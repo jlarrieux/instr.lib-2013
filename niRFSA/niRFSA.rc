@@ -1,0 +1,1070 @@
+explicitActiveChannels: TRUE
+library: niRFSA**.*
+      
+class: "niRFSA"
+flags: 0
+sorted: no
+implements: ivi, iviResourceMgr
+
+attribute: "Active Channel"
+   "Active Channel"
+   string	writeonly	19	-2
+   "Specifies the channel name used to access all subsequent properties in this instance of the property node. If the property you want to use is channel-based, you need to first select this property and then pass the name of the specific channel. If the property you specify is not channel-based, pass an empty string, or omit setting this property."	"pniRFSA_ActiveChannel.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Acquisition Type"
+   "Acquisition Type"
+   iL enum { "IQ"=100, "Spectrum"=101 }	readwrite	49	00118C31
+   "Configures the session to either acquire I/Q data or to compute a power spectrum over the specified frequency range."	"pniRFSA_AcquisitionType.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Reference Level"
+   "Vertical:Reference Level (dBm)"
+   fD	readwrite	49	00118C34
+   "Specifies the reference level, in dBm. The reference level represents the maximum expected power of an RF input signal."	"pniRFSA_ReferenceLevel.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Mixer Level"
+   "Vertical:Mixer Level (dBm)"
+   fD	readwrite	49	00118C36
+   "Specifies the mixer level, in dBm. The mixer level represents the attenuation value to apply to the input RF signal as it reaches the first mixer in the signal chain. If you do not set this property, NI-RFSA automatically selects an optimal mixer level value based on the reference level. The valid values for this property depend on your device configuration."	"pniRFSA_MixerLevel.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Mixer Level Offset"
+   "Vertical:Mixer Level Offset (dB)"
+   fD	readwrite	49	00118CAF
+   "Specifies the number of dB by which to adjust the device mixer level. The default value is 0, which specifies device settings that are the best compromise between distortion and noise. Specifying a positive value for this property configures the device for moderate distortion and low noise, and specifying a negative value results in low distortion and higher noise."	"pniRFSA_MixerLevelOffset.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IF Output Power Level"
+   "Vertical:IF Output Power Level (dBm)"
+   fD	readwrite	49	00118CB2
+   "Specifies the level of the IF signal leaving the system, in dBm. Use this property to increase or decrease the nominal IF signal output level to achieve better measurement results."	"pniRFSA_IFOutputLevel.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IF Output Power Level Offset"
+   "Vertical:IF Output Power Level Offset (dB)"
+   fD	readwrite	49	00118CB3
+   "Specifies the number of dB by which to adjust the default IF output power level. This property does not depend on absolute IF output power levels, so you can use it to adjust the IF output power level on all NI-RFSA devices without knowing the exact default value. Use this property to increase or decrease the nominal output level to achieve better measurement results. The default value for the offset is 0 dB."	"pniRFSA_IFOutputLevelOffset.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Downconverter Gain"
+   "Vertical:Downconverter Gain (dB)"
+   fD	readonly	17	00118C71
+   "Returns the net signal gain for the NI-RFSA device at the current NI-RFSA settings and temperature. NI-RFSA scales the acquired I/Q and spectrum data from the digitizer using the value of this property."	"pniRFSA_DownconverterGain.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Digitizer Vertical Range"
+   "Vertical:Digitizer Vertical Range"
+   fD	readwrite	49	00118C76
+   "Specifies the vertical range of the digitizer. The vertical range is defined as the absolute value of the input range for a channel. The default vertical range works for all device configurations, but you can use this property to optimize performance if you know that the signal level at the digitizer input terminal is low."	"pniRFSA_DigitizerVerticalRange.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "External Gain"
+   "Vertical:Advanced:External Gain (dB)"
+   fD	readwrite	49	00118C8E
+   "Specifies the gain, in dB, of a switch (or cable) connected before the RF IN connector of an NI-RFSA system. When you set this property and the RF Attenuation and IF Attenuation values, NI-RFSA calculates appropriate attenuator settings based on the value of this property and the value of the Reference Level property. In this case, NI-RFSA interprets the reference level as the maximum expected power level of the signal at the input of the external gain device. For more information about attenuation, refer to the Attenuation and Signal Levels topic for your device in the NI RF Vector Signal Analyzers Help."	"pniRFSA_ExternalGain_5601.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "RF Attenuation"
+   "Vertical:Advanced:RF Attenuation (dB)"
+   fD	readwrite	49	00118C35
+   "Specifies the nominal attenuation setting, in dB, for all attenuators before the first mixer in the RF signal chain. If you do not set this property, NI-RFSA automatically chooses an attenuation setting based on the reference level you configure. The valid values for this property depend on the device configuration."	"pniRFSA_Attenuation.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Mechanical Attenuation"
+   "Vertical:Advanced:Mechanical Attenuation (dB)"
+   fD	readwrite	49	00118CB0
+   "Specifies the level of mechanical attenuation for the RF path, in dB."	"pniRFSA_MechanicalAttenuation.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Device Configuration Temperature"
+   "Vertical:Advanced:Device Configuration Temperature (Degrees C)"
+   fD	readwrite	49	00118CCF
+   "Specifies the temperature, in degrees Celsius, that NI-RFSA uses to calculate the device configuration settings."	"pniRFSA_DeviceConfigurationTemperature.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "RF Attenuation Step Size"
+   "Vertical:Advanced:RF Attenuation Step Size (dB)"
+   fD	readwrite	49	00118CCB
+   "Specifies the step size for the RF attenuation level. The actual RF attenuation is coerced up to the next highest multiple of this step size. You can also set this value to change the step size for the device within the supported device precision and configuration."	"pniRFSA_RFAttenuationStepSize.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "OSP Data Scaling Factor"
+   "Vertical:Advanced:OSP Data Scaling Factor"
+   fD	readwrite	49	00118CC7
+   "Specifies the scaling factor applied to the time-domain voltage data in the IF digitizer. Use this property to maximize the dynamic range of the digitizer by increasing the maximum IF power the digitizer can measure without creating OSP overflows."	"pniRFSA_OSPDataScalingFactor.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Minimum ACPR"
+   "Vertical:Advanced:Minimum Adjacent Channel Power Ratio (dB)"
+   fD	readwrite	49	00118CBE
+   "Specifies the minimum adjacent channel power ratio (ACPR), in dB, relative to the main channel reference level. This property configures NI-RFSA to optimize downconverter gain to measure a lower-power adjacent channel, adding gain only after filtering the main channel. The gain NI-RFSA applies is always less than or equal to the ACPR value you specify."	"pniRFSA_ACPR_5603.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Preamp Enabled"
+   "Vertical:Advanced:Preamp Enabled"
+   iL enum { "Disabled"=2500, "Enabled when in Signal Path"=2501, "Enabled"=2502, "Automatic"=2503 }	readwrite	49	00118CB1
+   "Specifies whether the RF preamplifier is enabled in the system."	"pniRFSA_PreampEnabled.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Mechanical Attenuator Enabled"
+   "Vertical:Advanced:NI 5663:Mechanical Attenuator Enabled"
+   iL enum { "Disabled"=1900, "Enabled"=1901 }	readwrite	49	00118C81
+   "Specifies whether the mechanical attenuator is enabled. Set this property to <b>Enabled</b> to allow NI-RFSA to use the mechanical attenuator."	"pniRFSA_MechanicalAttenuationEnabled.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Channel Coupling"
+   "Vertical:Advanced:NI 5665/5667:Channel Coupling"
+   iL enum { "AC Coupled"=3001, "DC Coupled"=3002 }	readwrite	49	00118CC5
+   "Specifies whether the RF IN connector is AC- or DC-coupled on the downconverter."	"pniRFSA_ChannelCoupling.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Cal Tone Power"
+   "Vertical:Advanced:NI 5693:Cal Tone Power Referred to RF IN"
+   fD	readonly	17	00118CDE
+   "Returns the power of a virtual signal connected to the RF IN connector on the NI 5693 front panel when the calibration tone is enabled."	"pniRFSA_CalTonePowerReferredToRFIn.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Step Gain Enabled"
+   "Vertical:Advanced:NI 5694:Step Gain Enabled"
+   iL enum { "Disabled"=3200, "Enabled"=3201 }	readwrite	49	00118CCD
+   "Specifies whether to enable the step gain amplifier."	"pniRFSA_StepGainEnabled.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Digital IF Equalization Enabled"
+   "Signal Path:Digital IF Equalization Enabled"
+   bool	readwrite	49	00118C60
+   "Enables use of the digital equalization filter for the RF downconverter."	"pniRFSA_DigitalIFEqualizationEnabled.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "LO Frequency"
+   "Signal Path:LO Frequency"
+   fD	readwrite	49	00118C74
+   "Specifies the LO signal frequency for the configured center frequency."	"pniRFSA_LOFrequency.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "LO Source"
+   "Signal Path:LO Source"
+   string enum { "None"="None", "Onboard"="Onboard", "LO_In"="LO_In" }	readwrite	49	00118CD2
+   "Specifies the LO signal source used to downconvert the RF input signal."	"pniRFSA_LOSource.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "LO Export Enabled"
+   "Signal Path:LO Export Enabled"
+   bool	readwrite	49	00118CB6
+   "Specifies whether to enable the LO OUT terminals on the installed devices."	"pniRFSA_LOExportEnabled.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Fractional Resample Enabled"
+   "Signal Path:Fractional Resample Enabled"
+   bool	readwrite	49	00118C77
+   "Specifies whether fractional resampling is enabled on the digitizer. Fractional resampling allows the digitizer to achieve very fine resolution on the I/Q rate value. Setting this property to FALSE improves spectral performance."	"pniRFSA_FractionalResampleEnabled.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Digitizer Dither Enabled"
+   "Signal Path:Digitizer Dither Enabled"
+   iL enum { "Disabled"=1900, "Enabled"=1901 }	readwrite	49	00118C80
+   "Specifies whether dithering is enabled on the digitizer."	"pniRFSA_DigitizerDitherEnabled.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IF Filter BW"
+   "Signal Path:IF Filter Bandwidth"
+   fD	readwrite	49	00118CFD
+   "Specifies the IF filter path bandwidth for your device configuration."	"pniRFSA_IFFilterBandwidth.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Downconverter Loop Bandwidth"
+   "Signal Path:Advanced:Downconverter Loop Bandwidth"
+   iL enum { "Narrow"=800, "Medium"=801, "Wide"=802 }	readwrite	49	00118C73
+   "Configures the loop bandwidth of the RF downconverter tuning PLLs. To set this property, the NI-RFSA device must be in the Configuration state."	"pniRFSA_DownconverterLoopBandwidth.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Input Isolation Enabled"
+   "Signal Path:Advanced:Input Isolation Enabled"
+   iL enum { "Disabled"=1900, "Enabled"=1901 }	readwrite	49	00118CDA
+   "Specifies whether input isolation is enabled."	"pniRFSA_InputIsolation.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "LO Injection Side"
+   "Signal Path:Advanced:LO Injection Side"
+   iL enum { "High Side"=1300, "Low Side"=1301 }	readwrite	49	00118C75
+   "Specifies the LO injection side."	"pniRFSA_LOInjection_5601.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Frequency Settling Units"
+   "Signal Path:Advanced:Frequency Settling Units"
+   iL enum { "PPM"=2000, "Seconds After Lock"=2001, "Seconds After I/O"=2002 }	readwrite	49	00118C87
+   "Specifies the delay duration units and interpretation for LO settling. Specify the actual settling value using the Frequency Settling property. This property is not supported if you are using an external LO."	"pniRFSA_FrequencySettlingUnits_5601.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Frequency Settling"
+   "Signal Path:Advanced:Frequency Settling"
+   fD	readwrite	49	00118C88
+   "Specifies the value used for LO frequency settling. The units and interpretation for this scalar value are specified using the Frequency Settling Units property. This property is not supported if you are using an external LO."	"pniRFSA_FrequencySettling_5601.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "LO YIG Main Coil Drive"
+   "Signal Path:Advanced:LO YIG Main Coil Drive"
+   iL enum { "Normal"=2400, "Fast"=2401 }	readwrite	49	00118CB7
+   "Adjusts the dynamics of the current driving the YIG main coil."	"pniRFSA_LOYIGMainCoilDrive.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Preselector Enabled"
+   "Signal Path:Advanced:Downconverter Preselector Enabled"
+   iL enum { "Disabled"=2600, "Enabled when in Signal Path"=2601, "Enabled"=2602 }	readwrite	49	00118CB4
+   "Specifies whether the tunable preselector is enabled on the downconverter."	"pniRFSA_PreselectorEnabled.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Notch Filter Enabled"
+   "Signal Path:Advanced:Notch Filter Enabled"
+   iL enum { "Disabled"=3400, "Enabled when in Signal Path"=3401, "Enabled"=3402 }	readwrite	49	00118CD7
+   "Specifies whether the notch filter is enabled on the RF conditioning module."	"pniRFSA_NotchFilterEnabled.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "RF Preselector Filter"
+   "Signal Path:Advanced:RF Preselector Filter"
+   iL enum { "RF Preselector Filter None"=3300, "RF Preselector Filter 1"=3301, "RF Preselector Filter 2"=3302, "RF Preselector Filter 3"=3303, "RF Preselector Filter 4"=3304, "RF Preselector Filter 5"=3305, "RF Preselector Filter 6"=3306, "RF Preselector Filter 7"=3307, "RF Preselector Filter 8"=3308, "RF Preselector Filter 9"=3309, "RF Preselector Filter 10"=3310, "RF Preselector Filter 11"=3311, "RF Preselector Filter 12"=3312, "RF Preselector Filter 13"=3313, "RF Preselector Filter 14"=3314, "RF Preselector Filter 15"=3315, "RF Preselector Filter 16"=3316, "RF Preselector Filter External Filter"=3317 }	readwrite	49	00118CD6
+   "Specifies the RF preselector filter to use."	"pniRFSA_RFPreselectorFilter.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Low Frequency Bypass Enabled"
+   "Signal Path:Advanced:Low Frequency Bypass Enabled"
+   iL enum { "Disabled"=1900, "Enabled"=1901 }	readwrite	49	00118CFF
+   "Specifies whether to use the low frequency bypass path for the incoming RF signal."	"pniRFSA_LowFrequencyBypassEnabled.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IF Conditioning Downconversion Enabled"
+   "Signal Path:Advanced:IF Conditioning Downconversion Enabled"
+   iL enum { "Disabled"=1900, "Enabled"=1901 }	readwrite	49	00118CD1
+   "Specifies whether downconversion to 21.4 MHz is enabled for the IF conditioning module. The IF output frequency is 21.4 MHz when you enable this property, and it is 193.6 MHz when you disable this property."	"pniRFSA_DownconversionEnabled.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IF Filter"
+   "Signal Path:Advanced:NI 5663:IF Filter"
+   iL enum { "187.5 MHz Wide"=1400, "187.5 MHz Narrow"=1401, "53 MHz"=1402, "Bypass"=1403 }	readwrite	49	00118C7B
+   "Specifies the desired IF filter path, regardless of the RF band chosen by NI-RFSA."	"pniRFSA_IFFilter.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Attenuation Table"
+   "Signal Path:Advanced:NI 5663:RF Attenuation Table"
+   iL	readwrite	49	00118C7D
+   "Specifies which RF attenuator table to use."	"pniRFSA_AttenuationTable.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Attenuation Index"
+   "Signal Path:Advanced:NI 5663:RF Attenuation Index"
+   iL	readwrite	49	00118C7C
+   "Specifies the attenuator setting to use from the RF attenuator table, which is specified by the RF Attenuation Table property."	"pniRFSA_AttenuationIndex.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IF Attenuation"
+   "Signal Path:Advanced:NI 5663:IF Attenuation (dB)"
+   fD	readwrite	49	00118C7A
+   "Configures the device attenuation to a value that has the actual calibrated IF attenuation closest to the desired value."	"pniRFSA_IFAttenuation.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IF1 Attenuation"
+   "Signal Path:Advanced:NI 5663:IF1 Attenuation (dB)"
+   fD	readwrite	49	00118C7E
+   "Specifies the IF1 attenuation, in dB. The device IF1 attenuator is set to this nominal value. Use this property, along with the IF2 Attenuation property, when you set the IF Filter property to <b>Bypass</b>."	"pniRFSA_IF1_Attenuation.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IF2 Attenuation"
+   "Signal Path:Advanced:NI 5663:IF2 Attenuation (dB)"
+   fD	readwrite	49	00118C7F
+   "Specifies the IF2 attenuation, in dB. The device IF2 attenuator is set to this nominal value. Use this property, along with the IF1 Attenuation property, when you set the IF Filter property to <b>Bypass</b>."	"pniRFSA_IF2_Attenuation.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Signal Conditioning Enabled"
+   "Signal Path:Advanced:NI 5694:Signal Conditioning Enabled"
+   iL enum { "Enabled"=3600, "Bypassed"=3601 }	readwrite	49	00118CD0
+   "Specifies whether all signal conditioning is enabled on the NI 5694."	"pniRFSA_SignalConditioningEnabled.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Device Instantaneous Bandwidth"
+   "Acquisition:Device Instantaneous Bandwidth (Hz)"
+   fD	readwrite	49	00118CAD
+   "Specifies the instantaneous bandwidth of the device in hertz (Hz). The instantaneous bandwidth is the effective real-time bandwidth of the signal path for your configuration."	"pniRFSA_DeviceInstantaneousBandwidth.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IQ Carrier Frequency"
+   "Acquisition:IQ:IQ Carrier Frequency"
+   fD	readwrite	49	00118C6B
+   "Specifies the expected carrier frequency of the incoming signal for demodulation, in hertz (Hz). The NI-RFSA device tunes to this frequency. NI-RFSA may coerce this value based on hardware settings and the RF downconverter specifications."	"pniRFSA_IQCarrierFrequency.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IQ Rate"
+   "Acquisition:IQ:IQ Rate (S/s)"
+   fD	readwrite	49	00118C37
+   "Specifies the I/Q rate for the acquisition. The value is expressed in samples per second (S/s)."	"pniRFSA_IQ.Rate.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Number of Samples Is Finite"
+   "Acquisition:IQ:Number Of Samples Is Finite"
+   bool	readwrite	49	00118C38
+   "Specifies whether the device acquires a finite number of samples or acquires continuously."	"pniRFSA_IQ.NumSampsIsFinite.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Number of Samples"
+   "Acquisition:IQ:Number Of Samples"
+   iQ	readwrite	49	00118C39
+   "Specifies the number of samples to acquire. This property is valid only if the Number Of Samples Is Finite property is set to TRUE."	"pniRFSA_IQ.NumSamps.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Number of Records Is Finite"
+   "Acquisition:IQ:Number Of Records Is Finite"
+   bool	readwrite	49	00118C3A
+   "Specifies whether the device stops after acquiring the specified number of records or acquires records continuously."	"pniRFSA_IQ.NumRecordsIsFinite.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Allow More Records Than Memory"
+   "Acquisition:IQ:Allow More Records Than Memory"
+   bool	readwrite	49	00118CCA
+   "Specifies whether to allow the device to acquire more records than will fit in the device memory of the NI 5622."	"pniRFSA_IQ.AllowMoreRecords.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Number of Records"
+   "Acquisition:IQ:Number Of Records"
+   iQ	readwrite	49	00118C3B
+   "Specifies the number of records to acquire if the Number of Records Is Finite property is set to TRUE."	"pniRFSA_IQ.NumRecords.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Phase Offset"
+   "Acquisition:IQ:Phase Offset"
+   fD	readwrite	49	00118C9A
+   "Specifies the offset to apply to the initial I and Q phases."	"pniRFSA_PhaseOffset.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Contiguous Multirecord"
+   "Acquisition:IQ:Advanced:Contiguous Multirecord"
+   iL	readwrite	49	00118CDC
+   "This property is not for customer use."	"pniRFSA_ContiguousMultirecord.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Center Frequency"
+   "Acquisition:Spectrum:Center Frequency"
+   fD	readwrite	49	00118C32
+   "Specifies the center frequency in a spectrum acquisition. The value is expressed in hertz (Hz). An acquisition consists of a span of data surrounding the center frequency."	"pniRFSA_Spectrum.CenterFrequency.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Span"
+   "Acquisition:Spectrum:Span"
+   fD	readwrite	49	00118C33
+   "Specifies the frequency range of the computed spectrum in hertz (Hz). For example, if you specify a center frequency of 1 GHz and a span of 100 MHz, the spectrum ranges from 950 MHz to 1,050 MHz after zoom processing. This value may be coerced based on hardware settings and RF downconverter specifications."	"pniRFSA_Spectrum.Span.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Power Spectrum Units"
+   "Acquisition:Spectrum:Power Spectrum Units"
+   iL enum { "dBm"=200, "Volts Squared"=201, "dBmV"=202, "dBuV"=203, "Volts"=204, "Watts"=205 }	readwrite	49	00118C3C
+   "Specifies the units of the power spectrum."	"pniRFSA_Spectrum.Units.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Resolution Bandwidth"
+   "Acquisition:Spectrum:Resolution Bandwidth (Hz)"
+   fD	readwrite	49	00118C3D
+   "Specifies the resolution along the x-axis of the spectrum, in hertz (Hz). NI-RFSA uses the resolution bandwidth value to determine the acquisition size. If the Number of Spectral Lines property is specified, that value overrides over this value."	"pniRFSA_Spectrum.ResolutionBandwidth.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Resolution Bandwidth Type"
+   "Acquisition:Spectrum:Resolution Bandwidth Type"
+   iL enum { "3dB"=300, "6dB"=301, "Bin Width"=302, "ENBW"=303 }	readwrite	49	00118C3E
+   "Specifies how the Resolution Bandwidth property is expressed."	"pniRFSA_Spectrum.ResolutionBandwidthType.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Number of Spectral Lines"
+   "Acquisition:Spectrum:Number Of Spectral Lines"
+   iL	readwrite	49	00118C42
+   "Specifies the number of spectral lines expected with the current power spectrum configuration. If you do not configure this property, NI-RFSA selects an appropriate value based on the Resolution Bandwidth property. If you configure this property, NI-RFSA coerces the Resolution Bandwidth value based on the number of spectral lines requested and the value of the Spectrum Span property."	"pniRFSA_Spectrum.NumSpectralLines.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Averaging Mode"
+   "Acquisition:Spectrum:Averaging Mode"
+   iL enum { "No Averaging"=400, "RMS Averaging"=401, "Vector Averaging"=402, "Peak Hold Averaging"=403 }	readwrite	49	00118C40
+   "Specifies the averaging mode for the spectrum acquisition."	"pniRFSA_Spectrum.AveragingMode.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Number of Averages"
+   "Acquisition:Spectrum:Number Of Averages"
+   iL	readwrite	49	00118C3F
+   "Specifies the number of acquisitions to average. The averaging process returns the final result after the number of averages is complete."	"pniRFSA_Spectrum.NumAverages.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "FFT Window Type"
+   "Acquisition:Spectrum:FFT Window Type"
+   iL enum { "Uniform"=500, "Hanning"=501, "Hamming"=502, "Blackman-Harris"=503, "Exact Blackman"=504, "Blackman"=505, "Flat Top"=506, "4-term Blackman-Harris"=507, "7-term Blackman-Harris"=508, "Low Side Lobe"=509 }	readwrite	49	00118C41
+   "Specifies the time-domain window type."	"pniRFSA_Spectrum.FFTWindowType.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "FFT Window Shape Factor"
+   "Acquisition:Spectrum:FFT Window Shape Factor"
+   fD	readonly	17	00118CFE
+   "Returns the shape factor of the window used in the fast Fourier transform (FFT). The window shape factor is defined as the ratio of the 60 dB to 6 dB bandwidths."	"pniRFSA_Spectrum.FFTWindowShapeFactor.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "FFT Window Size"
+   "Acquisition:Spectrum:FFT Window Size"
+   iL	readonly	17	00118C61
+   "Returns the size of the window used in the fast Fourier transform (FFT), in terms of the number of samples in the window."	"pniRFSA_Spectrum.FFTWindowSize.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "FFT Size"
+   "Acquisition:Spectrum:FFT Size"
+   iL	readonly	17	00118C62
+   "Returns the size of the fast Fourier transform (FFT)."	"pniRFSA_Spectrum.FFTSize.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Spectrum OSP Sampling Ratio"
+   "Acquisition:Spectrum:Spectrum OSP Sampling Ratio"
+   fD	readwrite	49	00118CC0
+   "Specifies the oversampling ratio used by the digitizer onboard signal processing (OSP) when you are in spectrum acquisition mode. This property allows you to acquire a larger bandwidth in hardware and reduce that bandwidth in software, decreasing the possibility of hardware data path overflows."	"pniRFSA_Spectrum.OSPSamplingRatio.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "FFT Width"
+   "Acquisition:Spectrum:FFT Width"
+   fD	readwrite	49	00118CD9
+   "Specifies the FFT width of the device. The FFT width is the effective bandwidth of the signal path during each signal acquisition."	"pniRFSA_FFTWidth.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Fetch Relative To"
+   "Acquisition:Fetch:Fetch Relative To"
+   iL enum { "Most Recent Sample"=700, "First Sample"=701, "Reference Trigger"=702, "First Pretrigger Sample"=703, "Current Read Position"=704 }	readwrite	49	00118C5D
+   "Specifies the reference location within the acquired record from which to begin fetching."	"pniRFSA_FetchRelativeTo.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Fetch Offset"
+   "Acquisition:Fetch:Fetch Offset"
+   iQ	readwrite	49	00118C5E
+   "Specifies the offset relative to the position specified by the Fetch Relative To property from which to start fetching data. Offset can be a positive or negative value."	"pniRFSA_FetchOffset.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Records Done"
+   "Acquisition:Fetch:Records Done"
+   iQ	readonly	17	00118C5F
+   "Returns the number of records the RF vector signal analyzer has acquired."	"pniRFSA_RecordsDone.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Data Transfer Maximum Bandwidth"
+   "Acquisition:Fetch:Data Transfer Maximum Bandwidth"
+   fD	readwrite	49	00118C98
+   "Specifies the maximum bandwidth that the device can consume."	"pniRFSA_DataTransferMaximumBandwidth.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Data Transfer Block Size"
+   "Acquisition:Fetch:Data Transfer Block Size"
+   iL	readwrite	49	00118C99
+   "Specifies the maximum number of samples to transfer at one time from the device to host memory. Increasing this number should result in better fetching performance because the driver does not need to restart the transfers as often. However, increasing this number may also increase the amount of page-locked memory required from the system."	"pniRFSA_DataTransferBlockSize.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Downconverter Center Frequency"
+   "Acquisition:Advanced:Downconverter Center Frequency"
+   fD	readwrite	49	00118C82
+   "Enables in-band retuning and specifies the current frequency, in hertz (Hz), of the RF downconverter. If you set this property, any measurements outside the instantaneous bandwidth of the device are invalid. To disable in-band retuning, reset the property or call the niRFSA Reset VI."	"pniRFSA_DownconverterCenterFrequency.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IF Output Frequency"
+   "Acquisition:Advanced:IF Output Frequency"
+   fD	readonly	17	00118C86
+   "Returns the center frequency of the IF output signal that corresponds to the configured RF center frequency."	"pniRFSA_IFOutputFrequency.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Ref Clock Source"
+   "Clocking:Ref Clock Source"
+   string enum { "None"="None", "OnboardClock"="OnboardClock", "RefIn"="RefIn", "PXI_Clk"="PXI_Clk", "ClkIn"="ClkIn" }	readwrite	49	00118C43
+   "Specifies the Reference Clock source."	"pniRFSA_RefClockSrc.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Ref Clock Rate"
+   "Clocking:Ref Clock Rate"
+   fD	readwrite	49	00118C44
+   "Specifies the Reference Clock rate, in hertz (Hz), when the Ref Clock Source property is set to <b>ClkIn</b> or <b>RefIn</b>."	"pniRFSA_RefClockRate.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Ref Clock Exported Terminal"
+   "Clocking:Ref Clock Exported Terminal"
+   string enum { "None"="None", "RefOut"="RefOut", "RefOut2"="RefOut2", "ClkOut"="ClkOut", "IFCondRefOut"="IFCondRefOut" }	readwrite	49	00118C78
+   "Specifies a comma-separated list of the terminals at which to export the Reference Clock."	"pniRFSA_RefClkExportedTerm.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Digitizer Sample Clock Timebase Source"
+   "Clocking:Digitizer Sample Clock Timebase Source"
+   string enum { "OnboardClock"="OnboardClock", "ClkIn"="ClkIn", "LORefClk"="LORefClk", "PXI_STAR"="PXI_STAR" }	readwrite	49	00118C45
+   "Specifies the source of the Sample Clock timebase, which is the timebase used to control waveform sampling."	"pniRFSA_DigitizerSampClkTimebaseSrc.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Digitizer Sample Clock Timebase Rate"
+   "Clocking:Digitizer Sample Clock Timebase Rate"
+   fD	readwrite	49	00118C46
+   "Specifies the frequency, in hertz (Hz), of the external clock used as the timebase source if you set the Digitizer Sample Clock Timebase Source property to an external source, such as <b>ClkIn</b> or <b>LORefClk</b>."	"pniRFSA_DigitizerSampClkTimebaseRate.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "PXI Chassis Clk10 Source"
+   "Clocking:PXI Chassis Clk10 Source"
+   string enum { "None"="None", "OnboardClock"="OnboardClock", "RefIn"="RefIn" }	readwrite	49	00118C47
+   "Specifies the signal to drive the 10 MHz Reference Clock on the PXI backplane. This option can be configured only when the NI 5600 is installed in Slot 2 of the PXI chassis."	"pniRFSA_PXIChassisClk10Src.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Start Trigger Type"
+   "Triggers:Start:Type"
+   iL enum { "None"=600, "Digital Edge"=601, "Software"=604 }	readwrite	49	00118C48
+   "Specifies whether you want the Start Trigger to be a digital edge or software trigger."	"pniRFSA_StartTrig.Type.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Start Trigger Digital Edge Source"
+   "Triggers:Start:Digital Edge:Source"
+   string	readwrite	49	00118C49
+   "Specifies the source terminal for the Start Trigger. This property is used only when the Start Trigger Type property is set to <b>Digital Edge</b>."	"pniRFSA_StartTrig.DigEdge.Src.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Start Trigger Digital Edge"
+   "Triggers:Start:Digital Edge:Edge"
+   iL enum { "Rising Edge"=900, "Falling Edge"=901 }	readwrite	49	00118C4A
+   "Specifies the active edge for the Start Trigger. This property is used only when the Start Trigger Type property is set to <b>Digital Edge</b>."	"pniRFSA_StartTrig.DigEdge.Edge.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Start Trigger Output Terminal"
+   "Triggers:Start:Export:Output Terminal"
+   string enum { "Do not export signal"=, "ClkOut"=ClkOut, "RefOut"=RefOut, "RefOut2"=RefOut2, "PFI0"=PFI0, "PFI1"=PFI1, "PXI_Trig0"=PXI_Trig0, "PXI_Trig1"=PXI_Trig1, "PXI_Trig2"=PXI_Trig2, "PXI_Trig3"=PXI_Trig3, "PXI_Trig4"=PXI_Trig4, "PXI_Trig5"=PXI_Trig5, "PXI_Trig6"=PXI_Trig6, "PXI_Trig7"=PXI_Trig7, "PXI_STAR"=PXI_STAR }	readwrite	49	00118C4B
+   "Specifies the destination terminal for the exported Start Trigger."	"pniRFSA_ExportedStartTrig.OutputTerm.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Start Trigger Terminal Name"
+   "Triggers:Start:Terminal Name"
+   string	readonly	17	00118CAA
+   "Returns the fully qualified signal name as a string."	"pniRFSA_StartTriggerTerminalName.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Reference Trigger Type"
+   "Triggers:Ref:Type"
+   iL enum { "None"=600, "Digital Edge"=601, "IQ Power Edge"=603, "Software"=604, "IQ Analog Edge"=605 }	readwrite	49	00118C4C
+   "Specifies whether you want the Reference Trigger to be a digital edge, I/Q power edge, or software trigger."	"pniRFSA_RefTrig.Type.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Reference Trigger Pretrigger Samples"
+   "Triggers:Ref:Pretrigger Samples"
+   iQ	readwrite	49	00118C53
+   "Specifies the number of pretrigger samples--the samples acquired before the Reference Trigger is received--to be acquired per record."	"pniRFSA_RefTrig.PretrigSamples.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Reference Trigger Digital Edge Source"
+   "Triggers:Ref:Digital Edge:Source"
+   string	readwrite	49	00118C4D
+   "Specifies the source terminal for the digital edge Reference Trigger. This property is used only when the Reference Trigger Type property is set to <b>Digital Edge</b>."	"pniRFSA_RefTrig.DigEdge.Src.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Reference Trigger Digital Edge"
+   "Triggers:Ref:Digital Edge:Edge"
+   iL enum { "Rising Edge"=900, "Falling Edge"=901 }	readwrite	49	00118C4E
+   "Specifies the active edge for the Reference Trigger. This property is used only when the Ref Trigger Type property is set to <b>Digital Edge</b>."	"pniRFSA_RefTrig.DigEdge.Edge.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IQ Power Edge Trigger Source"
+   "Triggers:Ref:IQ Power Edge:Source"
+   string	readwrite	49	00118C67
+   "Specifies the channel from which the device monitors the trigger. NI-RFSA currently supports only 0 as the value of this property."	"pniRFSA_RefTrig.IQPwrEdge.Src.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IQ Power Edge Trigger Level"
+   "Triggers:Ref:IQ Power Edge:Level"
+   fD	readwrite	49	00118C68
+   "Specifies the power level, in dBm, at which the device triggers. The device asserts the trigger when the signal exceeds the level specified by the value of this property, taking into consideration the specified slope. If you are using external gain with your device, refer to the External Gain property for more information about how this property affects the I/Q power edge trigger level."	"pniRFSA_RefTrig.IQPwrEdge.Lvl.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IQ Power Edge Trigger Slope"
+   "Triggers:Ref:IQ Power Edge:Slope"
+   iL enum { "Rising Slope"=1000, "Falling Slope"=1001 }	readwrite	49	00118C69
+   "Specifies whether the device asserts the trigger when the signal power is rising or falling. When you set the Reference Trigger Type property to <b>IQ Power Edge</b>, the device asserts the trigger when the signal power exceeds the specified level with the slope you specify."	"pniRFSA_RefTrig.IQPwrEdge.Slope.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Min Quiet Time"
+   "Triggers:Ref:Minimum Quiet Time"
+   fD	readwrite	49	00118C6A
+   "Specifies a time duration, in seconds, for which the signal must be quiet before the device arms the IQ Power Edge trigger. The signal is quiet when it is below the trigger level if the trigger slope, specified by the Reference Trigger IQ Power Edge Slope property, is set to <b>Rising Slope</b> or when it is above the trigger level if the trigger slope is set to <b>Falling Slope</b>."	"pniRFSA_RefTrig.MinQuietTime.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Reference Trigger Output Terminal"
+   "Triggers:Ref:Export:Output Terminal"
+   string enum { "Do not export signal"=, "ClkOut"=ClkOut, "RefOut"=RefOut, "RefOut2"=RefOut2, "PFI0"=PFI0, "PFI1"=PFI1, "PXI_Trig0"=PXI_Trig0, "PXI_Trig1"=PXI_Trig1, "PXI_Trig2"=PXI_Trig2, "PXI_Trig3"=PXI_Trig3, "PXI_Trig4"=PXI_Trig4, "PXI_Trig5"=PXI_Trig5, "PXI_Trig6"=PXI_Trig6, "PXI_Trig7"=PXI_Trig7, "PXI_STAR"=PXI_STAR }	readwrite	49	00118C50
+   "Specifies the destination terminal for the exported Reference Trigger."	"pniRFSA_ExportedRefTrig.OutputTerm.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Reference Trigger Terminal Name"
+   "Triggers:Ref:Terminal Name"
+   string	readonly	17	00118CAB
+   "Returns the fully qualified signal name as a string."	"pniRFSA_RefTriggerTerminalName.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Reference Trigger Delay"
+   "Triggers:Ref:Advanced:Ref Trigger Delay (s)"
+   fD	readwrite	49	00118C6C
+   "Specifies the trigger delay time, in seconds. The trigger delay time is the length of time the IF digitizer waits after it receives the trigger before it asserts the Reference event."	"pniRFSA_RefTrigDelay.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Start To Reference Holdoff"
+   "Triggers:Ref:Advanced:Start To Ref Trigger Holdoff (s)"
+   fD	readwrite	49	00118C51
+   "Specifies the minimum time, in seconds, that must elapse after the Start Trigger is received before the device recognizes a Reference Trigger."	"pniRFSA_StartToRefHoldoff.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Reference To Reference Holdoff"
+   "Triggers:Ref:Advanced:Ref To Ref Trigger Holdoff (s)"
+   fD	readwrite	49	00118C52
+   "Specifies the minimum time, in seconds, that must elapse between Reference Triggers of two records. The device does not recognize the Reference Trigger of the next record before this minimum time elapses."	"pniRFSA_RefToRefHoldoff.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Reference Trigger OSP Delay Enabled"
+   "Triggers:Ref:Advanced:OSP Delay Enabled"
+   iL enum { "Disabled"=1900, "Enabled"=1901 }	readwrite	49	00118CF4
+   "Specifies whether to enable the digitizer OSP block to delay Reference Triggers, along with the data samples, moving through the OSP block. If you set this property to <b>Disabled</b>, the Reference Triggers bypass the OSP block and are processed immediately."	"pniRFSA_Ref_Trigger_OSP_Delay.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Advance Trigger Type"
+   "Triggers:Advance:Type"
+   iL enum { "None"=600, "Digital Edge"=601, "Software"=604 }	readwrite	49	00118C54
+   "Specifies whether you want the Advance Trigger to be a digital edge or software trigger."	"pniRFSA_AdvanceTrig.Type.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Advance Trigger Digital Edge Source"
+   "Triggers:Advance:Digital Edge:Source"
+   string	readwrite	49	00118C55
+   "Specifies the source terminal for the Advance Trigger. This property is used only when the Advance Trigger Type property is set to <b>Digital Edge</b>."	"pniRFSA_AdvanceTrig.DigEdge.Src.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Advance Trigger Output Terminal"
+   "Triggers:Advance:Export:Output Terminal"
+   string enum { "Do not export signal"=, "ClkOut"=ClkOut, "RefOut"=RefOut, "RefOut2"=RefOut2, "PFI0"=PFI0, "PFI1"=PFI1, "PXI_Trig0"=PXI_Trig0, "PXI_Trig1"=PXI_Trig1, "PXI_Trig2"=PXI_Trig2, "PXI_Trig3"=PXI_Trig3, "PXI_Trig4"=PXI_Trig4, "PXI_Trig5"=PXI_Trig5, "PXI_Trig6"=PXI_Trig6, "PXI_Trig7"=PXI_Trig7, "PXI_STAR"=PXI_STAR }	readwrite	49	00118C56
+   "Specifies the destination terminal for the exported Advance Trigger."	"pniRFSA_ExportedAdvanceTrig.OutputTerm.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Advance Trigger Terminal Name"
+   "Triggers:Advance:Terminal Name"
+   string	readonly	17	00118CAC
+   "Returns the fully qualified signal name as a string."	"pniRFSA_AdvanceTriggerTerminalName.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Arm Reference Trigger Type"
+   "Triggers:Arm Ref:Type"
+   iL enum { "None"=600, "Digital Edge"=601, "Software"=604 }	readwrite	49	00118C57
+   "Specifies whether the Arm Reference Trigger uses a digital edge or software trigger."	"pniRFSA_ArmRefTrig.Type.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Arm Reference Trigger Digital Edge Source"
+   "Triggers:Arm Ref:Digital Edge:Source"
+   string	readwrite	49	00118C58
+   "Specifies the source terminal for the digital edge Arm Reference Trigger. This property is used only when the Arm Reference Trigger Type property is set to <b>Digital Edge</b>."	"pniRFSA_ArmRefTrig.DigEdge.Src.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Configuration List Step Trigger Source"
+   "Triggers:Configuration List Step:Digital Edge:Source"
+   string	readwrite	49	00118C8F
+   "This property is not for customer use."	"pniRFSA_StepTriggerSource.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "DDC Reference Trigger Override"
+   "Triggers:Advanced:DDC Reference Trigger Override"
+   bool	readwrite	49	00118CD4
+   "This property is not for customer use."	"pniRFSA_DDCRefTriggerOverride.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Start Trigger Delay"
+   "Triggers:Advanced:Start Trigger Delay"
+   fD	readwrite	49	00118CDF
+   "This property is not for customer use."	"pniRFSA_StartTriggerDelay.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Ready For Start Event Output Terminal"
+   "Events:Ready For Start:Output Terminal"
+   string enum { "Do not export signal"=, "ClkOut"=ClkOut, "RefOut"=RefOut, "RefOut2"=RefOut2, "PFI0"=PFI0, "PFI1"=PFI1, "PXI_Trig0"=PXI_Trig0, "PXI_Trig1"=PXI_Trig1, "PXI_Trig2"=PXI_Trig2, "PXI_Trig3"=PXI_Trig3, "PXI_Trig4"=PXI_Trig4, "PXI_Trig5"=PXI_Trig5, "PXI_Trig6"=PXI_Trig6, "PXI_Trig7"=PXI_Trig7, "PXI_STAR"=PXI_STAR }	readwrite	49	00118C59
+   "Specifies the destination terminal for the Ready for Start Event."	"pniRFSA_RdyForStartEvent.OutputTerm.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Ready For Start Event Terminal Name"
+   "Events:Ready For Start:Terminal Name"
+   string	readonly	17	00118CA5
+   "Returns the fully qualified signal name as a string."	"pniRFSA_ReadyForStartEventTerminalName.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Ready For Advance Event Output Terminal"
+   "Events:Ready For Advance:Output Terminal"
+   string enum { "Do not export signal"=, "ClkOut"=ClkOut, "RefOut"=RefOut, "RefOut2"=RefOut2, "PFI0"=PFI0, "PFI1"=PFI1, "PXI_Trig0"=PXI_Trig0, "PXI_Trig1"=PXI_Trig1, "PXI_Trig2"=PXI_Trig2, "PXI_Trig3"=PXI_Trig3, "PXI_Trig4"=PXI_Trig4, "PXI_Trig5"=PXI_Trig5, "PXI_Trig6"=PXI_Trig6, "PXI_Trig7"=PXI_Trig7, "PXI_STAR"=PXI_STAR }	readwrite	49	00118C5A
+   "Specifies the destination terminal for the Ready for Advance Event."	"pniRFSA_RdyForAdvanceEvent.OutputTerm.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Ready For Advance Event Terminal Name"
+   "Events:Ready For Advance:Terminal Name"
+   string	readonly	17	00118CA6
+   "Returns the fully qualified signal name as a string."	"pniRFSA_ReadyForAdvanceEventTerminalName.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Ready For Reference Event Output Terminal"
+   "Events:Ready For Ref:Output Terminal"
+   string enum { "Do not export signal"=, "ClkOut"=ClkOut, "RefOut"=RefOut, "RefOut2"=RefOut2, "PFI0"=PFI0, "PFI1"=PFI1, "PXI_Trig0"=PXI_Trig0, "PXI_Trig1"=PXI_Trig1, "PXI_Trig2"=PXI_Trig2, "PXI_Trig3"=PXI_Trig3, "PXI_Trig4"=PXI_Trig4, "PXI_Trig5"=PXI_Trig5, "PXI_Trig6"=PXI_Trig6, "PXI_Trig7"=PXI_Trig7, "PXI_STAR"=PXI_STAR }	readwrite	49	00118C5B
+   "Specifies the destination terminal for the Ready for Reference Event."	"pniRFSA_RdyForRefEvent.OutputTerm.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Ready For Reference Event Terminal Name"
+   "Events:Ready For Ref:Terminal Name"
+   string	readonly	17	00118CA7
+   "Returns the fully qualified signal name as a string."	"pniRFSA_ReadyForRefEventTerminalName.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "End Of Record Event Output Terminal"
+   "Events:End Of Record:Output Terminal"
+   string enum { "Do not export signal"=, "ClkOut"=ClkOut, "RefOut"=RefOut, "RefOut2"=RefOut2, "PFI0"=PFI0, "PFI1"=PFI1, "PXI_Trig0"=PXI_Trig0, "PXI_Trig1"=PXI_Trig1, "PXI_Trig2"=PXI_Trig2, "PXI_Trig3"=PXI_Trig3, "PXI_Trig4"=PXI_Trig4, "PXI_Trig5"=PXI_Trig5, "PXI_Trig6"=PXI_Trig6, "PXI_Trig7"=PXI_Trig7, "PXI_STAR"=PXI_STAR }	readwrite	49	00118C5C
+   "Specifies the destination terminal for the End of Record Event."	"pniRFSA_EndOfRecEvent.OutputTerm.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "End Of Record Event Terminal Name"
+   "Events:End Of Record:Terminal Name"
+   string	readonly	17	00118CA8
+   "Returns the fully qualified signal name as a string."	"pniRFSA_EndOfRecEventTerminalName.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Done Event Output Terminal"
+   "Events:Done:Output Terminal"
+   string enum { "Do not export signal"=, "ClkOut"=ClkOut, "RefOut"=RefOut, "RefOut2"=RefOut2, "PFI0"=PFI0, "PFI1"=PFI1, "PXI_Trig0"=PXI_Trig0, "PXI_Trig1"=PXI_Trig1, "PXI_Trig2"=PXI_Trig2, "PXI_Trig3"=PXI_Trig3, "PXI_Trig4"=PXI_Trig4, "PXI_Trig5"=PXI_Trig5, "PXI_Trig6"=PXI_Trig6, "PXI_Trig7"=PXI_Trig7, "PXI_STAR"=PXI_STAR }	readwrite	49	00118C66
+   "Specifies the destination terminal for the Done Event."	"pniRFSA_DoneEvent.OutputTerm.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Done Event Terminal Name"
+   "Events:Done:Terminal Name"
+   string	readonly	17	00118CA9
+   "Returns the fully qualified signal name as a string."	"pniRFSA_DoneEvent.TerminalName.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Serial Number"
+   "Device Characteristics:Serial Number"
+   string	readonly	17	00118C65
+   "Returns the serial number of the RF downconverter module."	"pniRFSA_SerialNum.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Module Revision"
+   "Device Characteristics:Module Revision"
+   string	readonly	17	00118C8B
+   "Returns the revision of the RF downconverter module."	"pniRFSA_ModuleRev.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Device Temperature"
+   "Device Characteristics:Device Temperature (Degrees C)"
+   fD	readonly	17	00118C63
+   "Returns the current temperature, in degrees Celsius, of the module."	"pniRFSA_DeviceTemp.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "LO Temperature"
+   "Device Characteristics:LO Temperature (Degrees C)"
+   fD	readonly	17	00118C89
+   "Returns the current temperature, in degrees Celsius, of the LO module associated with the NI-RFSA device. This property is not supported if you are using an external LO."	"pniRFSA_LoTemp.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Digitizer Temperature"
+   "Device Characteristics:Digitizer Temperature (Degrees C)"
+   fD	readonly	17	00118C8A
+   "Returns the current temperature, in degrees Celsius, of the digitizer module."	"pniRFSA_DigitizerTemp.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "RF Conditioning Temperature"
+   "Device Characteristics:RF Conditioning Temperature (Degrees C)"
+   fD	readonly	17	00118D03
+   "Returns the current temperature, in degrees Celsius, of the RF conditioning module associated with the NI-RFSA device."	"pniRFSA_RfConditioningTemp.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IF Conditioning Temperature"
+   "Device Characteristics:IF Conditioning Temperature (Degrees C)"
+   fD	readonly	17	00118D02
+   "Returns the current temperature, in degrees Celsius, of the IF conditioning module associated with the NI-RFSA device."	"pniRFSA_IfConditioningTemp.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Temperature Read Interval"
+   "Device Characteristics:Temperature Read Interval (s)"
+   fD	readwrite	49	00118C6D
+   "Indicates the minimum time between temperature sensor readings. When you call the niRFSA Read Power Spectrum VI, niRFSA Read IQ VI, or niRFSA Initiate VI, NI-RFSA checks if at least the amount of time specified by this property has elapsed before reading the hardware temperature."	"pniRFSA_TemperatureReadInterval.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Memory Size"
+   "Device Characteristics:Memory Size"
+   iQ	readonly	17	00118C85
+   "Returns the digitizer onboard memory size, in bytes."	"pniRFSA_MemorySize.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "RF Preamp Present"
+   "Device Characteristics:RF Preamp Present"
+   bool	readonly	17	00118CB9
+   "Returns whether an RF preamplifier is available on the RF downconverter module."	"pniRFSA_RFPreampPresent.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Preselector Present"
+   "Device Characteristics:Preselector Present"
+   bool	readonly	17	00118CB8
+   "Returns whether a preselector is available on the RF downconverter module."	"pniRFSA_PreselectorPresent.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "P2P Enabled"
+   "Peer-to-Peer:Enabled"
+   bool	readwrite	49	00118C91
+   "Specifies whether peer-to-peer streaming is enabled for the active stream endpoint."	"pniRFSA_P2PEnabled.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "P2P FIFO Endpoint Count"
+   "Peer-to-Peer:FIFO Endpoint Count"
+   iQ	readonly	17	00118C92
+   "Returns the number of peer-to-peer streams supported by the device."	"pniRFSA_P2PFIFOEndpointCount.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "P2P Samples Transferred"
+   "Peer-to-Peer:Samples Transferred"
+   iQ	readonly	17	00118C93
+   "Returns the number of complex samples transferred through the peer-to-peer stream endpoint since the endpoint was last reset."	"pniRFSA_P2PSamplesTransferred.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Samples in P2P Endpoint"
+   "Peer-to-Peer:Samples in P2P Endpoint"
+   iQ	readonly	17	00118C94
+   "Returns the current number of complex samples available in the peer-to-peer endpoint."	"pniRFSA_SamplesInP2PEndpoint.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Most Samples in P2P Endpoint"
+   "Peer-to-Peer:Most Samples in P2P Endpoint"
+   iQ	readonly	17	00118C95
+   "Returns the largest number of complex samples available in the peer-to-peer endpoint since this property was last read."	"pniRFSA_MostSamplesInP2PEndpoint.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "P2P Endpoint Size"
+   "Peer-to-Peer:Endpoint Size"
+   iQ	readonly	17	00118C96
+   "Returns the size, in samples, of the peer-to-peer endpoint."	"pniRFSA_P2PEndpointSize.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "P2P Endpoint Overflow"
+   "Peer-to-Peer:Endpoint Overflow"
+   bool	readonly	17	00118C97
+   "Indicates whether the endpoint has overflowed. An overflow condition occurs when data is written to the endpoint faster than it can be streamed from it. During an overflow, data in the endpoint begins to be overwritten. Reset the device or close the session to reset the overflow condition."	"pniRFSA_P2PEndpointOverflow.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "P2P Onboard Memory Enabled"
+   "Peer-to-Peer:Onboard Memory Enabled"
+   bool	readwrite	49	00118C9B
+   "Specifies whether a limit is placed on the number of records and the size of the records by the size of the device onboard memory. When a peer-to-peer stream is enabled and onboard memory is disabled, any fetch calls result in an error."	"pniRFSA_P2POnboardMemoryEnabled.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Active Configuration List"
+   "Configuration List:Active List"
+   string	readwrite	49	00118C8C
+   "Specifies the configuration list for RF list mode to make active for configuration or initiation."	"pniRFSA_ActiveConfigurationList.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Active Configuration List Step"
+   "Configuration List:Active Step"
+   iQ	readwrite	49	00118C8D
+   "Specifies the step in the configuration list for RF list mode to make active for configuration or initiation."	"pniRFSA_ActiveConfigurationListStep.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Configuration List Step In Progress"
+   "Configuration List:Step In Progress"
+   iQ	readonly	17	00118CAE
+   "Returns the index of the current RF configuration list step that is executing in RF list mode. The list is zero-indexed. You can query this property only when a list is executed."	"pniRFSA_ConfigurationListStepInProgress.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Timer Event Interval"
+   "Configuration List:Timer Event Interval"
+   fD	readwrite	49	00118C90
+   "Specifies the time, in seconds, that the timer counts before generating a Timer event."	"pniRFSA_ConfigurationListStepTime.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Minimum Reconfiguration Time"
+   "Configuration List:Advanced:Minimum Reconfiguration Time"
+   fD	readwrite	49	00118CD5
+   "This property is not for customer use."	"pniRFSA_MinReconfigTime.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Timer Start Source"
+   "Configuration List:Advanced:Timer Start Source"
+   string	readwrite	49	00118CDD
+   "This property is not for customer use."	"pniRFSA_TimerStartSource.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Cache"
+   "Inherent IVI Attributes:User Options:Cache"
+   bool	readwrite	49	00100594
+   "Specifies whether to cache the value of properties. If you set this property to TRUE, NI-RFSA tracks the current NI-RFSA device settings and avoids sending redundant commands to the device."	"pniRFSA_Cache.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Interchange Check"
+   "Inherent IVI Attributes:User Options:Interchange Check"
+   bool	readwrite	49	001005A5
+   "Specifies whether to perform interchangeability checking and retrieve interchangeability warnings."	"pniRFSA_InterchangeCheck.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Driver Setup"
+   "Inherent IVI Attributes:User Options:Driver Setup"
+   string	readonly	17	00100597
+   "The Driver Setup string sets the initial values for properties that are specific to NI-RFSA."	"pniRFSA_DriverSetup.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Query Instrument Status"
+   "Inherent IVI Attributes:User Options:Query Instrument Status"
+   bool	readwrite	49	00100593
+   "Specifies whether NI-RFSA queries the NI-RFSA device status after each operation. Querying the device status is useful for debugging. After you validate your program, you can set this property to FALSE to disable status checking and maximize performance."	"pniRFSA_QueryInstrumentStatus.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Range Check"
+   "Inherent IVI Attributes:User Options:Range Check"
+   bool	readwrite	49	00100592
+   "Specifies whether to validate property values and VI parameters. If enabled, NI-RFSA validates the parameter values that you pass to NI-RFSA VIs. Range-checking parameters is very useful for debugging. After you validate your program, you can set this property to FALSE to disable range checking and maximize performance."	"pniRFSA_RangeCheck.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Record Value Coercions"
+   "Inherent IVI Attributes:User Options:Record Value Coercions"
+   bool	readwrite	49	00100596
+   "Specifies whether the IVI engine keeps a list of the value coercions it makes for integer and real type properties."	"pniRFSA_RecordValueCoercions.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Simulate"
+   "Inherent IVI Attributes:User Options:Simulate"
+   bool	readonly	17	00100595
+   "Specifies whether NI-RFSA simulates I/O operations. This property is useful for debugging applications without using hardware. After a session is opened, you cannot change the simulation state. Use the niRFSA Initialize with Options VI to enable simulation."	"pniRFSA_Simulate.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Description"
+   "Inherent IVI Attributes:Driver Identification:Description"
+   string	readonly	17	00100792
+   "Returns a string that contains a brief description of NI-RFSA. This property returns RF Signal Analyzer Instrument Driver."	"pniRFSA_Description.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Driver Prefix"
+   "Inherent IVI Attributes:Driver Identification:Driver Prefix"
+   string	readonly	17	001006BE
+   "Returns a string that contains the prefix for NI-RFSA. The name of each user-callable VI in NI-RFSA starts with this prefix. This property returns niRFSA."	"pniRFSA_DriverPrefix.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Driver Vendor"
+   "Inherent IVI Attributes:Driver Identification:Driver Vendor"
+   string	readonly	17	00100791
+   "Returns a string that contains the name of the vendor that supplies NI-RFSA. This property returns National Instruments."	"pniRFSA_DriverVendor.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Revision"
+   "Inherent IVI Attributes:Driver Identification:Revision"
+   string	readonly	17	001007B7
+   "Returns a string that contains additional version information about NI-RFSA. For example, NI-RFSA can return Driver: NI-RFSA 2.6, Compiler: MSVC 7.10, Components: IVI Engine 4.00, VISA-Spec 4.00 as the value of this property."	"pniRFSA_Revision.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Supported Instrument Models"
+   "Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models"
+   string	readonly	17	001006D7
+   "Returns a comma-separated list of supported devices."	"pniRFSA_SupportedInstrumentModels.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Manufacturer"
+   "Inherent IVI Attributes:Instrument Identification:Manufacturer"
+   string	readonly	17	0010078F
+   "Returns a string that contains the name of the manufacturer for the NI-RFSA device you are currently using."	"pniRFSA_Manufacturer.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Model"
+   "Inherent IVI Attributes:Instrument Identification:Model"
+   string	readonly	17	00100790
+   "Returns a string that contains the model number or name of the NI-RFSA device that you are currently using."	"pniRFSA_Model.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Firmware Revision"
+   "Inherent IVI Attributes:Instrument Identification:Firmware Revision"
+   string	readonly	17	0010078E
+   "Returns a string containing the firmware revision information for the NI-RFSA downconverter for the composite device you are currently using."	"pniRFSA_FirmwareRevision.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Logical Name"
+   "Inherent IVI Attributes:Advanced Session Information:Logical Name"
+   string	readonly	17	001006C1
+   "Contains the logical name you specified when opening the current IVI session. You may pass a logical name to the niRFSA Initialize VI or the niRFSA Initialize with Options VI. The IVI Configuration Utility must contain an entry for the logical name. The logical name entry refers to a driver session section in the IVI Configuration file. The driver session section specifies a physical device and initial user options."	"pniRFSA_LogicalName.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Resource Descriptor"
+   "Inherent IVI Attributes:Advanced Session Information:Resource Descriptor"
+   string	readonly	17	001006C0
+   "Indicates the resource descriptor NI-RFSA uses to identify the physical device. If you initialize NI-RFSA with a logical name, this property contains the resource name that corresponds to the entry in the IVI Configuration Utility."	"pniRFSA_ResourceDescriptor.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Downconverter Cal Tone Mode"
+   "Self Calibration:NI 5665/5667:Downconverter Cal Tone Mode"
+   iL enum { "Disabled"=2700, "Low Band RF"=2701, "High Band RF"=2702, "High Band IF"=2703 }	readwrite	49	00118CBB
+   "Specifies the location in a signal path where an RF downconverter calibration tone is injected or whether the tone is disabled."	"pniRFSA_DownconverterCalToneMode.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Downconverter Cal Tone Frequency"
+   "Self Calibration:NI 5665/5667:Downconverter Cal Tone Frequency"
+   fD	readwrite	49	00118CBC
+   "Specifies the frequency of the RF downconverter calibration tone, in hertz (Hz)."	"pniRFSA_DownconverterCalToneFrequency.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Calibration Correction for Through Filter"
+   "Self Calibration:NI 5665:Calibration Correction for Through Filter"
+   fD	readwrite	49	00118CC2
+   "Overrides the internal gain self-calibration correction for the IF filter through path with the value you set for this property."	"pniRFSA_CalCorrectionThroughFilter.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Calibration Correction for 300 kHz Filter"
+   "Self Calibration:NI 5665:Calibration Correction for 300 kHz Filter"
+   fD	readwrite	49	00118CC3
+   "Overrides the internal gain self-calibration correction for the 300 kHz IF filter path with the value you set for this property."	"pniRFSA_CalCorrection300MhzFilter.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Calibration Correction for 5 MHz Filter"
+   "Self Calibration:NI 5665:Calibration Correction for 5 MHz Filter"
+   fD	readwrite	49	00118CC4
+   "Overrides the internal gain self-calibration correction for the 5 MHz IF filter path with the value you set for this property."	"pniRFSA_CalCorrection5MHzFilter.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "RF Preselector Cal Tone Mode"
+   "Self Calibration:NI 5693:RF Preselector Cal Tone Mode"
+   iL enum { "Disabled"=2700, "Low Band RF"=2701, "High Band RF"=2702 }	readwrite	49	00118D00
+   "Specifies the location in a signal path where an RF preselector calibration tone is injected or whether the tone is disabled."	"pniRFSA_PreselectorCalToneMode.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "RF Preselector Cal Tone Frequency"
+   "Self Calibration:NI 5693:RF Preselector Cal Tone Frequency"
+   fD	readwrite	49	00118D01
+   "Specifies the frequency of the RF preselector calibration tone, in hertz (Hz)."	"pniRFSA_PreselectorCalToneFrequency.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "RF Path"
+   "Factory Calibration:NI 5601:RF Path Selection"
+   iL enum { "RF band 1"=1700, "RF band 2"=1701, "RF band 3"=1702, "RF band 4"=1703 }	readwrite	49	00118C83
+   "Specifies the RF path to use during calibration. This property is valid only during a calibration session. When you set this property, NI-RFSA does not select the RF path based on the downconverter center frequency."	"pniRFSA_RFPathSelection.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "RF Path"
+   "Factory Calibration:NI 5665:RF Path Selection"
+   iL enum { "RF band 1"=1700, "RF band 2"=1701, "RF band 3"=1702, "RF band 4"=1703 }	readwrite	49	00118C83
+   "Specifies the RF path to use during calibration. This property is valid only during a calibration session. When you set this property, NI-RFSA does not select the RF path based on the downconverter center frequency."	"pniRFSA_RFPathSelection.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "RF Electronic Attenuation Table Index"
+   "Factory Calibration:NI 5665:RF Electronic Attenuation Table Index"
+   iL	readwrite	49	00118C9E
+   "Selects the value of the RF electronic attenuation from a table of valid configurations. This property is valid only during a calibration session and when you set the RF Path Selection property to <b>RF band 1</b>."	"pniRFSA_RFElectronicAttenTableIndex_5603.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "RF Mechanical Attenuation Table Index"
+   "Factory Calibration:NI 5665:RF Mechanical Attenuation Table Index"
+   iL	readwrite	49	00118C9F
+   "Selects the value of the RF mechanical attenuation configuration from a table of valid configurations. This property is valid only during a calibration session."	"pniRFSA_RFMechAttnTableIndex_5603.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IF Filter Selection"
+   "Factory Calibration:NI 5665:IF Filter Selection"
+   iL enum { "5 MHz"=2100, "300 kHz"=2101, "Through"=2102, "20 MHz"=2103, "1.4 MHz"=2104, "400kHz"=2105, "110 kHz"=2106, "30 kHz"=2107 }	readwrite	49	00118CA0
+   "Specifies the IF filter path used during calibration. The property is valid only during a calibration session."	"pniRFSA_IFFilterSelection.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IF Attenuation Table Selection"
+   "Factory Calibration:NI 5665:IF Attenuation Table Selection"
+   iL enum { "Standard IF Attenuation Table"=2900, "ACPR IF Attenuation Table"=2901 }	readwrite	49	00118CBD
+   "Specifies the IF attenuation table to use for external calibration. This property is valid only in a calibration session."	"pniRFSA_IFAttenTableSelect_5603.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IF Attenuation Table Index"
+   "Factory Calibration:NI 5665:IF Attenuation Table Index"
+   iL	readwrite	49	00118C9D
+   "Specifies the IF attenuation index from a table of valid settings. To select a correct attenuation table, set this property in conjunction with the IF Filter Selection and IF Attenuation Table Selection properties. This property is valid only during a calibration session."	"pniRFSA_IFAttenuationTableIndex.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "LO Path Selection"
+   "Factory Calibration:NI 5665:LO Path Selection"
+   iL enum { "LO Path 1"=2300, "LO Path 2"=2301 }	readwrite	49	00118CA1
+   "Selects the LO signal path used during calibration. During noncalibration sessions, NI-RFSA implicitly derives the LO signal path from the center frequency. During calibration sessions, you must explicitly specify the LO signal path. This property is valid only during a calibration session."	"pniRFSA_LOPathSelection_5603.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "LO1 Attenuation"
+   "Factory Calibration:NI 5665:LO1 Attenuation"
+   fD	readwrite	49	00118CA2
+   "Specifies the LO1 attenuation, in dB, during a calibration session. This property is valid only during a calibration session."	"pniRFSA_LO1Attenuation_5603.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "LO2 Attenuation"
+   "Factory Calibration:NI 5665:LO2 Attenuation"
+   fD	readwrite	49	00118CA3
+   "Specifies the LO2 attenuation, in dB, during a calibration session. This property is valid only during a calibration session."	"pniRFSA_LO2Attenuation_5603.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "LO3 Attenuation"
+   "Factory Calibration:NI 5665:LO3 Attenuation"
+   fD	readwrite	49	00118CA4
+   "Specifies the LO3 attenuation, in dB, during a calibration session. This property is valid only during a calibration session."	"pniRFSA_LO3Attenuation_5603.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Cal Tone Step Attenuation"
+   "Factory Calibration:NI 5693:Cal Tone Step Attenuation"
+   fD	readwrite	49	00118CD8
+   "Specifies the step attenuator to engage in the calibration tone path. This property is valid only during a calibration session."	"pniRFSA_CalToneStepAttenuation.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Attenuation Index"
+   "Factory Calibration:NI 5693:RF Attenuation Index"
+   iL	readwrite	49	00118C7C
+   "Specifies the value of the RF attenuation from a table of valid configurations. This property is valid only during a calibration session and when you set the Low Frequency Bypass Enabled property to <b>Disabled</b>."	"pniRFSA_AttenuationIndex.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IF Filter Selection"
+   "Factory Calibration:NI 5694:IF Filter Selection"
+   iL enum { "5 MHz"=2100, "300 kHz"=2101, "Through"=2102, "20 MHz"=2103, "1.4 MHz"=2104, "400kHz"=2105, "110 kHz"=2106, "30 kHz"=2107 }	readwrite	49	00118CA0
+   "Specifies the IF filter path used during calibration. This property is valid only during a calibration session."	"pniRFSA_IFFilterSelection.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IF Attenuation Table Index"
+   "Factory Calibration:NI 5694:IF Attenuation Table Index"
+   iL	readwrite	49	00118C9D
+   "Specifies the IF attenuation index from a table of valid settings. To select correct attenuation settings, set this property in conjunction with the NI 5694 IF Filter Selection property. This property is valid only during a calibration session."	"pniRFSA_IFAttenuationTableIndex.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Preselector Tuning DAC Value"
+   "External Alignment:NI 5665:Preselector Tuning DAC Value"
+   iL	readwrite	49	00118CCE
+   "Specifies the preselector tuning DAC value during the preselector external alignment step. This value is valid only during a external alignment session."	"pniRFSA_5665_Preselector_Tuning_DAC_Value.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Input Port"
+   "Device Specific:5644R and 5645R:Signal Path:Input Port"
+   iL enum { "RF In"=2000, "IQ In"=2001, "Cal In"=2002, "I Only"=2003 }	readwrite	49	00118CE4
+   "Specifies the connector(s) to use to acquire the signal. To set this property, the NI-RFSA device must be in the Configuration state."	"pniRFSA_InputPort.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "LO In Power"
+   "Device Specific:5644R and 5645R:Signal Path:LO In Power (dBm)"
+   fD	readonly	49	00118CEA
+   "Returns the power level expected, in dBm, at the LO IN terminal when the LO Source property is set to <b>LO_In</b>."	"pniRFSA_LOInPower.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Decimation Delay"
+   "Device Specific:5644R and 5645R:Signal Path:Decimation Delay"
+   fD	readwrite	49	00118CEF
+   "Specifies the sub-sample delay, in seconds, to apply to the acquired signal. To set this property, the NI-RFSA device must be in the Configuration state."	"pniRFSA_DecimationDelay.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "LO Frequency Step Size"
+   "Device Specific:5644R and 5645R:Signal Path:LO Frequency Step Size (Hz)"
+   fD	readwrite	49	00118CEC
+   "Specifies the step size for tuning the local oscillator (LO) phase-locked loop (PLL).
+
+You can only tune the LO frequency by multiples of the LO Frequency Step Size property. The LO frequency can therefore be offset from the requested center frequency by as much as half of the LO Frequency Step Size property. This offset is corrected by digitally frequency shifting the LO frequency to the value requested in either the IQ Carrier Frequency property or the Spectrum Center Frequency property.
+
+When the LO PLL Fractional Mode Enabled property is set to <b>Enabled</b>, the LO Frequency Step Size can accept any value from 50 kHz to 24 MHz.
+
+When the LO PLL Fractional Mode Enabled property is set to <b>Disabled</b>, the LO Frequency Step Size is coerced to 4 MHz, 5 MHz, 6 MHz, 12 MHz or 24 MHz."	"pniRFSA_LOFrequencyStepSize.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "LO PLL Fractional Mode Enabled"
+   "Device Specific:5644R and 5645R:Signal Path:LO PLL Fractional Mode Enabled"
+   iL enum { "Disabled"=1900, "Enabled"=1901 }	readwrite	49	00118CEB
+   "Specifies whether to use fractional mode for the LO PLL. Fractional mode gives a finer frequency step resolution, but it may result in non harmonic spurs. Refer to the NI PXIe-5644R Specifications or the NI PXIe-5645R Specifications for more information about fractional mode and non harmonic spurs.
+
+NOTE: The LO PLL Fractional Mode Enabled property is applicable only when using the internal LO."	"pniRFSA_LOPLLFractionalModeEnabled.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Downconverter Frequency Offset"
+   "Device Specific:5644R and 5645R:Acquisition:Advanced:Downconverter Frequency Offset"
+   fD	readwrite	49	00118CFB
+   "Specifies an offset from the I/Q carrier frequency for the downconverter. If you set this property, any measurements outside the instantaneous bandwidth of the device are invalid. After you set this property, the RF downconverter is locked to that frequency offset until the value is changed or the property is reset."	"pniRFSA_DownconverterFrequencyOffset.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IQ Analog Edge Trigger Source"
+   "Device Specific:5644R and 5645R:Triggers:Ref:IQ Analog Edge:Source"
+   string	readwrite	49	00118CF0
+   "Specifies the channel from which the device monitors the trigger. Use a value of 'I' to monitor the I channel. Use a value of 'Q' to monitor the Q channel. Use a value of 'I,Q' to monitor both I and Q channels. This property affects the device operation only when the Reference Trigger Type property is set to <b>IQ Analog Edge</b>."	"pniRFSA_IQAnalogEdgeRefTriggerSource.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IQ Analog Edge Trigger Hysteresis"
+   "Device Specific:5644R and 5645R:Triggers:Ref:IQ Analog Edge:Hysteresis"
+   fD	readwrite	49	00118CF3
+   "Specifies the size of the hysteresis window on either side of the trigger level. The device triggers when the signal passes through the threshold you specify with the IQ Analog Edge Trigger Level property, has the slope you specify with the IQ Analog Edge Trigger Slope property, and passes through the hysteresis window that you specify with this property. This property affects the device operation only when the Reference Trigger Type property is set to <b>IQ Analog Edge</b>."	"pniRFSA_IQAnalogEdgeRefTriggerHysteresis.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IQ Analog Edge Trigger Slope"
+   "Device Specific:5644R and 5645R:Triggers:Ref:IQ Analog Edge:Slope"
+   iL enum { "Rising Slope"=1000, "Falling Slope"=1001 }	readwrite	49	00118CF1
+   "Specifies whether the device asserts the trigger when the voltage level is rising or falling. When you set the  Reference Trigger Type property to <b>IQ Analog Edge</b>, the device asserts the trigger when the signal level exceeds the specified level with the slope you specify. This property affects the device operation only when the Reference Trigger Type property is set to <b>IQ Analog Edge</b>."	"pniRFSA_IQAnalogEdgeRefTriggerSlope.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IQ Analog Edge Trigger Level"
+   "Device Specific:5644R and 5645R:Triggers:Ref:IQ Analog Edge:Level"
+   fD	readwrite	49	00118CF2
+   "Specifies the analog level, in volts, at which the device triggers. The device asserts the trigger when the signal exceeds the level specified by the value of this property, taking into consideration the specified slope. This property affects the device operation only when the Reference Trigger Type property is set to <b>IQ Analog Edge</b>."	"pniRFSA_IQAnalogEdgeRefTriggerLevel.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Sync Start Trigger Master"
+   "Device Specific:5644R and 5645R:Triggers:Synchronization:Sync Start Trigger Master"
+   bool	readwrite	49	00118CE0
+   "Specifies whether the device is the master for synchronizing the shared Start Trigger between multiple devices. The master device distributes the synchronized Start Trigger to all devices in the system through the Start Trigger distribution line.
+
+When synchronizing the Start Trigger, one device must always be designated as the master. When the device is configured as a master, it actively drives the Start Trigger distribution line. When the device is configured as a slave, set the Start Trigger Type property to <b>Digital Edge</b>, and the Start Trigger Digital Edge Source property to <b>Sync_Start</b>.
+
+Refer to the Synchronization Using NI-RFSA and NI-RFSG topic appropriate to your device in the NI RF Vector Signal Analyzers Help for more information about device synchronization for vector signal transceivers."	"pniRFSA_SyncStartTriggerMaster.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Sync Start Trigger Dist Line"
+   "Device Specific:5644R and 5645R:Triggers:Synchronization:Sync Start Trigger Dist Line"
+   string	readwrite	49	00118CE1
+   "Specifies which external trigger line distributes the synchronized Start Trigger signal. When synchronizing the Start Trigger, configure all devices to use the same Start Trigger distribution line.
+
+Refer to the Synchronization Using NI-RFSA and NI-RFSG topic appropriate to your device in the NI RF Vector Signal Analyzers Help for more information about device synchronization for vector signal transceivers."	"pniRFSA_SyncStartTriggerDistLine.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Sync Ref Trigger Master"
+   "Device Specific:5644R and 5645R:Triggers:Synchronization:Sync Ref Trigger Master"
+   bool	readwrite	49	00118CE2
+   "Specifies whether the device is the master for synchronizing the shared Reference Trigger between multiple devices. The master device distributes the synchronized Reference Trigger to all devices in the system through the Reference Trigger distribution line.
+
+When synchronizing the Reference Trigger, one device must always be designated as the master. When the device is configured as a master, it actively drives the Reference Trigger distribution line. When the device is configured as a slave, set the Reference Trigger Type property to <b>Digital Edge</b>, and the Reference Trigger Digital Edge Source property to <b>Sync_Ref</b>.
+
+Refer to the Synchronization Using NI-RFSA and NI-RFSG topic appropriate to your device in the NI RF Vector Signal Analyzers Help for more information about device synchronization for vector signal transceivers."	"pniRFSA_SyncRefTriggerMaster.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Sync Ref Trigger Dist Line"
+   "Device Specific:5644R and 5645R:Triggers:Synchronization:Sync Ref Trigger Dist Line"
+   string	readwrite	49	00118CE3
+   "Specifies which external trigger line distributes the synchronized Reference Trigger signal. When synchronizing the Reference Trigger, configure all devices to use the same Reference Trigger distribution line.
+
+Refer to the Synchronization Using NI-RFSA and NI-RFSG topic appropriate to your device in the NI RF Vector Signal Analyzers Help for more information about device synchronization for vector signal transceivers."	"pniRFSA_SyncRefTriggerDistLine.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Sync Advance Trigger Master"
+   "Device Specific:5644R and 5645R:Triggers:Synchronization:Sync Advance Trigger Master"
+   bool	readwrite	49	00118CE8
+   "Specifies whether the device is the master for synchronizing the shared Advance Trigger between multiple devices. The master device distributes the synchronized Advance Trigger to all devices in the system through the Advance Trigger distribution line.
+
+When synchronizing the Advance Trigger, one device must always be designated as the master. When the device is configured as a master, it actively drives the Advance Trigger distribution line. When the device is configured as a slave, set the Advance Trigger Type property to <b>Digital Edge</b>, and the Advance Trigger Digital Edge Source property to <b>Sync_Advance</b>.
+
+Refer to the Synchronization Using NI-RFSA and NI-RFSG topic appropriate to your device in the NI RF Vector Signal Analyzers Help for more information about device synchronization for vector signal transceivers."	"pniRFSA_SyncAdvanceTriggerMaster.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Sync Advance Trigger Dist Line"
+   "Device Specific:5644R and 5645R:Triggers:Synchronization:Sync Advance Trigger Dist Line"
+   string	readwrite	49	00118CE9
+   "Specifies which external trigger line distributes the synchronized Advance Trigger signal. When synchronizing the Advance Trigger, configure all devices to use the same Advance Trigger distribution line.
+
+Refer to the Synchronization Using NI-RFSA and NI-RFSG topic appropriate to your device in the NI RF Vector Signal Analyzers Help for more information about device synchronization for vector signal transceivers."	"pniRFSA_SyncAdvanceTriggerDistLine.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "Sync Ref Trigger Delay Enabled"
+   "Device Specific:5644R and 5645R:Triggers:Synchronization:Sync Ref Trigger Delay Enabled"
+   iL enum { "Disabled"=1900, "Enabled"=1901 }	readwrite	49	00118CED
+   "Specifies whether the Reference Trigger is delayed with the data. Set this property to <b>Disabled</b> when the Reference Trigger Type property is set to <b>IQ Power Edge</b> or <b>IQ Analog Edge</b>.
+
+Refer to the Synchronization Using NI-RFSA and NI-RFSG topic appropriate to your device in the NI RF Vector Signal Analyzers Help for more information about device synchronization for vector signal transceivers."	"pniRFSA_SyncRefTriggerDelayEnabled.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IQ In Port Carrier Frequency"
+   "Device Specific:5644R and 5645R:IQ In Port:Carrier Frequency"
+   fD	readwrite	49	00118CE5
+   "Configures the frequency of the signal. The onboard signal processing (OSP) frequency shifts the signal at this frequency to baseband prior to acquiring it."	"pniRFSA_IQInPortCarrierFrequency.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IQ In Port Vertical Range"
+   "Device Specific:5644R and 5645R:IQ In Port:Vertical Range"
+   fD	readwrite	49	00118CE7
+   "Specifies the voltage range for the I/Q terminals."	"pniRFSA_IQInPortVerticalRange.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IQ In Port Term Cfg"
+   "Device Specific:5644R and 5645R:IQ In Port:Terminal Configuration"
+   iL enum { "Differential"=2100, "Single-Ended"=2101 }	readwrite	49	00118CE6
+   "Configures the terminal configuration of the I/Q IN port."	"pniRFSA_IqInPortTerminalConfiguration.html"	"<helpdir>:\rfsapropref.chm"
+
+attribute: "IQ In Port Temperature"
+   "Device Specific:5644R and 5645R:IQ In Port:Temperature (Degrees C)"
+   fD	readonly	49	00118CFC
+   "Returns the temperature of the I/Q IN circuitry on the device."	"pniRFSA_IQInPortTemperature.html"	"<helpdir>:\rfsapropref.chm"

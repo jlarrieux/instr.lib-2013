@@ -1,0 +1,1188 @@
+explicitActiveChannels: TRUE
+library: niHSDIO**.*
+      
+class: "niHSDIO"
+flags: 0
+sorted: no
+implements: ivi, iviResourceMgr
+
+attribute: "Active Channels"
+   "Active Channels"
+   string	writeonly	19	-2
+   "Specifies part of the instrument session to which subsequent properties apply. The Active Channels property is most often used to specify a channel or channels. You also can use the Active Channels property prior to specifying a Script trigger or a Marker event."	"pniHSDIO_ActiveChannels.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DynamicChannels"
+   "Dynamic Channels"
+   string	readwrite	17	00118C32
+   "Configures channels for dynamic operation. The group of dynamic channels is reconfigured each time this property is set. For example, setting this property to 0-10 and then setting it to 5-8 results in only channels 5-8 being assigned to dynamic. Channels 0-4 and 9-10 are unconfigured by the second configuration.
+
+Writing an empty string to this property configures ALL channels for dynamic. Writing the value None unconfigures all channels for dynamic operation. The session must be committed before the channel is configured or unconfigured (refer to the niHSDIO Commit VI for more information about committing a session)."	"pniHSDIO_DynamicChannels.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "StaticChannels"
+   "Static Channels"
+   string	readwrite	17	00118C33
+   "Configures channels for static operation. The group of static channels is reconfigured each time this property is set. For example, setting this property to 0-10 and then setting it to 5-8 results in only channels 5-8 being assigned to static. Channels 0-4 and 9-10 are unconfigured by the second configuration. Writing an empty string to this property configures ALL channels for static. Writing the value None unconfigures all channels for static. The channel is not configured or unconfigured until a call to the niHSDIO Read Static (U32) VI (for acquisition sessions) or the niHSDIO Write Static (U32) VI (for generation sessions)."	"pniHSDIO_StaticChannels.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataVolt.High"
+   "Voltage Levels:Data High"
+   fD	readwrite	17	00118C37
+   "Specifies the high data voltage level for the session.
+
+This property applies to static and dynamic data operations.
+
+On NI 6555/6556 devices only, you can select the following PFI channels and clocks for the active channel input of the property node using these strings: PFI1, PFI2, STROBE, and DDC_CLKOUT. These six strings are not case sensitive and can be grouped with the standard input strings separated by commas. The following are examples of valid string syntax: 0, 4, 6, PFI1, 7 or 0-12, STROBE, DDC_CLKOUT."	"pniHSDIO_DataVolt.High.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataVolt.Low"
+   "Voltage Levels:Data Low"
+   fD	readwrite	17	00118C36
+   "Specifies the low data voltage level for the session. 
+
+This property applies to static and dynamic data operations.
+
+On NI 6555/6556 devices only, you can select the following PFI channels and clocks for the active channel input of the property node using these strings: PFI1, PFI2, STROBE, and DDC_CLKOUT. These six strings are not case sensitive and can be grouped with the standard input strings separated by commas. The following are examples of valid string syntax: 0, 4, 6, PFI1, 7 or 0-12, STROBE, DDC_CLKOUT."	"pniHSDIO_DataVolt.Low.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataVolt.Term"
+   "Voltage Levels:Data Termination"
+   fD	readwrite	17	00118CD1
+   "Specifies the termination voltage level for the active channels in this session. This property applies to static and dynamic data operations in acquisition or generation sessions. Refer to the Tristate Mode property to drive the termination voltage for a generation session or to the Termination Mode property to drive the termination voltage for an acquisition session. Refer to the NI PXIe-6555/6556 Specifications for more information about accuracy.
+
+On NI 6555/6556 devices only, you can select the following PFI channels and clocks for the active channel input of the property node using these strings: PFI1, PFI2, STROBE, and DDC_CLKOUT. These six strings are not case sensitive and can be grouped with the standard input strings separated by commas. The following are examples of valid string syntax: 0, 4, 6, PFI1, 7 or 0-12, STROBE, DDC_CLKOUT.
+
+NOTE: Only NI 6555/6556 devices support this property.
+
+Valid values range from -2 to 7, depending on the range selected with the Data Voltage Range property.
+
+The default value is 0.
+
+Units are in Volts."	"pniHSDIO_DataVolt.Term.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataVoltageRange"
+   "Voltage Levels:Data Voltage Range"
+   iL enum { "-2 to 6 Voltage Range"=86, "-1 to 7 Voltage Range"=87 }	readwrite	17	00118CD3
+   "Specifies the voltage range used for all voltages on the selected channel. You must use the same voltage range for all voltages on a channel in both acquisition and generation sessions, or NI-HSDIO returns an error. If you are using both acquisition and generation sessions in your application, when you set a voltage range in a session, NI-HSDIO automatically sets the same range in the other session. However, NI-HSDIO allows you to change the voltage range only in the original session in which you configured the voltage range. For example, if you select <b>-2 to 6 Voltage Range</b> in your acquisition session, your generation session is configured automatically to the same range, but if you want to change the range to <b>-1 to 7 Voltage Range</b>, you can do so only in the acquisition session.
+
+On NI 6555/6556 devices only, you can select the following PFI channels and clocks for the active channel input of the property node using these strings: PFI1, PFI2, STROBE, and DDC_CLKOUT. These six strings are not case sensitive and can be grouped with the standard input strings separated by commas. The following are examples of valid string syntax: 0, 4, 6, PFI1, 7 or 0-12, STROBE, DDC_CLKOUT.
+
+This property is valid for generation and acquisition sessions.
+
+NOTE: Only NI 6555/6556 devices support this property."	"pniHSDIO_DataVolt.Range.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "TrigVolt.High"
+   "Voltage Levels:Trigger High"
+   fD	readwrite	17	00118C39
+   "Specifies the high trigger voltage level for the session.
+
+NOTE: For NI 654x/6551/6552 devices, if you do not explicitly set this property, NI-HSDIO assumes the same value as the Data Voltage High Level property for the acquisition session."	"pniHSDIO_TrigVolt.High.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "TrigVolt.Low"
+   "Voltage Levels:Trigger Low"
+   fD	readwrite	17	00118C38
+   "Specifies the low trigger voltage level for the session.
+
+NOTE: For NI 654x/6551/6552 devices, if you do not explicitly set this property, NI-HSDIO assumes the same value as the Data Voltage Low Level property for the acquisition session."	"pniHSDIO_TrigVolt.Low.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "EventVolt.High"
+   "Voltage Levels:Event High"
+   fD	readwrite	17	00118C80
+   "Specifies the high event voltage level for the session.
+
+NOTE: For NI 654x/6551/6552 devices, if you do not explicitly set this property, NI-HSDIO assumes the same value as the Data Voltage High Level property for the generation session."	"pniHSDIO_EventVolt.High.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "EventVolt.Low"
+   "Voltage Levels:Event Low"
+   fD	readwrite	17	00118C7F
+   "Specifies the low event voltage level for the session.
+
+NOTE: For NI 654x/6551/6552 devices, if you do not explicitly set this property, NI-HSDIO assumes the same value as the Data Voltage Low Level property for the generation session."	"pniHSDIO_EventVolt.Low.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "SampsPerRecord"
+   "Dynamic Acquisition:Samples Per Record"
+   iL	readwrite	17	00118C4D
+   "Specifies the number of samples to be acquired per record. If you are using a Reference trigger, this number includes both pretrigger and posttrigger samples.
+
+This property is only valid for acquisition sessions."	"pniHSDIO_SampsPerRecord.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "SamplesPerRecordIsFinite"
+   "Dynamic Acquisition:Samples Per Record Is Finite"
+   bool	readwrite	17	00118CCF
+   "Specifies whether the configured samples per record is finite (TRUE) or infinite (FALSE).
+
+This property is valid only for acquisition sessions."	"pniHSDIO_SamplesPerRecordIsFinite.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "NumRecords"
+   "Dynamic Acquisition:Number Of Records To Acquire"
+   iL	readwrite	17	00118CAE
+   "Specifies the total number of records to acquire."	"pniHSDIO_NumRecords.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "FetchRelativeTo"
+   "Dynamic Acquisition:Fetch:Fetch Relative To"
+   iL enum { "Most recent sample"=46, "First sample"=47, "Reference trigger"=48, "First pretrigger sample"=49, "Current read position"=50 }	readwrite	17	00118C73
+   "Specifies the absolute location within the acquired record from which to begin fetching. The default value is <b>Current</b> read position. However, NI-HSDIO changes the default value internally as follows. If the Reference trigger is enabled (not disabled), then the fetch occurs from the first pretrigger sample. If the Reference trigger is disabled, then the fetch occurs from the first sample."	"pniHSDIO_FetchRelativeTo.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "FetchOffset"
+   "Dynamic Acquisition:Fetch:Fetch Offset"
+   iL	readwrite	17	00118C74
+   "Specifies the offset in samples to start fetching acquired waveform data. The offset is applied relative to the Fetch Relative To position. Offset can be a positive or negative value. 
+
+If the specified offset would cause the fetch to occur before the start of the waveform or exceed the end of the waveform, NI-HSDIO returns a data overwrite error.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_FetchOffset.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "FetchBacklog"
+   "Dynamic Acquisition:Fetch:Fetch Backlog"
+   iL	readonly	17	00118C4F
+   "Queries how many acquired data points remain in onboard memory.
+
+This property is valid only for acquisition sessions.
+
+This property is used with the Fetch Offset and Fetch Relative To properties. This property returns the number of samples available from the given Fetch Relative To and Fetch Offset."	"pniHSDIO_FetchBacklog.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RecordsDone"
+   "Dynamic Acquisition:Fetch:Records Done"
+   iL	readonly	17	00118CAD
+   "Returns the number of records that have been acquired."	"pniHSDIO_RecordsDone.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "InputImpedance"
+   "Dynamic Acquisition:Input Impedance"
+   fD	readwrite	17	00118C76
+   "Specifies the input impedance on the front panel connector. 
+
+Refer to the device documentation for more information about input impedance. Valid values for this property vary by device. Refer to your device documentation for more information on the supported impedance values.
+
+This property is valid only for acquisition sessions.
+
+The units are in ohms."	"pniHSDIO_InputImpedance.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataInterpretation"
+   "Dynamic Acquisition:Data Interpretation"
+   iL enum { "High or low"=3, "Valid or invalid"=4 }	readwrite	17	00118C3A
+   "Specifies whether you acquire high/low data or valid/invalid data during a static or dynamic acquisition session. Refer to your specific hardware documentation to understand how data is returned to you when the voltage level is above voltage level low but below voltage level high and you select <b>High or Low</b>.
+
+On NI 6555/6556 devices only, you can select the following PFI channels and clocks for the active channel input of the property node using these strings: PFI1, PFI2, STROBE, and DDC_CLKOUT. These six strings are not case sensitive and can be grouped with the standard input strings separated by commas. The following are examples of valid string syntax: 0, 4, 6, PFI1, 7 or 0-12, STROBE, DDC_CLKOUT.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_DataInterpretation.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "TerminationMode"
+   "Dynamic Acquisition:Termination Mode"
+   iL enum { "High impedance"=84, "Drive termination voltage"=85 }	readwrite	17	00118CDF
+   "Specifies the action taken by NI-HSDIO when a channel is tristated. A tristate condition can occur during initial states, idle states, per cycle tristate, and static tristate. Selecting <b>High impedance</b> sets the channel to a high-impedance state when tristated. Selecting <b>Drive termination voltage</b> sets the channel to drive a termination voltage (VTT).
+
+You can select the following PFI channels and clocks for the active channel input of the property node using these strings: PFI1, PFI2, STROBE, and DDC_CLKOUT. These six strings are not case sensitive and can be grouped with the standard input strings separated by commas. The following are examples of valid string syntax: 0, 4, 6, PFI1, 7 or 0-12, STROBE, DDC_CLKOUT.
+
+NOTE: This property is supported only on NI 6555/6556 devices.
+
+This property is valid only for acquisition sessions.
+
+NOTE: If you set the Termination Mode and Tristate Mode properties to different values on the same channel, NI-HSDIO returns an error."	"pniHSDIO_TerminationMode.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ActiveLoadMode"
+   "Advanced:Active Load:Active Load Mode"
+   iL enum { "Active Load Disabled"=96, "Active Load Enabled When Tristate"=97 }	readwrite	17	00118CE0
+   "Specifies whether the driver should source or sink current instead of being in a high-impedance state. To enable active load functionality, you must first set the Tristate Mode or Termination Mode properties to <b>High impedance</b>. If the Tristate Mode or Termination Mode properties are set to <b>Drive termination voltage</b>, then you must set this property to <b>Active Load Disabled</b> or NI-HSDIO returns an error.
+
+You can select the following PFI channels and clocks for the active channel input of the property node using these strings: PFI1, PFI2, STROBE, and DDC_CLKOUT. These six strings are not case sensitive and can be grouped with the standard input strings separated by commas. The following are examples of valid string syntax: 0, 4, 6, PFI1, 7 or 0-12, STROBE, DDC_CLKOUT.
+
+NOTE: Only NI 6556 devices support this property."	"pniHSDIO_ActiveLoadMode.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ActiveLoad.SourcingCurrent"
+   "Advanced:Active Load:Sourcing Current"
+   fD	readwrite	17	00118CE1
+   "Specifies the amount of current for the driver to source if the input voltage is less than the commutating voltage.
+
+Valid values range from 1.5 mA to 24 mA.
+
+The default value is 1.5 mA.
+
+The units are Amps (A).
+
+NOTE: This property takes effect only if the Active Load Mode property is set to Active Load Enabled When Tristate in the current session.
+
+You can select the following PFI channels and clocks for the active channel input of the property node using these strings: PFI1, PFI2, STROBE, and DDC_CLKOUT. These six strings are not case sensitive and can be grouped with the standard input strings separated by commas. The following are examples of valid string syntax: 0, 4, 6, PFI1, 7 or 0-12, STROBE, DDC_CLKOUT.
+
+NOTE: Only NI 6556 devices support this property."	"pniHSDIO_ActiveLoadSourcingCurrentValue.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ActiveLoad.SinkingCurrent"
+   "Advanced:Active Load:Sinking Current"
+   fD	readwrite	17	00118CE2
+   "Specifies the amount of current for the driver to sink if the input voltage is greater than or equal to the commutating voltage.
+
+Valid values range from 1.5 mA to 24 mA.
+
+The default value is 1.5 mA.
+
+The units are Amps (A).
+
+NOTE: This property takes effect only if the Active Load Mode property is set to Active Load Enabled When Tristate in the current session.
+
+You can select the following PFI channels and clocks for the active channel input of the property node using these strings: PFI1, PFI2, STROBE, and DDC_CLKOUT. These six strings are not case sensitive and can be grouped with the standard input strings separated by commas. The following are examples of valid string syntax: 0, 4, 6, PFI1, 7 or 0-12, STROBE, DDC_CLKOUT.
+
+NOTE: Only NI 6556 devices support this property."	"pniHSDIO_ActiveLoadSinkingCurrentValue.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ActiveLoad.CommVoltage"
+   "Advanced:Active Load:Commutating Voltage Level"
+   fD	readwrite	17	00118CE3
+   "Specifies the voltage threshold that causes the driver to switch from sourcing to sinking current. If the incoming voltage is greater than or equal to the commutating voltage level, the device sinks current. Conversely, if the incoming voltage is less than the commutating voltage level, the device sources current.
+
+Valid values range from -2 V to 7 V.
+
+The default value is 0 V.
+
+The units are Volts (V).
+
+You can select the following PFI channels and clocks for the active channel input of the property node using these strings: PFI1, PFI2, STROBE, and DDC_CLKOUT. These six strings are not case sensitive and can be grouped with the standard input strings separated by commas. The following are examples of valid string syntax: 0, 4, 6, PFI1, 7 or 0-12, STROBE, DDC_CLKOUT.
+
+NOTE: Only NI 6556 devices support this property."	"pniHSDIO_ActiveLoadCommutatingVoltageLevel.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "InitialState"
+   "Dynamic Generation:Initial State"
+   iL enum { "Tristate"=24, "Logic high"=1, "Logic low"=0, "Hold last value"=27 }	readwrite	17	00118C70
+   "Specifies a dynamic generation channel state after the session is initiated and before the first waveform sample is generated. The channel changes to the Initial state after the data operation has been initiated. When the Start trigger occurs, the Initial state is replaced by the first sample in the waveform.
+
+Channels explicitly disabled with the niHSDIO Tristate VI remain disabled, but the channel data value changes internally. Re-enabling a channel with the niHSDIO Tristate VI while the device is waiting for a Start trigger causes the channel to go to its Initial state.
+
+This property is valid only for generation sessions."	"pniHSDIO_InitialState.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "IdleState"
+   "Dynamic Generation:Idle State"
+   iL enum { "Tristate"=24, "Logic high"=1, "Logic low"=0, "Hold last value"=27 }	readwrite	17	00118C71
+   "Specifies a dynamic generation channel state while the device is idle."	"pniHSDIO_IdleState.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DriveType"
+   "Dynamic Generation:Drive Type"
+   iL enum { "Active drive"=75, "Open collector"=76 }	readwrite	17	00118CBB
+   "Specifies what the data channels generate when set to logic 1. Selecting <b>Open collector</b> to generate a Z is useful for wired-OR logic buses, such as I2C or SMBus. 
+
+NOTE: NI 656x devices support only the active drive setting. NI-HSDIO returns an error if you try to configure the channels on these devices for open collector generation.
+
+NOTE: NI 654x devices support open collector generation only for static generation. NI-HSDIO returns an error if you try to configure the channels on these devices for open collector dynamic generation.
+
+This property is only valid for generation sessions."	"pniHSDIO_DriveType.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "TristateMode"
+   "Dynamic Generation:Tristate Mode"
+   iL enum { "High impedance"=84, "Drive termination voltage"=85 }	readwrite	17	00118CD0
+   "Specifies the action taken by NI-HSDIO when a channel is tristated. A tristate condition can occur during initial states, idle states, per cycle tristate, and static tristate. Selecting <b>High impedance</b> sets the channel to a high-impedance state when tristated. To drive a termination voltage on a channel in a generation session, select <b>Drive termination voltage</b>.
+
+You can select the following PFI channels and clocks for the active channel input of the property node using these strings: PFI1, PFI2, STROBE, and DDC_CLKOUT. These six strings are not case sensitive and can be grouped with the standard input strings separated by commas. The following are examples of valid string syntax: 0, 4, 6, PFI1, 7 or 0-12, STROBE, DDC_CLKOUT.
+
+NOTE: This property is supported only on NI 6555/6556 devices.
+
+This property is valid only for generation sessions.
+
+NOTE: If you set the Termination Mode and Tristate Mode properties to different values on the same channel, NI-HSDIO returns an error."	"pniHSDIO_TristateMode.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RepeatMode"
+   "Dynamic Generation:Repeat Mode"
+   iL enum { "Finite"=16, "Continuous"=17 }	readwrite	17	00118C4A
+   "Specifies whether to generate a single waveform a finite number of times or continuously. This property is valid only when the Generation Mode property is set to <b>Waveform</b>; it is not used if you select <b>Scripted</b>.
+
+If this property is set to <b>Finite</b>, use the Repeat Count property to specify how many times the named waveform is generated.
+
+This property is valid only for generation sessions."	"pniHSDIO_RepeatMode.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RepeatCount"
+   "Dynamic Generation:Repeat Count"
+   iL	readwrite	17	00118C77
+   "Specifies how many times to generate the waveform specified by the Waveform To Generate property. This property is valid only when the Repeat Mode property is set to <b>Finite</b>; it is not used when the Repeat Mode property is set to <b>Continuous</b>. This property is valid only when the Generation Mode property is set to <b>Waveform</b>. It is ignored if you set the Generation Mode property to <b>Scripted</b>.
+
+This property is valid only for generation sessions."	"pniHSDIO_RepeatCount.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "GenerationMode"
+   "Dynamic Generation:Generation Mode"
+   iL enum { "Waveform"=14, "Scripted"=15 }	readwrite	17	00118C49
+   "Specifies whether to generate the waveform specified by the Waveform to Generate property or the script specified by the Script to Generate property upon calling the niHSDIO Initiate VI.
+
+This property is valid only for generation sessions."	"pniHSDIO_GenerationMode.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "WaveformToGenerate"
+   "Dynamic Generation:Waveform To Generate"
+   string	readwrite	17	00118C4B
+   "Specifies which named waveform in onboard memory is generated upon calling the niHSDIO Initiate VI when the Generation Mode property is set to <b>Waveform</b>. If this property is not set to a valid waveform name and more than one waveform is in onboard memory, you receive an error upon calling the niHSDIO Initiate VI. If only one waveform is in onboard memory and this property is set to an empty string, then that waveform is generated upon calling the niHSDIO Initiate VI.
+
+This property is ignored when the Generation Mode property is set to <b>Scripted</b>, since the Script to Generate property defines the sequence of waveforms to generate.
+
+This property is valid only for generation sessions."	"pniHSDIO_WaveformToGenerate.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ScriptToGenerate"
+   "Dynamic Generation:Script To Generate"
+   string	readwrite	17	00118C4C
+   "Specifies which script in onboard memory is generated upon calling the niHSDIO Initiate VI when the Generation Mode property is set to <b>Scripted</b>. If this property is not set to a valid script and more than one script is in onboard memory, you receive an error after calling the niHSDIO Initiate VI. If only one script is in onboard memory and this property is set to '' (empty string), then that script is generated upon calling the niHSDIO Initiate VI.
+
+This property is ignored when the Generation Mode property is set to <b>Waveform</b>, since the Waveform to Generate property defines which waveform to generate.
+
+This property is valid only for generation sessions."	"pniHSDIO_ScriptToGenerate.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "StreamingEnable"
+   "Dynamic Generation:Data Transfer:Streaming:Enable"
+   bool	readwrite	17	00118CBF
+   "Enables streaming data from host memory to the device.
+
+This property is valid only for dynamic generation sessions."	"pniHSDIO_StreamingEnable.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "StreamingWaveformName"
+   "Dynamic Generation:Data Transfer:Streaming:Streaming Waveform Name"
+   string	readwrite	17	00118CBE
+   "Specifies the name of the waveform used to continuously stream data during generation. This property defaults to an empty string when no streaming waveform is specified.
+
+Use in conjunction with the Space Available in Streaming Waveform property."	"pniHSDIO_StreamingWaveformName.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "SpaceAvailInStreamingWfrm"
+   "Dynamic Generation:Data Transfer:Streaming:Space Available in Streaming Waveform"
+   iL	readonly	17	00118CBD
+   "Specifies the space available (in samples) in the streaming waveform for writing new data.
+
+This property is valid only when streaming.
+
+Use in conjunction with the Streaming Waveform Name property."	"pniHSDIO_SpaceAvailInStreamingWfrm.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DirectDMAEnable"
+   "Dynamic Generation:Data Transfer:Direct DMA:Enable"
+   bool	readwrite	17	00118CC2
+   "Enables the device for Direct DMA writes.
+
+When enabled, all the niHSDIO Write Named Waveform VI calls that are given a data address in the Direct DMA Window download data residing on the Direct DMA device to the instrument's onboard memory.
+
+This property is valid only for dynamic generation sessions."	"pniHSDIO_DirectDMAEnable.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DirectDMAWindowSize"
+   "Dynamic Generation:Data Transfer:Direct DMA:Window Size (in bytes)"
+   iL	readwrite	17	00118CC3
+   "Specifies the Direct DMA window size (in bytes)."	"pniHSDIO_DirectDMAWindowSize.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DirectDMAWindowAddress"
+   "Dynamic Generation:Data Transfer:Direct DMA:Window Address"
+   iL	readwrite	17	00118CC4
+   "Specifies the window address (beginning of window) of the waveform data source. This window address is specified by your Direct DMA compatible data source."	"pniHSDIO_DirectDMAWindowAddress.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataTransferBlockSize"
+   "Dynamic Generation:Data Transfer:Advanced:Data Transfer Block Size"
+   iL	readwrite	17	00118CC0
+   "Specifies the number of samples to download to onboard memory at one time."	"pniHSDIO_DataTransferBlockSize.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "SampClk.Rate"
+   "Timing:Sample Clock:Rate"
+   fD	readwrite	17	00118C3E
+   "Specifies the Sample clock rate, which controls the rate at which samples are acquired or generated when you use the Sample clock to time your application. The Sample clock rate is expressed in Hertz.
+
+NOTE: You must set this property even when you supply an external clock, because NI-HSDIO uses this property for a number of reasons, including optimal error checking and certain pulse width selections."	"pniHSDIO_SampClk.Rate.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "SampClk.Source"
+   "Timing:Sample Clock:Source"
+   string	readwrite	17	00118C3D
+   "Specifies the Sample clock source.
+
+NOTE: STROBE is valid only for acquisition operations."	"pniHSDIO_SampClk.Source.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "SampClk.Impedance"
+   "Timing:Sample Clock:Impedance"
+   fD	readwrite	17	00118C6C
+   "Use this property to program the device input impedance when the Sample clock is supplied through the device front panel. This property is expressed in ohms."	"pniHSDIO_SampClk.Impedance.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ExportedSampClk.OutputTerm"
+   "Timing:Sample Clock:Export:Output Terminal"
+   string	readwrite	17	00118C6F
+   "Use this property to export the Sample clock to the specified terminal."	"pniHSDIO_ExportedSampClk.OutputTerm.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ExportedSampClk.Mode"
+   "Timing:Sample Clock:Export:Mode"
+   iL enum { "Noninverted"=21, "Inverted"=22, "Delayed"=23 }	readwrite	17	00118C6D
+   "Specifies the position of the exported Sample clock relative to the Sample clock used by the device."	"pniHSDIO_ExportedSampClk.Mode.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ExportedSampClk.Delay"
+   "Timing:Sample Clock:Export:Delay"
+   fD	readwrite	17	00118C6E
+   "Specifies the delay of the exported Sample clock relative to the Sample clock used by the device. This property is relevant only when the Sample Clock Export Mode property is set to <b>Delayed</b>. Otherwise, this property is ignored. This property is specified as fraction of the Sample clock interval, that is, as fraction of (1/Sample Clock Rate). On NI 6544/6545/6547/6548 devices, this property is not supported for acquisition."	"pniHSDIO_ExportedSampClk.Delay.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RefClk.Rate"
+   "Timing:Ref Clock:Rate"
+   fD	readwrite	17	00118C3C
+   "Specifies the Reference clock rate, expressed in Hertz. This property is ignored when the Reference Clock Source property is set to None."	"pniHSDIO_RefClk.Rate.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RefClk.Source"
+   "Timing:Ref Clock:Source"
+   string	readwrite	17	00118C3B
+   "Specifies the Reference clock source."	"pniHSDIO_RefClk.Source.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RefClk.Impedance"
+   "Timing:Ref Clock:Impedance"
+   fD	readwrite	17	00118C6A
+   "Specifies the input impedance of the Reference clock when it is supplied through the device front panel. This property is expressed in ohms."	"pniHSDIO_RefClockImpedance.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ExportedRefClk.OutputTerm"
+   "Timing:Ref Clock:Export Output Terminal"
+   string	readwrite	17	00118C6B
+   "Use this property to export the Reference clock to the specified terminal."	"pniHSDIO_ExportedRefClk.OutputTerm.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ExportedOnboardRefClk.OutputTerm"
+   "Timing:Onboard Ref Clock:Export Output Terminal"
+   string	readwrite	17	00118C85
+   "Use this property to export the Onboard Reference clock to the specified terminal. This property is only valid for PCI devices."	"pniHSDIO_ExportedOnboardRefClk.OutputTerm.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataPos.Position"
+   "Timing:Data Position:Position"
+   iL enum { "Sample clock rising edge"=18, "Sample clock falling edge"=19, "Delay from sample clock rising edge"=20 }	readwrite	17	00118C68
+   "Specifies which edge of the Sample clock signal is used to time the generation or acquisition. You can also configure the device to generate or acquire data at a configurable delay past each rising edge of the Sample clock.
+
+NOTE: To configure a delay on NI 656x devices, you must delay all channels in the session. NI-HSDIO returns an error if you apply a delay to only a partial channel list.
+
+Refer to the Data Position Delay property for more information about multibank data delay."	"pniHSDIO_DataPos.Position.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataPos.Delay"
+   "Timing:Data Position:Delay"
+   fD	readwrite	17	00118C69
+   "Specifies the delay after the Sample clock rising edge when the device generates or acquires a new data sample. Data delay is expressed as a fraction of the clock period (for example, a fraction of 1/Sample clock rate). This property is relevant only when the Data Position property is set to <b>Delay From Sample Clock Rising Edge</b>. This property is valid only when the <b>position</b> parameter of the niHSDIO Configure Data Position VI is set to <b>Delay From Sample Clock Rising Edge</b> for these channels.
+
+NOTE: On NI 6555/6556 devices, valid values range from -1 to 2 clock cycles in increments of 0.001 cycles. Delay on NI 6555/6556 devices is configured on a per channel basis.
+
+NOTE: To configure a delay on NI 656x devices, you must delay all channels in the session. NI-HSDIO returns an error if you apply a delay to only a partial channel list."	"pniHSDIO_DataPos.Delay.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataPos.Deskew"
+   "Timing:Data Position:Deskew"
+   fD	readwrite	17	00118CD2
+   "Specifies, per channel, the fixed time delay of acquired or generated data. The value of this property is added to the value of the Data Delay property to determine the total delay. Unlike the Data Delay property, this property is specified in seconds.
+
+NOTE: Only NI 6555/6556 devices support this property.
+
+Valid values, in seconds, depend on your clock rate and are represented by the equation -2(1/f) to +3(1/f), where f is the frequency of your clock rate.
+
+The default value is 0."	"pniHSDIO_DataPos.Deskew.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataPos.TrigDelay"
+   "Timing:Data Position:Trigger Delay"
+   fD	readwrite	17	00118CD4
+   "Specifies, per channel, the delay after the Sample clock rising edge when the device samples on a trigger. Trigger delay is expressed as a fraction of the clock period (for example, a fraction of 1/Sample clock rate).
+
+NOTE: This property is supported only on PFI 1 and PFI 2 on NI 6555/6556 devices.
+
+Valid values range from -1 to 2 clock cycles in increments of 0.001 cycles.
+
+The default value is 0."	"pniHSDIO_DataPos.TrigDelay.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataPos.TrigDeskew"
+   "Timing:Data Position:Trigger Deskew"
+   fD	readwrite	17	00118CD5
+   "Specifies, per channel, the fixed time delay after the Sample clock rising edge when the device samples on a trigger. The value of this property is added to the value of the Trigger Delay property to determine the total delay. Unlike the Trigger Delay property, this property is specified in seconds.
+
+NOTE: This property is supported only on PFI 1 and PFI 2 on NI 6555/6556 devices.
+
+Valid values, in seconds, depend on your clock rate and are represented by the equation -2(1/f) to +3(1/f), where f is the frequency of your clock rate.
+
+The default value is 0."	"pniHSDIO_DataPos.TrigDeskew.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataPos.EventDelay"
+   "Timing:Data Position:Event Delay"
+   fD	readwrite	17	00118CD6
+   "Specifies, per channel, the delay after the Sample clock rising edge when the device initiates an event. Event delay is expressed as a fraction of the clock period (for example, a fraction of 1/Sample clock rate).
+
+NOTE: This property is supported only on PFI 1 and PFI 2 on NI 6555/6556 devices.
+
+Valid values range from -1 to 2 clock cycles in increments of 0.001 cycles.
+
+The default value is 0."	"pniHSDIO_DataPos.EventDelay.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataPos.EventDeskew"
+   "Timing:Data Position:Event Deskew"
+   fD	readwrite	17	00118CD7
+   "Specifies, per channel, the delay after the Sample clock rising edge when the device initiates an event. The value of this property is added to the value of the Event Delay property to determine the total delay. Unlike the Event Delay property, this property is specified in seconds.
+
+NOTE: This property is supported only on PFI 1 and PFI 2 on NI 6555/6556 devices.
+
+Valid values, in seconds, depend on your clock rate and are represented by the equation -2(1/f) to +3(1/f), where f is the frequency of your clock rate.
+
+The default value is 0."	"pniHSDIO_DataPos.EventDeskew.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "OscillatorPhaseDACValue"
+   "Timing:Advanced:Oscillator Phase DAC Value"
+   iL	readwrite	17	00118C78
+   "Use this property to phase shift the PLL circuit of the On Board Clock source. You can use this property to align the Sample clock of this device with another device that shares the same Reference clock. This property is not valid if the Reference Clock Source property is set to None. For NI 6544/6545/6547/6548/6555/6556 devices, the valid range for this property is 0 to 65,535. For all other devices, the valid range for this property is 0 to 4,095."	"pniHSDIO_OscillatorPhaseDACValue.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ExportedSampClk.Offset"
+   "Timing:Advanced:Exported Sample Clock Offset"
+   fD	readwrite	17	00118C83
+   "Use this property to offset the exported clock by a fixed time. Refer to the Dynamic Generation Timing Diagrams for your device for more information about changing this value."	"pniHSDIO_ExportedSampClk.Offset.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "StartTrig.Type"
+   "Triggers:Start:Type"
+   iL enum { "None"=28, "Digital edge"=29, "Software"=32, "Pattern match"=31 }	readwrite	17	00118C50
+   "Specifies whether you want the Start trigger to be a digital edge, pattern match, or software trigger."	"pniHSDIO_StartTrig.Type.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "StartTrig.DigEdge.Source"
+   "Triggers:Start:Digital Edge:Source"
+   string	readwrite	17	00118C51
+   "Specifies the source terminal for the Start trigger. This property is used only when the Start Trigger Type property is set to <b>Digital edge</b>."	"pniHSDIO_StartTrig.DigEdge.Source.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "StartTrig.DigEdge.Edge"
+   "Triggers:Start:Digital Edge:Edge"
+   iL enum { "Rising edge"=12, "Falling edge"=13 }	readwrite	17	00118C52
+   "Specifies the active edge for the Start trigger. This property is used only when the Start Trigger Type property is set to Digital edge."	"pniHSDIO_StartTrig.DigEdge.Edge.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "StartTrig.DigEdge.Position"
+   "Triggers:Start:Digital Edge:Position"
+   iL enum { "Sample clock rising edge"=18, "Sample clock falling edge"=19, "Delay from sample clock rising edge"=20 }	readwrite	17	00118C7B
+   "Specifies the position where the Start trigger is latched, relative to the Sample clock. Trigger voltages and positions are only relevant if the trigger source is a front panel connector."	"pniHSDIO_StartTrig.DigEdge.Position.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "StartTrig.DigEdge.TermConfig"
+   "Triggers:Start:Digital Edge:Terminal Configuration"
+   iL enum { "LVDS"=64, "Single-Ended"=65 }	readwrite	17	00118C92
+   "Specifies whether the Start trigger terminal is configured for single-ended or LVDS operation. Valid values for this property vary by device. Refer to your device documentation to determine if your hardware supports LVDS operation."	"pniHSDIO_StartTrig.DigEdge.TermConfig.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "StartTrig.DigEdge.Impedance"
+   "Triggers:Start:Digital Edge:Impedance"
+   fD	readwrite	17	00118C31
+   "Specifies the impedance on the channel configured for the digital edge Start trigger. Valid values for this property vary by device. Refer to your device documentation for more information about the valid impedance settings.
+
+This property is only set if the trigger is configured to use a PFI channel, and it is ignored if the trigger is configured for any other channel."	"pniHSDIO_StartTrig.DigEdge.Impedance.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "StartTrig.PatMatch.Pattern"
+   "Triggers:Start:Pattern Match:Pattern"
+   string	readwrite	17	00118C53
+   "Sets the pattern match mask for the Start trigger. This property is used when the Start Trigger Type property is set to <b>Pattern match</b>."	"pniHSDIO_StartTrig.PatMatch.Pattern.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "StartTrig.PatMatch.TrigWhen"
+   "Triggers:Start:Pattern Match:Trigger When"
+   iL enum { "Pattern matches"=36, "Pattern does not match"=37 }	readwrite	17	00118C54
+   "Specifies whether a pattern match Start trigger asserts when a particular pattern is matched or not matched.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_StartTrig.PatMatch.TrigWhen.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ExportedStartTrig.OutputTerm"
+   "Triggers:Start:Export:Output Terminal"
+   string	readwrite	17	00118C55
+   "Specifies the destination terminal for exporting the Start trigger."	"pniHSDIO_ExportedStartTrig.OutputTerm.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ExportedStartTrig.TermConfig"
+   "Triggers:Start:Export:Terminal Configuration"
+   iL enum { "LVDS"=64, "Single-Ended"=65 }	readwrite	17	00118CA6
+   "Specifies whether the Start trigger output terminal is configured for single-ended or LVDS operation. Valid values for this property vary by device. Refer to your device documentation to determine if your hardware supports LVDS operation."	"pniHSDIO_ExportedStartTrig.TermConfig.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RefTrig.Type"
+   "Triggers:Ref:Type"
+   iL enum { "None"=28, "Digital edge"=29, "Software"=32, "Pattern match"=31 }	readwrite	17	00118C56
+   "Specifies the Reference trigger type. Depending on this property value, more properties may need to be set to fully configure the trigger.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_RefTrig.Type.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RefTrig.PretrigSamples"
+   "Triggers:Ref:Pretrigger Samples Per Record"
+   iL	readwrite	17	00118C4E
+   "Specifies the number of pretrigger samples, which are the samples acquired before the Reference trigger is received, to be acquired per record. The number of pretrigger samples cannot be greater than the value of the Samples Per Record property.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_RefTrig.PretrigSamples.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RefTrig:DigEdge.Source"
+   "Triggers:Ref:Digital Edge:Source"
+   string	readwrite	17	00118C57
+   "Specifies the source terminal for the Reference trigger. This property is used only when the Reference Trigger Type property is set to <b>Digital edge</b>.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_RefTrigDigEdge.Source.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RefTrig.DigEdge.Edge"
+   "Triggers:Ref:Digital Edge:Edge"
+   iL enum { "Rising edge"=12, "Falling edge"=13 }	readwrite	17	00118C58
+   "Specifies the active edge for the Reference trigger. This property is used when the Reference Trigger Type property is set to <b>Digital edge</b>.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_RefTrig.DigEdge.Edge.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RefTrig.DigEdge.Position"
+   "Triggers:Ref:Digital Edge:Position"
+   iL enum { "Sample clock rising edge"=18, "Sample clock falling edge"=19, "Delay from sample clock rising edge"=20 }	readwrite	17	00118C7D
+   "Specifies the position where the Reference trigger is latched, relative to the Sample clock. Trigger voltages and positions are only relevant if the trigger source is a front panel connector.
+
+This property is only valid for acquisition sessions."	"pniHSDIO_RefTrig.DigEdge.Position.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RefTrig.DigEdge.TermConfig"
+   "Triggers:Ref:Digital Edge:Terminal Configuration"
+   iL enum { "LVDS"=64, "Single-Ended"=65 }	readwrite	17	00118C93
+   "Specifies whether the Reference trigger terminal is configured for single-ended or LVDS operation. Valid values for this property vary by device. Refer to your device documentation to determine if your hardware supports LVDS operation.
+
+This property is only valid for acquisition sessions."	"pniHSDIO_RefTrig.DigEdge.TermConfig.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RefTrig.DigEdge.Impedance"
+   "Triggers:Ref:Digital Edge:Impedance"
+   fD	readwrite	17	00118C34
+   "Specifies the impedance on the channel configured for the digital edge Reference trigger. Valid values for this property vary by device. Refer to your device documentation for more information about the valid impedance settings.
+
+This property is set only if the trigger is configured to use a PFI channel, and it is ignored if the trigger is configured for any other channel.
+
+This property is only valid for acquisition sessions."	"pniHSDIO_RefTrig.DigEdge.Impedance.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RefTrig:PatMatch:Pattern"
+   "Triggers:Ref:Pattern Match:Pattern"
+   string	readwrite	17	00118C59
+   "Sets the pattern match mask for the Reference trigger. This property is used when the Reference Trigger Type property is set to <b>Pattern match</b>.
+
+The pattern is a string of characters representing the entire pattern to be matched on. Each character corresponds to a particular channel.
+
+- 'X' or 'x': Match on any value
+- '1': Match on a logic 1
+- '0': Match on a logic 0
+- 'R' or 'r': Match on a rising edge
+- 'F' or 'f': Match on a falling edge
+- 'E' or 'e': Match on either edge
+- Spaces are ignored, and are useful for readability to segment long patterns
+The rightmost character in the expression corresponds to the lowest numbered physical channel. Ex. 'XXXX XXXX XXXX 1111 1100' specifies to match when channels 0 and 1 are '0' and channels 2-7 are '1'. The values seen by pattern matching are affected by the Data Interpretation property.
+
+This property is only valid for acquisition sessions."	"pniHSDIO_RefTrigPatMatchPattern.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RefTrig.PatMatch.TrigWhen"
+   "Triggers:Ref:Pattern Match:Trigger When"
+   iL enum { "Pattern matches"=36, "Pattern does not match"=37 }	readwrite	17	00118C5A
+   "Specifies whether a pattern match Reference trigger asserts when a particular pattern is matched or not matched.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_RefTrig.PatMatch.TrigWhen.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ExportedRefTrig.OutputTerm"
+   "Triggers:Ref:Export:Output Terminal"
+   string	readwrite	17	00118C5B
+   "Specifies the destination terminal for exporting the Reference trigger.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_ExportedRefTrig.OutputTerm.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ExportedRefTrig.TermConfig"
+   "Triggers:Ref:Export:Terminal Configuration"
+   iL enum { "LVDS"=64, "Single-Ended"=65 }	readwrite	17	00118CA7
+   "Specifies whether the exported Reference trigger output terminal is configured for single-ended or LVDS operation. Valid values for this property vary by device. Refer to your device documentation to determine if your hardware supports LVDS operation.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_ExportedRefTrig.TermConfig.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "StartToRefHoldoff"
+   "Triggers:Ref:Advanced:Start to Reference Trigger Holdoff"
+   fD	readwrite	17	00118C86
+   "Specifies the amount of time, in seconds, after the Start trigger when the Reference trigger is recognized.
+
+This property is especially useful when you want each device in a multidevice situation to recognize the Reference trigger at the same time, though the Reference trigger is shared among devices and each device has a different pretrigger count.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_StartToRefHoldoff.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RefToRefHoldoff"
+   "Triggers:Ref:Advanced:Reference to Reference Trigger Holdoff"
+   fD	readwrite	17	00118CB1
+   "Specifies the amount of time, in seconds, until the next record's Reference trigger is recognized.
+
+This property is especially useful when you want each device in a multidevice situation to recognize the Reference trigger at the same time, though the Reference trigger is shared among devices and each device has a different record size.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_RefToRefHoldoff.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "AdvanceTrig.Type"
+   "Triggers:Advance:Type"
+   iL enum { "None"=28, "Digital edge"=29, "Software"=32, "Pattern match"=31 }	readwrite	17	00118C88
+   "Specifies whether you want the Advance trigger to be a digital edge, pattern match, or software trigger.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_AdvanceTrig.Type.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "AdvanceTrig.DigEdge.Source"
+   "Triggers:Advance:Digital Edge:Source"
+   string	readwrite	17	00118C89
+   "Specifies the source terminal for the Advance trigger. This property is used only when the Advance Trigger Type property is set to <b>Digital edge</b>.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_AdvanceTrig.DigEdge.Source.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "AdvanceTrig.DigEdge.Edge"
+   "Triggers:Advance:Digital Edge:Edge"
+   iL enum { "Rising edge"=12, "Falling edge"=13 }	readwrite	17	00118C8A
+   "Specifies the active edge for the Advance trigger. This property is used only when the Advance Trigger Type property is set to <b>Digital edge</b>.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_AdvanceTrig.DigEdge.Edge.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "AdvanceTrig.DigEdge.Position"
+   "Triggers:Advance:Digital Edge:Position"
+   iL enum { "Sample clock rising edge"=18, "Sample clock falling edge"=19, "Delay from sample clock rising edge"=20 }	readwrite	17	00118C8D
+   "Specifies the position where the Advance trigger is latched, relative to the Sample clock. Trigger voltages and positions are relevant only if the trigger source is a front panel connector.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_AdvanceTrig.DigEdge.Position.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "AdvanceTrig.DigEdge.TermConfig"
+   "Triggers:Advance:Digital Edge:Terminal Configuration"
+   iL enum { "LVDS"=64, "Single-Ended"=65 }	readwrite	17	00118C9B
+   "Specifies whether the Advance trigger terminal is configured for single-ended or LVDS operation. Valid values for this property vary by device. Refer to your device documentation to determine if your hardware supports LVDS operation.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_AdvanceTrig.DigEdge.TermConfig.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "AdvanceTrig.DigEdge.Impedance"
+   "Triggers:Advance:Digital Edge:Impedance"
+   fD	readwrite	17	00118C8F
+   "Specifies the impedance on the channel configured for the digital edge Advance trigger. Valid values for this property vary by device. Refer to your device documentation for more information about the valid impedance settings.
+
+This property is only set if the trigger is configured to use a PFI channel, and it is ignored if the trigger is configured for any other channel.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_AdvanceTrig.DigEdge.Impedance.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "AdvanceTrig.PatMatch.Pattern"
+   "Triggers:Advance:Pattern Match:Pattern"
+   string	readwrite	17	00118C8B
+   "Sets the pattern match mask for the Advance trigger. This property is used when the Advance Trigger Type property is set to Pattern match.
+
+The pattern is a string of characters representing the entire pattern to be matched on. Each character corresponds to a particular channel.
+
+- 'X' or 'x': Match on any value
+- '1': Match on a logic 1
+- '0': Match on a logic 0
+- 'R' or 'r': Match on a rising edge
+- 'F' or 'f': Match on a falling edge
+- 'E' or 'e': Match on either edge
+- Spaces are ignored, and are useful for readability to segment long patterns
+The rightmost character in the expression corresponds to the lowest numbered physical channel. Ex. 'XXXX XXXX XXXX 1111 1100' specifies to match when channels 0 and 1 are '0' and channels 2-7 are '1'. The values seen by pattern matching are affected by the Data Interpretation property.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_AdvanceTrig.PatMatch.Pattern.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "AdvanceTrig.PatMatch.TrigWhen"
+   "Triggers:Advance:Pattern Match:Trigger When"
+   iL enum { "Pattern matches"=36, "Pattern does not match"=37 }	readwrite	17	00118C8C
+   "Specifies whether a pattern match Advance trigger asserts when a particular pattern is matched or not matched. This property is valid only for acquisition sessions.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_AdvanceTrig.PatMatch.TrigWhen.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ExportedAdvanceTrig.OutputTerm"
+   "Triggers:Advance:Export:Output Terminal"
+   string	readwrite	17	00118C8E
+   "Specifies the destination terminal for exporting the Advance trigger.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_ExportedAdvanceTrig.OutputTerm.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ExportedAdvanceTrig.TermConfig"
+   "Triggers:Advance:Export:Terminal Configuration"
+   iL enum { "LVDS"=64, "Single-Ended"=65 }	readwrite	17	00118CAA
+   "Specifies whether the Advance trigger output terminal is configured for single-ended or LVDS operation. Valid values for this property vary by device. Refer to your device documentation to determine if your hardware supports LVDS operation.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_ExportedAdvanceTrig.TermConfig.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ScriptTrig.Type"
+   "Triggers:Script:Type"
+   iL enum { "None"=28, "Digital edge"=29, "Digital level"=30, "Software"=32 }	readwrite	17	00118C5C
+   "Specifies whether you want the Script trigger to be a digital edge, digital level, or software trigger. Depending upon the value of this property, more properties may be needed to fully configure the trigger.
+
+This property is valid only for generation sessions."	"pniHSDIO_ScriptTrig.Type.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ScriptTrig.DigEdge.Source"
+   "Triggers:Script:Digital Edge:Source"
+   string	readwrite	17	00118C5D
+   "Specifies the source terminal for the Script trigger. This property is used when the Script Trigger Type property is set to <b>Digital edge</b>."	"pniHSDIO_ScriptTrig.DigEdge.Source.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ScriptTrig.DigEdge.Edge"
+   "Triggers:Script:Digital Edge:Edge"
+   iL enum { "Rising edge"=12, "Falling edge"=13 }	readwrite	17	00118C5E
+   "Specifies the active edge for the Script trigger. This property is used when the Script Trigger Type property is set to <b>Digital edge</b>."	"pniHSDIO_ScriptTrig.DigEdge.Edge.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ScriptTrig.DigEdge.TermConfig"
+   "Triggers:Script:Digital Edge:Terminal Configuration"
+   iL enum { "LVDS"=64, "Single-Ended"=65 }	readwrite	17	00118C94
+   "Specifies whether the Script trigger terminal is configured for single-ended or LVDS operation. Valid values for this property vary by device. Refer to your device documentation to determine if your hardware supports LVDS operation."	"pniHSDIO_ScriptTrig.DigEdge.TermConfig.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ScriptTrig.DigEdge.Impedance"
+   "Triggers:Script:Digital Edge:Impedance"
+   fD	readwrite	17	00118C35
+   "Specifies the impedance on the channel configured for the digital edge Script trigger. Valid values for this property vary by device. Refer to your device documentation for more information about the valid impedance settings.
+
+This property is only set if the trigger is configured to use a PFI channel, and it is ignored if the trigger is configured for any other channel."	"pniHSDIO_ScriptTrig.DigEdge.Impedance.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ScriptTrig.DigLevel.Source"
+   "Triggers:Script:Digital Level:Source"
+   string	readwrite	17	00118C5F
+   "Specifies the source terminal for the Script trigger. This property is used when the Script Trigger Type property is set to <b>Digital level</b>."	"pniHSDIO_ScriptTrig.DigLevel.Source.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ScriptTrig.DigLevel.TrigWhen"
+   "Triggers:Script:Digital Level:Trigger When"
+   iL enum { "High"=34, "Low"=35 }	readwrite	17	00118C60
+   "Specifies the active level for the Script trigger. This property is used when the Script Trigger Type property is set to <b>Digital level</b>."	"pniHSDIO_ScriptTrig.DigLevel.TrigWhen.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ScriptTrig.DigLevel.TermConfig"
+   "Triggers:Script:Digital Level:Terminal Configuration"
+   iL enum { "LVDS"=64, "Single-Ended"=65 }	readwrite	17	00118C9A
+   "Specifies whether the Script trigger terminal is configured for single-ended or LVDS operation. Valid values for this property vary by device. Refer to your device documentation to determine if your hardware supports LVDS operation."	"pniHSDIO_ScriptTrig.DigLevel.TermConfig.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ScriptTrig.DigLevel.Impedance"
+   "Triggers:Script:Digital Level:Impedance"
+   fD	readwrite	17	00118C99
+   "Specifies the impedance on the channel configured for the digital level Script trigger. Valid values for this property vary by device. Refer to your device documentation for more information about the valid impedance settings.
+
+This property is set only if the trigger is configured to use a PFI channel, and it is ignored if the trigger is configured for any other channel."	"pniHSDIO_ScriptTrig.DigLevel.Impedance.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ExportedScriptTrig.OutputTerm"
+   "Triggers:Script:Export:Output Terminal"
+   string	readwrite	17	00118C61
+   "Specifies the output terminal for the exported Script trigger.
+
+Setting this property to an empty string means that when you commit the session, the signal is removed from the previously configured terminal and, if possible, the terminal is tristated. Event voltages and positions are only relevant if the destination of the event is a front panel connector.
+
+This property is valid only for generation sessions."	"pniHSDIO_ExportedScriptTrig.OutputTerm.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ExportedScriptTrig.TermConfig"
+   "Triggers:Script:Export:Terminal Configuration"
+   iL enum { "LVDS"=64, "Single-Ended"=65 }	readwrite	17	00118CA8
+   "Specifies whether the Script trigger output terminal is configured for single-ended or LVDS operation. Valid values for this property vary by device. Refer to your device documentation to determine if your hardware supports LVDS operation."	"pniHSDIO_ExportedScriptTrig.TermConfig.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "PauseTrig.Type"
+   "Triggers:Pause:Type"
+   iL enum { "None"=28, "Digital level"=30, "Pattern match"=31 }	readwrite	17	00118C62
+   "Specifies whether you want the Pause trigger to be a digital level or pattern match trigger."	"pniHSDIO_PauseTrig.Type.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "PauseTrig.DigLevel.Source"
+   "Triggers:Pause:Digital Level:Source"
+   string	readwrite	17	00118C63
+   "Specifies the source terminal for the Pause trigger.
+
+This property applies only to acquisition operations."	"pniHSDIO_PauseTrig.DigLevel.Source.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "PauseTrig.DigLevel.TrigWhen"
+   "Triggers:Pause:Digital Level:Trigger When"
+   iL enum { "High"=34, "Low"=35 }	readwrite	17	00118C64
+   "Specifies the active level for pausing the dynamic operation."	"pniHSDIO_PauseTrig.DigLevel.TrigWhen.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "PauseTrig.DigLevel.Position"
+   "Triggers:Pause:Digital Level:Position"
+   iL enum { "Sample clock rising edge"=18, "Sample clock falling edge"=19, "Delay from sample clock rising edge"=20 }	readwrite	17	00118C87
+   "Specifies the position where the Pause trigger is latched, relative to the Sample clock. Trigger voltages and positions are relevant only if the trigger source is a front panel connector."	"pniHSDIO_PauseTrig.DigLevel.Position.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "PauseTrig.DigLevel.TermConfig"
+   "Triggers:Pause:Digital Level:Terminal Configuration"
+   iL enum { "LVDS"=64, "Single-Ended"=65 }	readwrite	17	00118C95
+   "Specifies whether the Pause trigger terminal is configured for single-ended or LVDS operation. Valid values for this property vary by device. Refer to your device documentation to determine if your hardware supports LVDS operation."	"pniHSDIO_PauseTrig.DigLevel.TermConfig.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "PauseTrig.DigLevel.Impedance"
+   "Triggers:Pause:Digital Level:Impedance"
+   fD	readwrite	17	00118C3F
+   "Specifies the impedance on the channel configured for the digital level Pause trigger. Valid values for this property vary by device. Refer to your device documentation for more information about the valid impedance settings.
+
+This property is set only if the trigger is configured to use a PFI channel, and it is ignored if the trigger is configured for any other channel."	"pniHSDIO_PauseTrig.DigLevel.Impedance.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "PauseTrig.PatMatch.Pattern"
+   "Triggers:Pause:Pattern Match:Pattern"
+   string	readwrite	17	00118C65
+   "Sets the pattern match mask for the Pause trigger. This property is used when the Pause Trigger Type property is set to <b>Pattern match</b>.
+
+The pattern is a string of characters representing the entire pattern to match. Each character corresponds to a particular channel.
+
+- 'X' or 'x': Match on any value
+- '1': Match on a logic 1
+- '0': Match on a logic 0
+- 'R' or 'r': Match on a rising edge
+- 'F' or 'f': Match on a falling edge
+- 'E' or 'e': Match on either edge
+- Spaces are ignored, and are useful for readability to segment long patterns
+The rightmost character in the expression corresponds to the lowest numbered physical channel. Ex. 'XXXX XXXX XXXX 1111 1100' specifies to match when channels 0 and 1 are '0' and channels 2-7 are '1'. The values seen by pattern matching are affected by the Data Interpretation property.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_PauseTrig.PatMatch.Pattern.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "PauseTrig.PatMatch.TrigWhen"
+   "Triggers:Pause:Pattern Match:Trigger When"
+   iL enum { "Pattern matches"=36, "Pattern does not match"=37 }	readwrite	17	00118C66
+   "Specifies whether a pattern match Pause trigger asserts when a particular pattern is matched or not matched.
+
+This property is valid only for acquisition sessions."	"pniHSDIO_PauseTrig.PatMatch.TrigWhen.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ExportedPauseTrig.OutputTerm"
+   "Triggers:Pause:Export:Output Terminal"
+   string	readwrite	17	00118C67
+   "Specifies the destination terminal for the exported Pause trigger. Event voltages and positions are only relevant if the destination of the event is one of the front panel connectors.
+
+This property is only valid for generation sessions."	"pniHSDIO_ExportedPauseTrig.OutputTerm.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ExportedPauseTrig.TermConfig"
+   "Triggers:Pause:Export:Terminal Configuration"
+   iL enum { "LVDS"=64, "Single-Ended"=65 }	readwrite	17	00118CA9
+   "Specifies whether the Pause trigger output terminal is configured for single-ended or LVDS operation. Valid values for this property vary by device. Refer to your device documentation to determine if your hardware supports LVDS operation."	"pniHSDIO_ExportedPauseTrig.TermConfig.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "StopTrig.Type"
+   "Triggers:Stop:Type"
+   iL enum { "None"=28, "Digital edge"=29, "Software"=32 }	readwrite	17	00118CC8
+   "Specifies whether you want the Stop trigger to be a digital edge or software trigger. This property is valid only for generation sessions."	"pniHSDIO_StopTrig.Type.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "StopTrig.DigEdge.Source"
+   "Triggers:Stop:Digital Edge:Source"
+   string	readwrite	17	00118CC9
+   "Specifies the source terminal for the Stop trigger. This property is used only when the Stop Trigger Type property is set to <b>Digital edge</b>. This property is valid only for generation sessions."	"pniHSDIO_StopTrig.DigEdge.Source.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "StopTrig.DigEdge.Edge"
+   "Triggers:Stop:Digital Edge:Edge"
+   iL enum { "Rising edge"=12, "Falling edge"=13 }	readwrite	17	00118CCA
+   "Specifies the active edge for the Stop trigger. This property is used only when the Stop Trigger Type property is set to <b>Digital edge</b>. This property is valid only for generation sessions."	"pniHSDIO_StopTrig.DigEdge.Edge.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "StopTrig.DigEdge.TermConfig"
+   "Triggers:Stop:Digital Edge:Terminal Configuration"
+   iL enum { "LVDS"=64, "Single-Ended"=65 }	readwrite	17	00118CCB
+   "Specifies whether the Stop trigger terminal is configured for single-ended or LVDS operation. Valid values for this property vary by device. Refer to your device documentation to determine if your hardware supports LVDS operation. This property is valid only for generation sessions."	"pniHSDIO_StopTrig.DigEdge.TermConfig.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "StopTrig.DigEdge.Impedance"
+   "Triggers:Stop:Digital Edge:Impedance"
+   fD	readwrite	17	00118CCC
+   "Specifies the impedance on the channel configured for the digital edge Stop trigger. Valid values for this property vary by device. Refer to your device documentation for more information about the valid impedance settings.
+
+This property is only set if the trigger is configured to use a PFI channel, and it is ignored if the trigger is configured for any other channel. This property is valid only for generation sessions."	"pniHSDIO_StopTrig.DigEdge.Impedance.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ExportedStopTrig.OutputTerm"
+   "Triggers:Stop:Export:Output Terminal"
+   string	readwrite	17	00118CCD
+   "Specifies the destination terminal for exporting the Stop trigger. This property is valid only for generation sessions."	"pniHSDIO_ExportedStopTrig.OutputTerm.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ExportedStopTrig.TermConfig"
+   "Triggers:Stop:Export:Terminal Configuration"
+   iL enum { "LVDS"=64, "Single-Ended"=65 }	readwrite	17	00118CCE
+   "Specifies whether the Stop trigger output terminal is configured for single-ended or LVDS operation. Valid values for this property vary by device. Refer to your device documentation to determine if your hardware supports LVDS operation. This property is valid only for generation sessions."	"pniHSDIO_ExportedStopTrig.TermConfig.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RdyForStartEvent.OutputTerm"
+   "Events:Ready For Start:Output Terminal"
+   string	readwrite	17	00118C40
+   "Specifies the destination terminal for the Ready for Start Event. Event voltages and positions are relevant only if the destination of the event is a front panel connector."	"pniHSDIO_RdyForStartEvent.OutputTerm.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RdyForStartEvent.ActiveLvl"
+   "Events:Ready For Start:Active Level"
+   iL enum { "Active high"=10, "Active low"=11 }	readwrite	17	00118C41
+   "Specifies the output polarity of the Ready for Start Event."	"pniHSDIO_RdyForStartEvent.ActiveLvl.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RdyForStartEvent.TermConfig"
+   "Events:Ready For Start:Terminal Configuration"
+   iL enum { "LVDS"=64, "Single-Ended"=65 }	readwrite	17	00118C96
+   "Specifies whether the Ready for Start event terminal is configured for single-ended or LVDS operation. Valid values for this property vary by device. Refer to your device documentation to determine if your hardware supports LVDS operation."	"pniHSDIO_RdyForStartEvent.TermConfig.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RdyForAdvanceEvent.OutputTerm"
+   "Events:Ready For Advance:Output Terminal"
+   string	readwrite	17	00118C9D
+   "Specifies the destination terminal for the Ready for Advance Event. Event voltages and positions are relevant only if the destination of the event is a front panel connector."	"pniHSDIO_RdyForAdvanceEvent.OutputTerm.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RdyForAdvanceEvent.ActiveLvl"
+   "Events:Ready For Advance:Active Level"
+   iL enum { "Active high"=10, "Active low"=11 }	readwrite	17	00118C9E
+   "Specifies the output polarity of the Ready for Advance Event."	"pniHSDIO_RdyForAdvanceEvent.ActiveLvl.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "RdyForAdvanceEvent.TermConfig"
+   "Events:Ready For Advance:Terminal Configuration"
+   iL enum { "LVDS"=64, "Single-Ended"=65 }	readwrite	17	00118C9F
+   "Specifies whether the Ready for Advance event terminal is configured for single-ended or LVDS operation. Valid values for this property vary by device. Refer to your device documentation to determine if your hardware supports LVDS operation."	"pniHSDIO_RdyForAdvanceEvent.TermConfig.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "EndOfRecEvent.OutputTerm"
+   "Events:End Of Record:Output Terminal"
+   string	readwrite	17	00118CA0
+   "Specifies the destination terminal for the End of Record event. Event voltages and positions are relevant only if the destination of the event is a front panel connector."	"pniHSDIO_EndOfRecEvent.OutputTerm.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "EndOfRecEvent.PulsePolarity"
+   "Events:End Of Record:Pulse Polarity"
+   iL enum { "Active high"=10, "Active low"=11 }	readwrite	17	00118CA1
+   "Specifies the output polarity of the End of Record event."	"pniHSDIO_EndOfRecEvent.PulsePolarity.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "EndOfRecEvent.TermConfig"
+   "Events:End Of Record:Terminal Configuration"
+   iL enum { "LVDS"=64, "Single-Ended"=65 }	readwrite	17	00118CA2
+   "Specifies whether the End of Record event terminal is configured for single-ended or LVDS operation. Valid values for this property vary by device. Refer to your device documentation to determine if your hardware supports LVDS operation."	"pniHSDIO_EndOfRecEvent.TermConfig.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataActiveEvent.OutputTerm"
+   "Events:Data Active:Output Terminal"
+   string	readwrite	17	00118C43
+   "Specifies the destination terminal for the Data Active event. Event voltages and positions are only relevant if the destination of the event is a front panel connector. This property is valid only for generation sessions."	"pniHSDIO_DataActiveEvent.OutputTerm.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataActiveEvent.ActiveLvl"
+   "Events:Data Active:Active Level"
+   iL enum { "Active high"=10, "Active low"=11 }	readwrite	17	00118C44
+   "Specifies the output polarity of the Data Active event."	"pniHSDIO_DataActiveEvent.ActiveLvl.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataActiveEvent.Position"
+   "Events:Data Active:Position"
+   iL enum { "Sample clock rising edge"=18, "Sample clock falling edge"=19, "Delay from sample clock rising edge"=20 }	readwrite	17	00118C81
+   "Specifies the position of the Data Active event relative to the Sample clock. Event voltages and positions are only relevant if the destination of the event is a front panel connector."	"pniHSDIO_DataActiveEvent.Position.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataActiveEvent.TermConfig"
+   "Events:Data Active:Terminal Configuration"
+   iL enum { "LVDS"=64, "Single-Ended"=65 }	readwrite	17	00118C97
+   "Specifies whether the Data Active event terminal is configured for single-ended or LVDS operation. Valid values for this property vary by device. Refer to your device documentation to determine if your hardware supports LVDS operation."	"pniHSDIO_DataActiveEvent.TermConfig.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "MarkerEvent.OutputTerm"
+   "Events:Marker:Output Terminal"
+   string	readwrite	17	00118C46
+   "Specifies the destination terminal for the Marker event."	"pniHSDIO_MarkerEvent.OutputTerm.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "MarkerEvent.PulsePolarity"
+   "Events:Marker:Pulse Polarity"
+   iL enum { "Active high"=10, "Active low"=11 }	readwrite	17	00118C47
+   "Specifies the output polarity of the Marker event. This property is valid only for generation sessions."	"pniHSDIO_MarkerEvent.PulsePolarity.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "MarkerEvent.Position"
+   "Events:Marker:Position"
+   iL enum { "Sample clock rising edge"=18, "Sample clock falling edge"=19, "Delay from sample clock rising edge"=20 }	readwrite	17	00118C82
+   "Specifies the position of the event relative to the Sample clock. Event voltages and positions are only relevant if the destination of the event is a front panel connector. This property is valid only for generation sessions."	"pniHSDIO_MarkerEvent.Position.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "MarkerEvent.TermConfig"
+   "Events:Marker:Terminal Configuration"
+   iL enum { "LVDS"=64, "Single-Ended"=65 }	readwrite	17	00118C98
+   "Specifies whether the Marker event terminal is configured for single-ended or LVDS operation. Valid values for this property vary by device. Refer to your device documentation to determine if your hardware supports LVDS operation."	"pniHSDIO_MarkerEvent.TermConfig.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "SampleErrorEvent.OutputTerm"
+   "Events:Sample Error:Output Terminal"
+   string	readwrite	17	00118CB8
+   "Specifies the destination terminal for the Sample Error event. Event voltages and positions are relevant only if the destination of the event is a front panel connector."	"pniHSDIO_SampleErrorEvent.OutputTerm.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "TotalAcqMemSize"
+   "Device Characteristics:Total Acquisition Memory Size"
+   iL	readonly	17	00118C79
+   "Specifies the total onboard memory size, in samples, for acquiring data. The number of samples is based on the default device data width.
+
+If you configure your device to use a different data width, the total memory size is actually the value returned by this property multiplied by the quotient of the default data width divided by the configured data width. For example, if you configure 1-byte data width for a 2-byte device, the total acquisition memory size is twice the number of samples that is returned by this property."	"pniHSDIO_TotalAcqMemSize.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "TotalGenMemSize"
+   "Device Characteristics:Total Generation Memory Size"
+   iL	readonly	17	00118C7A
+   "Specifies the total onboard memory size, in samples, for generating data. The number of samples is based on the default device data width.
+
+If you configure your device to use a different data width, the total memory size is actually the value returned by this property multiplied by the quotient of the default data width divided by the configured data width. For example, if you configure 1-byte data width for a 2-byte device, the total generation memory size is twice the number of samples that is returned by this property."	"pniHSDIO_TotalGenMemSize.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "SerialNumber"
+   "Device Characteristics:Serial Number"
+   string	readonly	17	00118C90
+   "Returns the serial number of the device."	"pniHSDIO_SerialNumber.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ResourceDescriptor"
+   "Device Characteristics:Resource Descriptor"
+   string	readonly	17	001006C0
+   "Specifies the resource descriptor used to identify the instrument in Measurement & Automation Explorer."	"pniHSDIO_ResourceDescriptor.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataWidth"
+   "Advanced:Data Width"
+   iL enum { "1 byte"=1, "2 bytes"=2, "4 bytes"=4 }	readwrite	17	00118C9C
+   "Specifies, in bytes, the size of a raw sample from the operation.
+
+For NI 6544/6545/6547/6548/6555/6556 devices, this property is R/W for both acquisition and generation; but for all other NI HSDIO devices this property is R/W for acquisition and RO for generation."	"pniHSDIO_DataWidth.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataRateMultiplier"
+   "Advanced:Data Rate Multiplier"
+   iL enum { "Single Data Rate"=1, "Double Data Rate"=2 }	readwrite	17	00118CB0
+   "Specifies whether you want the device to acquire or generate in single data rate (SDR) mode or in double data rate (DDR) mode."	"pniHSDIO_DataRateMultiplier.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DataActiveInternalRouteDelay"
+   "Advanced:Data Active Internal Route Delay"
+   iL	readwrite	17	00118CBA
+   "Configures the number of Sample clock cycles to delay the internal Data Active event. Internally routing a delayed version of this event is useful when you want to synchronize an acquisition trigger to the generation operation. Use this coarse delay together with the finer-resolution data delay to compensate for the round trip delay of data in stimulus/response operations.
+
+You can configure the delayed Data Active event as the source for any acquisition trigger by manually entering DelayedDataActiveEvent as the <b>source</b> parameter in the appropriate niHSDIO Configure Trigger VI instance.
+
+This property is applicable only in acquisition sessions and cannot be set as the trigger source when using STROBE as the external Sample clock. 
+
+Valid values for this property are 0 to 21 for the NI 6551/6552 and 0 to 29 for the NI 6555/6556. The units are in Sample clock cycles.
+
+NOTE: This property is supported only for NI 655x devices."	"pniHSDIO_DataActiveInternalRouteDelay.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "Maximum Bandwidth"
+   "Advanced:Maximum Bandwidth"
+   fD	readwrite	17	00118CC5
+   "Specifies the maximum data transfer rate in bytes per second on the PCI Express bus."	"pniHSDIO_MaximumBandwidth.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "Preferred Packet Size"
+   "Advanced:Preferred Packet Size"
+   iL	readwrite	17	00118CC6
+   "Specifies the preferred size of the data field in the PCI Express packet. In general, the larger the packet size, the more efficiently the device uses the bus. However, some systems, because of their implementation, perform better with smaller packet sizes. The value of this property must be a power of two (2, 4, ..., 512)."	"pniHSDIO_PreferredPacketSize.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "Maximum In-Flight Read Requests"
+   "Advanced:Maximum In-Flight Read Requests"
+   iL	readwrite	17	00118CC7
+   "Specifies the number of memory reads on the PCI Express bus at the same time. In general, the larger this number, the more efficiently the NI device uses the bus because the system has more information about the device needs. A larger number of in-flight read requests means that more read requests are then expected by the system, so it can allocate bandwidth appropriately. Decrease the number of in-flight read requests when your application is using other hardware that is not as efficient as the NI device. The amount of reduction depends on the behavior of the other hardware."	"pniHSDIO_MaximumInFlightReadRequests.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "Power Consumption"
+   "Advanced:Device:Power Consumption"
+   fD	readonly	17	00118CDA
+   "Returns the power consumed by your device at the time this property is queried. Consuming more than 100% power disables the device. You can customize the voltage, data rate, and channel count of your specific application and use this property to ensure that the power consumption falls within the specifications listed in the NI 6555/6556 Specifications.
+
+NOTE: This property is supported only on NI 6555/6556 devices.
+
+Valid values range from 0 to 100.
+
+Units are expressed as a percentage."	"pniHSDIO_PowerConsumption.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "Peak Power Consumption"
+   "Advanced:Device:Peak Power Consumed"
+   fD	readonly	17	00118CDB
+   "Returns the maximum power your device has consumed since the last time this property was queried. Consuming more than 100% power disables the device. You can customize the voltage, data rate, and channel count of your specific application and use this property to ensure that the power consumption falls within the specifications listed in the NI 6555/6556 Specifications.
+
+NOTE: This property is supported only on NI 6555/6556 devices.
+
+Valid values range from 0 to 100.
+
+Units are expressed as a percentage."	"pniHSDIO_PeakPowerConsumed.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "SupportedDataStates"
+   "Advanced:Supported Data States"
+   iL enum { "0, 1 (binary)"=77, "0, 1, Z (tristate)"=83, "0, 1, Z, L, H, X (stim/resp)"=78, "L, H, X (resp only)"=79 }	readwrite	17	00118CB2
+   "Configures the supported digital data states in a waveform. Use this property to enable tristate data generation or real-time hardware compare data. To use the hardware comparison feature, you must have an acquisition and a generation session running concurrently. When you select hardware compare data you must set this property to the same value in both sessions.
+
+NOTE: For NI 6547/6548 devices, when you set this property to an extended data mode it reduces the number of channels available for dynamic generation to 24. The top eight channels (24-31) are available for dynamic acquisition or static generation, and the lower twenty-four channels (0-23) are available for dynamic generation of supported data states.
+
+When you set this property to <b>L, H, X (resp only)</b>, all data is configured for comparison. When you set this property to <b>0, 1, Z, L, H, X (stim/resp)</b>, the software is configured for either driving generation data or comparing data.
+
+Use the Waveform Data Type (WDT) instance of the niHSDIO Write Named Waveform VI to write tristate or expected data to the device. The device drives any values of 0, 1, or Z in the waveform, and values of H, L, or X are treated as expected data values.
+
+You must set this property before you write data or allocate a waveform to the device."	"pniHSDIO_HardwareCompare.Mode.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "HardwareCompare.SampleErrorBacklog"
+   "Advanced:Hardware Compare:Sample Error Backlog"
+   iL	readonly	17	00118CB4
+   "Returns the number of sample errors you can read using the niHSDIO HWC Fetch Sample Errors VI."	"pniHSDIO_HardwareCompare.SampleErrorBacklog.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "HardwareCompare.NumSampleErrors"
+   "Advanced:Hardware Compare:Number Of Sample Errors"
+   iL	readonly	17	00118CB5
+   "Returns the total number of sample errors since the acquisition was initiated. Use this property along with the Samples Compared property to calculate the sample error rate."	"pniHSDIO_HardwareCompare.NumSampleErrors.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "HardwareCompare.SamplesCompared"
+   "Advanced:Hardware Compare:Samples Compared"
+   fD	readonly	17	00118CB6
+   "Returns the total number of samples compared since the acquisition was initiated. Use this property, along with the Number Of Sample Errors property, to calculate the sample error rate."	"pniHSDIO_HardwareCompare.SamplesCompared.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "HardwareCompare.FilterRepeatedErrors"
+   "Advanced:Hardware Compare:Filter Repeated Sample Errors"
+   bool	readwrite	17	00118CBC
+   "Specifies whether the device stores and counts errors when the same error appears in consecutive samples. If this property is set to TRUE, the device counts only distinct errors. The niHSDIO HWC Fetch Sample Errors (U32) VI returns the number of clock cycles for which each error was present."	"pniHSDIO_HardwareCompare.FilterRepeatedErrors.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "HardwareCompare.ErrorBufferOverflowed"
+   "Advanced:Hardware Compare:Sample Error Buffer Overflowed"
+   bool	readonly	17	00118CB7
+   "Returns whether the FIFO used to store sample errors has overflowed. If the FIFO overflows, the hardware stops storing error information for further errors, but it continues to compare data and count the sample errors encountered. 
+
+You can remove sample errors from the FIFO using the niHSDIO HWC Fetch Sample Errors (U32) VI. Removing sample errors creates room for additional sample errors to be stored in the FIFO."	"pniHSDIO_HardwareCompare.ErrorBufferOverflowed.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "DeviceSerialNumber"
+   "Obsolete:Device Serial Number"
+   iL	readonly	17	00118C84
+   "Returns the serial number of the device."	"pniHSDIO_DeviceSerialNumber.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ClockVolt.High"
+   "Obsolete:Voltage Configuration:Clock High"
+   fD	readwrite	17	00118CD9
+   "Specifies the voltage above which a clock is considered logic high. The value for this property applies to the STROBE terminal in acquisition sessions and the DDC CLK OUT terminal in generation sessions.
+
+NOTE: Only NI 6555/6556 devices support this property.
+
+Valid values range from -2 to 7, depending on the range selected with the Clock Voltage Range property.
+
+The default value is 3.3 V for generation and 1.7 V for acquisition.
+
+Units are volts."	"pniHSDIO_ClockVolt.High.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ClockVolt.Low"
+   "Obsolete:Voltage Configuration:Clock Low"
+   fD	readwrite	17	00118CD8
+   "Specifies the voltage below which a clock is considered logic low. The value for this property applies to the STROBE terminal in acquisition sessions and the DDC CLK OUT terminal in generation sessions.
+
+NOTE: Only NI 6555/6556 devices support this property.
+
+Valid values range from -2 to 7, depending on the range selected with the Clock Voltage Range property.
+
+The default value is 0 V for generation and 1.6 V for acquisition.
+
+Units are volts."	"pniHSDIO_ClockVolt.Low.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "ClockVoltageRange"
+   "Obsolete:Voltage Configuration:Clock Voltage Range"
+   iL enum { "-2 to 6 Voltage Range"=86, "-1 to 7 Voltage Range"=87 }	readwrite	17	00118CDE
+   "Specifies the voltage range used for all clock voltages on the STROBE terminal (used during acquisition sessions) and on the DDC CLK OUT terminal (used during generation sessions).
+
+NOTE: Only NI 6555/6556 devices support this property."	"pniHSDIO_ClockVolt.Range.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "TriggerVoltageRange"
+   "Obsolete:Voltage Configuration:Trigger Voltage Range"
+   iL enum { "-2 to 6 Voltage Range"=86, "-1 to 7 Voltage Range"=87 }	readwrite	17	00118CDC
+   "Specifies the voltage range used for all trigger voltages on all PFI channels that support voltage configuration. Only PFI 1 and PFI 2 support voltage configuration. This property is valid only for acquisition sessions.
+
+NOTE: Only NI 6555/6556 devices support this property."	"pniHSDIO_TrigVolt.Range.html"	"<helpdir>:\hsdiopropref.chm"
+
+attribute: "EventVoltageRange"
+   "Obsolete:Voltage Configuration:Event Voltage Range"
+   iL enum { "-2 to 6 Voltage Range"=86, "-1 to 7 Voltage Range"=87 }	readwrite	17	00118CDD
+   "Specifies the voltage range used for all event voltages on all PFI channels that support voltage configuration. Only PFI 1 and PFI 2 support voltage configuration. This property is valid only for generation sessions.
+
+NOTE: Only NI 6555/6556 devices support this property."	"pniHSDIO_EventVolt.Range.html"	"<helpdir>:\hsdiopropref.chm"

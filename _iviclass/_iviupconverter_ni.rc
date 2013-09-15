@@ -1,0 +1,1204 @@
+explicitActiveChannels: FALSE
+library: IviUpconverter_ni**.dll
+
+class: "IviUpconverter"
+flags: 16
+sorted: no
+implements: ivi, iviResourceMgr
+attribute: "Range Check"
+	"Inherent IVI Settings:User Options:Range Check"
+	bool readwrite 1 00100592
+"Specifies whether to validate property values and VI parameters.  If enabled, the instrument driver validates the parameter values that you pass to driver VIs.  Range checking parameters is very useful for debugging.  After you validate your program, you can set this property to FALSE to disable range checking and maximize performance.
+    The default value is TRUE.   Use the Initialize With Options VI to override this value.
+    
+TRUE 1
+True
+
+FALSE 0
+False"
+"CLASSPREFIX_ATTR_RANGE_CHECK.html" "../../help/lvivi.chm"
+attribute: "Query Instrument Status"
+	"Inherent IVI Settings:User Options:Query Instrument Status"
+	bool readwrite 1 00100593
+"Specifies whether the instrument driver queries the instrument status after each operation.  Querying the instrument status is very useful for debugging.  After you validate your program, you can set this property to FALSE to disable status checking and maximize performance
+    The instrument driver can choose to ignore status checking for particular properties regardless of the setting of this property.
+    The default value is FALSE.   Use the Initialize With Options VI to override this value.
+    
+TRUE 1
+True
+
+FALSE 0
+False"
+"CLASSPREFIX_ATTR_QUERY_INSTR_STATUS.html" "../../help/lvivi.chm"
+attribute: "Cache"
+	"Inherent IVI Settings:User Options:Cache"
+	bool readwrite 1 00100594
+"Specifies whether to cache the value of properties.  When caching is enabled, the instrument driver keeps track of the current instrument settings and avoids sending redundant commands to the instrument.  Thus, you can significantly increase execution speed.
+    The instrument driver can choose always to cache or never to cache particular properties regardless of the setting of this property.
+    The default value is TRUE.   Use the Initialize With Options VI to override this value.
+    
+TRUE 1
+True
+
+FALSE 0
+False"
+"CLASSPREFIX_ATTR_CACHE.html" "../../help/lvivi.chm"
+attribute: "Simulate"
+	"Inherent IVI Settings:User Options:Simulate"
+	bool readwrite 1 00100595
+"Specifies whether or not to simulate instrument driver I/O operations.  If simulation is enabled, instrument driver VIs perform range checking and set and get properties, but they do not perform instrument I/O.  For output parameters that represent instrument data, the instrument driver VIs return calculated values.
+    The default value is FALSE.   Use the Initialize With Options VI to override this value.
+    
+TRUE 1
+True
+
+FALSE 0
+False"
+"CLASSPREFIX_ATTR_SIMULATE.html" "../../help/lvivi.chm"
+attribute: "Use Specific Simulation"
+	"Inherent IVI Settings:User Options:Use Specific Simulation"
+	bool readwrite 1 001005A7
+"Specifies whether to simulate instrument driver I/O operations in the specific or class driver.  This property affects instrument driver operation only when the IviUpconverter>>Inherent IVI Settings>>User Options>>Simulate property is set to TRUE.
+    The default value is FALSE.
+    
+TRUE 1
+True
+
+FALSE 0
+False"
+"CLASSPREFIX_ATTR_USE_SPECIFIC_SIMULATION.html" "../../help/lvivi.chm"
+attribute: "Record Value Coercions"
+	"Inherent IVI Settings:User Options:Record Value Coercions"
+	bool readwrite 1 00100596
+"Specifies whether the instrument driver keeps a list of the value coercions it makes for integer and real type properties.  If IviUpconverter>>Inherent IVI Settings>>User Options>>Spy is set to TRUE, you use the NI I/O Trace utility to view coercion information.  If IviUpconverter>>Inherent IVI Settings>>User Options>>Spy is set to FALSE you call Get Next Coercion Record to extract and delete the oldest coercion record from the list.
+    The default value is FALSE.   Use the IVI Configuration utility or the Initialize With Options VI to override this value.
+    
+TRUE 1
+True
+
+FALSE 0
+False"
+"CLASSPREFIX_ATTR_RECORD_COERCIONS.html" "../../help/lvivi.chm"
+attribute: "Interchange Check"
+	"Inherent IVI Settings:User Options:Interchange Check"
+	bool readwrite 1 001005A5
+"Specifies whether to perform interchangeability checking and retrieve interchangeability warnings when you call the Wait Until Settled VI.  The default value is FALSE.  Interchangeability warnings indicate that using your application with a different instrument might cause different behavior.  If IviUpconverter>>Inherent IVI Settings>>User Options>>Spy is set to FALSE, you call Get Next Interchange Warning to extract interchange warnings.  Call the Clear Interchange Warnings VI to clear the list of interchangeability warnings without reading them.
+If IviUpconverter>>Inherent IVI Settings>>User Options>>Spy is set to TRUE, you can use the NI I/O Trace utility to view interchange warnings.
+     Interchangeability checking examines the properties in a capability group only if you specify a value for at least one property within that group.  Interchangeability warnings can occur under the following conditions:
+
+(1) A property affects the behavior of the instrument and you have not set that property.
+
+(2) The IviUpconverter class defines values for a property and you have set that property to a value not defined by the IviUpconverter class.
+
+(3) The IviUpconverter class defines a property as read-only and you have set that property.
+
+
+TRUE 1
+True
+
+FALSE 0
+False"
+"CLASSPREFIX_ATTR_INTERCHANGE_CHECK.html" "../../help/lvivi.chm"
+attribute: "Spy"
+	"Inherent IVI Settings:User Options:Spy"
+	bool readwrite 1 001005A6
+"Specifies whether to log class VI calls to the NI I/O Trace utility.  If spying is enabled, you can use NI I/O Trace to view the input and output parameters, return values, coercion records, and interchangeability warnings of class VI calls.
+    The default value is TRUE.
+    
+TRUE 1
+True
+
+FALSE 0
+False"
+"CLASSPREFIX_ATTR_SPY.html" "../../help/lvivi.chm"
+attribute: "Description"
+	"Inherent IVI Settings:Class Driver Identification:Description"
+	string readonly 1 00100796
+"A string that contains a brief description of the class driver
+    "
+"CLASSPREFIX_ATTR_CLASS_DRIVER_DESCRIPTION.html" "../../help/lvivi.chm"
+attribute: "Class Driver Prefix"
+	"Inherent IVI Settings:Class Driver Identification:Class Driver Prefix"
+	string readonly 1 001006BD
+"A string that contains the prefix for the class driver.  The name of each user-callable VI in this driver starts with this prefix.
+    "
+"CLASSPREFIX_ATTR_CLASS_PREFIX.html" "../../help/lvivi.chm"
+attribute: "Class Driver Vendor"
+	"Inherent IVI Settings:Class Driver Identification:Class Driver Vendor"
+	string readonly 1 00100795
+"A string that contains the name of the vendor that supplies this class driver.
+    "
+"CLASSPREFIX_ATTR_CLASS_DRIVER_VENDOR.html" "../../help/lvivi.chm"
+attribute: "Revision"
+	"Inherent IVI Settings:Class Driver Identification:Revision"
+	string readonly 1 001007B8
+"A string that contains additional version information about the class driver.
+    "
+"CLASSPREFIX_ATTR_CLASS_REVISION.html" "../../help/lvivi.chm"
+attribute: "Class Specification Major Version"
+	"Inherent IVI Settings:Class Driver Identification:Class Specification Major Version"
+	iL readonly 1 00100797
+"The major version number of the class specification with which the class driver is compliant.
+    "
+"CLASSPREFIX_ATTR_CLASS_DRIVER_CLASS_SPEC_MAJOR_VERSION.html" "../../help/lvivi.chm"
+attribute: "Class Specification Minor Version"
+	"Inherent IVI Settings:Class Driver Identification:Class Specification Minor Version"
+	iL readonly 1 00100798
+"The minor version number of the class specification with which the class driver is compliant.
+    "
+"CLASSPREFIX_ATTR_CLASS_DRIVER_CLASS_SPEC_MINOR_VERSION.html" "../../help/lvivi.chm"
+attribute: "Description"
+	"Inherent IVI Settings:Specific Driver Identification:Description"
+	string readonly 1 00100792
+"A string that contains a brief description of the specific driver
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_DESCRIPTION.html" "../../help/lvivi.chm"
+attribute: "Specific Driver Prefix"
+	"Inherent IVI Settings:Specific Driver Identification:Specific Driver Prefix"
+	string readonly 1 001006BE
+"A string that contains the prefix for the instrument driver.  The name of each user-callable VI in this driver starts with this prefix.
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_PREFIX.html" "../../help/lvivi.chm"
+attribute: "Specific Driver Locator"
+	"Inherent IVI Settings:Specific Driver Identification:Specific Driver Locator"
+	string readonly 1 001006BF
+"Indicates the location at which the class driver attempts to find the specific driver module file.
+"
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_LOCATOR.html" "../../help/lvivi.chm"
+attribute: "Specific Driver Vendor"
+	"Inherent IVI Settings:Specific Driver Identification:Specific Driver Vendor"
+	string readonly 1 00100791
+"A string that contains the name of the vendor that supplies this driver.
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_VENDOR.html" "../../help/lvivi.chm"
+attribute: "Revision"
+	"Inherent IVI Settings:Specific Driver Identification:Revision"
+	string readonly 1 001007B7
+"A string that contains additional version information about the specific driver.
+    "
+"CLASSPREFIX_ATTR_DRIVER_REVISION.html" "../../help/lvivi.chm"
+attribute: "Class Specification Major Version"
+	"Inherent IVI Settings:Specific Driver Identification:Class Specification Major Version"
+	iL readonly 1 00100793
+"The major version number of the class specification with which the specific driver is compliant.
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION.html" "../../help/lvivi.chm"
+attribute: "Class Specification Minor Version"
+	"Inherent IVI Settings:Specific Driver Identification:Class Specification Minor Version"
+	iL readonly 1 00100794
+"The minor version number of the class specification with which the specific driver is compliant.
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION.html" "../../help/lvivi.chm"
+attribute: "Supported Instrument Models"
+	"Inherent IVI Settings:Specific Driver Capabilities:Supported Instrument Models"
+	string readonly 1 001006D7
+"Contains a model code of the instrument. For specific drivers that support more than one device, this property contains a comma-separated list of supported instrument models.
+    "
+"CLASSPREFIX_ATTR_SUPPORTED_INSTRUMENT_MODELS.html" "../../help/lvivi.chm"
+attribute: "Group Capabilities"
+	"Inherent IVI Settings:Specific Driver Capabilities:Group Capabilities"
+	string readonly 1 00100721
+"Indicates the IviUpconverter capability groups that the specific instrument driver supports.  This property is a comma-delimited list of the following group names:
+
+'IviUpconverterBase' - Supports fundamental upconverter capabilities.
+
+'IviUpconverterOutputGain' - Supports IviUpconverterBase with the capability to specify the output power gain.
+
+'IviUpconverterOutputPowerLevel' - Supports IviUpconverterBase with the capability to specify the absolute output power level.
+
+'IviUpconverterModulateAM' - Supports IviUpconverterBase with the capability to apply amplitude modulation to the RF output signal.
+
+'IviUpconverterModulateFM' - Supports IviUpconverterBase with the capability to apply frequency modulation to the RF output signal.
+
+'IviUpconverterModulatePM' - Supports IviUpconverterBase with the capability to apply phase modulation to the RF output signal.
+
+'IviUpconverterAnalogModulationSource' - Supports IviUpconverterBase with the capability to apply analog modulation to the RF output signal.
+
+'IviUpconverterModulatePulse' - Supports IviUpconverterBase with the capability to apply pulse modulation to the RF output signal.
+
+'IviUpconverterBypass' - Supports IviUpconverterBase with the capability to route the IF input completely around the upconverter.
+
+'IviUpconverterOutputReadyTrigger' - Supports IviUpconverterBase with the capability to send an output trigger signal when the RF output has settled to a point where it is suitable for processing by downstream components.
+
+'IviUpconverterSweep' - Supports IviUpconverterBase with the capability to sweep the output frequency, power, or gain.
+
+'IviUpconverterFrequencySweep' - Supports IviUpconverterBase with the capability to apply a frequency sweep to the RF output signal.
+
+'IviUpconverterPowerSweep' - Supports IviUpconverterBase with the capability to apply a power sweep to the RF output signal.
+
+'IviUpconverterGainSweep' - Supports IviUpconverterBase with the capability to apply a gain sweep to the RF output signal.
+
+'IviUpconverterFrequencyStep' - Supports IviUpconverterBase with the capability to sweep the frequency of the RF output signal in steps.
+
+'IviUpconverterPowerStep' - Supports IviUpconverterBase with the capability to sweep the power of the RF output signal in steps.
+
+'IviUpconverterGainStep' - Supports IviUpconverterBase with the capability to sweep the gain of the upconverter in steps.
+
+'IviUpconverterList' - Supports IviUpconverterBase with the capability to sweep the output frequency, power, or gain by a list of values.
+
+'IviUpconverterALC' - Supports IviUpconverterBase with the capability to configure automatic level control (ALC).
+
+'IviUpconverterCalibration' - Supports IviUpconverterBase with the capability to perform self-calibration.
+
+'IviUpconverterAttenuatorHold' - Supports IviUpconverterBase with the capability to hold the attenuators at a constant value.
+
+'IviUpconverterReferenceOscillator' - Supports IviUpconverterBase with the capability to configure frequency reference.
+
+'IviUpconverterSoftwareTrigger' - Supports IviUpconverterBase with the capability to generate output based on a software trigger signal.
+
+'IviUpconverterModulateIQ' - Supports IviUpconverterBase with the capability to apply IQ (vector) modulation to the RF output signal.
+
+'IviUpconverterIQImpairment' - Supports IviUpconverterBase with the capability to simulate or correct impairment on IQ (vector) modulation.
+
+    "
+"CLASSPREFIX_ATTR_GROUP_CAPABILITIES.html" "../../help/lvivi.chm"
+attribute: "Function Capabilities"
+	"Inherent IVI Settings:Specific Driver Capabilities:Function Capabilities"
+	string readonly 1 00100722
+"Indicates the IviUpconverter VIs that the specific instrument driver supports.  This property is a comma-delimited list of the following functions:
+
+	'IviUpconverter_init'
+	'IviUpconverter_close'
+	'IviUpconverter_reset'
+	'IviUpconverter_self_test'
+	'IviUpconverter_error_query'
+	'IviUpconverter_error_message'
+	'IviUpconverter_revision_query'
+	'IviUpconverter_InitWithOptions'
+	'IviUpconverter_ConfigureIFInputAttenuation'
+	'IviUpconverter_ConfigureIFInputFrequency'
+	'IviUpconverter_ConfigureRFOutputEnabled'
+	'IviUpconverter_GetIFInputName'
+	'IviUpconverter_GetRFOutputName'
+	'IviUpconverter_SetActiveIFInput'
+	'IviUpconverter_SetActiveRFOutput'
+	'IviUpconverter_WaitUntilReady'
+	'IviUpconverter_ConfigureRFOutputGain'
+	'IviUpconverter_ConfigureRFOutputLevel'
+	'IviUpconverter_ConfigureAM'
+	'IviUpconverter_ConfigureAMEnabled'
+	'IviUpconverter_ConfigureAMExternalCoupling'
+	'IviUpconverter_ConfigureFM'
+	'IviUpconverter_ConfigureFMEnabled'
+	'IviUpconverter_ConfigureFMExternalCoupling'
+	'IviUpconverter_ConfigurePM'
+	'IviUpconverter_ConfigurePMEnabled' 
+	'IviUpconverter_ConfigurePMExternalCoupling'
+	'IviUpconverter_GetAnalogModulationSourceName'
+	'IviUpconverter_ConfigurePulseModulationEnabled'
+	'IviUpconverter_ConfigurePulseModulationExternalPolarity'
+	'IviUpconverter_ConfigureBypass'
+	'IviUpconverter_ConfigureRFOutputReadyTrigger'
+	'IviUpconverter_ConfigureSweep'
+	'IviUpconverter_ConfigureFrequencySweepCenterSpan'
+	'IviUpconverter_ConfigureFrequencySweepStartStop'
+	'IviUpconverter_ConfigureFrequencySweepTime'
+	'IviUpconverter_ConfigurePowerSweepStartStop'
+	'IviUpconverter_ConfigurePowerSweepTime'
+	'IviUpconverter_ConfigureGainSweepStartStop'
+	'IviUpconverter_ConfigureGainSweepTime'
+	'IviUpconverter_ConfigureFrequencyStepDwell'
+	'IviUpconverter_ConfigureFrequencyStepStartStop'
+	'IviUpconverter_ResetFrequencyStep'
+	'IviUpconverter_ConfigurePowerStepDwell'
+	'IviUpconverter_ConfigurePowerStepStartStop'
+	'IviUpconverter_ResetPowerStep'
+	'IviUpconverter_ConfigureGainStepDwell'
+	'IviUpconverter_ConfigureGainStepStartStop'
+	'IviUpconverter_ResetGainStep'
+	'IviUpconverter_ClearAllLists'
+	'IviUpconverter_ConfigureListDwell'
+	'IviUpconverter_CreateFrequencyList'
+	'IviUpconverter_CreateFrequencyPowerList'
+	'IviUpconverter_CreateFrequencyGainList'
+	'IviUpconverter_CreatePowerList'
+	'IviUpconverter_CreateGainList'
+	'IviUpconverter_ResetList'
+	'IviUpconverter_ConfigureALC'
+	'IviUpconverter_Calibrate'
+	'IviUpconverter_IsCalibrationComplete'
+	'IviUpconverter_ConfigureAttenuatorHoldEnabled'
+	'IviUpconverter_ConfigureReferenceOscillator'
+	'IviUpconverter_ConfigureReferenceOscillatorOutputEnabled'
+	'IviUpconverter_SendSoftwareTrigger'
+	'IviUpconverter_CalibrateIQ'
+	'IviUpconverter_ConfigureIQEnabled'
+	'IviUpconverter_ConfigureIQImpairment'
+	'IviUpconverter_ConfigureIQImpairmentEnabled'
+    "
+"CLASSPREFIX_ATTR_FUNCTION_CAPABILITIES.html" "../../help/lvivi.chm"
+attribute: "Manufacturer"
+	"Inherent IVI Settings:Instrument Identification:Manufacturer"
+	string readonly 1 0010078F
+"A string that contains the name of the instrument manufacturer you are currently using.
+    "
+"CLASSPREFIX_ATTR_INSTRUMENT_MANUFACTURER.html" "../../help/lvivi.chm"
+attribute: "Model"
+	"Inherent IVI Settings:Instrument Identification:Model"
+	string readonly 1 00100790
+"A string that contains the model number or name of the instrument that you are currently using.
+    "
+"CLASSPREFIX_ATTR_INSTRUMENT_MODEL.html" "../../help/lvivi.chm"
+attribute: "Firmware Revision"
+	"Inherent IVI Settings:Instrument Identification:Firmware Revision"
+	string readonly 1 0010078E
+"A string that contains the firmware revision information for the instrument you are currently using.
+    "
+"CLASSPREFIX_ATTR_INSTRUMENT_FIRMWARE_REVISION.html" "../../help/lvivi.chm"
+attribute: "Driver Setup"
+	"Inherent IVI Settings:Advanced Session Information:Driver Setup"
+	string readonly 1 00100597
+"Some cases exist where you must specify instrument driver options at initialization time.  An example of this is specifying a particular instrument model from among a family of instruments that the driver supports.  This is useful when using simulation.  
+     You can specify driver-specific options through the DriverSetup keyword in the optionsString parameter to the Init With Options VI.  If you open an instrument using a logical name, you can also specify the options through the IVI Configuration Utility.
+     The default value is an empty string.
+     "
+"CLASSPREFIX_ATTR_DRIVER_SETUP.html" "../../help/lvivi.chm"
+attribute: "Logical Name"
+	"Inherent IVI Settings:Advanced Session Information:Logical Name"
+	string readonly 1 001006C1
+"A string containing the logical name you specified when opening the current IVI session.
+     You may pass a logical name to the Initialize or Initialize With Options VIs.  The IVI Configuration utility must contain an entry for the logical name.  The logical name entry refers to a virtual instrument section in the IVI Configuration file.  The virtual instrument section specifies a physical device and initial user options.
+    "
+"CLASSPREFIX_ATTR_LOGICAL_NAME.html" "../../help/lvivi.chm"
+attribute: "IO Resource Descriptor"
+	"Inherent IVI Settings:Advanced Session Information:IO Resource Descriptor"
+	string readonly 1 001006C0
+"Indicates the resource descriptor the driver uses to identify the physical device.
+    If you initialize the driver with a logical name, this property contains the resource descriptor that corresponds to the entry in the IVI Configuration utility.  
+    If you initialize the instrument driver with the resource descriptor, this property contains that value.
+    "
+"CLASSPREFIX_ATTR_RESOURCE_DESCRIPTOR.html" "../../help/lvivi.chm"
+attribute: "Active IF Input"
+	"IF Input:Active IF Input"
+	string readwrite 1 001312D0
+"Specifies the IF input that is currently active.
+Subsequent calls to VIs and properties that are based on the IF Input repeated capability will be applied to the Active IF Input specified here.
+The values for this property correspond to the allowed repeated capability names for the IF Input repeated capability.
+If the driver defines a qualified IF Input name, this property returns the qualified name.
+Use the IviUpconverter Get IF Input Name VI to read the allowed values for this property.
+    "
+"IVIUPCONVERTER_ATTR_ACTIVE_IF_INPUT.html" "../../help/lvivi.chm"
+attribute: "Auto Corrections Enabled"
+	"IF Input:Auto Corrections Enabled"
+	bool readwrite 1 001312D3
+"Enables or disables automatic global corrections on the device.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIUPCONVERTER_ATTR_AUTO_CORRECTIONS_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Bypass [BP]"
+	"IF Input:Bypass [BP]"
+	bool readwrite 1 0013137A
+"Specifies whether or not the IF input signal bypasses the entire upconverter.
+When set to True, the IF input signal is routed directly to the RF output indicated by the IviUpconverter>>RF Output>>Active RF Output property.
+When set to False, the IF input signal is routed into the front end of the upconverter and follows the normal signal path.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIUPCONVERTER_ATTR_BYPASS.html" "../../help/lvivi.chm"
+attribute: "IF Input Attenuation"
+	"IF Input:IF Input Attenuation"
+	fD readwrite 1 001312D6
+"Specifies the amount of attenuation (or gain) to apply to the active IF input of the upconverter. The units are dB.
+Positive values for this property represent attenuation while negative values represent gain.
+If an instrument only supports a fixed IF attenuation, the driver should accept that value for the IviUpconverter>>IF Input>>IF Input Attenuation property and return Invalid Value error for any other value.
+	"
+"IVIUPCONVERTER_ATTR_IF_INPUT_ATTENUATION.html" "../../help/lvivi.chm"
+attribute: "IF Input Count"
+	"IF Input:IF Input Count"
+	iL readonly 1 001312D7
+"Returns the number of IF Inputs available on the device.
+    "
+"IVIUPCONVERTER_ATTR_IF_INPUT_COUNT.html" "../../help/lvivi.chm"
+attribute: "IF Input Coupling"
+	"IF Input:IF Input Coupling"
+	iL enum { IVIUPCONVERTER_VAL_IF_INPUT_COUPLING_AC=0, IVIUPCONVERTER_VAL_IF_INPUT_COUPLING_DC=1} readwrite 1 001312D8
+"Specifies the coupling applied to active IF input.
+    
+IVIUPCONVERTER_VAL_IF_INPUT_COUPLING_AC 0
+The upconverter AC couples the IF input signal.
+
+IVIUPCONVERTER_VAL_IF_INPUT_COUPLING_DC 1
+The upconverter DC couples the IF input signal.
+	"
+"IVIUPCONVERTER_ATTR_IF_INPUT_COUPLING.html" "../../help/lvivi.chm"
+attribute: "IF Input Frequency"
+	"IF Input:IF Input Frequency"
+	fD readonly 1 001312D9
+"Returns the frequency of the active IF input. The units are Hertz.
+    "
+"IVIUPCONVERTER_ATTR_IF_INPUT_FREQUENCY.html" "../../help/lvivi.chm"
+attribute: "Active RF Output"
+	"RF Output:Active RF Output"
+	string readwrite 1 001312D1
+"Specifies the RF output that is currently active.
+Subsequent calls to VIs and properties that are based on the RF Output repeated capability will be applied to the Active RF Output specified here.
+The values for this property correspond to the allowed repeated capability names for the RF Output repeated capability.
+If the driver defines a qualified RF Output name, this property returns the qualified name.
+Use the IviUpconverter Get RF Output Name VI to read the allowed values for this property.
+Note that this property does not enable the specified output. This property only controls the RF Output repeated capability instance to which other VIs and properties apply.
+Use the IviUpconverter>>RF Output>>RF Output Enabled property to route the RF signal to a specific output.
+   "
+"IVIUPCONVERTER_ATTR_ACTIVE_RF_OUTPUT.html" "../../help/lvivi.chm"
+attribute: "Attenuator Hold Enabled [AH]"
+	"RF Output:Attenuator Hold Enabled [AH]"
+	bool readwrite 1 00131406
+"Enables or disables the attenuator hold on the active RF output.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIUPCONVERTER_ATTR_ATTENUATOR_HOLD_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Is Ready"
+	"RF Output:Is Ready"
+	bool readonly 1 001312DA
+"Indicates whether the upconverter has settled from changes to either the IF input signal or changes to device control parameters, such as RF Output Gain, RF Frequency, or IF Attenuation.
+This property indicates whether or not the RF output is valid for processing by another downstream system component, such as a digitizer.
+
+TRUE 1
+True
+
+FALSE 0
+False
+	"	 
+"IVIUPCONVERTER_ATTR_IS_READY.html" "../../help/lvivi.chm"
+attribute: "RF Output Bandwidth"
+	"RF Output:RF Output Bandwidth"
+	fD readwrite 1 001312DB
+"Specifies the maximum effective RF signal bandwidth of the upconverter's active RF Output. The units are Hertz.  
+This value is a measure of the spectral width between two points for which the amplitude profile is 3 dB below a peak close to mid band.
+    "
+"IVIUPCONVERTER_ATTR_RF_OUTPUT_BANDWIDTH.html" "../../help/lvivi.chm"
+attribute: "RF Output Count"
+	"RF Output:RF Output Count"
+	iL readonly 1 001312DC
+"Returns the number of RF Outputs available on the device.
+	"
+"IVIUPCONVERTER_ATTR_RF_OUTPUT_COUNT.html" "../../help/lvivi.chm"
+attribute: "RF Output Enabled"
+	"RF Output:RF Output Enabled"
+	bool readwrite 1 001312DD
+"Enables or disables the active RF output.
+Only a single RF Output can be enabled at a time. Thus, when this property is set to True for a particular RF output, all other RF outputs are disabled.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIUPCONVERTER_ATTR_RF_OUTPUT_ENABLED.html" "../../help/lvivi.chm"
+attribute: "RF Output Frequency"
+	"RF Output:RF Output Frequency"
+	fD readwrite 1 001312DE
+"Specifies the frequency of the active RF output. The units are Hertz.
+    "
+"IVIUPCONVERTER_ATTR_RF_OUTPUT_FREQUENCY.html" "../../help/lvivi.chm"
+attribute: "RF Output Gain [OG]"
+		   "RF Output:RF Output Gain [OG]"
+	fD readwrite 1 00131334
+"Specifies the amount of gain (or attenuation) to apply to the active RF output of the upconverter. The units are dB.
+Positive values for this property represent signal gain while negative values represent attenuation.
+    "
+"IVIUPCONVERTER_ATTR_RF_OUTPUT_GAIN.html" "../../help/lvivi.chm"
+attribute: "RF Output Level [OPL]"
+	"RF Output:RF Output Level [OPL]"
+	fD readwrite 1 0013133E
+"Specifies the output power that should appear at the active RF output of the upconverter. The units are dBm.
+    "
+"IVIUPCONVERTER_ATTR_RF_OUTPUT_LEVEL.html" "../../help/lvivi.chm"
+attribute: "RF Output Ready Trigger [ORT]"
+		   "RF Output:RF Output Ready Trigger [ORT]"
+	string readwrite 1 00131384
+"Specifies where a trigger should be fired when the active RF output has settled to a point that is suitable for processing by downstream components.
+    
+Triggers:
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_NONE ('') - No trigger source.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_IMMEDIATE ('Immediate') - Trigger Immediately.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_EXTERNAL ('External') - External trigger source.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_INTERNAL ('Internal') - Internal trigger source.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_SOFTWARE ('Software') - Software trigger.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LAN0 ('LAN0') - LAN0 (LXI defined 'LAN0' LAN message).
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LAN1 ('LAN1') - LAN1 (LXI defined 'LAN1' LAN message).
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LAN2 ('LAN2') - LAN2 (LXI defined 'LAN2' LAN message).
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LAN3 ('LAN3') - LAN3 (LXI defined 'LAN3' LAN message).
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LAN4 ('LAN4') - LAN4 (LXI defined 'LAN4' LAN message).
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LAN5 ('LAN5') - LAN5 (LXI defined 'LAN5' LAN message).
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LAN6 ('LAN6') - LAN6 (LXI defined 'LAN6' LAN message).
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LAN7 ('LAN7') - LAN7 (LXI defined 'LAN7' LAN message).
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LXI0 ('LXI0') - LXI Trigger Bus Line 0.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LXI1 ('LXI1') - LXI Trigger Bus Line 1.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LXI2 ('LXI2') - LXI Trigger Bus Line 2.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LXI3 ('LXI3') - LXI Trigger Bus Line 3.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LXI4 ('LXI4') - LXI Trigger Bus Line 4.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LXI5 ('LXI5') - LXI Trigger Bus Line 5.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LXI6 ('LXI6') - LXI Trigger Bus Line 6.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LXI7 ('LXI7') - LXI Trigger Bus Line 7.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_TTL0 ('TTL0') - TTL Interface 0.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_TTL1 ('TTL1') - TTL Interface 1.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_TTL2 ('TTL2') - TTL Interface 2.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_TTL3 ('TTL3') - TTL Interface 3.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_TTL4 ('TTL4') - TTL Interface 4.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_TTL5 ('TTL5') - TTL Interface 5.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_TTL6 ('TTL6') - TTL Interface 6.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_TTL7 ('TTL7') - TTL Interface 7.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXI_STAR ('PXI_STAR') - PXI Star Interface.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG0 ('PXI_TRIG0') - PXI Trigger Bus Line 0.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG1 ('PXI_TRIG1') - PXI Trigger Bus Line 1.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG2 ('PXI_TRIG2') - PXI Trigger Bus Line 2.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG3 ('PXI_TRIG3') - PXI Trigger Bus Line 3.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG4 ('PXI_TRIG4') - PXI Trigger Bus Line 4.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG5 ('PXI_TRIG5') - PXI Trigger Bus Line 5.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG6 ('PXI_TRIG6') - PXI Trigger Bus Line 6.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG7 ('PXI_TRIG7') - PXI Trigger Bus Line 7.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXIE_DSTARA ('PXIe_DSTARA') - PXI Express DStar Line A.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXIE_DSTARB ('PXIe_DSTARB') - PXI Express DStar Line B.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXIE_DSTARC ('PXIe_DSTARC') - PXI Express DStar Line C.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_RTSI0 ('RTSI0') - RTSI Bus Line 0.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_RTSI1 ('RTSI1') - RTSI Bus Line 1.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_RTSI2 ('RTSI2') - RTSI Bus Line 2.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_RTSI3 ('RTSI3') - RTSI Bus Line 3.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_RTSI4 ('RTSI4') - RTSI Bus Line 4.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_RTSI5 ('RTSI5') - RTSI Bus Line 5.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_RTSI6 ('RTSI6') - RTSI Bus Line 6.
+    "
+"IVIUPCONVERTER_ATTR_RF_OUTPUT_READY_TRIGGER.html" "../../help/lvivi.chm"
+attribute: "External LO Enabled"
+	"External LO:External LO Enabled"
+	bool readwrite 1 001312D4
+"Enables or disables the external LO.
+
+TRUE 1
+True
+
+FALSE 0
+False
+	"
+"IVIUPCONVERTER_ATTR_EXTERNAL_LO_ENABLED.html" "../../help/lvivi.chm"
+attribute: "External LO Frequency"
+	"External LO:External LO Frequency"
+	fD readwrite 1 001312D5
+"Specifies the frequency of the external LO. The units are Hertz.
+    "
+"IVIUPCONVERTER_ATTR_EXTERNAL_LO_FREQUENCY.html" "../../help/lvivi.chm"
+attribute: "AM Depth [AM]"
+	"Analog Modulation:AM:AM Depth [AM]"
+	fD readwrite 1 00131348
+"Specifies the extent of modulation the upconverter applies to the RF output signal with the modulating signal as a result of summing all sources, internal and external.
+The amount of the specified modulation depth is achieved with a modulating voltage of AM Nominal Voltage. If the IviUpconverter>>Analog Modulation>>AM>>AM Scaling [AM] property is set to Linear, then the units are percent (%). If the IviUpconverter>>Analog Modulation>>AM>>AM Scaling [AM] property is set to Logarithmic, then the units are dBm.
+    "
+"IVIUPCONVERTER_ATTR_AM_DEPTH.html" "../../help/lvivi.chm"
+attribute: "AM Enabled [AM]"
+	"Analog Modulation:AM:AM Enabled [AM]"
+	bool readwrite 1 00131349
+"Specifies whether the upconverter enables or disables amplitude modulation of the RF output signal.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIUPCONVERTER_ATTR_AM_ENABLED.html" "../../help/lvivi.chm"
+attribute: "AM External Coupling [AM]"
+	"Analog Modulation:AM:AM External Coupling [AM]"
+	iL enum { IVIUPCONVERTER_VAL_AM_EXTERNAL_COUPLING_AC=0, IVIUPCONVERTER_VAL_AM_EXTERNAL_COUPLING_DC=1} readwrite 1 0013134A
+"Specifies the coupling of the external source of the modulating signal.
+    
+IVIUPCONVERTER_VAL_AM_EXTERNAL_COUPLING_AC 0
+The external source is coupled for AC only.
+
+IVIUPCONVERTER_VAL_AM_EXTERNAL_COUPLING_DC 1
+The external source is coupled for both DC and AC.
+	"
+"IVIUPCONVERTER_ATTR_AM_EXTERNAL_COUPLING.html" "../../help/lvivi.chm"
+attribute: "AM Nominal Voltage [AM]"
+	"Analog Modulation:AM:AM Nominal Voltage [AM]"
+	fD readonly 1 0013134B
+"Returns the voltage at which the instrument achieves the amount of modulation specified by the IviUpconverter>>Analog Modulation>>AM>>AM Depth [AM] property. The units are Volts.
+	"
+"IVIUPCONVERTER_ATTR_AM_NOMINAL_VOLTAGE.html" "../../help/lvivi.chm"
+attribute: "AM Scaling [AM]"
+	"Analog Modulation:AM:AM Scaling [AM]"
+	iL enum { IVIUPCONVERTER_VAL_AM_SCALING_LINEAR=0, IVIUPCONVERTER_VAL_AM_SCALING_LOGARITHMIC=1} readwrite 1 0013134C
+"Specifies linear or logarithmic characteristics for amplitude modulation. The units of the IviUpconverter>>Analog Modualtion>>AM>>AM Depth [AM] property is changed with this setting.
+    
+IVIUPCONVERTER_VAL_AM_SCALING_LINEAR 0
+Enables linear attenuation for amplitude modulation.
+
+IVIUPCONVERTER_VAL_AM_SCALING_LOGARITHMIC 1
+Enables logarithmic attenuation for amplitude modulation.
+	"
+"IVIUPCONVERTER_ATTR_AM_SCALING.html" "../../help/lvivi.chm"
+attribute: "AM Source [AM]"
+	"Analog Modulation:AM:AM Source [AM]"
+	string readwrite 1 0013134D
+"Specifies the source of the signal that is used as the modulating signal. If more than one source is specified, the voltages of all sources are summed. Multiple source names are separated by commas.
+	"
+"IVIUPCONVERTER_ATTR_AM_SOURCE.html" "../../help/lvivi.chm"
+attribute: "FM Deviation [FM]"
+	"Analog Modulation:FM:FM Deviation [FM]"
+	fD readwrite 1 00131352
+"Specifies the extent of modulation the upconverter applies to the RF output signal with the modulating signal as a result of summing all sources, internal and external.
+The amount of the specified FM modulation deviation is achieved with a modulating voltage of FM Nominal Voltage. The units are Hertz.
+    "
+"IVIUPCONVERTER_ATTR_FM_DEVIATION.html" "../../help/lvivi.chm"
+attribute: "FM Enabled [FM]"
+	"Analog Modulation:FM:FM Enabled [FM]"
+	bool readwrite 1 00131353
+"Specifies whether the upconverter enables or disables frequency modulation of the RF output signal.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIUPCONVERTER_ATTR_FM_ENABLED.html" "../../help/lvivi.chm"
+attribute: "FM External Coupling [FM]"
+	"Analog Modulation:FM:FM External Coupling [FM]"
+	iL enum { IVIUPCONVERTER_VAL_FM_EXTERNAL_COUPLING_AC=0, IVIUPCONVERTER_VAL_FM_EXTERNAL_COUPLING_DC=1} readwrite 1 00131354
+"Specifies the coupling of the external source of the modulating signal.
+    
+IVIUPCONVERTER_VAL_FM_EXTERNAL_COUPLING_AC 0
+The external source is coupled for AC only.
+
+IVIUPCONVERTER_VAL_FM_EXTERNAL_COUPLING_DC 1
+The external source is coupled for both DC and AC.
+	"
+"IVIUPCONVERTER_ATTR_FM_EXTERNAL_COUPLING.html" "../../help/lvivi.chm"
+attribute: "FM Nominal Voltage [FM]"
+	"Analog Modulation:FM:FM Nominal Voltage [FM]"
+	fD readonly 1 00131355
+"Returns the voltage at which the instrument achieves the amount of modulation specified by the IviUpconverter>>Analog Modulation>>FM>>FM Deviation [FM] property. The units are Volts.
+	"
+"IVIUPCONVERTER_ATTR_FM_NOMINAL_VOLTAGE.html" "../../help/lvivi.chm"
+attribute: "FM Source [FM]"
+	"Analog Modulation:FM:FM Source [FM]"
+	string readwrite 1 00131356
+"Specifies the source of the signal that is used as the modulating signal. If more than one source is specified, the voltages of all sources are summed. Multiple source names are separated by commas.
+	"
+"IVIUPCONVERTER_ATTR_FM_SOURCE.html" "../../help/lvivi.chm"
+attribute: "PM Deviation [PM]"
+	"Analog Modulation:PM:PM Deviation [PM]"
+	fD readwrite 1 0013135C
+"Specifies the extent of modulation the upconverter applies to the RF output signal with the modulating signal as a result of summing all sources, internal and external.
+The amount of the specified PM modulation deviation is achieved with a modulating voltage of PM Nominal Voltage. The units are radians.
+    "
+"IVIUPCONVERTER_ATTR_PM_DEVIATION.html" "../../help/lvivi.chm"
+attribute: "PM Enabled [PM]"
+	"Analog Modulation:PM:PM Enabled [PM]"
+	bool readwrite 1 0013135D
+"Specifies whether the upconverter enables or disables phase modulation of the RF output signal.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIUPCONVERTER_ATTR_PM_ENABLED.html" "../../help/lvivi.chm"
+attribute: "PM External Coupling [PM]"
+	"Analog Modulation:PM:PM External Coupling [PM]"
+	iL enum { IVIUPCONVERTER_VAL_PM_EXTERNAL_COUPLING_AC=0, IVIUPCONVERTER_VAL_PM_EXTERNAL_COUPLING_DC=1} readwrite 1 0013135E
+"Specifies the coupling of the external source of the modulating signal.
+    
+IVIUPCONVERTER_VAL_PM_EXTERNAL_COUPLING_AC 0
+The external source is coupled for AC only.
+
+IVIUPCONVERTER_VAL_PM_EXTERNAL_COUPLING_DC 1
+The external source is coupled for both DC and AC.
+	"
+"IVIUPCONVERTER_ATTR_PM_EXTERNAL_COUPLING.html" "../../help/lvivi.chm"
+attribute: "PM Nominal Voltage [PM]"
+	"Analog Modulation:PM:PM Nominal Voltage [PM]"
+	fD readonly 1 0013135F
+"Returns the voltage at which the instrument achieves the amount of modulation specified by the IviUpconverter>>Analog Modulation>>PM>>PM Deviation [PM] property. The units are Volts.
+	"
+"IVIUPCONVERTER_ATTR_PM_NOMINAL_VOLTAGE.html" "../../help/lvivi.chm"
+attribute: "PM Source [PM]"
+	"Analog Modulation:PM:PM Source [PM]"
+	string readwrite 1 00131360
+"Specifies the source of the signal that is used as the modulating signal. If more than one source is specified, the voltages of all sources are summed. Multiple source names are separated by commas.
+	"
+"IVIUPCONVERTER_ATTR_PM_SOURCE.html" "../../help/lvivi.chm"
+attribute: "Analog Modulation Source Count [MS]"
+	"Analog Modulation:Source:Analog Modulation Source Count [MS]"
+	iL readonly 1 00131366
+"Returns the number of Analog Modulation Sources available on the device.
+    "
+"IVIUPCONVERTER_ATTR_ANALOG_MODULATION_SOURCE_COUNT.html" "../../help/lvivi.chm"
+attribute: "Pulse Modulation Enabled [PULM]"
+	"Pulse Modulation:Pulse Modulation Enabled [PULM]"
+	bool readwrite 1 00131370
+"Enables or disables pulse modulation of the RF output signal.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIUPCONVERTER_ATTR_PULSE_MODULATION_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Pulse Modulation External Polarity [PULM]"
+	"Pulse Modulation:Pulse Modulation External Polarity [PULM]"
+	iL enum { IVIUPCONVERTER_VAL_PULSE_MODULATION_EXTERNAL_POLARITY_NORMAL=0, IVIUPCONVERTER_VAL_PULSE_MODULATION_EXTERNAL_POLARITY_INVERSE=1} readwrite 1 00131371
+"Specifies the polarity of the external source signal.
+    
+IVIUPCONVERTER_VAL_PULSE_MODULATION_EXTERNAL_POLARITY_NORMAL 0
+The upconverter modulates the carrier signal with normal pulse polarity. Increasing the positive pulse voltage level results in higher RF level.
+
+IVIUPCONVERTER_VAL_PULSE_MODULATION_EXTERNAL_POLARITY_INVERSE 1
+The upconverter modulates the carrier signal with inverted pulse polarity. Increasing the positive pulse voltage level results in lower RF level.
+	"
+"IVIUPCONVERTER_ATTR_PULSE_MODULATION_EXTERNAL_POLARITY.html" "../../help/lvivi.chm"
+attribute: "Sweep Mode [SWP]"
+	"Sweep:Sweep Mode [SWP]"
+	iL enum { IVIUPCONVERTER_VAL_SWEEP_MODE_NONE=0, IVIUPCONVERTER_VAL_SWEEP_MODE_FREQUENCY_SWEEP=1, IVIUPCONVERTER_VAL_SWEEP_MODE_POWER_SWEEP=2, IVIUPCONVERTER_VAL_SWEEP_MODE_GAIN_SWEEP=3, IVIUPCONVERTER_VAL_SWEEP_MODE_FREQUENCY_STEP=4, IVIUPCONVERTER_VAL_SWEEP_MODE_POWER_STEP=5, IVIUPCONVERTER_VAL_SWEEP_MODE_GAIN_STEP=6, IVIUPCONVERTER_VAL_SWEEP_MODE_LIST=7} readwrite 1 00131399
+"Specifies whether the RF output signal is a continuous wave or the frequency, power level, or gain is swept or stepped.
+
+IVIUPCONVERTER_VAL_SWEEP_MODE_NONE 0
+The RF output is a non-swept signal (continuous wave).
+
+IVIUPCONVERTER_VAL_SWEEP_MODE_FREQUENCY_SWEEP 1
+Sweeps the RF output signal frequency in an analog form (non-stepped).
+
+IVIUPCONVERTER_VAL_SWEEP_MODE_POWER_SWEEP 2
+Sweeps the RF output signal power in an analog form (non-stepped).
+
+IVIUPCONVERTER_VAL_SWEEP_MODE_GAIN_SWEEP 3
+Sweeps the upconverter's gain in an analog form (non-stepped).
+
+IVIUPCONVERTER_VAL_SWEEP_MODE_FREQUENCY_STEP 4
+Sweeps the RF output signal frequency in steps.
+
+IVIUPCONVERTER_VAL_SWEEP_MODE_POWER_STEP 5
+Sweeps the RF output signal power level in steps.
+
+IVIUPCONVERTER_VAL_SWEEP_MODE_GAIN_STEP 6
+Sweeps the upconverter's gain in steps.
+
+IVIUPCONVERTER_VAL_SWEEP_MODE_LIST 7
+Uses two lists with frequency and power level or gain values to sweep the RF output signal.
+    "
+"IVIUPCONVERTER_ATTR_SWEEP_MODE.html" "../../help/lvivi.chm"
+attribute: "Sweep Trigger Source [SWP]"
+	"Sweep:Sweep Trigger Source [SWP]"
+	string readwrite 1 0013139A
+"Specifies the way to start the sweep or run the sweep continuously.
+    
+Trigger Sources:
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_NONE ('') - No trigger source.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_IMMEDIATE ('Immediate') - Trigger Immediately.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_EXTERNAL ('External') - External trigger source.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_INTERNAL ('Internal') - Internal trigger source.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_SOFTWARE ('Software') - Software trigger.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LAN0 ('LAN0') - LAN0 (LXI defined 'LAN0' LAN message).
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LAN1 ('LAN1') - LAN1 (LXI defined 'LAN1' LAN message).
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LAN2 ('LAN2') - LAN2 (LXI defined 'LAN2' LAN message).
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LAN3 ('LAN3') - LAN3 (LXI defined 'LAN3' LAN message).
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LAN4 ('LAN4') - LAN4 (LXI defined 'LAN4' LAN message).
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LAN5 ('LAN5') - LAN5 (LXI defined 'LAN5' LAN message).
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LAN6 ('LAN6') - LAN6 (LXI defined 'LAN6' LAN message).
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LAN7 ('LAN7') - LAN7 (LXI defined 'LAN7' LAN message).
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LXI0 ('LXI0') - LXI Trigger Bus Line 0.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LXI1 ('LXI1') - LXI Trigger Bus Line 1.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LXI2 ('LXI2') - LXI Trigger Bus Line 2.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LXI3 ('LXI3') - LXI Trigger Bus Line 3.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LXI4 ('LXI4') - LXI Trigger Bus Line 4.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LXI5 ('LXI5') - LXI Trigger Bus Line 5.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LXI6 ('LXI6') - LXI Trigger Bus Line 6.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_LXI7 ('LXI7') - LXI Trigger Bus Line 7.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_TTL0 ('TTL0') - TTL Interface 0.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_TTL1 ('TTL1') - TTL Interface 1.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_TTL2 ('TTL2') - TTL Interface 2.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_TTL3 ('TTL3') - TTL Interface 3.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_TTL4 ('TTL4') - TTL Interface 4.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_TTL5 ('TTL5') - TTL Interface 5.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_TTL6 ('TTL6') - TTL Interface 6.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_TTL7 ('TTL7') - TTL Interface 7.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXI_STAR ('PXI_STAR') - PXI Star Interface.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG0 ('PXI_TRIG0') - PXI Trigger Bus Line 0.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG1 ('PXI_TRIG1') - PXI Trigger Bus Line 1.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG2 ('PXI_TRIG2') - PXI Trigger Bus Line 2.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG3 ('PXI_TRIG3') - PXI Trigger Bus Line 3.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG4 ('PXI_TRIG4') - PXI Trigger Bus Line 4.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG5 ('PXI_TRIG5') - PXI Trigger Bus Line 5.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG6 ('PXI_TRIG6') - PXI Trigger Bus Line 6.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG7 ('PXI_TRIG7') - PXI Trigger Bus Line 7.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXIE_DSTARA ('PXIe_DSTARA') - PXI Express DStar Line A.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXIE_DSTARB ('PXIe_DSTARB') - PXI Express DStar Line B.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_PXIE_DSTARC ('PXIe_DSTARC') - PXI Express DStar Line C.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_RTSI0 ('RTSI0') - RTSI Bus Line 0.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_RTSI1 ('RTSI1') - RTSI Bus Line 1.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_RTSI2 ('RTSI2') - RTSI Bus Line 2.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_RTSI3 ('RTSI3') - RTSI Bus Line 3.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_RTSI4 ('RTSI4') - RTSI Bus Line 4.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_RTSI5 ('RTSI5') - RTSI Bus Line 5.
+    IVIUPCONVERTER_VAL_TRIGGER_SOURCE_RTSI6 ('RTSI6') - RTSI Bus Line 6.
+    "
+"IVIUPCONVERTER_ATTR_SWEEP_TRIGGER_SOURCE.html" "../../help/lvivi.chm"
+attribute: "Is Sweeping [SWP]"
+	"Sweep:Is Sweeping [SWP]"
+	bool readonly 1 00131398
+"Indicates if the upconverter is currently sweeping the RF output signal.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    " 
+"IVIUPCONVERTER_ATTR_IS_SWEEPING.html" "../../help/lvivi.chm"
+attribute: "Frequency Sweep Start [FSW]"
+	"Sweep:Frequency Sweep:Frequency Sweep Start [FSW]"
+	fD readwrite 1 001313A2
+"Specifies the start frequency of the sweep.
+If the stop frequency is less than the start frequency, the frequency decreases during the sweep. The units are Hertz.
+    "
+"IVIUPCONVERTER_ATTR_FREQUENCY_SWEEP_START.html" "../../help/lvivi.chm"
+attribute: "Frequency Sweep Stop [FSW]"
+	"Sweep:Frequency Sweep:Frequency Sweep Stop [FSW]"
+	fD readwrite 1 001313A3
+"Specifies the stop frequency of the sweep.
+If the stop frequency is less than the start frequency, the frequency decreases during the sweep. The units are Hertz.
+	"
+"IVIUPCONVERTER_ATTR_FREQUENCY_SWEEP_STOP.html" "../../help/lvivi.chm"
+attribute: "Frequency Sweep Time [FSW]"
+	"Sweep:Frequency Sweep:Frequency Sweep Time [FSW]"
+	fD readwrite 1 001313A4
+"Specifies the duration of one sweep from start to stop frequency. The units are seconds.
+    "
+"IVIUPCONVERTER_ATTR_FREQUENCY_SWEEP_TIME.html" "../../help/lvivi.chm"
+attribute: "Power Sweep Start [PSW]"
+	"Sweep:Power Sweep:Power Sweep Start [PSW]"
+	fD readwrite 1 001313AC
+"Specifies the start power of the sweep.
+If the stop power is less than the start power, the power decreases during the sweep. The units are dBm.
+    "
+"IVIUPCONVERTER_ATTR_POWER_SWEEP_START.html" "../../help/lvivi.chm"
+attribute: "Power Sweep Stop [PSW]"
+	"Sweep:Power Sweep:Power Sweep Stop [PSW]"
+	fD readwrite 1 001313AD
+"Specifies the stop power of the sweep.
+If the stop power is less than the start power, the power decreases during the sweep. The units are dBm.
+	"
+"IVIUPCONVERTER_ATTR_POWER_SWEEP_STOP.html" "../../help/lvivi.chm"
+attribute: "Power Sweep Time [PSW]"
+	"Sweep:Power Sweep:Power Sweep Time [PSW]"
+	fD readwrite 1 001313AE
+"Specifies the duration of one sweep from start to stop power. The units are seconds.
+    "
+"IVIUPCONVERTER_ATTR_POWER_SWEEP_TIME.html" "../../help/lvivi.chm"
+attribute: "Gain Sweep Start [GSW]"
+	"Sweep:Gain Sweep:Gain Sweep Start [GSW]"
+	fD readwrite 1 001313B6
+"Specifies the start gain of the sweep.
+If the stop gain is less than the start gain, the gain decreases during the sweep. The units are dB.
+    "
+"IVIUPCONVERTER_ATTR_GAIN_SWEEP_START.html" "../../help/lvivi.chm"
+attribute: "Gain Sweep Stop [GSW]"
+	"Sweep:Gain Sweep:Gain Sweep Stop [GSW]"
+	fD readwrite 1 001313B7
+"Specifies the stop gain of the sweep.
+If the stop gain is less than the start gain, the gain decreases during the sweep. The units are dB.
+	"
+"IVIUPCONVERTER_ATTR_GAIN_SWEEP_STOP.html" "../../help/lvivi.chm"
+attribute: "Gain Sweep Time [GSW]"
+	"Sweep:Gain Sweep:Gain Sweep Time [GSW]"
+	fD readwrite 1 001313B8
+"Specifies the duration of one sweep from start to stop gain. The units are seconds.
+    "
+"IVIUPCONVERTER_ATTR_GAIN_SWEEP_TIME.html" "../../help/lvivi.chm"
+attribute: "Frequency Step Dwell [FST]"
+	"Sweep:Frequency Step:Frequency Step Dwell [FST]"
+	fD readwrite 1 001313C0
+"Specifies the duration of one step. The units are seconds.
+The dwell time starts immediately after a trigger or next step; no settling time is added. This property is valid only when the IviUpconverter>>Sweep>>Frequency Step>>Frequency Step Single Step Enabled [FST] property is set to FALSE.
+    "
+"IVIUPCONVERTER_ATTR_FREQUENCY_STEP_DWELL.html" "../../help/lvivi.chm"
+attribute: "Frequency Step Scaling [FST]"
+	"Sweep:Frequency Step:Frequency Step Scaling [FST]"
+	iL enum { IVIUPCONVERTER_VAL_FREQUENCY_STEP_SCALING_LINEAR=0, IVIUPCONVERTER_VAL_FREQUENCY_STEP_SCALING_LOGARITHMIC=1} readwrite 1 001313C1
+"Specifies the spacing of the steps.
+
+IVIUPCONVERTER_VAL_FREQUENCY_STEP_SCALING_LINEAR 0
+Enables linear scaling.
+
+IVIUPCONVERTER_VAL_FREQUENCY_STEP_SCALING_LOGARITHMIC 1
+Enables logarithmic scaling.
+    "
+"IVIUPCONVERTER_ATTR_FREQUENCY_STEP_SCALING.html" "../../help/lvivi.chm"
+attribute: "Frequency Step Single Step Enabled [FST]"
+	"Sweep:Frequency Step:Frequency Step Single Step Enabled [FST]"
+	bool readwrite 1 001313C2
+"Enables or disables single step mode.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIUPCONVERTER_ATTR_FREQUENCY_STEP_SINGLE_STEP_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Frequency Step Size [FST]"
+	"Sweep:Frequency Step:Frequency Step Size [FST]"
+	fD readwrite 1 001313C3
+"Specifies the step size. The units are Hertz if the IviUpconverter>>Sweep>>Frequency Step>>Frequency Step Scaling [FST] property is set to Linear and unitless (factor) if the IviUpconverter>>Sweep>>Frequency Step>>Frequency Step Scaling [FST] property is set to Logarithmic.
+    "
+"IVIUPCONVERTER_ATTR_FREQUENCY_STEP_SIZE.html" "../../help/lvivi.chm"
+attribute: "Frequency Step Start [FST]"
+	"Sweep:Frequency Step:Frequency Step Start [FST]"
+	fD readwrite 1 001313C4
+"Specifies the start frequency of the stepped sweep.
+If the stop frequency is less than the start frequency, the frequency decreases during the sweep. The units are Hertz.
+    "
+"IVIUPCONVERTER_ATTR_FREQUENCY_STEP_START.html" "../../help/lvivi.chm"
+attribute: "Frequency Step Stop [FST]"
+	"Sweep:Frequency Step:Frequency Step Stop [FST]"
+	fD readwrite 1 001313C5
+"Specifies the stop frequency of the stepped sweep.
+If the stop frequency is less than the start frequency, the frequency decreases during the sweep. The units are Hertz.
+    "
+"IVIUPCONVERTER_ATTR_FREQUENCY_STEP_STOP.html" "../../help/lvivi.chm"
+attribute: "Power Step Dwell [PST]"
+	"Sweep:Power Step:Power Step Dwell [PST]"
+	fD readwrite 1 001313CA
+"Specifies the duration of one step. The units are seconds.
+This property is valid only when the IviUpconverter>>Sweep>>Power Step>>Power Step Single Step Enabled [PST] property is set to FALSE.
+    "
+"IVIUPCONVERTER_ATTR_POWER_STEP_DWELL.html" "../../help/lvivi.chm"
+attribute: "Power Step Single Step Enabled [PST]"
+	"Sweep:Power Step:Power Step Single Step Enabled [PST]"
+	bool readwrite 1 001313CB
+"Enables or disables single step mode.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIUPCONVERTER_ATTR_POWER_STEP_SINGLE_STEP_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Power Step Size [PST]"
+	"Sweep:Power Step:Power Step Size [PST]"
+	fD readwrite 1 001313CC
+"Specifies the step size. The units are dBm.
+    "
+"IVIUPCONVERTER_ATTR_POWER_STEP_SIZE.html" "../../help/lvivi.chm"
+attribute: "Power Step Start [PST]"
+	"Sweep:Power Step:Power Step Start [PST]"
+	fD readwrite 1 001313CD
+"Specifies the start power of the stepped sweep.
+If the stop power is less than the start power, the power decreases during the sweep. The units are dBm.
+    "
+"IVIUPCONVERTER_ATTR_POWER_STEP_START.html" "../../help/lvivi.chm"
+attribute: "Power Step Stop [PST]"
+	"Sweep:Power Step:Power Step Stop [PST]"
+	fD readwrite 1 001313CE
+"Specifies the stop power of the stepped sweep.
+If the stop power is less than the start power, the power decreases during the sweep. The units are dBm.
+    "
+"IVIUPCONVERTER_ATTR_POWER_STEP_STOP.html" "../../help/lvivi.chm"
+attribute: "Gain Step Dwell [GST]"
+	"Sweep:Gain Step:Gain Step Dwell [GST]"
+	fD readwrite 1 001313D4
+"Specifies the duration of one step. The units are seconds.
+This property is valid only when the IviUpconverter>>Sweep>>Gain Step>>Gain Step Single Step Enabled [GST] property is set to FALSE.
+    "
+"IVIUPCONVERTER_ATTR_GAIN_STEP_DWELL.html" "../../help/lvivi.chm"
+attribute: "Gain Step Single Step Enabled [GST]"
+	"Sweep:Gain Step:Gain Step Single Step Enabled [GST]"
+	bool readwrite 1 001313D5
+"Enables or disables single step mode.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIUPCONVERTER_ATTR_GAIN_STEP_SINGLE_STEP_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Gain Step Size [GST]"
+	"Sweep:Gain Step:Gain Step Size [GST]"
+	fD readwrite 1 001313D6
+"Specifies the step size. The units are dB.
+    "
+"IVIUPCONVERTER_ATTR_GAIN_STEP_SIZE.html" "../../help/lvivi.chm"
+attribute: "Gain Step Start [GST]"
+	"Sweep:Gain Step:Gain Step Start [GST]"
+	fD readwrite 1 001313D7
+"Specifies the start gain of the stepped sweep.
+If the stop gain is less than the start gain, the gain decreases during the sweep. The units are dB.
+    "
+"IVIUPCONVERTER_ATTR_GAIN_STEP_START.html" "../../help/lvivi.chm"
+attribute: "Gain Step Stop [GST]"
+	"Sweep:Gain Step:Gain Step Stop [GST]"
+	fD readwrite 1 001313D8
+"Specifies the stop gain of the stepped sweep.
+If the stop gain is less than the start gain, the gain decreases during the sweep. The units are dB.
+    "
+"IVIUPCONVERTER_ATTR_GAIN_STEP_STOP.html" "../../help/lvivi.chm"
+attribute: "List Dwell [LST]"
+	"Sweep:List:List Dwell [LST]"
+	fD readwrite 1 001313DE
+"Specifies the duration of one step. The units are seconds.
+This property is valid only when the IviUpconverter>>Sweep>>List>>List Single Step Enabled [LST] property is set to FALSE.
+    "
+"IVIUPCONVERTER_ATTR_LIST_DWELL.html" "../../help/lvivi.chm"
+attribute: "List Selected Name [LST]"
+	"Sweep:List:List Selected Name [LST]"
+	string readwrite 1 001313DF
+"Specifies the name of the selected list to become active. The name shall be one of the lists created.
+    "
+"IVIUPCONVERTER_ATTR_LIST_SELECTED_NAME.html" "../../help/lvivi.chm"
+attribute: "List Single Step Enabled [LST]"
+	"Sweep:List:List Single Step Enabled [LST]"
+	bool readwrite 1 001313E0
+"Enables or disables single step mode.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIUPCONVERTER_ATTR_LIST_SINGLE_STEP_ENABLED.html" "../../help/lvivi.chm"
+attribute: "ALC Bandwidth [ALC]"
+	"ALC:ALC Bandwidth [ALC]"
+	fD readwrite 1 001313FC
+"Specifies the bandwidth of the level control. Narrow bandwidth improves noise and allows AM with modulation frequencies beyond bandwidth frequency. The units are Hertz.
+    "
+"IVIUPCONVERTER_ATTR_ALC_BANDWIDTH.html" "../../help/lvivi.chm"
+attribute: "ALC Enabled"
+	"ALC:ALC Enabled"
+	bool readwrite 1 001312D2
+"Enables or disables the Automatic Level Control (ALC).
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIUPCONVERTER_ATTR_ALC_ENABLED.html" "../../help/lvivi.chm"
+attribute: "ALC Source [ALC]"
+	"ALC:ALC Source [ALC]"
+	iL enum { IVIUPCONVERTER_VAL_ALC_SOURCE_INTERNAL=0, IVIUPCONVERTER_VAL_ALC_SOURCE_EXTERNAL=1} readwrite 1 001313FD
+"Specifies the source of the controlling voltage for the Automatic Level Control. The RF level at the sensor point is held constant.
+
+IVIUPCONVERTER_VAL_ALC_SOURCE_INTERNAL 0
+The ALC is controlled by an internal measurement source.
+
+IVIUPCONVERTER_VAL_ALC_SOURCE_EXTERNAL 1
+The ALC is controlled by an external voltage.
+    "
+"IVIUPCONVERTER_ATTR_ALC_SOURCE.html" "../../help/lvivi.chm"
+attribute: "Reference Oscillator External Frequency [RO]"
+	"Reference Oscillator:Reference Oscillator External Frequency [RO]"
+	fD readwrite 1 00131410
+"Specifies the frequency of the external signal that is used as reference for internal RF frequency generation.
+This property is valid only when IviUpconverter>>Reference Oscillator>>Reference Oscillator Source [RO] property is set to External. The units are Hertz.
+	"
+"IVIUPCONVERTER_ATTR_REFERENCE_OSCILLATOR_EXTERNAL_FREQUENCY.html" "../../help/lvivi.chm"
+attribute: "Reference Oscillator Source [RO]"
+	"Reference Oscillator:Reference Oscillator Source [RO]"
+	iL enum { IVIUPCONVERTER_VAL_REFERENCE_OSCILLATOR_SOURCE_INTERNAL=0, IVIUPCONVERTER_VAL_REFERENCE_OSCILLATOR_SOURCE_EXTERNAL=1} readwrite 1 00131411
+"Specifies the reference oscillator source used to generate the precise RF output frequency.
+    
+IVIUPCONVERTER_VAL_REFERENCE_OSCILLATOR_SOURCE_INTERNAL 0
+Internal reference oscillator.
+
+IVIUPCONVERTER_VAL_REFERENCE_OSCILLATOR_SOURCE_EXTERNAL 1
+External reference oscillator.
+	"
+"IVIUPCONVERTER_ATTR_REFERENCE_OSCILLATOR_SOURCE.html" "../../help/lvivi.chm"
+attribute: "Reference Oscillator Output Enabled [RO]"
+	"Reference Oscillator:Reference Oscillator Output Enabled [RO]"
+	bool readwrite 1 00131412
+"Enables or disables the reference output.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIUPCONVERTER_ATTR_REFERENCE_OSCILLATOR_OUTPUT_ENABLED.html" "../../help/lvivi.chm"
+attribute: "IQ Enabled [MIQ]"
+	"IQ:IQ Enabled [MIQ]"
+	bool readwrite 1 0013141A
+"Enables or disables IQ (vector) modulation of the RF output signal.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIUPCONVERTER_ATTR_IQ_ENABLED.html" "../../help/lvivi.chm"
+attribute: "IQ Impairment Enabled [IQI]"
+	"IQ:Impairment:IQ Impairment Enabled [IQI]"
+	bool readwrite 1 00131424
+"Enables or disables IQ impairment.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIUPCONVERTER_ATTR_IQ_IMPAIRMENT_ENABLED.html" "../../help/lvivi.chm"
+attribute: "IQ Impairment I Offset [IQI]"
+	"IQ:Impairment:IQ Impairment I Offset [IQI]"
+	fD readwrite 1 00131425
+"Specifies an origin offset voltage to the I signal. The range of values allowed is -100% to +100%. The value is expressed as percentage (%).
+	"
+"IVIUPCONVERTER_ATTR_IQ_IMPAIRMENT_I_OFFSET.html" "../../help/lvivi.chm"
+attribute: "IQ Impairment Q Offset [IQI]"
+	"IQ:Impairment:IQ Impairment Q Offset [IQI]"
+	fD readwrite 1 00131426
+"Specifies an origin offset voltage to the Q signal. The range of values allowed is -100% to +100%. The value is expressed as percentage (%).
+	"
+"IVIUPCONVERTER_ATTR_IQ_IMPAIRMENT_Q_OFFSET.html" "../../help/lvivi.chm"
+attribute: "IQ Impairment Ratio [IQI]"
+	"IQ:Impairment:IQ Impairment Ratio [IQI]"
+	fD readwrite 1 00131427
+"Specifies the gain imbalance between I and Q channels. For no imbalance this value is set to 0%. The value is expressed as percentage (%).
+	"
+"IVIUPCONVERTER_ATTR_IQ_IMPAIRMENT_RATIO.html" "../../help/lvivi.chm"
+attribute: "IQ Impairment Skew [IQI]"
+	"IQ:Impairment:IQ Impairment Skew [IQI]"
+	fD readwrite 1 00131428
+"Specifies the adjustment of the phase angle between the I and Q vectors. If this skew is zero, the phase angle is 90 degrees. The units are degrees.
+	"
+"IVIUPCONVERTER_ATTR_IQ_IMPAIRMENT_SKEW.html" "../../help/lvivi.chm"
+attribute: "IQ Nominal Voltage [MIQ]"
+	"IQ:IQ Nominal Voltage [MIQ]"
+	fD readonly 1 0013141B
+"Returns the voltage at which the instrument achieves full modulation. The value is calculated by SQRT(I2+Q2). The units are Volts.
+	"
+"IVIUPCONVERTER_ATTR_IQ_NOMINAL_VOLTAGE.html" "../../help/lvivi.chm"
+attribute: "IQ Swap Enabled [MIQ]"
+	"IQ:IQ Swap Enabled [MIQ]"
+	bool readwrite 1 0013141C
+"Enables or disables the inverse phase rotation of the IQ signal by swapping the I and Q inputs.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIUPCONVERTER_ATTR_IQ_SWAP_ENABLED.html" "../../help/lvivi.chm"

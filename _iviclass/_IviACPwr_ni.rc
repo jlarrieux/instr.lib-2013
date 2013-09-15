@@ -1,0 +1,909 @@
+explicitActiveChannels: TRUE
+library: IviACPwr_ni**.dll
+
+class: "IviACPwr"
+flags: 16
+sorted: no
+implements: ivi, iviResourceMgr
+
+attribute: "Active Phase" "Active Phase" string writeonly 3 -2
+"Specifies the phase name used to access all subsequent phase-based properties in this property node. Set the phase before setting phase-based properties. Pass a name that the instrument driver defines or a virtual phase name configured in MAX."
+"ActivePhase.html" "../../help/lvivi.chm"
+
+attribute: "Range Check"
+	"Inherent IVI Settings:User Options:Range Check"
+	bool readwrite 1 00100592
+	//const: IVIACPWR_ATTR_RANGE_CHECK
+"Specifies whether to validate property values and VI parameters.  If enabled, the instrument driver validates the parameter values that you pass to driver VIs.  Range checking parameters is very useful for debugging.  After validating your program, you can set this property to FALSE to disable range checking and maximize performance.
+    The default value is TRUE.  Use the IviACPwr Initialize With Options VI to override this value.
+    
+TRUE 1
+True
+
+FALSE (0)
+False
+
+"
+"CLASSPREFIX_ATTR_RANGE_CHECK.html" "../../help/lvivi.chm"
+
+attribute: "Query Instrument Status"
+	"Inherent IVI Settings:User Options:Query Instrument Status"
+	bool readwrite 1 00100593
+	//const: IVIACPWR_ATTR_QUERY_INSTRUMENT_STATUS
+"Specifies whether the instrument driver queries the instrument status after each operation.  Querying the instrument status is very useful for debugging.  After validating your program, you can set this property to FALSE to disable status checking and maximize performance
+    The instrument driver can choose to ignore status checking for particular properties regardless of the setting of this property.
+    The default value is FALSE.  Use the IviACPwr Initialize With Options VI to override this value.
+    
+
+TRUE 1
+True
+
+FALSE 0
+False
+
+"
+"CLASSPREFIX_ATTR_QUERY_INSTR_STATUS.html" "../../help/lvivi.chm"
+
+attribute: "Cache"
+	"Inherent IVI Settings:User Options:Cache"
+	bool readwrite 1 00100594
+	//const: IVIACPWR_ATTR_CACHE
+"Specifies whether to cache the value of properties.  When caching is enabled, the instrument driver keeps track of the current instrument settings and avoids sending redundant commands to the instrument.  Thus, you can significantly increase execution speed.
+    The instrument driver can choose always to cache or never to cache particular properties regardless of the setting of this property.
+    The default value is TRUE.  Use the IviACPwr Initialize With Options VI to override this value.
+    
+
+TRUE 1
+True
+
+FALSE 0
+False
+
+"
+"CLASSPREFIX_ATTR_CACHE.html" "../../help/lvivi.chm"
+
+attribute: "Simulate"
+	"Inherent IVI Settings:User Options:Simulate"
+	bool readwrite 1 00100595
+	//const: IVIACPWR_ATTR_SIMULATE
+"Specifies whether or not to simulate instrument driver I/O operations.  If simulation is enabled, instrument driver VIs perform range checking and call Ivi_GetAttribute and Ivi_SetAttribute VIs, but they do not perform instrument I/O.  For output parameters that represent instrument data, the instrument driver VIs return calculated values.
+    The default value is FALSE.  Use the IviACPwr Initialize With Options VI to override this value.
+    
+
+TRUE 1
+True
+
+FALSE 0
+False
+
+"
+"CLASSPREFIX_ATTR_SIMULATE.html" "../../help/lvivi.chm"
+
+attribute: "Use Specific Simulation"
+	"Inherent IVI Settings:User Options:Use Specific Simulation"
+	bool readwrite 1 001005A7
+	//const: IVIACPWR_ATTR_USE_SPECIFIC_SIMULATION
+"Specifies whether to simulate instrument driver I/O operations in the specific or class driver.  This property affects instrument driver operation only when the IviACPwr Simulate property is set to TRUE.
+    The default value is FALSE.
+    
+
+TRUE 1
+True
+
+FALSE 0
+False
+
+"
+"CLASSPREFIX_ATTR_USE_SPECIFIC_SIMULATION.html" "../../help/lvivi.chm"
+
+attribute: "Record Value Coercions"
+	"Inherent IVI Settings:User Options:Record Value Coercions"
+	bool readwrite 1 00100596
+	//const: IVIACPWR_ATTR_RECORD_COERCIONS
+"Specifies whether the instrument driver keeps a list of the value coercions it makes for integer and ViReal64 properties. If the IviACPwr Spy property is set to TRUE, you use the NI IO Trace utility to view coercion information. If the IviACPwr Spy property is set to FALSE you call the IviACPwr Get Next Coercion Record VI to extract and delete the oldest coercion record from the list.
+    The default value is FALSE. Use the IVI Configuration utility or the IviACPwr Initialize With Options VI to override this value.
+    
+
+TRUE 1
+True
+
+FALSE 0
+False
+
+"
+"CLASSPREFIX_ATTR_RECORD_COERCIONS.html" "../../help/lvivi.chm"
+
+attribute: "Interchange Check"
+	"Inherent IVI Settings:User Options:Interchange Check"
+	bool readwrite 1 001005A5
+	//const: IVIACPWR_ATTR_INTERCHANGE_CHECK
+"Specifies whether to perform interchangeability checking and retrieve interchangeability warnings when you call the IviACPwr Configure Output Enabled, IviACPwr Configure Waveform, and IviACPwr Initiate Measurement VIs.  The default value is FALSE.  Interchangeability warnings indicate that using your application with a different instrument might cause different behavior.  If the IviACPwr Spy property is set to FALSE, you call IviACPwr Get Next Interchange Warning VI to extract interchange warnings.  Call the IviACPwr Clear Interchange Warnings VI to clear the list of interchangeability warnings without reading them.
+If the IviACPwr Spy property is set to TRUE, you can use the NI IO Trace utility to view interchange warnings.
+     Interchangeability checking examines the properties in a capability group only if you specify a value for at least one property within that group.  Interchangeability warnings can occur under the following conditions:
+
+(1) A property affects the behavior of the instrument and you have not set that property.
+
+(2) The IviACPwr class defines values for a property and you have set that property to a value not defined by the IviACPwr class.
+
+(3) The IviACPwr class defines a property as read-only and you have set that property.
+
+    
+
+TRUE 1
+True
+
+FALSE 0
+False
+
+"
+"CLASSPREFIX_ATTR_INTERCHANGE_CHECK.html" "../../help/lvivi.chm"
+
+attribute: "Spy"
+	"Inherent IVI Settings:User Options:Spy"
+	bool readwrite 1 001005A6
+	//const: IVIACPWR_ATTR_SPY
+"Specifies whether to log class VI calls to the NI IO Trace utility.  If this property is set to TRUE, you can use NI IO Trace to view the input and output parameters, return values, coercion records, and interchangeability warnings of class VI calls.
+    The default value is TRUE.
+    
+
+TRUE 1
+True
+
+FALSE 0
+False
+
+"
+"CLASSPREFIX_ATTR_SPY.html" "../../help/lvivi.chm"
+
+attribute: "Description"
+	"Inherent IVI Settings:Class Driver Identification:Description"
+	string readonly 1 00100796
+	//const: IVIACPWR_ATTR_CLASS_DRIVER_DESCRIPTION
+"A string that contains a brief description of the class driver.
+    
+
+"
+"CLASSPREFIX_ATTR_CLASS_DRIVER_DESCRIPTION.html" "../../help/lvivi.chm"
+
+attribute: "Class Driver Prefix"
+	"Inherent IVI Settings:Class Driver Identification:Class Driver Prefix"
+	string readonly 1 001006BD
+	//const: IVIACPWR_ATTR_CLASS_DRIVER_PREFIX
+"A string that contains the prefix for the class driver.  The name of each user-callable VI in this driver starts with this prefix.
+    
+
+"
+"CLASSPREFIX_ATTR_CLASS_PREFIX.html" "../../help/lvivi.chm"
+
+attribute: "Class Driver Vendor"
+	"Inherent IVI Settings:Class Driver Identification:Class Driver Vendor"
+	string readonly 1 00100795
+	//const: IVIACPWR_ATTR_CLASS_DRIVER_VENDOR
+"A string that contains the name of the vendor that supplies this class driver.
+    
+
+"
+"CLASSPREFIX_ATTR_CLASS_DRIVER_VENDOR.html" "../../help/lvivi.chm"
+
+attribute: "Revision"
+	"Inherent IVI Settings:Class Driver Identification:Revision"
+	string readonly 1 001007B8
+	//const: IVIACPWR_ATTR_CLASS_DRIVER_REVISION
+"A string that contains additional version information about the class driver.
+    
+
+"
+"CLASSPREFIX_ATTR_CLASS_REVISION.html" "../../help/lvivi.chm"
+
+attribute: "Class Specification Major Version"
+	"Inherent IVI Settings:Class Driver Identification:Class Specification Major Version"
+	iL readonly 1 00100797
+	//const: IVIACPWR_ATTR_CLASS_DRIVER_CLASS_SPEC_MAJOR_VERSION
+"The major version number of the class specification with which the class driver is compliant.
+    
+
+"
+"CLASSPREFIX_ATTR_CLASS_DRIVER_CLASS_SPEC_MAJOR_VERSION.html" "../../help/lvivi.chm"
+
+attribute: "Class Specification Minor Version"
+	"Inherent IVI Settings:Class Driver Identification:Class Specification Minor Version"
+	iL readonly 1 00100798
+	//const: IVIACPWR_ATTR_CLASS_DRIVER_CLASS_SPEC_MINOR_VERSION
+"The minor version number of the class specification with which the class driver is compliant.
+    
+
+"
+"CLASSPREFIX_ATTR_CLASS_DRIVER_CLASS_SPEC_MINOR_VERSION.html" "../../help/lvivi.chm"
+
+attribute: "Description"
+	"Inherent IVI Settings:Specific Driver Identification:Description"
+	string readonly 1 00100792
+	//const: IVIACPWR_ATTR_SPECIFIC_DRIVER_DESCRIPTION
+"A string that contains a brief description of the specific driver.
+    
+
+"
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_DESCRIPTION.html" "../../help/lvivi.chm"
+
+attribute: "Specific Driver Prefix"
+	"Inherent IVI Settings:Specific Driver Identification:Specific Driver Prefix"
+	string readonly 1 001006BE
+	//const: IVIACPWR_ATTR_SPECIFIC_DRIVER_PREFIX
+"A string that contains the prefix for the instrument driver.  The name of each user-callable VI in this driver starts with this prefix.
+    
+
+"
+"CLASSPREFIX_ATTR_SPECIFIC_PREFIX.html" "../../help/lvivi.chm"
+
+attribute: "Specific Driver Locator"
+	"Inherent IVI Settings:Specific Driver Identification:Specific Driver Locator"
+	string readonly 1 001006BF
+	//const: IVIACPWR_ATTR_SPECIFIC_DRIVER_LOCATOR
+"Indicates the location at which the class driver attempts to find the specific driver module file.
+
+
+"
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_LOCATOR.html" "../../help/lvivi.chm"
+
+attribute: "Specific Driver Vendor"
+	"Inherent IVI Settings:Specific Driver Identification:Specific Driver Vendor"
+	string readonly 1 00100791
+	//const: IVIACPWR_ATTR_SPECIFIC_DRIVER_VENDOR
+"A string that contains the name of the vendor that supplies this driver.
+    
+
+"
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_VENDOR.html" "../../help/lvivi.chm"
+
+attribute: "Revision"
+	"Inherent IVI Settings:Specific Driver Identification:Revision"
+	string readonly 1 001007B7
+	//const: IVIACPWR_ATTR_SPECIFIC_DRIVER_REVISION
+"A string that contains additional version information about the specific driver.
+    
+
+"
+"CLASSPREFIX_ATTR_DRIVER_REVISION.html" "../../help/lvivi.chm"
+
+attribute: "Class Specification Major Version"
+	"Inherent IVI Settings:Specific Driver Identification:Class Specification Major Version"
+	iL readonly 1 00100793
+	//const: IVIACPWR_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION
+"The major version number of the class specification with which the specific driver is compliant.
+    
+
+"
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION.html" "../../help/lvivi.chm"
+
+attribute: "Class Specification Minor Version"
+	"Inherent IVI Settings:Specific Driver Identification:Class Specification Minor Version"
+	iL readonly 1 00100794
+	//const: IVIACPWR_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION
+"The minor version number of the class specification with which the specific driver is compliant.
+    
+
+"
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION.html" "../../help/lvivi.chm"
+
+attribute: "Supported Instrument Models"
+	"Inherent IVI Settings:Specific Driver Capabilities:Supported Instrument Models"
+	string readonly 1 001006D7
+	//const: IVIACPWR_ATTR_SUPPORTED_INSTRUMENT_MODELS
+"Contains a model code of the instrument. For specific drivers that support more than one device, this property contains a comma-separated list of supported instrument models.
+    
+
+"
+"CLASSPREFIX_ATTR_SUPPORTED_INSTRUMENT_MODELS.html" "../../help/lvivi.chm"
+
+attribute: "Group Capabilities"
+	"Inherent IVI Settings:Specific Driver Capabilities:Group Capabilities"
+	string readonly 1 00100721
+	//const: IVIACPWR_ATTR_GROUP_CAPABILITIES
+"Indicates the IviACPwr capability groups that the specific instrument driver supports. This property is a comma-delimited list of the following group names:
+
+'IviACPwrBase' - Supports fundamental AC power capabilities.
+
+'IviACPwrMeasurement' - Supports the ability to query the instrument for the measurement characteristics of the output signal provides the capability to take measurements on the output signal.
+
+'IviACPwrPhase' - Supports the ability to set and measure output phase relationship.
+
+'IviACPwrExternalSync' - Supports the ability of synchronizing an AC power source's output frequency with an external signal.
+
+'IviACPwrCurrentProtection' - Supports the ability to program current protection.
+
+'IviACPwrVoltageProtection' - Supports the ability to program voltage protection.
+
+'IviACPwrArbWaveform' - Supports the ability to produce waveforms other than sine waves on the output signal.
+
+'IviACPwrImpedance' - Supports the ability to set and query the instrument for the output impedance characteristics of the output signal.
+
+'IviACPwrDCGeneration' - Supports the ability to configure the output of the AC power source with DC content.
+
+'IviACPwrVoltageRamp' - Supports the ability to configure a linear voltage ramp with starting and ending voltage in volts (RMS) and ramp duration in seconds.
+
+'IviACPwrCurrentRamp' - Supports the ability to configure a current ramp starting and ending current and ramp duration in seconds.
+
+'IviACPwrFrequencyRamp' - Supports the ability to configure a linear crequency ramp with starting and ending frequencies and ramp duration.
+
+    
+
+"
+"CLASSPREFIX_ATTR_GROUP_CAPABILITIES.html" "../../help/lvivi.chm"
+
+attribute: "Function Capabilities"
+	"Inherent IVI Settings:Specific Driver Capabilities:Function Capabilities"
+	string readonly 1 00100722
+	//const: IVIACPWR_ATTR_FUNCTION_CAPABILITIES
+"Indicates the IviACPwr VIs that the specific instrument driver supports.  This property is a comma-delimited list of the following VIs:
+
+    'IviACPwr_Initialize'
+    'IviACPwr_Close'
+    'IviACPwr_Reset'
+    'IviACPwr_Self-Test'
+    'IviACPwr_Error-Query'
+    'IviACPwr_Error Message'
+    'IviACPwr_Revision Query'
+    'IviACPwr_Initialize With Options'
+    'IviACPwr_ConfigureCurrentLimit'
+    'IviACPwr_ConfigureOutputEnabled'
+    'IviACPwr_ConfigureVoltageLevel'
+    'IviACPwr_ConfigureVoltageRange'
+    'IviACPwr_ConfigureFrequency'
+    'IviACPwr_ConfigureFrequencyRange'
+    'IviACPwr_ConfigureWaveform'
+    'IviACPwr_QueryVoltageRangeCapabilities'
+    'IviACPwr_QueryFrequencyRangeCapabilities'
+    'IviACPwr_GetOutputPhaseName'
+    'IviACPwr_InitiateMeasurement'
+    'IviACPwr_FetchMeasurement'
+    'IviACPwr_FetchMeasurementArray'
+    'IviACPwr_ConfigurePhaseAngle'
+    'IviACPwr_ConfigureExternalSync'
+    'IviACPwr_QueryExternalSyncLocked'
+    'IviACPwr_QueryCurrentProtectionTripped'
+    'IviACPwr_ResetCurrentProtection'
+    'IviACPwr_ConfigureCurrentProtection'
+    'IviACPwr_QueryVoltageProtectionTripped'
+    'IviACPwr_ResetVoltageProtection'
+    'IviACPwr_ConfigureVoltageProtection'
+    'IviACPwr_ClearArbWaveform'
+    'IviACPwr_WriteArbWaveform'
+    'IviACPwr_QueryArbWaveformCatalog'
+    'IviACPwr_ConfigureOutputImpedance'
+    'IviACPwr_QueryOutputImpedanceCapabilities'
+    'IviACPwr_ConfigureDC'
+    'IviACPwr_ConfigureDCRange'
+    'IviACPwr_QueryDCCapabilities'
+    'IviACPwr_RampVoltage'
+    'IviACPwr_QueryVoltageRampBusy'
+    'IviACPwr_AbortVoltageRamp'
+    'IviACPwr_RampCurrent'
+    'IviACPwr_QueryCurrentRampBusy'
+    'IviACPwr_AbortCurrentRamp'
+    'IviACPwr_RampFrequency'
+    'IviACPwr_QueryFrequencyRampBusy'
+    'IviACPwr_AbortFrequencyRamp'
+
+"
+"CLASSPREFIX_ATTR_FUNCTION_CAPABILITIES.html" "../../help/lvivi.chm"
+
+attribute: "Manufacturer"
+	"Inherent IVI Settings:Instrument Identification:Manufacturer"
+	string readonly 1 0010078F
+	//const: IVIACPWR_ATTR_INSTRUMENT_MANUFACTURER
+"A string that contains the name of the instrument manufacturer you are currently using.
+    
+
+"
+"CLASSPREFIX_ATTR_INSTRUMENT_MANUFACTURER.html" "../../help/lvivi.chm"
+
+attribute: "Model"
+	"Inherent IVI Settings:Instrument Identification:Model"
+	string readonly 1 00100790
+	//const: IVIACPWR_ATTR_INSTRUMENT_MODEL
+"A string that contains the model number or name of the instrument that you are currently using.
+    
+
+"
+"CLASSPREFIX_ATTR_INSTRUMENT_MODEL.html" "../../help/lvivi.chm"
+
+attribute: "Firmware Revision"
+	"Inherent IVI Settings:Instrument Identification:Firmware Revision"
+	string readonly 1 0010078E
+	//const: IVIACPWR_ATTR_INSTRUMENT_FIRMWARE_REVISION
+"A string that contains the firmware revision information for the instrument you are currently using.
+    
+
+"
+"CLASSPREFIX_ATTR_INSTRUMENT_FIRMWARE_REVISION.html" "../../help/lvivi.chm"
+
+attribute: "Driver Setup"
+	"Inherent IVI Settings:Advanced Session Information:Driver Setup"
+	string readonly 1 00100597
+	//const: IVIACPWR_ATTR_DRIVER_SETUP
+"Some cases exist where you must specify instrument driver options at initialization time.  An example of this is specifying a particular instrument model from among a family of instruments that the driver supports.  This is useful when using simulation.  You can specify driver-specific options through the DriverSetup keyword in the option string input of the IviACPwr Initialize With Options VI.  If you open an instrument using a logical name, you can also specify the options through the IVI Configuration utility.
+    The default value is an empty string.
+    
+
+"
+"CLASSPREFIX_ATTR_DRIVER_SETUP.html" "../../help/lvivi.chm"
+
+attribute: "Logical Name"
+	"Inherent IVI Settings:Advanced Session Information:Logical Name"
+	string readonly 1 001006C1
+	//const: IVIACPWR_ATTR_LOGICAL_NAME
+"A string containing the logical name you specified when opening the current IVI session.
+     You may pass a logical name to the IviACPwr Initialize or IviACPwr Initialize With Options VIs.  The IVI Configuration utility must contain an entry for the logical name.  The logical name entry refers to a virtual instrument section in the IVI Configuration file.  The virtual instrument section specifies a physical device and initial user options.
+    
+
+"
+"CLASSPREFIX_ATTR_LOGICAL_NAME.html" "../../help/lvivi.chm"
+
+attribute: "IO Resource Descriptor"
+	"Inherent IVI Settings:Advanced Session Information:IO Resource Descriptor"
+	string readonly 1 001006C0
+	//const: IVIACPWR_ATTR_IO_RESOURCE_DESCRIPTOR
+"Indicates the resource descriptor the driver uses to identify the physical device.
+    If you initialize the driver with a logical name, this property contains the resource descriptor that corresponds to the entry in the IVI Configuration utility.  
+    If you initialize the instrument driver with the resource descriptor, this property contains that value.
+    
+
+"
+"CLASSPREFIX_ATTR_RESOURCE_DESCRIPTOR.html" "../../help/lvivi.chm"
+
+attribute: "Current Limit [OUT]"
+	"Output:Current Limit [OUT]"
+	fD readwrite 1 001312DD
+	//const: IVIACPWR_ATTR_CURRENT_LIMIT
+"Specifies the output current limit. The units are amps. The RMS behavior of this property is vendor specific.
+
+"
+"IVIACPWR_ATTR_CURRENT_LIMIT.html" "../../help/lvivi.chm"
+
+attribute: "Waveform [OUT]"
+	"Output:Waveform [OUT]"
+	string readwrite 1 001312E1
+	//const: IVIACPWR_ATTR_WAVEFORM
+"Specifies the waveform name (refer to the IviACPwrArbWaveform capability group) used to generate output voltage.
+
+"
+"IVIACPWR_ATTR_WAVEFORM.html" "../../help/lvivi.chm"
+
+attribute: "Output Enabled [OUT]"
+	"Output:Output Enabled [OUT]"
+	bool readwrite 1 001312DE
+	//const: IVIACPWR_ATTR_OUTPUT_ENABLED
+"Enables or disables the output of the AC power source. When Output Enabled is set to False, the output of the AC power source is effectively disconnected from the load.
+
+TRUE 1
+True
+
+FALSE 0
+False
+
+"
+"IVIACPWR_ATTR_OUTPUT_ENABLED.html" "../../help/lvivi.chm"
+
+attribute: "Voltage Range [OUT]"
+	"Output:Voltage Range [OUT]"
+	fD readwrite 1 001312E2
+	//const: IVIACPWR_ATTR_VOLTAGE_RANGE
+"Sets or returns the voltage range of the AC power source based on a specified maximum voltage. The driver coerces this value to the upper limit of the lowest range that supports that voltage.
+
+Use the IviACPwr Query Voltage Range Capabilities VI to determine the minimum and maximum RMS voltages supported by a particular range and waveform.
+
+"
+"IVIACPWR_ATTR_VOLTAGE_RANGE.html" "../../help/lvivi.chm"
+
+attribute: "Num Voltage Ranges [OUT]"
+	"Output:Num Voltage Ranges [OUT]"
+	iL readonly 1 001312DF
+	//const: IVIACPWR_ATTR_NUM_VOLTAGE_RANGES
+"Returns the number of output voltage ranges supported by the AC power source. Use the IviACPwr Voltage Range property to read or change the output voltage range.
+
+"
+"IVIACPWR_ATTR_NUM_VOLTAGE_RANGES.html" "../../help/lvivi.chm"
+
+attribute: "Voltage Level [OUT]"
+	"Output:Voltage Level [OUT]"
+	fD readwrite 1 001312E0
+	//const: IVIACPWR_ATTR_VOLTAGE_LEVEL
+"Specifies the Line to Neutral output voltage level of the AC power source when operating in constant voltage mode. The units are volts RMS. The power source will reduce the actual output voltage to limit the output current to the value specified by the IviACPwr Current Limit property.
+
+Use the IviACPwr Query Voltage Range Capabilities VI to determine the minimum and maximum allowable values for the IviACPwr Voltage Level property for a particular voltage range and waveform.
+
+"
+"IVIACPWR_ATTR_VOLTAGE_LEVEL.html" "../../help/lvivi.chm"
+
+attribute: "Phase Angle [PHA]"
+	"Phase Angle:Phase Angle [PHA]"
+	fD readwrite 1 001312E3
+	//const: IVIACPWR_ATTR_PHASE_ANGLE
+"Specifies the phase angle of the output phase in relation to Phase A. The units are degrees.
+
+"
+"IVIACPWR_ATTR_PHASE_ANGLE.html" "../../help/lvivi.chm"
+
+attribute: "Frequency [OUTS]"
+	"Outputs:Frequency [OUTS]"
+	fD readwrite 1 001312D1
+	//const: IVIACPWR_ATTR_FREQUENCY
+"Specifies the frequency the AC output voltage waveform. The units are hertz.
+
+"
+"IVIACPWR_ATTR_FREQUENCY.html" "../../help/lvivi.chm"
+
+attribute: "Frequency Range [OUTS]"
+	"Outputs:Frequency Range [OUTS]"
+	fD readwrite 1 001312D4
+	//const: IVIACPWR_ATTR_FREQUENCY_RANGE
+"Sets or returns the frequency range of the AC power source based on a specified maximum frequency. The driver coerces this value to the upper limit of the lowest range that supports that frequency.
+
+Use the IviACPwr Query Frequency Range Capabilities VI to determine the minimum and maximum frequency supported by a particular range.
+
+"
+"IVIACPWR_ATTR_FREQUENCY_RANGE.html" "../../help/lvivi.chm"
+
+attribute: "Num Frequency Ranges [OUTS]"
+	"Outputs:Num Frequency Ranges [OUTS]"
+	iL readonly 1 001312D3
+	//const: IVIACPWR_ATTR_NUM_FREQUENCY_RANGES
+"Returns the number of output frequency ranges supported by the AC power source. Use the IviACPwr Frequency Range property to read or change the output frequency range.
+
+"
+"IVIACPWR_ATTR_NUM_FREQUENCY_RANGES.html" "../../help/lvivi.chm"
+
+attribute: "Num Phases [OUTS]"
+	"Outputs:Num Phases [OUTS]"
+	iL readonly 1 001312D2
+	//const: IVIACPWR_ATTR_NUM_PHASES
+"Returns the number of physical output phases of the AC power source the user can connect to their load for this phase group (driver session). The number of phases returned by this property does not include the special 'AllPhases' output phase name used to set all output phases.
+
+AC power sources that support single or multi-phase operation can only be configured when opening a new driver session using the 'NumPhases' token in the DriverSetup string or in the IVI Configuration Store. Otherwise, the present number of phases configured in the AC power source is used.
+
+"
+"IVIACPWR_ATTR_NUM_PHASES.html" "../../help/lvivi.chm"
+
+attribute: "Output Phase Count [OUTS]"
+	"Outputs:Output Phase Count [OUTS]"
+	iL readonly 1 001312F4
+	//const: IVIACPWR_ATTR_OUTPUT_PHASE_COUNT
+"Returns the number of output phase names supported by the power source.
+
+"
+"IVIACPWR_ATTR_OUTPUT_PHASE_COUNT.html" "../../help/lvivi.chm"
+
+attribute: "Voltage Ramp Busy [VR]"
+	"Voltage Ramp:Voltage Ramp Busy [VR]"
+	bool readonly 1 001312F5
+	//const: IVIACPWR_ATTR_VOLTAGE_RAMP_BUSY
+"Indicates if a voltage ramp is in progress (busy).
+
+TRUE 1
+True
+
+FALSE 0
+False
+
+"
+"IVIACPWR_ATTR_VOLTAGE_RAMP_BUSY.html" "../../help/lvivi.chm"
+
+attribute: "Current Ramp Busy [CR]"
+	"Current Ramp:Current Ramp Busy [CR]"
+	bool readonly 1 001312F6
+	//const: IVIACPWR_ATTR_CURRENT_RAMP_BUSY
+"Indicates if a current ramp is in progress (busy).
+
+TRUE 1
+True
+
+FALSE 0
+False
+
+"
+"IVIACPWR_ATTR_CURRENT_RAMP_BUSY.html" "../../help/lvivi.chm"
+
+attribute: "Frequency Ramp Busy [FR]"
+	"Frequency Ramp:Frequency Ramp Busy [FR]"
+	bool readonly 1 001312F7
+	//const: IVIACPWR_ATTR_FREQUENCY_RAMP_BUSY
+"Indicates if a frequency ramp is in progress (busy).
+
+TRUE 1
+True
+
+FALSE 0
+False
+
+"
+"IVIACPWR_ATTR_FREQUENCY_RAMP_BUSY.html" "../../help/lvivi.chm"
+
+attribute: "Num Waveforms Max [ARB]"
+	"Arb Waveform:Num Waveforms Max [ARB]"
+	iL readonly 1 001312D5
+	//const: IVIACPWR_ATTR_NUM_WAVEFORMS_MAX
+"Returns the maximum number of arbitrary waveforms the power source can store including user-defined waveforms and fixed vendor-defined waveforms.
+
+"
+"IVIACPWR_ATTR_NUM_WAVEFORMS_MAX.html" "../../help/lvivi.chm"
+
+attribute: "Num Optimal Data Points [ARB]"
+	"Arb Waveform:Num Optimal Data Points [ARB]"
+	iL readonly 1 001312D6
+	//const: IVIACPWR_ATTR_NUM_OPTIMAL_DATA_POINTS
+"Returns the optimal (native) number of data points the AC power source uses for arbitrary waveforms.
+
+The driver will automatically resample the waveform data array passed to the IviACPwr Write Arbitrary Waveform [ARB] VI to fit the optimal number of data points supported by the AC power source. To minimize the effects of resampling and to maximize the waveform resolution, allocate user-defined waveform data using the optimal number of data points of the AC power source.
+
+"
+"IVIACPWR_ATTR_NUM_OPTIMAL_DATA_POINTS.html" "../../help/lvivi.chm"
+
+attribute: "Fixed Waveform Count [ARB]"
+	"Arb Waveform:Fixed Waveform Count [ARB]"
+	iL readonly 1 001312D7
+	//const: IVIACPWR_ATTR_FIXED_WAVEFORM_COUNT
+"Returns the number of fixed vendor-defined arbitrary waveforms stored in the power source.
+
+"
+"IVIACPWR_ATTR_FIXED_WAVEFORM_COUNT.html" "../../help/lvivi.chm"
+
+attribute: "User Waveform Count [ARB]"
+	"Arb Waveform:User Waveform Count [ARB]"
+	iL readonly 1 001312D8
+	//const: IVIACPWR_ATTR_USER_WAVEFORM_COUNT
+"Returns the number of user-defined arbitrary waveforms stored in the power source.
+
+"
+"IVIACPWR_ATTR_USER_WAVEFORM_COUNT.html" "../../help/lvivi.chm"
+
+attribute: "Available Waveform Count [ARB]"
+	"Arb Waveform:Available Waveform Count [ARB]"
+	iL readonly 1 001312D9
+	//const: IVIACPWR_ATTR_AVAILABLE_WAVEFORM_COUNT
+	"Returns the number of additional arbitrary waveforms the user can store in the power source. Use the IviACPwr Clear Arbitrary Waveform [ARB] VI to increase the number user defined arbitrary waveforms the power source can store.
+
+The number of available waveforms can also be calculated from the following properties:
+
+Available Waveforms = Num Waveforms Max - Fixed Waveform Count - User Waveform Count
+
+"
+"IVIACPWR_ATTR_AVAILABLE_WAVEFORM_COUNT.html" "../../help/lvivi.chm"
+
+attribute: "Output Impedance Inductive [IMP]"
+	"Impedance:Output Impedance Inductive [IMP]"
+	fD readwrite 1 001312E4
+	//const: IVIACPWR_ATTR_OUTPUT_IMPEDANCE_INDUCTIVE
+"Specifies the inductive output impedance value in henries. This value affects the power source output when the IviACPwr Output Impedance Enabled [IMP] property is set to True.
+
+"
+"IVIACPWR_ATTR_OUTPUT_IMPEDANCE_INDUCTIVE.html" "../../help/lvivi.chm"
+
+attribute: "Output Impedance Resistive [IMP]"
+	"Impedance:Output Impedance Resistive [IMP]"
+	fD readwrite 1 001312E6
+	//const: IVIACPWR_ATTR_OUTPUT_IMPEDANCE_RESISTIVE
+"Specifies the resistive output impedance value in ohms. This value affects the power source output when the IviACPwr Output Impedance Enabled [IMP] property is set to True.
+
+"
+"IVIACPWR_ATTR_OUTPUT_IMPEDANCE_RESISTIVE.html" "../../help/lvivi.chm"
+
+attribute: "Output Impedance Enabled [IMP]"
+	"Impedance:Output Impedance Enabled [IMP]"
+	bool readwrite 1 001312E5
+	//const: IVIACPWR_ATTR_OUTPUT_IMPEDANCE_ENABLED
+"When set to True, this property allows the IviACPwr Output Impedance Resistive [IMP] and IviACPwr Output Impedance Inductive [IMP] property values to affect the power source output.
+
+TRUE 1
+True
+
+FALSE 0
+False
+
+"
+"IVIACPWR_ATTR_OUTPUT_IMPEDANCE_ENABLED.html" "../../help/lvivi.chm"
+
+attribute: "Over Voltage Protection Enabled [VP]"
+	"Voltage Protection:Over Voltage Protection Enabled [VP]"
+	bool readwrite 1 001312EB
+	//const: IVIACPWR_ATTR_OVER_VOLTAGE_PROTECTION_ENABLED
+"When set to True, voltage protection mode is triggered when the output voltage is above the Over voltage limit.
+
+TRUE 1
+True
+
+FALSE 0
+False
+
+"
+"IVIACPWR_ATTR_OVER_VOLTAGE_PROTECTION_ENABLED.html" "../../help/lvivi.chm"
+
+attribute: "Over Voltage Protection Limit [VP]"
+	"Voltage Protection:Over Voltage Protection Limit [VP]"
+	fD readwrite 1 001312EC
+	//const: IVIACPWR_ATTR_OVER_VOLTAGE_PROTECTION_LIMIT
+"Specifies the output over voltage protection limit value. The units are volts RMS.
+
+"
+"IVIACPWR_ATTR_OVER_VOLTAGE_PROTECTION_LIMIT.html" "../../help/lvivi.chm"
+
+attribute: "Under Voltage Protection Enabled [VP]"
+	"Voltage Protection:Under Voltage Protection Enabled [VP]"
+	bool readwrite 1 001312ED
+	//const: IVIACPWR_ATTR_UNDER_VOLTAGE_PROTECTION_ENABLED
+"When set to True, voltage protection mode is triggered when the output voltage is below the Under voltage limit.
+
+TRUE 1
+True
+
+FALSE 0
+False
+
+"
+"IVIACPWR_ATTR_UNDER_VOLTAGE_PROTECTION_ENABLED.html" "../../help/lvivi.chm"
+
+attribute: "Under Voltage Protection Limit [VP]"
+	"Voltage Protection:Under Voltage Protection Limit [VP]"
+	fD readwrite 1 001312EE
+	//const: IVIACPWR_ATTR_UNDER_VOLTAGE_PROTECTION_LIMIT
+"Specifies the output under voltage protection limit value. The units are Volts RMS.
+
+"
+"IVIACPWR_ATTR_UNDER_VOLTAGE_PROTECTION_LIMIT.html" "../../help/lvivi.chm"
+
+attribute: "Voltage Protection Tripped [VP]"
+	"Voltage Protection:Voltage Protection Tripped [VP]"
+	bool readonly 1 001312EF
+	//const: IVIACPWR_ATTR_VOLTAGE_PROTECTION_TRIPPED
+	"Indicates if voltage protection has tripped. Use the IviACPwr Reset Voltage Protection [VP] VI to reset the voltage protection state.
+
+TRUE 1
+True
+
+FALSE 0
+False
+
+"
+"IVIACPWR_ATTR_VOLTAGE_PROTECTION_TRIPPED.html" "../../help/lvivi.chm"
+
+attribute: "Current Protection Delay [CP]"
+	"Current Protection:Current Protection Delay [CP]"
+	fD readwrite 1 001312E7
+	//const: IVIACPWR_ATTR_CURRENT_PROTECTION_DELAY
+"Specifies the time the output current must exceed the current protection threshold until current protection mode is triggered. The units are seconds.
+
+"
+"IVIACPWR_ATTR_CURRENT_PROTECTION_DELAY.html" "../../help/lvivi.chm"
+
+attribute: "Current Protection Enabled [CP]"
+	"Current Protection:Current Protection Enabled [CP]"
+	bool readwrite 1 001312E8
+	//const: IVIACPWR_ATTR_CURRENT_PROTECTION_ENABLED
+"When set to True, current protection mode is triggered when the output current exceeds the current protection threshold for the time specified by the current protection delay.
+
+TRUE 1
+True
+
+FALSE 0
+False
+
+"
+"IVIACPWR_ATTR_CURRENT_PROTECTION_ENABLED.html" "../../help/lvivi.chm"
+
+attribute: "Current Protection Threshold [CP]"
+	"Current Protection:Current Protection Threshold [CP]"
+	fD readwrite 1 001312E9
+	//const: IVIACPWR_ATTR_CURRENT_PROTECTION_THRESHOLD
+"Specifies the output current threshold that triggers current protection. The units are amps RMS.
+
+"
+"IVIACPWR_ATTR_CURRENT_PROTECTION_THRESHOLD.html" "../../help/lvivi.chm"
+
+attribute: "Current Protection Tripped [CP]"
+	"Current Protection:Current Protection Tripped [CP]"
+	bool readonly 1 001312EA
+	//const: IVIACPWR_ATTR_CURRENT_PROTECTION_TRIPPED
+	"Indicates if current protection has tripped. Current protection trips when the output current exceeds the value of the IviACPwr Current Protection Threshold [CP] property for the time specified by the IviACPwr Current Protection Delay property. Use the IviACPwr Reset Current Protection [CP] VI to reset the current protection state.
+
+TRUE 1
+True
+
+FALSE 0
+False
+
+"
+"IVIACPWR_ATTR_CURRENT_PROTECTION_TRIPPED.html" "../../help/lvivi.chm"
+
+attribute: "Mode [DG]"
+	"DC Generation:Mode [DG]"
+	iL enum { IVIACPWR_VAL_MODE_AC_ONLY=0, IVIACPWR_VAL_MODE_DC_ONLY=1, IVIACPWR_VAL_MODE_AC_DC=2 } readwrite 1 1312F0
+	//const: IVIACPWR_ATTR_DC_MODE
+"Configures AC Only, DC Only or a combination of AC Plus DC output voltage generation. When using AC Only or AC Plus DC generation mode, the IviACPwr Voltage Level property sets the RMS value of the AC voltage.
+
+IVIACPWR_VAL_MODE_AC_ONLY 0
+AC Only voltage generation.
+
+IVIACPWR_VAL_MODE_DC_ONLY 1
+DC Only voltage generation.
+
+IVIACPWR_VAL_MODE_AC_DC 2
+DC Only voltage generation.
+
+"
+"IVIACPWR_ATTR_DC_MODE.html" "../../help/lvivi.chm"
+
+attribute: "DC Voltage Level [DG]"
+	"DC Generation:DC Voltage Level [DG]"
+	fD readwrite 1 001312F1
+	//const: IVIACPWR_ATTR_DC_VOLTAGE_LEVEL
+	"The DC voltage when the Mode [DG] property is set to DC Only or the DC Offset when the Mode [DG] property is set to AC Plus DC.
+
+"
+"IVIACPWR_ATTR_DC_VOLTAGE_LEVEL.html" "../../help/lvivi.chm"
+
+attribute: "Range Min [DG]"
+	"DC Generation:Range Min [DG]"
+	fD readonly 1 001312F8
+	//const: IVIACPWR_ATTR_DC_RANGE_MIN
+	"Returns the minimum DC voltage supported by the power source for the present DC voltage range. Use the IviACPwr Configure DC Range [DG] VI to set the DC voltage range.
+
+"
+"IVIACPWR_ATTR_DC_RANGE_MIN.html" "../../help/lvivi.chm"
+
+attribute: "Range Max [DG]"
+	"DC Generation:Range Max [DG]"
+	fD readonly 1 001312F9
+	//const: IVIACPWR_ATTR_DC_RANGE_MAX
+	"Returns the maximum DC voltage supported by the power source for the present DC voltage range. Use the IviACPwr Configure DC Range [DG] VI to set the DC voltage range.
+
+"
+"IVIACPWR_ATTR_DC_RANGE_MAX.html" "../../help/lvivi.chm"
+
+attribute: "Num Ranges [DG]"
+	"DC Generation:Num Ranges [DG]"
+	iL readonly 1 001312F3
+	//const: IVIACPWR_ATTR_DC_NUM_RANGES
+"Returns the number of DC ranges supported by the power source.
+
+"
+"IVIACPWR_ATTR_DC_NUM_RANGES.html" "../../help/lvivi.chm"
+
+attribute: "Enabled [ES]"
+	"External Sync:Enabled [ES]"
+	bool readwrite 1 001312DA
+	//const: IVIACPWR_ATTR_EXTERNAL_SYNC_ENABLED
+"Specifies whether to enable or disable synchronization to an external signal.
+
+TRUE 1
+True
+
+FALSE 0
+False
+
+"
+"IVIACPWR_ATTR_EXTERNAL_SYNC_ENABLED.html" "../../help/lvivi.chm"
+
+attribute: "Phase Offset [ES]"
+	"External Sync:Phase Offset [ES]"
+	fD readwrite 1 001312DB
+	//const: IVIACPWR_ATTR_EXTERNAL_SYNC_PHASE_OFFSET
+"Specifies the phase angle offset (degrees) of the power sources output relative to the external synchronization signal.
+
+A positive external sync phase offset value means the output of a single phase power source, or phase A of a multiphase power source, leads the external sync signal and a negative phase offset value means it lags the external sync signal. For multiphase power sources, the phase relationship between output phases is always exclusively determined by the IviACPwrPhase extension group.
+
+"
+"IVIACPWR_ATTR_EXTERNAL_SYNC_PHASE_OFFSET.html" "../../help/lvivi.chm"
+
+attribute: "Locked [ES]"
+	"External Sync:Locked [ES]"
+	bool readonly 1 001312DC
+	//const: IVIACPWR_ATTR_EXTERNAL_SYNC_LOCKED
+"Indicates if the AC power source is locked to the external synchronization signal.
+
+TRUE 1
+True
+
+FALSE 0
+False
+
+"
+"IVIACPWR_ATTR_EXTERNAL_SYNC_LOCKED.html" "../../help/lvivi.chm"

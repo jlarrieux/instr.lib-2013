@@ -1,0 +1,1311 @@
+explicitActiveChannels: TRUE
+library: niScope_*.*
+      
+class: "niScope"
+flags: 0
+sorted: no
+implements: iviscope, iviResourceMgr
+
+attribute: "Active Channel"
+   "Active Channel"
+   string	writeonly	19	-2
+   "Specifies the channel name used to access all subsequent properties in this instance of the property node. If the property you want to use is Channel Based, you need to first select this property and then pass the name of the specific channel. If the property you specify is not channel based, pass an empty string, or omit setting this property. The default value is ' '."	"pniScope_ActiveChannel.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Channel Enabled"
+   "Vertical:Channel Enabled"
+   bool	readwrite	17	001312D5
+   "Specifies whether the digitizer acquires a waveform for the channel."	"pniScope_ChannelEnabled.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Vertical Range"
+   "Vertical:Vertical Range"
+   fD	readwrite	17	001312D1
+   "Specifies the absolute value of the input range for a channel. The units are volts. For example, to acquire a sine wave that spans between -5 and +5 V, set this property to 10.0 V."	"pniScope_VerticalRange.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Vertical Offset"
+   "Vertical:Vertical Offset"
+   fD	readwrite	17	001312D2
+   "Specifies the location of the center of the range. The value is with respect to ground and is in volts. For example, to acquire a sine wave that spans between 0.0 and 10.0 V, set this property to 5.0 V. This property is not supported by all digitizers."	"pniScope_VerticalOffset.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Max Input Frequency"
+   "Vertical:Maximum Input Frequency"
+   fD	readwrite	17	001312D6
+   "Specifies the bandwidth of the channel in hertz. Express this value as the frequency at which the input circuitry attenuates the input signal by 3 dB."	"pniScope_MaxInputFrequency.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Vertical Coupling"
+   "Vertical:Vertical Coupling"
+   iL enum { "AC"=0, "DC"=1, "Ground"=2 }	readwrite	17	001312D3
+   "Specifies how the digitizer couples the input signal for the channel. When you change input coupling, the input stage takes a finite amount of time to settle."	"pniScope_VerticalCoupling.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Input Impedance"
+   "Vertical:Input Impedance"
+   fD	readwrite	17	00131337
+   "Specifies the input impedance for the channel in ohms."	"pniScope_InputImpedance.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Probe Attenuation"
+   "Vertical:Probe Attenuation"
+   fD	readwrite	17	001312D4
+   "Specifies the probe attenuation for the input channel. For example, for a 10:1 probe, you would set this property to 10.0."	"pniScope_ProbeAttenuation.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Terminal Configuration"
+   "Vertical:Channel Terminal Configuration"
+   iL enum { "Single Ended"=0, "Unbalanced Differential"=1, "Differential"=2 }	readwrite	17	00118C9B
+   "Specifies how the digitizer configures the channel terminal."	"pniScope_TerminalConfiguration.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Digital Gain"
+   "Vertical:Advanced:Digital Gain"
+   fD	readwrite	17	00118D63
+   "Applies gain to the specified channel in hardware before any onboard signal processing occurs. The default value is 1.
+
+The output of the digital gain/offset block is as follows:
+
+(ADC value x digital gain) + digital offset 
+
+Units: Unitless
+
+Valid Values: -1.5 to 1.5"	"pniScope_DigitalGain.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Digital Offset"
+   "Vertical:Advanced:Digital Offset"
+   fD	readwrite	17	00118D64
+   "Applies offset to the specified channel in hardware before any onboard signal processing occurs. The default value is 0.
+
+Units: Volts
+
+ <b>Valid Values</b> 
+
++/-(Vertical Range x 0.4)"	"pniScope_DigitalOffset.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Bandpass Filter Enabled"
+   "Vertical:Advanced:Bandpass Filter Enabled"
+   bool	readwrite	17	00118D6E
+   "Enables the bandpass filter on the specified channel. The default value is FALSE."	"pniScope_BandpassFilterEnabled.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Dither Enabled"
+   "Vertical:Advanced:Dither Enabled"
+   bool	readwrite	17	00118D6F
+   "Enables or disables the analog dither on the device. Using dither can improve the spectral performance of the device by reducing the effects of quantization. However, adding dither increases the power level to the ADC, so you may need to either decrease the signal level or increase the vertical range. The default value is FALSE."	"pniScope_DitherEnabled.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Flex FIR Antialias Filter Type"
+   "Vertical:Advanced:Flex FIR Antialias Filter Type"
+   iL enum { "48 Tap Standard"=0, "48 Tap Hanning"=1, "16 Tap Hanning"=2, "8 Tap Hanning"=3 }	readwrite	17	00118D3F
+   "The NI 5922 flexible-resolution digitizer uses an onboard FIR lowpass antialias filter. Use this property to select from several types of filters to achieve desired filtering characteristics. For most applications, the default value of this property is recommended. The other available filters are useful for optimizing settling time measurements of step responses. The default value is 48 Tap Standard."	"pniScope_FlexFIRAntialiasFilterType.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Min Sample Rate"
+   "Horizontal:Min Sample Rate"
+   fD	readwrite	49	00118C39
+   "Specifies the sampling rate (in Samples/second) for the acquisition."	"pniScope_MinSampleRate.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Min Number of Points"
+   "Horizontal:Min Number of Points"
+   iL	readwrite	17	001312D9
+   "Specifies the minimum number of points you require in the waveform record for each channel."	"pniScope_MinNumberofPoints.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Number of Records"
+   "Horizontal:Number of Records"
+   iL	readwrite	17	00118C31
+   "Specify the number of records to acquire."	"pniScope_NumberofRecords.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Reference Position"
+   "Horizontal:Reference Position"
+   fD	readwrite	17	001312DB
+   "Specifies the position of the Reference Event in the waveform record as a percentage of the record."	"pniScope_ReferencePosition.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Actual Sample Rate"
+   "Horizontal:Actual Sample Rate"
+   fD	readonly	17	001312DA
+   "Returns the actual sample rate used for the acquisition.
+
+Units: hertz (Samples / Second)"	"pniScope_ActualSampleRate.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Actual Record Length"
+   "Horizontal:Actual Record Length"
+   iL	readonly	17	001312D8
+   "Returns the actual number of points the digitizer acquires for each channel. The value is equal to or greater than the value you specify in the niScope Configure Horizontal Timing VI.
+
+Valid Values: 1 to the maximum memory size"	"pniScope_ActualRecordLength.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Enable TIS"
+   "Horizontal:Enable Time Interleaved Sampling"
+   bool	readwrite	17	00118CB0
+   "Extends the maximum sample rate on the specified Active Channel for some devices that support Time Interleaved Sampling (TIS). TIS enables the device to use multiple ADCs to sample the same waveform at a higher effective real-time rate. NI 5152/5153/5154 devices fully support Read/Write ability for this property. For other devices that use TIS mode, such as the NI 5185/5186, this property is Read Only."	"pniScope_EnableTIS.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Enforce Realtime"
+   "Horizontal:Enforce Realtime"
+   bool	readwrite	17	00118C34
+   "Indicates whether the digitizer enforces real-time measurements or allows equivalent-time measurements."	"pniScope_EnforceRealtime.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Enable Records > Memory"
+   "Horizontal:Enable Records > Memory"
+   bool	readwrite	17	00118C74
+   "Allows you to acquire more records than fit in onboard memory.
+
+TRUE--Enables NI-SCOPE to fetch more records than fit in memory
+
+FALSE--Disables NI-SCOPE from fetching more records than fit in memory"	"pniScope_EnableRecordsMemory.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "RIS Num Avg"
+   "Horizontal:RIS Num Avg"
+   iL	readwrite	17	00118C76
+   "Specifies the number of averages in each RIS bin."	"pniScope_RISNumAvg.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "RIS Method"
+   "Horizontal:RIS Method"
+   iL enum { "Exact Num Avg."=1, "Min Num Avg."=2, "Incomplete"=3, "Limit Bin Width"=5 }	readwrite	17	00118C77
+   "Specifies the algorithm for random-interleaved sampling, which is used if the sample rate exceeds the Max Realtime Sample Rate."	"pniScope_RISMethod.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Maximum Real Time Sample Rate"
+   "Horizontal:Maximum Real Time Sample Rate"
+   fD	readonly	17	00118C79
+   "Returns the maximum real-time sample rate in hertz."	"pniScope_MaximumRealTimeSampleRate.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Maximum RIS Rate"
+   "Horizontal:Maximum RIS Rate"
+   fD	readonly	17	00118C7A
+   "Returns the maximum RIS sampling rate in hertz."	"pniScope_MaximumRISRate.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Memory Size"
+   "Horizontal:Memory Size"
+   iL	readonly	17	00118C75
+   "Returns the total combined amount of onboard memory for all channels in bytes."	"pniScope_MemorySize.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Enable TDC"
+   "Horizontal:Advanced:Enable TDC"
+   bool	readwrite	17	00118C90
+   "Specifies that the digitizer should record the trigger position precisely using time-digital conversion (TDC)."	"pniScope_EnableTDC.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Time Per Record"
+   "Horizontal:Advanced:Time Per Record"
+   fD	readwrite	17	001312D7
+   "Specifies the length of time that corresponds to the record length. The units are seconds."	"pniScope_TimePerRecord.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Acq Start Time"
+   "Horizontal:Advanced:Acquisition Start Time"
+   fD	readwrite	17	0013133D
+   "Specifies the length of time (in seconds) from the trigger event to the first point in the waveform record."	"pniScope_AcqStartTime.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Adjust Samples"
+   "Horizontal:Advanced:5102 Adjust Pretrigger Samples"
+   bool	readwrite	17	00118C85
+   "When set to TRUE and the digitizer is set to master, the number of pretrigger samples and total number of samples are adjusted to enable synchronizing a master and slave NI 5102."	"pniScope_AdjustSamples.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Trigger Type"
+   "Triggering:Trigger Type"
+   iL enum { "Edge"=1, "Video"=5, "Immediate"=6, "Hysteresis"=1001, "Digital"=1002, "Window"=1003, "Software"=1004 }	readwrite	17	001312DC
+   "Specifies the type of trigger to use."	"pniScope_TriggerType.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Trigger Source"
+   "Triggering:Trigger Source"
+   string	readwrite	17	001312DD
+   "Specifies the source the digitizer monitors for the trigger event. The value must be selected from one of the following valid values."	"pniScope_TriggerSource.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "RefTrig.OutputTerm"
+   "Triggering:Trigger Output Terminal"
+   string	readwrite	17	00118C92
+   "Specifies the destination to export the Reference (Stop) Trigger Refer to the device specifications document for a list of valid destinations."	"pniScope_RefTrig.OutputTerm.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Trigger Level"
+   "Triggering:Trigger Level"
+   fD	readwrite	17	001312E1
+   "Specifies the voltage threshold for the trigger. The units are volts."	"pniScope_TriggerLevel.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Trigger Modifier"
+   "Triggering:Trigger Modifier"
+   iL enum { "None"=1, "Auto Trigger"=2 }	readwrite	17	00131336
+   "Configures the device to automatically complete an acquisition if a trigger has not been received."	"pniScope_TriggerModifier.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Auto Triggered"
+   "Triggering:Auto Triggered"
+   bool	readonly	17	00118D46
+   "Specifies whether the acquisition was triggered automatically. Auto triggering occurs if the Trigger Modifier property is set to Auto Trigger and no trigger has been received for a certain amount of time."	"pniScope_AutoTriggered.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Trigger Hysteresis"
+   "Triggering:Trigger Hysteresis"
+   fD	readwrite	17	00118C36
+   "Specifies the size of the hysteresis window on either side of the trigger level."	"pniScope_TriggerHysteresis.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Trigger Delay"
+   "Triggering:Trigger Delay"
+   fD	readwrite	17	001312DF
+   "Specifies the trigger delay time in seconds."	"pniScope_TriggerDelay.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Trigger Holdoff"
+   "Triggering:Trigger Holdoff"
+   fD	readwrite	17	001312E0
+   "Specifies the length of time the digitizer waits after detecting a trigger before enabling the trigger subsystem to detect another trigger. The units are seconds."	"pniScope_TriggerHoldoff.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Trigger Slope"
+   "Triggering:Trigger Slope"
+   iL enum { "Positive"=1, "Negative"=0 }	readwrite	17	001312E2
+   "Specifies whether a rising or a falling edge triggers the digitizer."	"pniScope_TriggerSlope.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Trigger Coupling"
+   "Triggering:Trigger Coupling"
+   iL enum { "AC"=0, "DC"=1, "HF Reject"=3, "LF Reject"=4, "AC Plus HF Reject"=1001 }	readwrite	17	001312DE
+   "Specifies how the digitizer couples the trigger source."	"pniScope_TriggerCoupling.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Trigger Impedance"
+   "Triggering:Trigger Impedance"
+   fD	readwrite	17	00118C7B
+   "Sets the impedance for the trigger channel (NI 5112 only)."	"pniScope_TriggerImpedance.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Start To Ref Trigger Holdoff"
+   "Triggering:Start To Ref Trigger Holdoff"
+   fD	readwrite	17	00118C97
+   "Pass the length of time (in seconds) you want the digitizer to wait after it starts acquiring data until the digitizer enables the trigger system to detect a reference (stop) trigger."	"pniScope_StartToRefTriggerHoldoff.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Trigger Window Mode"
+   "Triggering:Trigger Window:Window Mode"
+   iL enum { "Entering"=0, "Leaving"=1 }	readwrite	17	00118C3C
+   "Specifies whether to trigger when the signal enters or leaves the window specified by the Trigger Window Low Level property or the Trigger Window High Level property."	"pniScope_TriggerWindowMode.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Trigger Window Low Level"
+   "Triggering:Trigger Window:Low Level"
+   fD	readwrite	17	00118C3D
+   "Pass the lower voltage threshold you want the digitizer to use for window triggering."	"pniScope_TriggerWindowLowLevel.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Trigger Window High Level"
+   "Triggering:Trigger Window:High Level"
+   fD	readwrite	17	00118C3E
+   "Pass the upper voltage threshold you want the digitizer to use for window triggering."	"pniScope_TriggerWindowHighLevel.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Video Signal Format"
+   "Triggering:Trigger Video:Signal Format"
+   iL enum { "M-NTSC"=1, "B/G-PAL"=2, "SECAM"=3, "M-PAL"=4, "480i/59.94 fps"=5, "480i/60 fps"=6, "480p/59.94 Fps"=7, "480p/60 Fps"=8, "576i/60 fps"=9, "576p/50 Fps"=10, "720p/30 Fps"=11, "720p/50 Fps"=12, "720p/59.94 Fps"=13, "720p/60 Fps"=14, "1080i/50 fps"=15, "1080i/59.94 fps"=16, "1080i/60 fps"=17, "1080p/24 Fps"=18 }	readwrite	17	00131399
+   "Specifies the video signal format to use."	"pniScope_VideoSignalFormat.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Video Line Number"
+   "Triggering:Trigger Video:Line Number"
+   iL	readwrite	17	0013139E
+   "Specifies the line number to trigger on."	"pniScope_VideoLineNumber.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Video Polarity"
+   "Triggering:Trigger Video:Polarity"
+   iL enum { "Positive"=1, "Negative"=2 }	readwrite	17	0013139C
+   "Specifies whether the video signal is positive or negative."	"pniScope_VideoPolarity.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Video Trigger Event"
+   "Triggering:Trigger Video:Event"
+   iL enum { "Field 1"=1, "Field 2"=2, "Any Field"=3, "Any Line"=4, "Line Number"=5 }	readwrite	17	0013139D
+   "Specifies the event to trigger on."	"pniScope_VideoTriggerEvent.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Enable DC Restore"
+   "Triggering:Trigger Video:Enable DC Restore"
+   bool	readwrite	17	00118C8D
+   "Restores the video-triggered data retrieved by the digitizer to the video signal's zero reference point. The default value is FALSE."	"pniScope_EnableDCRestore.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Ref Trigger Detector Location"
+   "Triggering:Onboard Signal Processing:Ref Trigger Detection Location"
+   iL enum { "Analog Detection Circuit"=0, "DDC Output"=1 }	readwrite	17	00118D6A
+   "Specifies which reference trigger detection circuitry to use on the device."	"pniScope_RefTriggerDetectorLocation.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Ref Trigger Min Quiet Time"
+   "Triggering:Onboard Signal Processing:Ref Trigger Min Quiet Time"
+   fD	readwrite	17	00118D6B
+   "Specifies the amount of time (in seconds) the trigger circuit must not detect a signal above the trigger level (or below the trigger level if the trigger slope is negative) before the trigger is armed. This property is useful for triggering at the beginning of signal bursts instead of in the middle of signal bursts. The default value is 0."	"pniScope_RefTriggerMinQuietTime.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Fetch Record Number"
+   "Fetch:Fetch Record Number"
+   iL	readwrite	17	00118C7F
+   "Sets the record to fetch. The record is from a channel you specify. The default value is 0.
+
+Valid Values: Values greater than or equal to 0"	"pniScope_FetchRecordNumber.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Fetch Number of Records"
+   "Fetch:Fetch Number of Records"
+   iL	readwrite	17	00118C80
+   "Fetches multiple records. If you want to fetch all records from the record you specify in the Fetch Record Number property to the last record configured, use -1. The default value is -1."	"pniScope_FetchNumberofRecords.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Fetch Relative To"
+   "Fetch:Fetch Relative To"
+   iL enum { "Start"=482, "Trigger"=483, "Pretrigger"=477, "Now"=481, "Read Pointer"=388 }	readwrite	17	00118C7D
+   "Specifies which point in the acquired waveform is the first to be fetched. This property specifies what the 'Fetch Offset' is relative to."	"pniScope_FetchRelativeTo.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Fetch Offset"
+   "Fetch:Fetch Offset"
+   iL	readwrite	17	00118C7E
+   "Sets the offset in samples; the samples returned also depend on the Fetch Relative To property. The default value is 0.
+
+Valid Values: All integers"	"pniScope_FetchOffset.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Data Transfer Block Size"
+   "Fetch:Data Transfer Block Size"
+   iL	readwrite	17	00118D6C
+   "Specifies the maximum number of samples to transfer at one time from the device to host memory. Increasing this number should result in better fetching performance because the driver does not need to restart the transfers as often. However, increasing this number may also increase the amount of page-locked memory required from the system."	"pniScope_DataTransferBlockSize.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Fetch Meas Number of Samples"
+   "Fetch:Fetch Meas Num Samples"
+   iL	readwrite	17	00118C81
+   "Determines the number of samples to fetch from a digitizer when performing a measurement. -1 means fetch all samples from the Fetch Offset property to the end of the current record. The default value is -1."	"pniScope_FetchMeasNumberofSamples.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Points Done"
+   "Fetch:Points Done"
+   fD	readonly	17	00118C82
+   "Actual number of samples acquired since the last fetch, relative to the configured value for Fetch Relative To, including Fetch Offset, and for the current configured Fetch Record Number."	"pniScope_PointsDone.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Fetch Backlog"
+   "Fetch:Fetch Backlog"
+   fD	readonly	17	00118C84
+   "Specifies the number of points acquired that have not been fetched yet."	"pniScope_FetchBacklog.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Records Done"
+   "Fetch:Records Done"
+   iL	readonly	17	00118C83
+   "Returns the number of records your digitizer has acquired."	"pniScope_RecordsDone.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Maximum Bandwidth"
+   "Fetch:Advanced:Maximum Bandwidth"
+   fD	readwrite	17	00118D71
+   "Specifies the maximum bandwidth that the device is allowed to consume. The NI device limits itself to transfer fewer bytes per second on the PCIe bus than the value you specify for this property."	"pniScope_MaximumBandwidth.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Preferred Packet Size"
+   "Fetch:Advanced:Preferred Packet Size"
+   iL	readwrite	17	00118D72
+   "Specifies the preferred size of the data field in the PCI Express packet. In general, the larger the packet size, the more efficiently the device uses the bus. However, some systems, because of their implementation, perform better with smaller packet sizes. The value of this property must be a power of two (64, 128, ... , 512)."	"pniScope_PreferredPacketSize.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Reference Clock Source"
+   "Clocking:Reference (Input) Clock Source"
+   string	readwrite	17	00118C32
+   "Specifies the input source for the PLL reference clock for all boards except the NI 5102. For the NI 5102 this property is the source of the board clock.
+
+ Valid Values: 
+
+VAL_NO_SOURCE
+
+ VAL_PFI_0
+
+ VAL_PFI_1 
+
+ VAL_PFI_2 
+
+ VAL_PXI_CLOCK 
+
+ VAL_CLK_IN 
+
+ VAL_EXTERNAL 
+
+ VAL_RTSI_CLOCK"	"pniScope_ReferenceClockSource.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Reference Clock Rate"
+   "Clocking:Reference Clock Rate"
+   fD	readwrite	17	00118C8A
+   "If Reference Clock Source is an external source, specifies the frequency (in hertz) of the input clock (reference clock) to which the internal sample clock timebase is synchronized."	"pniScope_ReferenceClockRate.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Output Clock Source"
+   "Clocking:Output Clock Source"
+   string	readwrite	17	00118C33
+   "Specifies the output source for the 10 MHz clock to which another digitizer's sample clock can be phased-locked."	"pniScope_OutputClockSource.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Sample Clock Timebase Source"
+   "Clocking:Sample Clock Timebase Source"
+   string	readwrite	17	00118C87
+   "Specifies the source of the sample clock timebase, which is the timebase used to control waveform sampling."	"pniScope_SampleClockTimebaseSource.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Sample Clock Timebase Rate"
+   "Clocking:Sample Clock Timebase Rate"
+   fD	readwrite	17	00118C88
+   "Specifies the frequency in hertz of the external clock used as the timebase source if the Sample Clock Timebase Source is an external source."	"pniScope_SampleClockTimebaseRate.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Sample Clock Timebase Divisor"
+   "Clocking:Sample Clock Timebase Divisor"
+   iL	readwrite	17	00118C89
+   "If Sample Clock Timebase Source is an external source, specifies the ratio between the sample clock timebase rate and the actual sample rate, which can be slower."	"pniScope_SampleClockTimebaseDivisor.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Sample Clock Timebase Multiplier"
+   "Clocking:Sample Clock Timebase Multiplier"
+   iL	readwrite	17	00118D9F
+   "If Sample Clock Timebase Source is an external source, this property specifies the ratio between the Sample Clock Timebase Rate and the actual sample rate, which can be higher. This property can be used in conjunction with the Sample Clock Timebase Divisor Property."	"pniScope_SampleClockTimebaseMultiplier.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Exported Sample Clock Output Terminal"
+   "Clocking:Exported Sample Clock Output Terminal"
+   string	readwrite	17	00118C8B
+   "Exports the sample clock to a specified terminal. This property is not supported by all digitizers."	"pniScope_ExportedSampleClockOutputTerminal.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Clock Sync Pulse Source"
+   "Clocking:Clock Sync Pulse Source"
+   string	readwrite	17	00118C37
+   "For the NI 5102, specifies the line on which the sample clock is sent or received. For the NI 5112/5620/5621, specifies the line on which the one-time sync pulse is sent or received."	"pniScope_ClockSyncPulseSource.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "PLL Locked"
+   "Clocking:PLL Lock Status"
+   bool	readonly	17	00119147
+   "If TRUE, the PLL has remained locked to the external reference clock since it was last checked. If FALSE, the PLL has become unlocked from the external reference clock since it was last checked."	"pniScope_PLLLocked.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Oscillator Phase DAC Value"
+   "Clocking:Advanced:Oscillator Phase DAC Value"
+   iL	readwrite	17	00118C99
+   "Gets or sets the binary phase DAC value that controls the delay added to the Phase Locked Loop (PLL) of the sample clock. The default value is ' '."	"pniScope_OscillatorPhaseDACValue.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Start Trigger Source"
+   "Synchronization:Start Trigger (Acq. Arm): Source"
+   string	readwrite	17	00118C65
+   "Specifies the source the digitizer monitors for an acquisition arm trigger. When an acquisition arm trigger is received, the digitizer begins acquiring pretrigger samples."	"pniScope_StartTriggerSource.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "StartTrig.OutputTerm"
+   "Synchronization:Start Trigger (Acq. Arm): Output Terminal"
+   string	readwrite	17	00118C91
+   "Specifies the destination to export the Start trigger. When the start trigger is received, the digitizer begins acquiring data. Refer to the device specifications document for a list of valid destinations."	"pniScope_StartTrig.OutputTerm.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "RdyForStartEvent.OutputTerm"
+   "Synchronization:Ready for Start:Output Terminal"
+   string	readwrite	17	00118C9E
+   "Specifies the destination to export the Start trigger. When the start trigger is received, the digitizer begins acquiring data. Refer to the device specifications document for a list of valid destinations."	"pniScope_RdyForStartEvent.OutputTerm.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Advance Trigger Source"
+   "Synchronization:Advance Trigger:Source"
+   string	readwrite	17	00118C8E
+   "Specifies the source the digitizer monitors for an advance trigger. When the advance trigger is received, the digitizer begins acquiring pretrigger samples for the next record."	"pniScope_AdvanceTriggerSource.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "AdvTrig.OutputTerm"
+   "Synchronization:Advance Trigger:Output Terminal"
+   string	readwrite	17	00118C9D
+   "Specifies the destination for the advance trigger. When the advance trigger is received, the digitizer begins acquiring pretrigger samples."	"pniScope_AdvTrig.OutputTerm.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "RdyForAdvEvent.OutputTerm"
+   "Synchronization:Ready for Advance:Output Terminal"
+   string	readwrite	17	00118CA0
+   "Specifies the destination for the advance trigger. When the advance trigger is received, the digitizer begins acquiring pretrigger samples."	"pniScope_RdyForAdvEvent.OutputTerm.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Arm Reference Trigger Source"
+   "Synchronization:Arm Reference Trigger: Source"
+   string	readwrite	17	00118C8F
+   "Specifies the source the digitizer monitors for an arm reference trigger. When the arm reference trigger is received, the digitizer begins searching for the reference (stop) trigger from the user-configured trigger source."	"pniScope_ArmReferenceTriggerSource.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "RdyForRefEvent.OutputTerm"
+   "Synchronization:Ready for Reference:Output Terminal"
+   string	readwrite	17	00118C9F
+   "Specifies the destination for the Ready for Reference Event. When this event is asserted, the digitizer is ready to receive a reference trigger. Refer to the device-specific documentation in the NI High-Speed Digitizers Help for a list of valid destinations for your device."	"pniScope_RdyForRefEvent.OutputTerm.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "EndOfRecEvent.OutputTerm"
+   "Synchronization:End of Record:Output Terminal"
+   string	readwrite	17	00118C93
+   "Specifies the destination for the End of Record event. When this event is asserted, the digitizer has completed sampling a record. Refer to the device specifications document for a list of valid destinations."	"pniScope_EndOfRecEvent.OutputTerm.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "EndOfAcqEvent.OutputTerm"
+   "Synchronization:End of Acquisition:Output Terminal"
+   string	readwrite	17	00118C95
+   "Specifies the destination for the End of Acquisition event. When this event is asserted, the digitizer has completed sampling all records. Refer to the device specifications document for a list of valid destinations."	"pniScope_EndOfAcqEvent.OutputTerm.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "5VoltPower.OutputTerm"
+   "Synchronization:5 Volt Power:Output Terminal"
+   string	readwrite	17	00118CB1
+   "Specifies the destination for the 5 Volt power signal. Refer to the device specifications document for a list of valid destinations."	"pniScope_5VoltPower.OutputTerm.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Trigger to Star Delay"
+   "Synchronization:Trigger Calibration Delay:Trigger to Star Delay"
+   fD	readonly	17	00118C5F
+   "A factory-programmed value that specifies the delay in seconds for the trigger to the PXI Star Trigger line."	"pniScope_TriggertoStarDelay.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Trigger to RTSI Delay"
+   "Synchronization:Trigger Calibration Delay:Trigger to RTSI Delay"
+   fD	readonly	17	00118C60
+   "A factory-programmed value that specifies the delay in seconds for the trigger to the RTSI bus."	"pniScope_TriggertoRTSIDelay.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Trigger to PFI Delay"
+   "Synchronization:Trigger Calibration Delay:Trigger to PFI Delay"
+   fD	readonly	17	00118C61
+   "A factory-programmed value that specifies the delay in seconds for the trigger to the PFI lines. By itself, this property has no effect on the acquired data."	"pniScope_TriggertoPFIDelay.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Trigger from Star Delay"
+   "Synchronization:Trigger Calibration Delay:Trigger from Star Delay"
+   fD	readonly	17	00118C62
+   "A factory-programmed value that specifies the delay in seconds for PXI Star Trigger line to the trigger input. By itself, this property has no effect on the acquired data."	"pniScope_TriggerfromStarDelay.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Trigger from RTSI Delay"
+   "Synchronization:Trigger Calibration Delay:Trigger from RTSI Delay"
+   fD	readonly	17	00118C63
+   "A factory-programmed value that specifies the delay in seconds for the RTSI bus to the trigger input. By itself, this property has no effect on the acquired data."	"pniScope_TriggerfromRTSIDelay.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Trigger from PFI Delay"
+   "Synchronization:Trigger Calibration Delay:Trigger from PFI Delay"
+   fD	readonly	17	00118C64
+   "A factory-programmed value that specifies the delay in seconds for the PFI lines to the trigger input. By itself, this property has no effect on the acquired data."	"pniScope_TriggerfromPFIDelay.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Slave Trigger Delay"
+   "Synchronization:Trigger Calibration Delay:Slave Trigger Delay"
+   fD	readwrite	17	00118C5E
+   "Specifies the delay in seconds for the trigger from the master to the slave."	"pniScope_SlaveTriggerDelay.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Record Arm Source"
+   "Synchronization:Record Arm Source"
+   string	readwrite	17	00118C71
+   "Specifies the source for the record arm."	"pniScope_RecordArmSource.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Master Enable"
+   "Synchronization:Master Enable"
+   bool	readwrite	17	00118C38
+   "Specifies whether the device is a master or a slave."	"pniScope_MasterEnable.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Binary Sample Width"
+   "Acquisition:Binary Sample Width"
+   iL	readwrite	17	00118C35
+   "Indicates the bit width of the binary data in the acquired waveform, which can help you determine which Binary Fetch to use."	"pniScope_BinarySampleWidth.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Resolution"
+   "Acquisition:Resolution"
+   iL	readonly	17	00118C96
+   "Indicates the actual resolution in bits of valid data (as opposed to padding bits) in the acquired waveform. Compare to the Binary Sample Width property.
+
+Valid Values: 8 to 32"	"pniScope_Resolution.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Acquisition Type"
+   "Acquisition:Acquisition Type"
+   iL enum { "Normal"=0, "Flex Res"=1001, "DDC"=1002 }	readwrite	17	00131335
+   "Specifies how the digitizer acquires data and fills the waveform record."	"pniScope_AcquisitionType.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Sample Mode"
+   "Acquisition:Sample Mode"
+   iL	readonly	17	0013133A
+   "Returns the sample mode the digitizer is currently using."	"pniScope_SampleMode.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Delay before Initiate"
+   "Acquisition:Delay before Initiate"
+   fD	readwrite	17	00119148
+   "Specifies a delay in seconds that is used by niScope_Initiate Acquisition to allow additional delay between programming of the vertical range, trigger level, DDC, and the start of the acquisition. This property is supported only on the NI 5112 and the NI 5620/5621. The default value is 0.0."	"pniScope_DelaybeforeInitiate.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Enable RIS in Auto Setup"
+   "Acquisition:Advanced:Enable RIS in Auto Setup"
+   bool	readwrite	17	00118C9A
+   "Indicates whether the digitizer should use RIS sample rates when searching for a frequency in autosetup."	"pniScope_EnableRISinAutoSetup.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Other Channel"
+   "Waveform Measurement:Other Channel"
+   string	readwrite	17	00118C42
+   "Specifies the second channel for two-channel measurements, such as Add Channels. If processing steps are registered with this channel, the processing happens before the waveform is used in a two-channel measurement. The default value is 0."	"pniScope_OtherChannel.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Array Gain"
+   "Waveform Measurement:Array Gain"
+   fD	readwrite	17	00118C5B
+   "Every element of an array is multiplied by this scalar value during the array gain measurement. The default value is 1.0."	"pniScope_ArrayGain.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Array Offset"
+   "Waveform Measurement:Array Offset"
+   fD	readwrite	17	00118C5C
+   "Every element of an array is added to this scalar value during the array offset measurement. The default value is 0.0."	"pniScope_ArrayOffset.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Hysteresis Percent"
+   "Waveform Measurement:Hysteresis Percent"
+   fD	readwrite	17	00118C43
+   "Digital hysteresis that is used in several of the scalar waveform measurements. This property specifies the percentage of the full-scale vertical range for the hysteresis window size. The default value is 2%."	"pniScope_HysteresisPercent.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Last Acq. Histogram Size"
+   "Waveform Measurement:Last Acq. Histogram Size"
+   iL	readwrite	17	00118C44
+   "Specifies the size (that is, the number of bins) in the last acquisition histogram. This histogram is used to determine several scalar measurements, most importantly voltage low and voltage high. The default value is 256."	"pniScope_LastAcq.HistogramSize.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "V. Hist. Size"
+   "Waveform Measurement:Voltage Histogram:Size"
+   iL	readwrite	17	00118C45
+   "Specifies the number of bins in the running voltage histogram. The default value is 256."	"pniScope_V.Hist.Size.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "V. Hist. Low Volts"
+   "Waveform Measurement:Voltage Histogram:Low Volts"
+   fD	readwrite	17	00118C46
+   "Specifies the minimum voltage value in the running voltage histogram. The default value is -10.0."	"pniScope_V.Hist.LowVolts.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "V. Hist. High Volts"
+   "Waveform Measurement:Voltage Histogram:High Volts"
+   fD	readwrite	17	00118C47
+   "Specifies the maximum voltage value in the running voltage histogram. The default value is 10.0."	"pniScope_V.Hist.HighVolts.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Time Hist. Size"
+   "Waveform Measurement:Time Histogram:Size"
+   iL	readwrite	17	00118C48
+   "Determines the multiple acquisition time histogram size. The size is set during the first call to a time histogram measurement after you clear the measurement history with niScope Clear Waveform Measurement Stats."	"pniScope_TimeHist.Size.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Time Hist. Low Volts"
+   "Waveform Measurement:Time Histogram:Low Volts"
+   fD	readwrite	17	00118C49
+   "Specifies the low voltage limit for the multi-acquisition time histogram. Only points in the waveform between the low and high voltage limits are included in the histogram. The default value is -10.0."	"pniScope_TimeHist.LowVolts.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Time Hist. High Volts"
+   "Waveform Measurement:Time Histogram:High Volts"
+   fD	readwrite	17	00118C4A
+   "Specifies the high voltage limit for the Multi-Acquisition time histogram. Only points in the waveform between the low and high voltage limits are included in the histogram. The default value is 10.0 V."	"pniScope_TimeHist.HighVolts.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Time Hist. Low Time"
+   "Waveform Measurement:Time Histogram:Low Time"
+   fD	readwrite	17	00118C4B
+   "Specifies the minimum time limit (in seconds) of the multi-acquisition time histogram, where the time is in seconds relative to the trigger position. Only points in the waveform between the low and high time limits are included in the histogram. The default value is -5.0e-4 ."	"pniScope_TimeHist.LowTime.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Time Hist. High Time"
+   "Waveform Measurement:Time Histogram:High Time"
+   fD	readwrite	17	00118C4C
+   "Specifies the maximum time limit (in seconds) of the Multi-Acquisition time histogram, where the time is in seconds relative to the trigger position. Only points in the waveform between the low and high time limits are included in the histogram. The default value is 5.0e-4 ."	"pniScope_TimeHist.HighTime.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Poly. Interp. Order"
+   "Waveform Measurement:Interpolation:Polynomial Interpolation Order"
+   iL	readwrite	17	00118C4D
+   "Specifies the order of the polynomial used during the polynomial interpolation array measurement. For example, an order of 1 is linear interpolation whereas an order of 2 specifies parabolic interpolation. Any positive integer is valid. The default value is 1 (linear interpolation)."	"pniScope_Poly.Interp.Order.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Interp. Sampling Factor"
+   "Waveform Measurement:Interpolation:Sampling Factor"
+   fD	readwrite	17	00118C4E
+   "The new number of points for polynomial interpolation is the sampling factor times the input number of points. The default value is 0.0."	"pniScope_Interp.SamplingFactor.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Filter Type"
+   "Waveform Measurement:Filter:Type"
+   iL enum { "lowpass"=0, "highpass"=1, "bandpass"=2, "bandstop"=3 }	readwrite	17	00118C53
+   "Specifies the type of digital filter. The default value is lowpass."	"pniScope_FilterType.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Filter Taps"
+   "Waveform Measurement:Filter:FIR Taps"
+   iL	readwrite	17	00118C55
+   "Specifies the number of taps for the finite impulse response filter. This value must be odd if the filter type is highpass or bandstop. Otherwise, the magnitude response goes to zero as the frequency goes to half the sampling rate. The default value is 25.
+
+ Valid Values: >0"	"pniScope_FilterTaps.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "FIR Filter Window"
+   "Waveform Measurement:Filter:FIR Window"
+   iL enum { "None"=0, "Hanning"=409, "Hamming"=420, "Flat Top"=410, "Triangle"=423, "Blackman"=424 }	readwrite	17	00118C5A
+   "Specifies the FIR window type. The symmetric windows are applied to the FIR filter coefficients to limit passband ripple in FIR filters. The default value is None (0)."	"pniScope_FIRFilterWindow.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Filter Width"
+   "Waveform Measurement:Filter:Width"
+   fD	readwrite	17	00118C59
+   "Specifies the width (in Hz) of a bandpass or bandstop filter. The cutoff frequencies are the (center frequency property +/- 0.5 x filter width). The default value is 1.0e3."	"pniScope_FilterWidth.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Filter Order"
+   "Waveform Measurement:Filter:IIR Order"
+   iL	readwrite	17	00118C54
+   "Specifies the order of the infinite impulse response filter. The default value is 2.
+
+ Valid Values: >0"	"pniScope_FilterOrder.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Filter Cutoff Frequency"
+   "Waveform Measurement:Filter:Cutoff Frequency"
+   fD	readwrite	17	00118C4F
+   "Specifies the cutoff frequency in hertz for filters of type lowpass and highpass. The cutoff frequency definition varies depending on the filter. The default value is 1.0e6 Hz."	"pniScope_FilterCutoffFrequency.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Filter Center Frequency"
+   "Waveform Measurement:Filter:Center Frequency"
+   fD	readwrite	17	00118C50
+   "The center frequency in hertz for filters of type bandpass and bandstop. The width of the filter is specified by Filter Width, where the cutoff frequencies are the center width. The default value is 1.0e6 Hz."	"pniScope_FilterCenterFrequency.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Filter Ripple"
+   "Waveform Measurement:Filter:Ripple"
+   fD	readwrite	17	00118C51
+   "Specifies the amount of passband ripple (in dB) for Chebyshev filters. More ripple gives a sharper cutoff for a given filter order. The default value is 0.1.
+
+ Valid Values: >0.0"	"pniScope_FilterRipple.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Percent Waveform Transient"
+   "Waveform Measurement:Filter:Percent Waveform Transient"
+   fD	readwrite	17	00118C52
+   "The percentage (0 - 100%) of the infinite impulse response (IIR) filtered waveform to eliminate from the beginning of the waveform. This action allows eliminating the transient portion of the waveform that is undefined due to the assumptions necessary at the boundary condition. The default value is 20.0%.
+
+ Valid Range: 0.0 - 100.0%"	"pniScope_PercentWaveformTransient.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Chan. Based Low Ref"
+   "Waveform Measurement:Reference Levels:Channel Based Low Ref Level"
+   fD	readwrite	17	00118C56
+   "Specifies the low reference level used in many scalar measurements. The default value is 10.0%."	"pniScope_Chan.BasedLowRef.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Chan. Based Mid Ref"
+   "Waveform Measurement:Reference Levels:Channel Based Mid Ref Level"
+   fD	readwrite	17	00118C57
+   "Specifies the mid reference level used in many scalar measurements. The default value is 50%."	"pniScope_Chan.BasedMidRef.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Chan Based High Ref"
+   "Waveform Measurement:Reference Levels:Channel Based High Ref Level"
+   fD	readwrite	17	00118C58
+   "Specifies the high reference level used in many scalar measurements. The default value is 90%."	"pniScope_ChanBasedHighRef.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Ref. Level Units"
+   "Waveform Measurement:Reference Levels:Units"
+   iL enum { "Volts"=0, "Percentage"=1 }	readwrite	17	00118C40
+   "Specifies the units for the waveform measurement reference levels."	"pniScope_Ref.LevelUnits.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Percentage Method"
+   "Waveform Measurement:Reference Levels:Percentage Units Method"
+   iL enum { "LowHigh"=0, "MinMax"=1, "BaseTop"=2 }	readwrite	17	00118C5D
+   "Specifies the method used to map percentage reference units to voltages. The default value is BaseTop."	"pniScope_PercentageMethod.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "DDC Enabled"
+   "Onboard Signal Processing:DDC:DDC Enabled"
+   bool	readwrite	17	00118D5C
+   "Enables/disables the digital downconverter (DDC) block of the digitizer. When the DDC block is disabled, all DDC-related properties are disabled and have no effect on the acquired signal. The default value is FALSE."	"pniScope_DDCEnabled.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Data Processing Mode"
+   "Onboard Signal Processing:DDC:Data Processing Mode"
+   iL enum { "Real"=0, "Complex"=1 }	readwrite	17	00118D60
+   "The way in which data is processed by the DDC block. The default value is Complex."	"pniScope_DataProcessingMode.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Frequency Translation Enabled"
+   "Onboard Signal Processing:DDC:Frequency Translation Enabled"
+   bool	readwrite	17	00118D5E
+   "Enables/disables frequency translating the data around the user-selected center frequency down to baseband. The default value is TRUE."	"pniScope_FrequencyTranslationEnabled.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Center Frequency"
+   "Onboard Signal Processing:DDC:Center Frequency"
+   fD	readwrite	17	00118D5F
+   "The frequency at which the DDC block frequency translates the input data. The default value is 10 MHz."	"pniScope_CenterFrequency.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Fetch Interleaved IQ Data"
+   "Onboard Signal Processing:DDC:Fetch Interleaved IQ Data"
+   bool	readwrite	17	00118D67
+   "Specifies whether a fetch call retrieves a single waveform with I and Q interleaved, or two separate waveforms. If enabled, the number of elements returned by scalar fetch types (such as 16-bit integer) is twice the requested number of samples. If disabled during DDC acquisitions in Complex mode, two noninterleaved arrays of data are returned per channel, per record."	"pniScope_FetchInterleavedIQData.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Q Source"
+   "Onboard Signal Processing:DDC:Q Source"
+   string	readwrite	17	00118D66
+   "Specifies the channel that is the input to the Q data stream of the DDC. The default value is the channel to which the property is registered.
+
+Valid Values: All valid channels for the device."	"pniScope_QSource.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Frequency Translation Phase I"
+   "Onboard Signal Processing:DDC:Signal Adjustments:Frequency Translation:Frequency Translation Phase I"
+   fD	readwrite	17	00118D61
+   "The I oscillator phase in degrees at the first point acquired. The default value is 0.
+
+ <b>Valid Values</b> 
+
+-360 to 360"	"pniScope_FrequencyTranslationPhaseI.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Frequency Translation Phase Q"
+   "Onboard Signal Processing:DDC:Signal Adjustments:Frequency Translation:Frequency Translation Phase Q"
+   fD	readwrite	17	00118D62
+   "The Q oscillator phase in degrees at the first point acquired. Use this property only when the Data Processing Mode property is set to Complex. The default value is 90.
+
+ <b>Valid Values</b> 
+
+-360 to 360"	"pniScope_FrequencyTranslationPhaseQ.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Equalization Filter Enabled"
+   "Onboard Signal Processing:Equalization:Equalization Filter Enabled"
+   bool	readwrite	17	00118D69
+   "Enables the onboard signal processing equalization FIR block, which is connected directly to the input signal. The equalization filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer. Because this filter is a generic FIR filter, any coefficients are valid. Coefficient values should be between +1 and -1. The default value is FALSE."	"pniScope_EqualizationFilterEnabled.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Equalization Num Coefficients"
+   "Onboard Signal Processing:Equalization:Equalization Num Coefficients"
+   iL	readonly	17	00118D68
+   "Returns the number of coefficients that the equalization FIR filter can accept. This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer. Because this filter is a generic FIR filter, any coefficients are valid. Coefficient values should be between +1 and -1."	"pniScope_EqualizationNumCoefficients.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Fractional Resample Enabled"
+   "Onboard Signal Processing:Fractional Resample:Fractional Resample Enabled"
+   bool	readwrite	17	00118D70
+   "Enables the onboard signal processing block that resamples the input waveform to the user desired sample rate. The default value is FALSE."	"pniScope_FractionalResampleEnabled.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Overflow Error Reporting"
+   "Onboard Signal Processing:OSP Overflow Error Reporting"
+   iL enum { "Error"=0, "Warning"=1, "Disabled"=2 }	readwrite	17	00118D65
+   "Configures error reporting when the onboard signal processing block detects an overflow in any of its stages. Overflows lead to clipping of the waveform. The default value is Warning."	"pniScope_OverflowErrorReporting.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "P2P Enabled"
+   "Peer-to-Peer:P2P Enabled"
+   bool	readwrite	17	00118D82
+   "Specifies whether the digitizer writes data to the peer-to-peer endpoint. This property is endpoint-based."	"pniScope_P2PEnabled.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Channels to Stream"
+   "Peer-to-Peer:Channels to Stream"
+   string	readwrite	17	00118D83
+   "Specifies which channels will be written to a peer-to-peer endpoint. If multiple channels are specified, they will be interleaved by sample. This property is endpoint-based."	"pniScope_P2PChannelsToStream.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Endpoint Size"
+   "Peer-to-Peer:Endpoint Size"
+   iL	readonly	17	00118D86
+   "Returns the size, in samples, of the peer-to-peer endpoint. This property is endpoint-based."	"pniScope_P2PEndpointSize.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Samples Available In Endpoint"
+   "Peer-to-Peer:Samples Available In Endpoint"
+   iL	readonly	17	00118D78
+   "Returns the current number of samples available to stream from a peer-to-peer endpoint. This property is endpoint-based."	"pniScope_P2PSamplesAvailableInEndpoint.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Most Samples Available in Endpoint"
+   "Peer-to-Peer:Most Samples Available in Endpoint"
+   iL	readonly	17	00118D85
+   "Returns the most number of samples available to stream from a peer-to-peer endpoint since the last time this property was read. This property is endpoint-based."	"pniScope_P2PMostSamplesAvailableInEndpoint.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Samples Transferred"
+   "Peer-to-Peer:Samples Transferred"
+   iQ	readonly	17	00118D84
+   "Returns the number of samples transferred through the peer-to-peer endpoint since the endpoint was last reset. This property is endpoint-based."	"pniScope_P2PSamplesTransferred.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Endpoint Overflow"
+   "Peer-to-Peer:Endpoint Overflow"
+   bool	readonly	17	00118D88
+   "Returns TRUE if the peer-to-peer endpoint has overflowed. Reset the endpoint to clear the overflow condition. This property is endpoint-based."	"pniScope_P2PEndpointOverflow.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "FIFO Endpoint Count"
+   "Peer-to-Peer:FIFO Endpoint Count"
+   iL	readonly	17	00118D89
+   "Returns the number of FIFO-based peer-to-peer endpoints this device supports."	"pniScope_P2PFIFOEndpointCount.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Onboard Memory Enabled"
+   "Peer-to-Peer:Onboard Memory Enabled"
+   bool	readwrite	17	00118D92
+   "Specifies whether the digitizer writes data to onboard memory when a peer-to-peer endpoint is enabled."	"pniScope_OnboardMemoryEnabled.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Manual Configuration Enabled"
+   "Peer-to-Peer:Manual:Manual Configuration Enabled"
+   bool	readwrite	17	00118D87
+   "Enables and disables manual configuration of a peer-to-peer endpoint. These attributes cannot be used if an endpoint is being configured by NI-P2P, or a resource reservation error will result. This property is endpoint-based."	"pniScope_P2PManualConfigurationEnabled.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Data Transfer Permission Address"
+   "Peer-to-Peer:Manual:Configuration:Data Transfer Permission Address"
+   iQ	readonly	17	00118D79
+   "Returns the address of a hardware register used to grant permission for the peer-to-peer endpoint to write data to another peer. The type of this address is determined by the Data Transfer Permission Address Type property. Permission is granted in bytes and the register is additive. This property is endpoint-based."	"pniScope_P2PDataTransferPermissionAddress.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Data Transfer Permission Address Type"
+   "Peer-to-Peer:Manual:Configuration:Data Transfer Permission Address Type"
+   iL enum { "Virtual"=1, "Physical"=0 }	readwrite	17	00118D7A
+   "Specifies the type of address returned to the user from the Data Transfer Permission Address property. This property is endpoint-based."	"pniScope_P2PDataTransferPermissionAddressType.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Destination Window Address"
+   "Peer-to-Peer:Manual:Configuration:Destination Window Address"
+   iQ	readwrite	17	00118D7B
+   "Specifies the destination for data written by the peer-to-peer endpoint. The type of this address is specified by the Destination Window Address Type property. This property is endpoint-based."	"pniScope_P2PDestinationWindowAddress.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Destination Window Address Type"
+   "Peer-to-Peer:Manual:Configuration:Destination Window Address Type"
+   iL enum { "Virtual"=1, "Physical"=0 }	readwrite	17	00118D7C
+   "Specifies the type of the Destination Window Address property. This property is endpoint-based."	"pniScope_P2PDestinationWindowAddressType.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Destination Window Size"
+   "Peer-to-Peer:Manual:Configuration:Destination Window Size"
+   iQ	readwrite	17	00118D7D
+   "Specifies the size, in bytes, of the destination window determined by the Destination Window Address and Destination Window Address Type properties. This property is endpoint-based."	"pniScope_P2PDestinationWindowSize.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Push Message On"
+   "Peer-to-Peer:Manual:Notification:Push Message On"
+   iL enum { "Done"=1, "Never"=0 }	readwrite	17	00118D7E
+   "Specifies the event to push the Message Push Value property to the Message Push Address property. Specifying Done will push the message when the acquisition has completed. This property is endpoint-based."	"pniScope_P2PPushMessageOn.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Message Push Address"
+   "Peer-to-Peer:Manual:Notification:Message Push Address"
+   iQ	readwrite	17	00118D7F
+   "Specifies the address to push the Message Push Value to on the event specified by the Push Message On property. This property is endpoint-based."	"pniScope_P2PMessagePushAddress.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Message Push Address Type"
+   "Peer-to-Peer:Manual:Notification:Message Push Address Type"
+   iL enum { "Virtual"=1, "Physical"=0 }	readwrite	17	00118D80
+   "Specifies the type of the Message Push Address property. This property is endpoint-based."	"pniScope_P2PMessagePushAddressType.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Message Push Value"
+   "Peer-to-Peer:Manual:Notification:Message Push Value"
+   iQ	readwrite	17	00118D81
+   "Specifies the value to be pushed to the Message Push Address property on the event specified in the Push Message On property. This property is endpoint-based."	"pniScope_P2PMessagePushValue.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Device Temperature"
+   "Device:Temperature"
+   fD	readonly	17	00118C86
+   "Returns the temperature of the device in degrees Celsius from the onboard sensor."	"pniScope_DeviceTemperature.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Serial Number"
+   "Device:Serial Number"
+   string	readonly	17	00118C98
+   "Returns the serial number of the device."	"pniScope_SerialNumber.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Accessory Gain"
+   "Device:Accessory:Gain"
+   fD	readonly	17	00118D47
+   "Returns the calibration gain for the current device configuration."	"pniScope_AccessoryGain.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Accessory Offset"
+   "Device:Accessory:Offset"
+   fD	readonly	17	00118D48
+   "Returns the calibration offset for the current device configuration."	"pniScope_AccessoryOffset.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Range Check"
+   "Inherent IVI Attributes:User Options:Range Check"
+   bool	readwrite	17	00100592
+   "Specifies whether to validate property values and function parameters. If enabled, the instrument driver validates the parameter values that you pass to driver functions. Range checking parameters is very useful for debugging. After you validate your program, you can set this property to FALSE to disable range checking and maximize performance. The default value is TRUE. Use niScope Initialize with Options to override this value."	"pniScope_RangeCheck.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Query Instrument Status"
+   "Inherent IVI Attributes:User Options:Query Instrument Status"
+   bool	readwrite	17	00100593
+   "Specifies whether the instrument driver queries the instrument status after each operation. Querying the instrument status is very useful for debugging. After you validate your program, you can set this property to FALSE to disable status checking and maximize performance. The instrument driver can choose to ignore status checking for particular properties regardless of the setting of this property. The default value is TRUE. Use niScope Initialize with Options to override this value."	"pniScope_QueryInstrumentStatus.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Cache"
+   "Inherent IVI Attributes:User Options:Cache"
+   bool	readwrite	17	00100594
+   "Specifies whether to cache the value of properties. When caching is enabled, the instrument driver keeps track of the current instrument settings and avoids sending redundant commands to the instrument. Thus, you can significantly increase execution speed. The instrument driver can choose always to cache or never to cache particular properties, regardless of the setting of this property. The default value is TRUE. Use niScope Initialize with Options to override this value."	"pniScope_Cache.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Simulate"
+   "Inherent IVI Attributes:User Options:Simulate"
+   bool	readwrite	17	00100595
+   "Specifies whether to simulate instrument driver I/O operations. The default value is FALSE. Use niScope Initialize with Options to override this value."	"pniScope_Simulate.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Record Value Coercions"
+   "Inherent IVI Attributes:User Options:Record Value Coercions"
+   bool	readwrite	17	00100596
+   "Specifies whether the IVI engine keeps a list of the value coercions it makes for ViInt32 and DBL properties. The default value is FALSE. Use niScope Initialize with Options to override this value."	"pniScope_RecordValueCoercions.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Interchange Check"
+   "Inherent IVI Attributes:User Options:Interchange Check"
+   bool	readwrite	17	001005A5
+   "Specifies whether to perform interchangeability checking and log interchangeability warnings when you call VIs. Interchangeability warnings indicate that using your application with a different instrument might cause different behavior."	"pniScope_InterchangeCheck.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Description"
+   "Inherent IVI Attributes:Driver Identification:Description"
+   string	readonly	17	00100792
+   "A string that contains the description of the instrument."	"pniScope_Description.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Driver Prefix"
+   "Inherent IVI Attributes:Driver Identification:Driver Prefix"
+   string	readonly	17	001006BE
+   "A string that contains the prefix for the instrument driver. The name of each user-callable function in this driver starts with this prefix."	"pniScope_DriverPrefix.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Driver Vendor"
+   "Inherent IVI Attributes:Driver Identification:Driver Vendor"
+   string	readonly	17	00100791
+   "A string that contains the name of the vendor that supplies this driver, for example, 'National Instruments'."	"pniScope_DriverVendor.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Revision"
+   "Inherent IVI Attributes:Driver Identification:Revision"
+   string	readonly	17	001007B7
+   "The string that contains additional version information about this instrument driver."	"pniScope_Revision.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Class Specification Major Version"
+   "Inherent IVI Attributes:Driver Identification:Class Specification Major Version"
+   iL	readonly	17	00100793
+   "The major version number of the class specification with which this driver is compliant."	"pniScope_ClassSpecificationMajorVersion.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Class Specification Minor Version"
+   "Inherent IVI Attributes:Driver Identification:Class Specification Minor Version"
+   iL	readonly	17	00100794
+   "The minor version number of the class specification with which this driver is compliant."	"pniScope_ClassSpecificationMinorVersion.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Supported Instrument Models"
+   "Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models"
+   string	readonly	17	001006D7
+   "A string that contains a comma-separated list of the instrument model numbers supported by this driver."	"pniScope_SupportedInstrumentModels.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Class Group Capabilities"
+   "Inherent IVI Attributes:Driver Capabilities:Class Group Capabilities"
+   string	readonly	17	00100721
+   "A string that contains a comma-separated list of class-extension groups that this driver implements."	"pniScope_ClassGroupCapabilities.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Channel Count"
+   "Inherent IVI Attributes:Driver Capabilities:Channel Count"
+   iL	readonly	17	0010065B
+   "Indicates the number of channels that the specific instrument driver supports. For channel based properties, the IVI engine maintains a separate cache value for each channel."	"pniScope_ChannelCount.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Manufacturer"
+   "Inherent IVI Attributes:Instrument Identification:Manufacturer"
+   string	readonly	17	0010078F
+   "A string that contains the name of the instrument manufacturer, for example, 'National Instruments'."	"pniScope_Manufacturer.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Model"
+   "Inherent IVI Attributes:Instrument Identification:Model"
+   string	readonly	17	00100790
+   "A string that contains the model number of the current instrument."	"pniScope_Model.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Firmware Revision"
+   "Inherent IVI Attributes:Instrument Identification:Firmware Revision"
+   string	readonly	17	0010078E
+   "A string that contains the firmware revision information for the current instrument."	"pniScope_FirmwareRevision.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Logical Name"
+   "Inherent IVI Attributes:Advanced Session Information:Logical Name"
+   string	readonly	17	001006C1
+   "A string that contains the logical name you specified when opening the current IVI session."	"pniScope_LogicalName.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Resource Descriptor"
+   "Inherent IVI Attributes:Advanced Session Information:Resource Descriptor"
+   string	readonly	17	001006C0
+   "Indicates the resource descriptor the driver uses to identify the physical device. If you initialize the driver with a logical name, this property contains the resource descriptor that corresponds to the entry in the IVI Configuration utility. If you initialize the instrument driver with the resource descriptor, this property contains that value."	"pniScope_ResourceDescriptor.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Combined Decimation"
+   "Device Specific:IF Digitizer (5620 and 5621):Combined Decimation"
+   iL	readonly	17	00119145
+   "Returns the combined DDC decimation."	"pniScope_CombinedDecimation.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Carrier NCO Center Frequency"
+   "Device Specific:IF Digitizer (5620 and 5621):Carrier Mixer:NCO Center Frequency"
+   fD	readwrite	17	00119018
+   "Controls the frequency of the timing NCO. The default value is 0X8000000."	"pniScope_CarrierNCOCenterFrequency.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Carrier Phase Offset"
+   "Device Specific:IF Digitizer (5620 and 5621):Carrier Mixer:Phase Offset"
+   fD	readwrite	17	00119019
+   "Offsets the phase of the timing NCO in binary format. The value is transferred to the active register during the next initiate acquisition. The default value is 0.
+
+ Valid Range: 0 to 6.283185307179586476925286766558"	"pniScope_CarrierPhaseOffset.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "CIC Decimation"
+   "Device Specific:IF Digitizer (5620 and 5621):CIC Filter:Decimation"
+   iL	readwrite	17	00119022
+   "Controls the decimation in the CIC filter. The CIC filter reduces the sample rate of a wideband signal to a rate that other filters in the DDC can process. The default value is 4.
+
+ Valid Range: 4 to 32"	"pniScope_CICDecimation.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "CIC Shift Gain"
+   "Device Specific:IF Digitizer (5620 and 5621):CIC Filter:Shift Gain"
+   iL	readwrite	17	00119023
+   "Controls the shift gain at the input to the CIC filter. The CIC filter reduces the sample rate of a wideband signal to a rate that other filters in the DDC can process. The default value is 0.
+
+ Valid Range: 0 to 15"	"pniScope_CICShiftGain.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Discr. Enable"
+   "Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:Enable"
+   bool	readwrite	17	0011902C
+   "Enables or disables the discriminator. If set to TRUE, frequency discriminator is enabled. The default value is FALSE."	"pniScope_Discr.Enable.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Discriminator FIR Decimation"
+   "Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:FIR Decimation"
+   iL	readwrite	17	0011902D
+   "Sets the amount of decimation. The default value is 1.
+
+Valid Range: 1 to 8"	"pniScope_DiscriminatorFIRDecimation.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Discriminator FIR Symmetry"
+   "Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:FIR Symmetry"
+   iL enum { "Symmetric"=0, "Asymmetric"=1 }	readwrite	17	0011902E
+   "Sets the discriminator FIR symmetry to symmetric or asymmetric. The default value is Symmetric."	"pniScope_DiscriminatorFIRSymmetry.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Discriminator FIR Symmetry Type"
+   "Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:FIR Symmetry Type"
+   iL enum { "Even"=0, "Odd"=1 }	readwrite	17	0011902F
+   "Sets the discriminator FIR symmetry type to even or odd. The default value is even."	"pniScope_DiscriminatorFIRSymmetryType.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Discriminator FIR Taps"
+   "Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:FIR Taps"
+   iL	readwrite	17	00119030
+   "Sets the discriminator FIR number of taps. The default value is 1.
+
+ Valid Range: 1 to 63"	"pniScope_DiscriminatorFIRTaps.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Discriminator FIR Input Source"
+   "Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:FIR Input Source"
+   iL enum { "Phase"=0, "Magnitude"=1, "Resampler"=3 }	readwrite	17	00119032
+   "Sets the discriminator FIR input source to Phase, Magnitude, or Resampler. The default value is Phase."	"pniScope_DiscriminatorFIRInputSource.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Discriminator Delay"
+   "Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:Delay"
+   iL	readwrite	17	00119031
+   "Sets the number of delays in the discriminator. The default value is 1.
+
+ Valid Range: 1 to 8"	"pniScope_DiscriminatorDelay.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Discriminator Phase Multiplier"
+   "Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:Phase Multiplier"
+   iL	readwrite	17	00119033
+   "Programs the coordinate converter to multiply the phase output by 1, 2, 4, or 8. Multiplying the phase output removes phase modulation before the frequency is measured. The default value is 0."	"pniScope_DiscriminatorPhaseMultiplier.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Prog. FIR Filter Decimation"
+   "Device Specific:IF Digitizer (5620 and 5621):Programmable FIR Filter:Decimation"
+   iL	readwrite	17	00119036
+   "Specifies the programmable FIR filter decimation. The default value is 1."	"pniScope_Prog.FIRFilterDecimation.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Prog. FIR Filter Symmetry"
+   "Device Specific:IF Digitizer (5620 and 5621):Programmable FIR Filter:Symmetry"
+   iL enum { "Symmetric"=0, "Asymmetric"=1 }	readwrite	17	00119037
+   "Sets either a Symmetric or Asymmetric filter. The default value is Symmetric."	"pniScope_Prog.FIRFilterSymmetry.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Prog. FIR Filter Symmetry Type"
+   "Device Specific:IF Digitizer (5620 and 5621):Programmable FIR Filter:Symmetry Type"
+   iL enum { "Even"=0, "Odd"=1 }	readwrite	17	00119038
+   "Sets either even or odd symmetry. The default value is Even."	"pniScope_Prog.FIRFilterSymmetryType.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Prog. FIR Filter Taps"
+   "Device Specific:IF Digitizer (5620 and 5621):Programmable FIR Filter:Taps"
+   iL	readwrite	17	00119039
+   "Defines the number of taps (in other words, coefficients) for a FIR filter. The default value is 25."	"pniScope_Prog.FIRFilterTaps.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Prog. FIR Filter Real/Complex"
+   "Device Specific:IF Digitizer (5620 and 5621):Programmable FIR Filter:Real/Complex"
+   iL enum { "Real"=0, "Complex"=1 }	readwrite	17	0011903A
+   "Sets either a Complex filter or a dual Real filter. The default value is Real."	"pniScope_Prog.FIRFilterRealComplex.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "AGC Upper Gain Limit"
+   "Device Specific:IF Digitizer (5620 and 5621):AGC:Upper Gain Limit"
+   fD	readwrite	17	00119040
+   "Sets the maximum gain and minimum signal levels in the AGC. The default value is 6.020600."	"pniScope_AGCUpperGainLimit.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "AGC Lower Gain Limit"
+   "Device Specific:IF Digitizer (5620 and 5621):AGC:Lower Gain Limit"
+   fD	readwrite	17	00119041
+   "Sets the minimum gain and maximum signal levels in the AGC. The default value is 6.020600."	"pniScope_AGCLowerGainLimit.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "AGC Loop Gain 0 Exponent"
+   "Device Specific:IF Digitizer (5620 and 5621):AGC:Loop Gain 0 Exponent"
+   iL	readwrite	17	00119042
+   "Along with the AGC Loop Gain 0 Mantissa property, sets the loop gain for the AGC. The default value is 0."	"pniScope_AGCLoopGain0Exponent.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "AGC Loop Gain 0 Mantissa"
+   "Device Specific:IF Digitizer (5620 and 5621):AGC:Loop Gain 0 Mantissa"
+   iL	readwrite	17	00119043
+   "Along with the AGC Loop Gain 0 Exponent property, sets the loop gain for the AGC. The default value is 0."	"pniScope_AGCLoopGain0Mantissa.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "AGC Loop Gain 1 Exponent"
+   "Device Specific:IF Digitizer (5620 and 5621):AGC:Loop Gain 1 Exponent"
+   iL	readwrite	17	00119044
+   "Along with AGC Loop Gain 1 Mantissa property, sets the loop gain for the AGC. The default value is 0."	"pniScope_AGCLoopGain1Exponent.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "AGC Loop Gain 1 Mantissa"
+   "Device Specific:IF Digitizer (5620 and 5621):AGC:Loop Gain 1 Mantissa"
+   iL	readwrite	17	00119045
+   "Along with AGC Loop Gain 1 Exponent property, sets the loop gain for the AGC. The default value is 0."	"pniScope_AGCLoopGain1Mantissa.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "AGC Threshold"
+   "Device Specific:IF Digitizer (5620 and 5621):AGC:Threshold"
+   iL	readwrite	17	00119046
+   "Sets the gain error in the AGC. The default value is 0x034D."	"pniScope_AGCThreshold.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "AGC Average Control"
+   "Device Specific:IF Digitizer (5620 and 5621):AGC:Average Control"
+   iL enum { "Mean"=0, "Median"=1 }	readwrite	17	00119047
+   "Averages the AGC values. The default value is Mean."	"pniScope_AGCAverageControl.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Halfband Filter Bypass"
+   "Device Specific:IF Digitizer (5620 and 5621):HalfBand Filter:Bypass"
+   bool	readwrite	17	0011904A
+   "Enables or bypasses the halfband filters. If set to TRUE, halfband filters are bypassed. The default is TRUE."	"pniScope_HalfbandFilterBypass.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Halfband Filter 1 Enable"
+   "Device Specific:IF Digitizer (5620 and 5621):HalfBand Filter:Filter 1 Enable"
+   bool	readwrite	17	0011904B
+   "Enables halfband filter 1. If TRUE, filter is enabled. The default is TRUE."	"pniScope_HalfbandFilter1Enable.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Halfband Filter 2 Enable"
+   "Device Specific:IF Digitizer (5620 and 5621):HalfBand Filter:Filter 2 Enable"
+   bool	readwrite	17	0011904C
+   "Enables halfband filter 2. If TRUE, filter is enabled. The default is FALSE."	"pniScope_HalfbandFilter2Enable.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Halfband Filter 3 Enable"
+   "Device Specific:IF Digitizer (5620 and 5621):HalfBand Filter:Filter 3 Enable"
+   bool	readwrite	17	0011904D
+   "Enables halfband filter 3. If TRUE, filter is enabled. The default is FALSE."	"pniScope_HalfbandFilter3Enable.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Halfband Filter 4 Enable"
+   "Device Specific:IF Digitizer (5620 and 5621):HalfBand Filter:Filter 4 Enable"
+   bool	readwrite	17	0011904E
+   "Enables halfband filter 4. If TRUE, filter is enabled. The default is FALSE."	"pniScope_HalfbandFilter4Enable.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Halfband Filter 5 Enable"
+   "Device Specific:IF Digitizer (5620 and 5621):HalfBand Filter:Filter 5 Enable"
+   bool	readwrite	17	0011904F
+   "Enables halfband filter 5. If TRUE, filter is enabled. The default is FALSE."	"pniScope_HalfbandFilter5Enable.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "AOUT Parallel Output Source"
+   "Device Specific:IF Digitizer (5620 and 5621):Output Configuration:Parallel:AOUT Source"
+   iL enum { "I Data"=0, "Magnitude Data"=1, "Frequency Data"=2 }	readwrite	17	0011905E
+   "Specifies the source for the AOUT parallel output from the DDC. The default is I Data."	"pniScope_AOUTParallelOutputSource.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "BOUT Parallel Output Source"
+   "Device Specific:IF Digitizer (5620 and 5621):Output Configuration:Parallel:BOUT Source"
+   iL enum { "Q Data"=3, "Phase Data"=4, "Magnitude Data"=1 }	readwrite	17	0011905F
+   "Specifies the source for the BOUT parallel output from the DDC. The default is Q Data."	"pniScope_BOUTParallelOutputSource.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Device Number"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Device Number"
+   iL	readonly	17	00118C7C
+   "Indicates the device number associated with the current session."	"pniScope_DeviceNumber.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Enable DDC"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Enable DDC"
+   bool	readwrite	17	0011901B
+   "Disables programming the DDC when set to FALSE. The default value is TRUE."	"pniScope_EnableDDC.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "DDC Direct Register Address"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:DDC Direct Register Address"
+   iL	readwrite	17	00119149
+   "Used for directly accessing the DDC registers."	"pniScope_DDCDirectRegisterAddress.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "DDC Direct Register Data"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:DDC Direct Register Data"
+   iL	readwrite	17	0011914A
+   "Used for directly accessing the DDC registers. The default value is 0."	"pniScope_DDCDirectRegisterData.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Fetch Interleaved Data"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Fetch Interleaved Data"
+   bool	readwrite	17	00118C78
+   "Set to TRUE to retrieve one array with alternating values on the NI 5620/5621. This property can be used to retrieve a single array with I and Q interleaved instead of two separate arrays. If set to TRUE, the resulting array is twice the size of the actual record length. The default value is FALSE."	"pniScope_FetchInterleavedData.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Mux Mode Register"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Mux Mode"
+   iL	readwrite	17	0011901A
+   ""	"pniScope_MuxModeRegister.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Serial DAC Cal Voltage"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Serial DAC Cal Voltage"
+   fD	readwrite	17	00119146
+   ""	"pniScope_SerialDACCalVoltage.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Test Mode Sin/Cos"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Test Mode Sin/Cos"
+   bool	readwrite	17	00119060
+   "Enables the special test mode where the carrier NCO outputs are set to 0x7FFF. The default is FALSE."	"pniScope_TestModeSinCos.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Coordinate Converter Input"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Coordinate Converter Input"
+   iL enum { "Resampler HB"=0, "Programmable FIR"=1 }	readwrite	17	00119061
+   "Selects the source for the input to the coordinate converter, either the HB filter or the Programmable FIR. the default value is Programmable FIR."	"pniScope_CoordinateConverterInput.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Q Input to Coord. Converter"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Q Input to Coord. Converter"
+   iL enum { "I and Q"=0, "Q Zeroed"=1 }	readwrite	17	00119062
+   "Either enables or zeros out the Q input to coordinate converter. The default value is I and Q."	"pniScope_QInputtoCoord.Converter.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Syncout CLK Select"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Syncout CLK Select"
+   iL enum { "CLKIN"=0, "PROCCLK"=1 }	readwrite	17	00119068
+   "Source for Syncout CLK. The default value is CLK IN."	"pniScope_SyncoutCLKSelect.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Enable Dither"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Enable Dither"
+   bool	readwrite	17	00119144
+   "Applies dither at the input of the ADC. Set this property to TRUE to enable dither. The default value is FALSE."	"pniScope_EnableDither.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Timing NCO Phase Accum. Load on Update"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Timing NCO:Phase Accum. Load on Update"
+   bool	readwrite	17	00119090
+   "When TRUE, updates the timing NCO frequency to zero the feedback of the phase accumulator as well as update the phase and frequency. The default value is TRUE."	"pniScope_TimingNCOPhaseAccum.LoadonUpdate.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Timing NCO Clear Phase Accum."
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Timing NCO:Clear Phase Accum."
+   bool	readwrite	17	00119091
+   "If FALSE, enables the accumulator in the timing NCO. If TRUE, zeros out feedback in the accumulator. The default value is FALSE."	"pniScope_TimingNCOClearPhaseAccum.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Timing NCO Enable Offset Freq."
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Timing NCO:Enable Offset Freq."
+   bool	readwrite	17	00119092
+   "If TRUE, enables offset frequency in the timing NCO. If FALSE, applies no offset frequency. The default value is FALSE."	"pniScope_TimingNCOEnableOffsetFreq.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Timing NCO Freq. Offset Bits"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Timing NCO:Frequency Offset Bits"
+   iL enum { "8 bits"=0, "16 bits"=1, "24 bits"=2, "32 bits"=3 }	readwrite	17	00119093
+   "Specifies the number of offset bits in the timing NCO. The default value is 8 bits."	"pniScope_TimingNCOFreq.OffsetBits.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Timing NCO Center Freq."
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Timing NCO:Center Frequency"
+   iL	readwrite	17	00119094
+   "Controls the frequency of the timing NCO. Specifies the timing NCO center frequency in binary format:
+
+ N = (Fout / Fresampler) & 232  
+
+where Fout  is the output frequency and Fresampler  is the resampled frequency.
+
+The value is transferred to the active register during the next initiate acquisition operation. The default value is 0X8000000."	"pniScope_TimingNCOCenterFreq.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Timing NCO Phase Offset"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Timing NCO:Phase Offset"
+   iL	readwrite	17	00119095
+   "Offsets the phase of the timing NCO in binary format. The value is transferred to the active register during the next initiate acquisition. The default value is 0.
+
+Valid Range: 0 to 6.283185307179586476925286766558"	"pniScope_TimingNCOPhaseOffset.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Resampler Filter Mode"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Resampler:Filter Mode"
+   iL enum { "Resampler Enabled"=1, "HB 1 Enabled"=2, "Resampler and HB 1"=3, "Both HB Filters"=6, "Resampler and Both HB Filters"=7 }	readwrite	17	00119096
+   "Selects the resampling filter mode."	"pniScope_ResamplerFilterMode.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Resampler Bypass"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Resampler:Bypass"
+   bool	readwrite	17	00119097
+   "Either enables or bypasses the resampler filter in the DDC. The resampler is a polyphase filter that allows the output sample rate to have a non-integer relationship to the input sample rate. In essence, it acts as a fixed interpolation filter followed by an NCO controlled decimator. The default value is TRUE."	"pniScope_ResamplerBypass.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Resampler Output Pulse Delay"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Resampler:Output Pulse Delay"
+   iL	readwrite	17	00119098
+   "Programs the delay between output samples when interpolating. These outputs can be delayed from 2 to 255 clocks. The default value is 16."	"pniScope_ResamplerOutputPulseDelay.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Resampler NCO Divide"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Resampler:NCO Divide"
+   iL	readwrite	17	00119099
+   "Divides down the resampler NCO output by the value loaded into the register plus one. The default value is 2."	"pniScope_ResamplerNCODivide.html"	"<helpdir>:\scopepropref.chm"
+
+attribute: "Resampler Reference Divide"
+   "Device Specific:IF Digitizer (5620 and 5621):Advanced:Resampler:Reference Divide"
+   iL	readwrite	17	0011909A
+   "Divides down the reference clock by the value loaded into the register plus one. Load with a value that is one less than the desired period. The default value is 2."	"pniScope_ResamplerReferenceDivide.html"	"<helpdir>:\scopepropref.chm"

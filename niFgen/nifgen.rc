@@ -1,0 +1,1198 @@
+explicitActiveChannels: TRUE
+library: niFgen_*.*
+      
+class: "niFgen"
+flags: 0
+sorted: no
+implements: ivifgen, iviResourceMgr
+
+attribute: "Active Channel"
+   "Active Channel"
+   string	writeonly	19	-2
+   "Specifies the channel used to access all subsequent channel-based properties. You must set this property before setting any channel-based properties. Pass a name that the instrument driver defines or a virtual channel name defined in MAX."	"pniFgen_ActiveChannel.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Output Mode"
+   "Output:Output Mode"
+   iL enum { "NIFGEN_VAL_OUTPUT_FUNC"=0, "NIFGEN_VAL_OUTPUT_FREQ_LIST"=101, "NIFGEN_VAL_OUTPUT_ARB"=1, "NIFGEN_VAL_OUTPUT_SEQ"=2, "NIFGEN_VAL_OUTPUT_SCRIPT"=102 }	readwrite	17	001312D1
+   "Specifies the output mode the signal generator uses. The output mode you specify determines which VIs and properties you use to configure the waveform the signal generator produces."	"pniFgen_OutputMode.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Output Enabled"
+   "Output:Output Enabled"
+   bool	readwrite	49	001312D3
+   "Specifies whether the signal that the signal generator produces appears at the output connector."	"pniFgen_OutputEnabled.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Digital Gain"
+   "Output:Digital Gain"
+   fD	readwrite	49	00118D2E
+   "Specifies a factor by which the signal generator digitally multiplies generated data before converting it to an analog signal in the DAC. For a digital gain greater than 1.0, the product of digital gain times the generated data must be inside the range +/-1.0 (assuming floating point data). If the product exceeds these limits, the signal generator clips the output signal, and an error results."	"pniFgen_DigitalGain.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Analog Path"
+   "Output:Analog Path"
+   iL enum { "NIFGEN_VAL_MAIN_ANALOG_PATH"=0, "NIFGEN_VAL_DIRECT_ANALOG_PATH"=1, "NIFGEN_VAL_FIXED_LOW_GAIN_ANALOG_PATH"=2, "NIFGEN_VAL_FIXED_HIGH_GAIN_ANALOG_PATH"=3 }	readwrite	49	00118D0E
+   "Specifies the analog signal path. The main path allows the user to configure gain, offset, analog filter status, output impedance, and output enable."	"pniFgen_AnalogPath.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Load Impedance"
+   "Output:Load Impedance"
+   fD	readwrite	49	00118D0C
+   "Specifies the load impedance connected to the analog output of the channel."	"pniFgen_LoadImpedance.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Output Impedance"
+   "Output:Output Impedance"
+   fD	readwrite	49	001312D4
+   "Specifies the output impedance of the signal generator at the output connector. NI signal generators have an output impedance of 50 ohms and an optional 75 ohms on select modules."	"pniFgen_OutputImpedance.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Terminal Configuration"
+   "Output:Terminal Configuration"
+   iL enum { "Single Ended"=300, "Differential"=301 }	readwrite	49	00118D9D
+   "Specifies whether to analyze gain and offset values based on single-ended or differential operation."	"pniFgen_TerminalConfiguration.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Common Mode Offset"
+   "Output:Common Mode Offset"
+   fD	readwrite	49	00118D9E
+   "Specifies the value the signal generator adds to or subtracts from the arbitrary waveform data. This property applies only when set the Terminal Configuration property to <b>Differential</b>. Common-mode offset is applied to the signals generated at each differential output terminal."	"pniFgen_CommonModeOffset.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Channel Delay"
+   "Output:Channel Delay"
+   fD	readwrite	49	00118DA1
+   "Specifies the delay to apply to the analog output of the channel specified by the Active Channel property."	"pniFgen_ChannelDelay.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Analog Filter Enabled"
+   "Output:Filters:Analog Filter Enabled"
+   bool	readwrite	17	00118C97
+   "Specifies whether the signal generator applies an analog filter to the output signal. Set this property to TRUE to enable the filter. This property is valid in Arbitrary Waveform, Arbitrary Sequence, and Script output modes. You also can use this property in Standard Function and Frequency List output modes for user-defined waveforms.
+
+<b>Default Value</b>: FALSE"	"pniFgen_AnalogFilterEnabled.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Digital Filter Enabled"
+   "Output:Filters:Digital Filter Enabled"
+   bool	readwrite	17	00118C96
+   "Specifies whether the signal generator applies a digital filter to the output signal. Set this property to TRUE to use a digital filter. This property is valid in Arbitrary Waveform, Arbitrary Sequence, and Script output modes. You also can use this property in Standard Function and Frequency List output modes for user-defined waveforms.
+
+<b>Default Value</b>: FALSE"	"pniFgen_DigitalFilterEnabled.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Digital Filter Interpolation Factor"
+   "Output:Filters:Digital Filter Interpolation Factor"
+   fD	readwrite	17	00118D0A
+   "Specifies the interpolation factor when the Digital Filter Enabled property is set to TRUE."	"pniFgen_DigitalFilterInterpolationFactor.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Flatness Correction Enabled"
+   "Output:Filters:Flatness Correction Enabled"
+   bool	readwrite	49	00118D73
+   "Specifies whether flatness correction is enabled (TRUE). When flatness correction is enabled, the signal generator applies a flatness correction factor to the generated sine wave to ensure the same output power level at all frequencies. 
+
+Set this property to FALSE when performing flatness calibration."	"pniFgen_FlatnessCorrectionEnabled.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Analog Data Mask"
+   "Output:Data Mask:Analog Data Mask"
+   iL	readwrite	49	00118D1A
+   "Specifies the mask to apply to the analog output data. The masked data is replaced with the data in the Analog Static Value property."	"pniFgen_AnalogDataMask.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Analog Static Value"
+   "Output:Data Mask:Analog Static Value"
+   iL	readwrite	49	00118D1B
+   "Specifies the static value that replaces data masked by the Analog Data Mask property."	"pniFgen_AnalogStaticValue.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Digital Data Mask"
+   "Output:Data Mask:Digital Data Mask"
+   iL	readwrite	49	00118D1C
+   "Specifies the mask to apply to the output on the digital connector. The masked data is replaced with the data in the Digital Static Value property."	"pniFgen_DigitalDataMask.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Digital Static Value"
+   "Output:Data Mask:Digital Static Value"
+   iL	readwrite	49	00118D1D
+   "Specifies the static value that replaces data masked by the Digital Data Mask property."	"pniFgen_DigitalStaticValue.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Digital Pattern Enabled"
+   "Output:Advanced:Digital Pattern Enabled"
+   bool	readwrite	49	00118C95
+   "Specifies whether the signal generator generates a digital pattern corresponding to the output signal. Set this property to TRUE to generate a digital pattern."	"pniFgen_DigitalPatternEnabled.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Idle Behavior"
+   "Output:Advanced:Idle Behavior"
+   iL enum { "Hold Last Value"=400, "Jump To Value"=401 }	readwrite	49	00118DA9
+   "Specifies the behavior of the output during the Idle state."	"pniFgen_IdleBehavior.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Idle Value"
+   "Output:Advanced:Idle Value"
+   iL	readwrite	49	00118DAA
+   "Specifies the value to generate in the Idle state. You must set the Idle Behavior property to <b>Jump To Value</b> to use this property."	"pniFgen_IdleValue.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Wait Behavior"
+   "Output:Advanced:Wait Behavior"
+   iL enum { "Hold Last Value"=400, "Jump To Value"=401 }	readwrite	49	00118DAB
+   "Specifies the behavior of the output while waiting for a Script trigger or during a wait instruction."	"pniFgen_WaitBehavior.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Wait Value"
+   "Output:Advanced:Wait Value"
+   iL	readwrite	49	00118DAC
+   "Specifies the value to generate while waiting. You must set the Wait Behavior property to <b>Jump To Value</b> to use this property."	"pniFgen_WaitValue.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Gain"
+   "Arbitrary Waveform:Gain"
+   fD	readwrite	49	0013139A
+   "Specifies the factor by which the signal generator scales the arbitrary waveform data. When you create arbitrary waveforms, you must first normalize the data points to the range -1.0 to +1.0. Use this property to scale the arbitrary waveform to other ranges."	"pniFgen_ArbitraryWaveformGain.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Offset"
+   "Arbitrary Waveform:Offset"
+   fD	readwrite	49	0013139B
+   "Specifies the value the signal generator adds to the arbitrary waveform data. When you create arbitrary waveforms, you must first normalize the data points to the range -1.0 to +1.0. Use this property to shift the arbitrary waveform range."	"pniFgen_ArbitraryWaveformOffset.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Arbitrary Waveform Handle"
+   "Arbitrary Waveform:Arbitrary Waveform Mode:Arbitrary Waveform Handle"
+   iL	readwrite	17	00131399
+   "Selects which arbitrary waveform the signal generator produces. You can create multiple arbitrary waveforms using the niFgen Create Waveform VI."	"pniFgen_ArbitraryWaveformHandle.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Marker Position"
+   "Arbitrary Waveform:Arbitrary Waveform Mode:Marker Position"
+   iL	readwrite	17	00118D77
+   "Specifies the position for a marker to be asserted in the arbitrary waveform."	"pniFgen_ArbWfm.MarkerPos.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Repeat Count"
+   "Arbitrary Waveform:Arbitrary Waveform Mode:Repeat Count"
+   iL	readwrite	17	00118D78
+   "Specifies the number of times to repeat the arbitrary waveform when the <b>Trigger Mode</b> parameter in the niFgen Configure Trigger Mode VI is set to <b>Single</b> or <b>Stepped</b>."	"pniFgen_ArbWfm.RepeatCount.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Arbitrary Sequence Handle"
+   "Arbitrary Waveform:Arbitrary Sequence Mode:Arbitrary Sequence Handle"
+   iL	readwrite	17	001313A3
+   "Selects which sequence the signal generator produces. You can create multiple sequences using the niFgen Create Arbitrary Sequence VI."	"pniFgen_ArbitrarySequenceHandle.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Max Number of Sequences"
+   "Arbitrary Waveform:Arbitrary Sequence Mode:Max Number of Sequences"
+   iL	readonly	17	001313A4
+   "Returns the maximum number of arbitrary sequences the signal generator allows."	"pniFgen_MaxNumberofSequences.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Max Sequence Length"
+   "Arbitrary Waveform:Arbitrary Sequence Mode:Max Sequence Length"
+   iL	readonly	17	001313A6
+   "Returns the maximum number of arbitrary waveforms the signal generator allows in a sequence."	"pniFgen_MaxSequenceLength.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Min Sequence Length"
+   "Arbitrary Waveform:Arbitrary Sequence Mode:Min Sequence Length"
+   iL	readonly	17	001313A5
+   "Returns the minimum number of arbitrary waveforms the signal generator allows in a sequence. Typically, this value is constant for the signal generator."	"pniFgen_MinSequenceLength.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Max Loop Count"
+   "Arbitrary Waveform:Arbitrary Sequence Mode:Max Loop Count"
+   iL	readonly	17	001313A7
+   "Returns the maximum number of times the signal generator can repeat a waveform in a sequence. Typically, this value is constant for the signal generator."	"pniFgen_MaxLoopCount.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Script to Generate"
+   "Arbitrary Waveform:Script Mode:Script to Generate"
+   string	readwrite	17	00118D3E
+   "Specifies which script the signal generator uses. To configure the signal generator to run a particular script, set this property to the name of the script."	"pniFgen_ScriptToGenerate.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Waveform Quantum"
+   "Arbitrary Waveform:Capabilities:Waveform Quantum"
+   iL	readonly	17	0013139E
+   "Returns the quantum value the signal generator allows. The size of each arbitrary waveform must be a multiple of this quantum value."	"pniFgen_Quantum.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Max Number of Waveforms"
+   "Arbitrary Waveform:Capabilities:Max Number of Waveforms"
+   iL	readonly	17	0013139D
+   "Returns the maximum number of arbitrary waveforms that the signal generator allows. On some signal generators, this value may vary with remaining onboard memory."	"pniFgen_MaxNumberofWaveforms.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Min Waveform Size"
+   "Arbitrary Waveform:Capabilities:Min Waveform Size"
+   iL	readonly	17	0013139F
+   "Returns the minimum number of points the signal generator allows in an arbitrary waveform. Typically, this value is constant for the signal generator."	"pniFgen_MinWaveformSize.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Max Waveform Size"
+   "Arbitrary Waveform:Capabilities:Max Waveform Size"
+   iL	readonly	17	001313A0
+   "Returns the maximum number of points the signal generator allows in an arbitrary waveform. On some signal generators, this value may vary with remaining onboard memory."	"pniFgen_MaxWaveformSize.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Data Transfer Block Size"
+   "Arbitrary Waveform:Data Transfer:Data Transfer Block Size"
+   iL	readwrite	49	00118D21
+   "Specifies the number of samples at a time to download to onboard memory. This property is useful when the total data to be transferred to onboard memory is large."	"pniFgen_DataTransferBlockSize.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "File Transfer Block Size"
+   "Arbitrary Waveform:Data Transfer:File Transfer Block Size"
+   iL	readwrite	17	00118D20
+   "Specifies the number of samples at a time to read from the file and download to onboard memory. This property is used in conjunction with the niFgen Create Waveform From File and niFgen Write Waveform From File VIs."	"pniFgen_FileTransferBlockSize.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Maximum Bandwidth"
+   "Arbitrary Waveform:Data Transfer:Maximum Bandwidth"
+   fD	readwrite	49	00118DA5
+   "Specifies the maximum amount of bus bandwidth to use for data transfers."	"pniFgen_MaximumBandwidth.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Direct DMA Enabled"
+   "Arbitrary Waveform:Data Transfer:Direct DMA:Direct DMA Enabled"
+   bool	readwrite	49	00118D24
+   "Enables the device for Direct DMA writes."	"pniFgen_DirectDMAEnabled.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Direct DMA Window Address"
+   "Arbitrary Waveform:Data Transfer:Direct DMA:Window Address"
+   iL	readwrite	49	00118D42
+   "Specifies the window address (beginning of window) of the waveform data source. This window address is specified by your Direct DMA-compatible data source."	"pniFgen_DirectDMAWindowAddress.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Direct DMA Window Size"
+   "Arbitrary Waveform:Data Transfer:Direct DMA:Window Size in Bytes"
+   iL	readwrite	49	00118D25
+   "Specifies the size of the memory window provided by your Direct DMA-compatible data source."	"pniFgen_DirectDMAWindowSize.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Streaming Waveform Handle"
+   "Arbitrary Waveform:Data Transfer:Streaming:Streaming Waveform Handle"
+   iL	readwrite	17	00118D74
+   "Specifies the waveform handle of the waveform used to continuously stream data during generation."	"pniFgen_StreamingWaveformHandle.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Streaming Waveform Name"
+   "Arbitrary Waveform:Data Transfer:Streaming:Streaming Waveform Name"
+   string	readwrite	49	00118D76
+   "Specifies the name of the waveform used to continuously stream data during generation. This property defaults to an empty string when no streaming waveform is specified.
+
+Use this property in conjunction with the Space Available in Streaming Waveform property."	"pniFgen_StreamingWaveformName.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Space Available in Streaming Waveform"
+   "Arbitrary Waveform:Data Transfer:Streaming:Space Available in Streaming Waveform"
+   iL	readonly	17	00118D75
+   "Returns the space available in the streaming waveform for writing new data.
+
+Use this property in conjunction with the Streaming Waveform Handle or Streaming Waveform Name property."	"pniFgen_SpaceAvailInStreamingWfm.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Streaming Write Timeout"
+   "Arbitrary Waveform:Data Transfer:Streaming:Streaming Write Timeout"
+   fD	readwrite	49	00118DC9
+   "Specifies the maximum amount of time allowed to complete a streaming write operation."	"pniFgen_StreamingWriteTimeout.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Maximum In-Flight Read Requests"
+   "Arbitrary Waveform:Data Transfer:Advanced:Maximum In-Flight Read Requests"
+   iL	readwrite	49	00118DA7
+   "Specifies the maximum number of concurrent PCI Express read requests the signal generator can issue."	"pniFgen_MaximumIn-FlightReadRequests.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "PCI DMA Optimizations Enabled"
+   "Arbitrary Waveform:Data Transfer:Advanced:PCI DMA Optimizations Enabled"
+   bool	readwrite	49	00118D9A
+   "Controls whether NI-FGEN allows performance optimizations for DMA transfers. This property is only valid for PCI and PXI SMC-based devices. This property is enabled (TRUE) by default, and NI recommends leaving it enabled."	"pniFgen_PCIDMAOptimizationsEnabled.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Preferred Packet Size"
+   "Arbitrary Waveform:Data Transfer:Advanced:Preferred Packet Size"
+   iL	readwrite	49	00118DA6
+   "Specifies the preferred size of the data field in a PCI Express read request packet."	"pniFgen_PreferredPacketSize.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "OSP Enabled"
+   "Arbitrary Waveform:Onboard Signal Processing:OSP Enabled"
+   bool	readwrite	17	00118D26
+   "Enables (TRUE) or disables (FALSE) the OSP block of the signal generator. When the OSP block is disabled, all OSP-related properties are disabled and have no effect on the generated signal."	"pniFgen_OSPEnabled.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "IQ Rate"
+   "Arbitrary Waveform:Onboard Signal Processing:IQ Rate"
+   fD	readwrite	49	00118D28
+   "Specifies the rate at which the user-provided waveform data is generated when the OSP Enabled property is set to TRUE."	"pniFgen_IQRate.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Data Processing Mode"
+   "Arbitrary Waveform:Onboard Signal Processing:Data Processing Mode"
+   iL enum { "Real"=0, "Complex"=1 }	readwrite	49	00118D27
+   "Controls the way in which data is processed by the OSP block."	"pniFgen_DataProcessingMode.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "OSP Mode"
+   "Arbitrary Waveform:Onboard Signal Processing:OSP Mode"
+   iL enum { "IF"=0, "BaseBand"=1 }	readwrite	49	00118DA2
+   "Specifies the generation mode of the OSP, which determines the type of data contained in the output signal."	"pniFgen_OSPMode.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Carrier Enabled"
+   "Arbitrary Waveform:Onboard Signal Processing:Carrier Enabled"
+   bool	readwrite	49	00118D29
+   "Enables (TRUE) or disables (FALSE) generation of the carrier."	"pniFgen_CarrierEnabled.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Carrier Frequency"
+   "Arbitrary Waveform:Onboard Signal Processing:Carrier Frequency"
+   fD	readwrite	49	00118D2A
+   "Specifies the frequency of the generated carrier."	"pniFgen_CarrierFrequency.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Frequency Shift"
+   "Arbitrary Waveform:Onboard Signal Processing:Frequency Shift"
+   fD	readwrite	49	00118DA3
+   "Specifies the amount of frequency shift applied to the baseband signal."	"pniFgen_FrequencyShift.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Filter Type"
+   "Arbitrary Waveform:Onboard Signal Processing:FIR Filter:Filter Type"
+   iL enum { "Flat"=0, "Raised Cosine"=1, "Root Raised Cosine"=2, "Gaussian"=3, "Custom"=4 }	readwrite	49	00118D2D
+   "Specifies the pulse-shaping filter type for the FIR filter."	"pniFgen_FilterType.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Flat Filter Passband"
+   "Arbitrary Waveform:Onboard Signal Processing:FIR Filter:Flat:Passband"
+   fD	readwrite	49	00118D35
+   "Specifies the passband value to use when calculating the FIR filter coefficients. The FIR filter is designed to be flat to passband x I/Q rate. This property is used only when the Filter Type property is set to <b>Flat</b>."	"pniFgen_FlatFilterPassband.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Raised Cosine Filter Alpha"
+   "Arbitrary Waveform:Onboard Signal Processing:FIR Filter:Raised Cosine:Alpha"
+   fD	readwrite	49	00118D34
+   "Specifies the alpha value to use when calculating the pulse-shaping FIR filter coefficients. This property is used only when the Filter Type property is set to <b>Raised Cosine</b>."	"pniFgen_RaisedCosineFilterAlpha.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Root Raised Cosine Filter Alpha"
+   "Arbitrary Waveform:Onboard Signal Processing:FIR Filter:Root Raised Cosine:Alpha"
+   fD	readwrite	49	00118D33
+   "Specifies the alpha value to use when calculating the pulse-shaping FIR filter coefficients. This property is used only when the Filter Type property is set to <b>Root Raised Cosine</b>."	"pniFgen_RootRaisedCosineFilterAlpha.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Gaussian Filter BT"
+   "Arbitrary Waveform:Onboard Signal Processing:FIR Filter:Gaussian:BT"
+   fD	readwrite	49	00118D36
+   "Specifies the BT value to use when calculating the pulse-shaping FIR filter coefficients. The BT value is the product of the -3 dB bandwidth and the symbol period. This property is used only when the Filter Type property is set to <b>Gaussian</b>."	"pniFgen_GaussianFilterBT.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Carrier Phase I"
+   "Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Carrier Phase:Carrier Phase I"
+   fD	readwrite	49	00118D2B
+   "Specifies the I carrier phase, in degrees, at the first point of the generated signal. 
+
+<b>Default Value</b>: 0.0"	"pniFgen_CarrierPhaseI.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Carrier Phase Q"
+   "Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Carrier Phase:Carrier Phase Q"
+   fD	readwrite	49	00118D2C
+   "Specifies the Q carrier phase, in degrees, at the first point of the generated signal. This property is used only when the Data Processing Mode property is set to <b>Complex</b>.
+
+<b>Default Value</b>: -90.0"	"pniFgen_CarrierPhaseQ.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Pre-filter Gain I"
+   "Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Gain:Pre-filter Gain I"
+   fD	readwrite	49	00118D38
+   "Specifies the digital gain to apply to the I data stream before any filtering by the OSP block.
+
+<b>Valid Values</b>: -2.0 to 2.0
+
+<b>Default Value</b>: 1.0"	"pniFgen_Pre-filterGainI.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Pre-filter Gain Q"
+   "Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Gain:Pre-filter Gain Q"
+   fD	readwrite	49	00118D39
+   "Specifies the digital gain to apply to the Q data stream before any filtering by the OSP block. This property is used only when the Data Processing Mode property is set to <b>Complex</b>.
+
+<b>Valid Values</b>: -2.0 to 2.0
+
+<b>Default Value</b>: 1.0"	"pniFgen_Pre-filterGainQ.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Pre-filter Offset I"
+   "Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Offset:Pre-filter Offset I"
+   fD	readwrite	49	00118D3A
+   "Specifies the digital offset to apply to the I data stream. This offset is applied after the prefilter gain and before any filtering.
+
+<b>Valid Values</b>: -1.0 to 1.0
+
+<b>Default Value</b>: 0.9"	"pniFgen_Pre-filterOffsetI.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Pre-filter Offset Q"
+   "Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Offset:Pre-filter Offset Q"
+   fD	readwrite	49	00118D3B
+   "Specifies the digital offset to apply to the Q data stream. This offset is applied after the prefilter gain and before any filtering. This property is only used when the Data Processing Mode property is set to <b>Complex</b>.
+
+<b>Valid Values</b>: -1.0 to 1.0
+
+<b>Default Value</b>: 0.0"	"pniFgen_Pre-filterOffsetQ.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "FIR Filter Enabled"
+   "Arbitrary Waveform:Onboard Signal Processing:Advanced:FIR Filter Enabled"
+   bool	readwrite	49	00118D2F
+   "Enables (TRUE) or disables (FALSE) the FIR filter."	"pniFgen_FIRFilterEnabled.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "FIR Interpolation"
+   "Arbitrary Waveform:Onboard Signal Processing:Advanced:FIR Interpolation Factor"
+   fD	readwrite	49	00118D30
+   "Specifies the interpolation factor for the FIR filter. If you do not set this value, NI-FGEN calculates the appropriate value based on the value of the IQ Rate property."	"pniFgen_FIRInterpolation.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "CIC Filter Enabled"
+   "Arbitrary Waveform:Onboard Signal Processing:Advanced:CIC Filter Enabled"
+   bool	readwrite	49	00118D31
+   "Enables (TRUE) or disables (FALSE) the CIC filter."	"pniFgen_CICFilterEnabled.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "CIC Filter Gain"
+   "Arbitrary Waveform:Onboard Signal Processing:Advanced:CIC Filter Gain"
+   fD	readwrite	49	00118D37
+   "Specifies the gain applied at the final stage of the CIC filter. This property is commonly used to compensate for attenuation in the FIR filter. If you set the FIR Filter Type to a value other than <b>Custom</b>, NI-FGEN calculates the CIC gain to achieve unity gain between the FIR and CIC filters. Setting this property overrides the value set by NI-FGEN."	"pniFgen_CICFilterGain.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "CIC Interpolation"
+   "Arbitrary Waveform:Onboard Signal Processing:Advanced:CIC Interpolation Factor"
+   fD	readwrite	49	00118D32
+   "Specifies the interpolation factor for the CIC filter. If you do not set this value, NI-FGEN calculates the appropriate value based on the value of the IQ Rate property."	"pniFgen_CICInterpolation.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Compensate for Filter Group Delay"
+   "Arbitrary Waveform:Onboard Signal Processing:Advanced:Compensate for Filter Group Delay"
+   bool	readwrite	49	00118DB5
+   "Adjusts for OSP filter group delay when aligning analog outputs and events in OSP mode. If you set this property to TRUE, event outputs align more closely with the analog output. The analog output also aligns more closely between two devices synchronized using NI-TClk."	"pniFgen_CompensateFilterGroupDelay.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "OSP Overflow Error Reporting"
+   "Arbitrary Waveform:Onboard Signal Processing:Advanced:OSP Overflow Error Reporting"
+   iL enum { "Error"=0, "Disabled"=2 }	readwrite	49	00118D3C
+   "Configures error reporting when the OSP block detects an overflow in any of its stages. Overflows lead to waveform clipping."	"pniFgen_OSPOverflowErrorReporting.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "OSP Overflow Status"
+   "Arbitrary Waveform:Onboard Signal Processing:Advanced:OSP Overflow Status"
+   iL	readwrite	49	00118D3D
+   "Returns a bit field of the overflow status in any stage of the OSP block. This property is functional regardless of the value for the OSP Overflow Error Reporting property.
+
+Set this property to 0 to clear the current OSP overflow status."	"pniFgen_OSPOverflowStatus.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "P2P Enabled"
+   "Arbitrary Waveform:Peer-to-Peer:P2P Enabled"
+   bool	readwrite	17	00118DB7
+   "Specifies whether the signal generator reads data from the peer-to-peer endpoint (TRUE), as opposed to the typical method of reading it from the onboard memory. This property is endpoint-based."	"pniFgen_P2PEnabled.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Destination Channels"
+   "Arbitrary Waveform:Peer-to-Peer:Destination Channels"
+   string	readwrite	17	00118DB8
+   "Specifies which channels are written to by a peer-to-peer endpoint. If multiple channels are specified, data is deinterleaved to each channel. Channels are configured using the niFgen Configure Channels VI. This property is endpoint-based."	"pniFgen_DestinationChannels.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Endpoint Size"
+   "Arbitrary Waveform:Peer-to-Peer:Endpoint Size"
+   iL	readonly	17	00118DB9
+   "Returns the size, in samples per channel, of the peer-to-peer endpoint. This property is endpoint-based."	"pniFgen_EndpointSize.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Space Available In Endpoint"
+   "Arbitrary Waveform:Peer-to-Peer:Space Available In Endpoint"
+   iL	readonly	17	00118DBA
+   "Returns the current space available in the endpoint in samples per channel. You can use this property when priming the endpoint with initial data through the niFgen Write P2P Endpoint I16 VI to determine how many samples you can write. You also can use this property to characterize the performance and measure the latency of the peer-to-peer stream as data moves across the bus. This property is endpoint-based."	"pniFgen_SpaceAvailableInEndpoint.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Most Space Available In Endpoint"
+   "Arbitrary Waveform:Peer-to-Peer:Most Space Available In Endpoint"
+   iL	readonly	17	00118DBB
+   "Returns the largest number of samples per channel available in the endpoint since this property was last read. This property can be used to determine how much endpoint space to use as a buffer against PCI Express bus traffic latencies by reading the property and keeping track of the largest value returned. This property is endpoint-based."	"pniFgen_MostSpaceAvailableInEndpoint.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Endpoint Count"
+   "Arbitrary Waveform:Peer-to-Peer:Endpoint Count"
+   iL	readonly	17	00118DBC
+   "Returns the number of peer-to-peer FIFO endpoints supported by the device."	"pniFgen_EndpointCount.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Data Transfer Permission Interval"
+   "Arbitrary Waveform:Peer-to-Peer:Data Transfer Permission Interval"
+   iL	readwrite	17	00118DC0
+   "Specifies the interval, in samples per channel, at which the signal generator issues credits to allow the writer peer to transfer data over the bus into the configured endpoint. Refer to the Flow Control topic in the NI Signal Generators Help for more information. This property is coerced up by NI-FGEN to the nearest 128 byte boundary. This property is endpoint-based."	"pniFgen_DataTransferPermissionInterval.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Data Transfer Permission Initial Credits"
+   "Arbitrary Waveform:Peer-to-Peer:Data Transfer Permission Initial Credits"
+   iL	readwrite	17	00118DC8
+   "Specifies the initial amount of data, in samples per channel, that the writer peer is allowed to transfer over the bus into the configured endpoint when the peer-to-peer data stream is enabled. If you do not set this property and the endpoint is empty, credits equal to the full size of the endpoint are issued to the writer peer. If data has been written to the endpoint using the niFgen Write P2P Endpoint I16 VI prior to enabling the stream, credits equal to the remaining space available in the endpoint are issued to the writer peer. This property is coerced up by NI-FGEN to 8 byte boundaries."	"pniFgen_DataTransferPermissionInitialCredits.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Manual Configuration Enabled"
+   "Arbitrary Waveform:Peer-to-Peer:Manual:Manual Configuration Enabled"
+   bool	readwrite	17	00118DBD
+   "Enables (TRUE) or disables (FALSE) manual configuration for a peer-to-peer endpoint. Enabling this property disables automatic NI-P2P stream manager flow control and Done Notifications."	"pniFgen_ManualConfigurationEnabled.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Data Transfer Permission Address"
+   "Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Data Transfer Permission Address"
+   iQ	writeonly	17	00118DBE
+   "Indicates the address in the writer peer to which the signal generator sends data transfer permission credits. This property is endpoint-based.
+
+NOTE: You can use this property only when the Manual Configuration Enabled property is set to TRUE."	"pniFgen_DataTransferPermissionAddress.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Data Transfer Permission Address Type"
+   "Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Data Transfer Permission Address Type"
+   iL enum { "Physical"=0, "Virtual"=1 }	readwrite	17	00118DBF
+   "Specifies the type of address for the Data Transfer Permission Address property. This property is endpoint-based.
+
+NOTE: You can only use this property when the Manual Configuration Enabled property is set to TRUE."	"pniFgen_DataTransferPermissionAddressType.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Endpoint Window Address"
+   "Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Endpoint Window Address"
+   iQ	readonly	17	00118DC1
+   "Returns the signal generator address where endpoint data is sent by the writer peer. The type of this address is specified by the Endpoint Window Address Type property. This property is endpoint-based.
+
+NOTE: You can only use this property when the Manual Configuration Enabled property is set to TRUE."	"pniFgen_EndpointWindowAddress.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Endpoint Window Address Type"
+   "Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Endpoint Window Address Type"
+   iL enum { "Physical"=0, "Virtual"=1 }	readwrite	17	00118DC2
+   "Specifies the type of the Endpoint Window Address property. This property is endpoint-based.
+
+NOTE: You can only use this property when the Manual Configuration Enabled property is set to TRUE."	"pniFgen_EndpointWindowAddressType.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Endpoint Window Size"
+   "Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Endpoint Window Size"
+   iL	readonly	17	00118DC3
+   "Returns the size, in bytes, of the endpoint window. The endpoint window is also described by the Endpoint Window Address and Endpoint Window Address Type properties. This property is endpoint-based.
+
+NOTE: You can only use this property when the Manual Configuration Enabled property is set to TRUE."	"pniFgen_EndpointWindowSize.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Done Notification Address"
+   "Arbitrary Waveform:Peer-to-Peer:Manual:Notification:Done Notification Address"
+   iQ	readonly	17	00118DC5
+   "Returns the signal generator address to which the writer peer sends the Done Notification Value. This property is endpoint-based. Refer to the Stopping a Peer-to-Peer Generation topic in the NI Signal Generators Help for more information.
+
+NOTE: You can only use this property when the Manual Configuration Enabled property is set to TRUE."	"pniFgen_DoneNotificationAddress.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Done Notification Address Type"
+   "Arbitrary Waveform:Peer-to-Peer:Manual:Notification:Done Notification Address Type"
+   iL enum { "Physical"=0, "Virtual"=1 }	readwrite	17	00118DC6
+   "Specifies the address type of the Done Notification Address property. This property is endpoint-based. Refer to the Stopping a Peer-to-Peer Generation topic in the NI Signal Generators Help for more information about using Done Notifications.
+
+NOTE: You can only use this property when the Manual Configuration Enabled property is set to TRUE."	"pniFgen_DoneNotificationAddressType.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Done Notification Value"
+   "Arbitrary Waveform:Peer-to-Peer:Manual:Notification:Done Notification Value"
+   iL	readonly	17	00118DC7
+   "Returns the value the writer peer writes to the address specified by the Done Notification Address property. This property is endpoint-based. Refer to the Stopping a Peer-to-Peer Generation topic in the NI Signal Generators Help for more information about using Done Notifications.
+
+NOTE: You can only use this property when the Manual Configuration Enabled property is set to TRUE."	"pniFgen_DoneNotificationValue.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Waveform"
+   "Standard Function:Waveform"
+   iL enum { "NIFGEN_VAL_WFM_SINE"=1, "NIFGEN_VAL_WFM_SQUARE"=2, "NIFGEN_VAL_WFM_TRIANGLE"=3, "NIFGEN_VAL_WFM_RAMP_UP"=4, "NIFGEN_VAL_WFM_RAMP_DOWN"=5, "NIFGEN_VAL_WFM_DC"=6, "NIFGEN_VAL_WFM_NOISE"=101, "NIFGEN_VAL_WFM_USER"=102 }	readwrite	17	00131335
+   "Specifies which standard waveform the signal generator produces. Use this property only when the Output Mode property is set to <b>NIFGEN_VAL_OUTPUT_FUNC</b>."	"pniFgen_Waveform.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Amplitude"
+   "Standard Function:Amplitude"
+   fD	readwrite	17	00131336
+   "Controls the amplitude of the standard waveform that the signal generator produces. This value is the amplitude at the output terminal."	"pniFgen_Amplitude.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "DC Offset"
+   "Standard Function:DC Offset"
+   fD	readwrite	17	00131337
+   "Controls the DC offset of the standard waveform that the signal generator produces."	"pniFgen_DCOffset.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Start Phase"
+   "Standard Function:Start Phase"
+   fD	readwrite	17	00131339
+   "Controls horizontal offset of the standard waveform the signal generator produces. Specify this property in degrees of one waveform cycle."	"pniFgen_StartPhase.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Duty Cycle High"
+   "Standard Function:Duty Cycle High"
+   fD	readwrite	17	0013133A
+   "Specifies the duty cycle of the square wave the signal generator is producing. Specify this property as a percentage of the time the square wave is high in a cycle. 
+
+<b>Units</b>: Percentage of time the waveform is high
+
+<b>Default Value</b>: 50%"	"pniFgen_DutyCycleHigh.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Sync Duty Cycle High"
+   "Standard Function:Sync Duty Cycle High"
+   fD	readwrite	17	00118C99
+   "Specifies the duty cycle of the square wave the signal generator produces on the SYNC OUT connector. Specify this property as a percentage of the time the square wave is high in each cycle. 
+
+<b>Units</b>: Percentage of time the waveform is high
+
+<b>Default Value</b>: 50%"	"pniFgen_SyncDutyCycleHigh.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Sync Out Output Terminal"
+   "Standard Function:Sync Out Output Terminal"
+   string	readwrite	49	00118D7A
+   "Specifies the terminal at which to export the SYNC OUT signal. This property is not supported for all devices. For a list of the terminals available on your device, refer to the <b>Device Routes</b> tab in MAX."	"pniFgen_SyncOutOutputTerminal.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Frequency"
+   "Standard Function:Standard Function Mode:Frequency"
+   fD	readwrite	17	00131338
+   "Controls the frequency of the standard waveform that the signal generator produces.
+
+<b>Units</b>: hertz (Hz)
+
+<b>Default Value</b>: None"	"pniFgen_Frequency.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Buffer Size"
+   "Standard Function:Standard Function Mode:Buffer Size"
+   iL	readonly	17	00118D1E
+   "Contains the number of samples used in the standard function waveform buffer."	"pniFgen_BufferSize.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Maximum Buffer Size"
+   "Standard Function:Standard Function Mode:Maximum Buffer Size"
+   iL	readwrite	17	00118D1F
+   "Sets the maximum number of samples that can be used in the standard function waveform buffer. Increasing this value may increase the quality of the waveform but may also increase the amount of time required to change the waveform while running."	"pniFgen_MaximumBufferSize.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Frequency List Handle"
+   "Standard Function:Frequency List Mode:Frequency List Handle"
+   iL	readwrite	17	00118D00
+   "Sets which frequency list the signal generator produces. You create a frequency list using the niFgen Create Frequency List VI. The niFgen Create Frequency List VI returns a handle that you use to identify the list."	"pniFgen_FrequencyListHandle.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Max Number Of Frequency Lists"
+   "Standard Function:Frequency List Mode:Maximum Number Of Frequency Lists"
+   iL	readonly	17	00118D01
+   "Returns the maximum number of frequency lists that the signal generator allows."	"pniFgen_MaximumNumberOfFrequencyLists.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Max Frequency List Length"
+   "Standard Function:Frequency List Mode:Maximum Frequency List Length"
+   iL	readonly	17	00118D03
+   "Returns the maximum number of steps that can be in a frequency list."	"pniFgen_MaximumFrequencyListLength.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Min Frequency List Length"
+   "Standard Function:Frequency List Mode:Minimum Frequency List Length"
+   iL	readonly	17	00118D02
+   "Returns the minimum number of frequency lists that the signal generator allows."	"pniFgen_MinimumFrequencyListLength.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Frequency List Duration Quantum"
+   "Standard Function:Frequency List Mode:Frequency List Duration Quantum"
+   fD	readwrite	17	00118D06
+   "Returns the quantum of which all durations must be a multiple in a frequency list."	"pniFgen_FrequencyListDurationQuantum.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Max Frequency List Duration"
+   "Standard Function:Frequency List Mode:Maximum Frequency List Duration"
+   fD	readonly	17	00118D05
+   "Returns the maximum duration in seconds of any one step in the frequency list."	"pniFgen_MaximumFrequencyListDuration.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Min Frequency List Duration"
+   "Standard Function:Frequency List Mode:Minimum Frequency List Duration"
+   fD	readonly	17	00118D04
+   "Returns the minimum duration in seconds of any one step in a frequency list."	"pniFgen_MinimumFrequencyListDuration.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Reference Clock Source"
+   "Clocks:Reference Clock:Source"
+   string enum { "None"=None, "PXI Clock"=PXI_Clk, "Clock In"=ClkIn, "Onboard Reference Clock"=OnboardRefClk, "RTSI 7"=RTSI7 }	readwrite	49	00118CA1
+   "Specifies the Reference clock source used by the signal generator."	"pniFgen_ReferenceClockSource.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Reference Clock Frequency"
+   "Clocks:Reference Clock:Frequency"
+   fD	readwrite	49	00118C9B
+   "Specifies the Reference clock frequency. The signal generator uses the Reference clock to derive frequencies and sample rates when generating output."	"pniFgen_ReferenceClockFrequency.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Exported Reference Clock Output Terminal"
+   "Clocks:Reference Clock:Export Output Terminal"
+   string	readwrite	49	00118D71
+   "Specifies the terminal at which to export the Reference clock.
+
+For a list of the terminals available on your device, refer to the <b>Device Routes</b> tab in MAX."	"pniFgen_ExportedReferenceClockOutputTerminal.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Exported Onboard Reference Clock Output Terminal"
+   "Clocks:Reference Clock:Onboard Reference Clock:Export Output Terminal"
+   string	readwrite	49	00118D72
+   "Specifies the terminal at which to export the onboard Reference clock.
+
+For a list of the terminals available on your device, refer to the <b>Device Routes</b> tab in MAX."	"pniFgen_ExportedOnboardReferenceClockOutputTerminal.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Sample Rate"
+   "Clocks:Sample Clock:Rate"
+   fD	readwrite	49	0013139C
+   "Specifies the rate, in samples per second, at which the signal generator generates the points in arbitrary waveforms."	"pniFgen_SampleRate.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Sample Clock Mode"
+   "Clocks:Sample Clock:Mode"
+   iL enum { "NIFGEN_VAL_DIVIDE_DOWN"=1, "NIFGEN_VAL_HIGH_RESOLUTION"=0, "NIFGEN_VAL_AUTOMATIC"=2 }	readwrite	49	00118C9E
+   "Specifies the Sample clock mode for the signal generator."	"pniFgen_ClockMode.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Sample Clock Source"
+   "Clocks:Sample Clock:Source"
+   string enum { "Onboard Clock"="OnboardClock", "Clock In"="ClkIn", "PXI STAR Line"="PXI_Star", "PXI Trigger Line 0/RTSI 0"="PXI_Trig0", "PXI Trigger Line 1/RTSI 1"="PXI_Trig1", "PXI Trigger Line 2/RTSI 2"="PXI_Trig2", "PXI Trigger Line 3/RTSI 3"="PXI_Trig3", "PXI Trigger Line 4/RTSI 4"="PXI_Trig4", "PXI Trigger Line 5/RTSI 5"="PXI_Trig5", "PXI Trigger Line 6/RTSI 6"="PXI_Trig6", "PXI Trigger Line 7/RTSI 7"="PXI_Trig7", "DDC Clock In"="DDC_ClkIn" }	readwrite	49	00118CA0
+   "Specifies the Sample clock source."	"pniFgen_SampleClockSource.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Exported Sample Clock Output Terminal"
+   "Clocks:Sample Clock:Export Output Terminal"
+   string	readwrite	49	00118D70
+   "Specifies the terminal at which to export the Sample clock. If you specify a divisor with the Exported Sample Clock Divisor property, the Sample clock exported with the Exported Sample Clock Output Terminal property is the value of the Sample clock after it is divided-down.
+
+For a list of the terminals available on your device, refer to the <b>Device Routes</b> tab in MAX."	"pniFgen_ExportedSampleClockOutputTerminal.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Exported Sample Clock Divisor"
+   "Clocks:Sample Clock:Exported Sample Clock Divisor"
+   iL	readwrite	49	00118D0B
+   "Specifies the factor by which to divide the update (Sample) clock before it is exported."	"pniFgen_ExportedSampleClockDivisor.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Sample Clock Timebase Rate"
+   "Clocks:Sample Clock Timebase:Rate"
+   fD	readwrite	49	00118DA0
+   "Specifies the Sample Clock Timebase rate. This property applies only to external Sample clock timebases."	"pniFgen_SampleClockTimebaseRate.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Sample Clock Timebase Source"
+   "Clocks:Sample Clock Timebase:Source"
+   string enum { "Onboard Clock"="OnboardClock", "Clock In"="ClkIn" }	readwrite	49	00118D9F
+   "Specifies the Sample Clock Timebase source."	"pniFgen_SampleClockTimebaseSource.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Exported Sample Clock Timebase Output Terminal"
+   "Clocks:Sample Clock Timebase:Export Output Terminal"
+   string	readwrite	49	00118D79
+   "Specifies the terminal at which to export the Sample Clock Timebase.
+
+For a list of the terminals available on your device, refer to the <b>Device Routes</b> tab in MAX."	"pniFgen_ExportedSampleClockTimebaseOutputTerminal.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Exported Sample Clock Timebase Divisor"
+   "Clocks:Sample Clock Timebase:Exported Sample Clock Timebase Divisor"
+   iL	readwrite	49	00118D16
+   "Specifies the factor by which to divide the device clock (Sample clock timebase) before it is exported."	"pniFgen_ExportedSampleClockTimebaseDivisor.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "External Sample Clock Multiplier"
+   "Clocks:Advanced:External Sample Clock Multiplier"
+   fD	readwrite	49	00118DA8
+   "Specifies a multiplication factor to use to obtain a desired sample rate from an external Sample clock."	"pniFgen_ExternalSampleClockMultiplier.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Sample Clock Absolute Delay"
+   "Clocks:Advanced:Sample Clock Absolute Delay"
+   fD	readwrite	49	00118D17
+   "Specifies the delay in seconds to apply to an external Sample clock. This property is useful when trying to align the output of two devices."	"pniFgen_SampleClockAbsoluteDelay.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "External Clock Delay Binary Value"
+   "Clocks:Advanced:External Clock Delay Binary Value"
+   iL	readwrite	49	00118D19
+   "Specifies the external clock delay binary value."	"pniFgen_ExternalClockDelayBinaryValue.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Oscillator Phase DAC Value"
+   "Clocks:Advanced:Oscillator Phase DAC Value"
+   iL	readwrite	49	00118D18
+   "Specifies the oscillator phase DAC value."	"pniFgen_OscillatorPhaseDACValue.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Marker Event Output Terminal"
+   "Events:Marker:Output Terminal"
+   string	readwrite	49	00118D68
+   "Specifies the destination terminal for the Marker event.
+
+For a list of the terminals available on your device, refer to the <b>Device Routes</b> tab in MAX."	"pniFgen_MarkerEventOutputTerminal.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Marker Event Output Behavior"
+   "Events:Marker:Output Behavior"
+   iL enum { "Pulse"=101, "Toggle"=103 }	readwrite	49	00118D86
+   "Specifies the output behavior for the Marker event."	"pniFgen_MarkerEventOutputBehavior.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Marker Event Pulse Polarity"
+   "Events:Marker:Pulse:Polarity"
+   iL enum { "Active High"=101, "Active Low"=102 }	readwrite	49	00118D69
+   "Specifies the output polarity of the Marker event."	"pniFgen_MarkerEventPulsePolarity.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Marker Event Pulse Width Units"
+   "Events:Marker:Pulse:Width Units"
+   iL enum { "Sample Clock Periods"=101, "Seconds"=102 }	readwrite	49	00118D85
+   "Specifies the pulse width units of the Marker event."	"pniFgen_MarkerEventPulseWidthUnits.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Marker Event Pulse Width Value"
+   "Events:Marker:Pulse:Width Value"
+   fD	readwrite	49	00118D84
+   "Specifies the pulse width value of the Marker event."	"pniFgen_MarkerEventPulseWidthValue.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Marker Event Toggle Initial State"
+   "Events:Marker:Toggle:Initial State"
+   iL enum { "High"=101, "Low"=102 }	readwrite	49	00118D87
+   "Specifies the initial state of the Marker event."	"pniFgen_MarkerEventToggleInitialState.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Marker Event Delay Units"
+   "Events:Marker:Advanced:Delay Units"
+   iL enum { "Sample Clock Periods"=101, "Seconds"=102 }	readwrite	49	00118D93
+   "Specifies the units used for the Marker Event Delay Value property."	"pniFgen_MarkerEventDelayUnits.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Marker Event Delay Value"
+   "Events:Marker:Advanced:Delay Value"
+   fD	readwrite	49	00118D92
+   "Specifies the amount of delay applied to a Marker event with respect to the analog output of the signal generator."	"pniFgen_MarkerEventDelayValue.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Marker Event Latched Status"
+   "Events:Marker:Advanced:Latched Status"
+   bool	readwrite	49	00118D8E
+   "Specifies the latched status of the specified Marker event. Set this property to FALSE to clear the latched status of the Marker Event."	"pniFgen_MarkerEventLatchedStatus.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "All Marker Events Latched Status"
+   "Events:Marker:Advanced:All Marker Events Latched Status"
+   iL	readwrite	49	00118D8D
+   "Returns a bit field of the latched status of all Marker events. Set this property to 0 to clear the latched status of all Marker events."	"pniFgen_AllMarkerEventsLatchedStatus.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Marker Event Live Status"
+   "Events:Marker:Advanced:Live Status"
+   bool	readonly	17	00118D89
+   "Returns the live status of the specified Marker event."	"pniFgen_MarkerEventLiveStatus.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "All Marker Events Live Status"
+   "Events:Marker:Advanced:All Marker Events Live Status"
+   iL	readonly	17	00118D88
+   "Returns a bit field of the live status of all Marker events."	"pniFgen_AllMarkerEventsLiveStatus.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Data Marker Event Output Terminal"
+   "Events:Data Marker:Output Terminal"
+   string	readwrite	49	00118D83
+   "Specifies the destination terminal for the Data Marker event. For a list of the terminals available on your device, refer to the <b>Device Routes</b> tab in MAX."	"pniFgen_DataMarkerEventOutputTerminal.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Data Marker Event Bit Number"
+   "Events:Data Marker:Data Bit Number"
+   iL	readwrite	49	00118D81
+   "Specifies the bit number to assign to the Data Marker event."	"pniFgen_DataMarkerEventBitNumber.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Data Marker Event Level Polarity"
+   "Events:Data Marker:Level:Active Level"
+   iL enum { "Active High"=101, "Active Low"=102 }	readwrite	49	00118D82
+   "Specifies the output polarity of the Data Marker event. Refer to Data Marker Events topic for more information about Data Marker event polarity."	"pniFgen_DataMarkerEventLevelPolarity.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Ready For Start Event Output Terminal"
+   "Events:Ready For Start:Output Terminal"
+   string	readwrite	49	00118D66
+   "Specifies the destination terminal for the Ready for Start event. For a list of the terminals available on your device, refer to the <b>Device Routes</b> tab in MAX."	"pniFgen_ReadyForStartEventOutputTerminal.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Ready For Start Event Active Level"
+   "Events:Ready For Start:Level:Active Level"
+   iL enum { "Active High"=101, "Active Low"=102 }	readwrite	49	00118D67
+   "Specifies the output polarity of the Ready for Start event."	"pniFgen_ReadyForStartEventActiveLevel.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Ready For Start Event Live Status"
+   "Events:Ready For Start:Advanced:Live Status"
+   bool	readonly	17	00118D8C
+   "Returns the live status of the specified Ready For Start event."	"pniFgen_ReadyForStartEventLiveStatus.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Started Event Output Terminal"
+   "Events:Started:Output Terminal"
+   string	readwrite	49	00118D6A
+   "Specifies the destination terminal for the Started event. For a list of the terminals available on your device, refer to the <b>Device Routes</b> tab in MAX."	"pniFgen_StartedEventOutputTerminal.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Started Event Output Behavior"
+   "Events:Started:Output Behavior"
+   iL enum { "Pulse"=101, "Level"=102 }	readwrite	49	00118D7B
+   "Specifies the output behavior for the Started event."	"pniFgen_StartedEventOutputBehavior.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Started Event Pulse Polarity"
+   "Events:Started:Pulse:Polarity"
+   iL enum { "Active High"=101, "Active Low"=102 }	readwrite	49	00118D6E
+   "Specifies the output polarity of the Started event."	"pniFgen_StartedEventPulsePolarity.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Started Event Pulse Width Units"
+   "Events:Started:Pulse:Width Units"
+   iL enum { "Sample Clock Periods"=101, "Seconds"=102 }	readwrite	49	00118D7D
+   "Specifies the pulse width units for the Started event."	"pniFgen_StartedEventPulseWidthUnits.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Started Event Pulse Width Value"
+   "Events:Started:Pulse:Width Value"
+   fD	readwrite	49	00118D7F
+   "Specifies the pulse width value for the Started event."	"pniFgen_StartedEventPulseWidthValue.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Started Event Active Level"
+   "Events:Started:Level:Active Level"
+   iL enum { "Active High"=101, "Active Low"=102 }	readwrite	49	00118D6C
+   "Specifies the output polarity of the Started event."	"pniFgen_StartedEventActiveLevel.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Started Event Delay Units"
+   "Events:Started:Advanced:Delay Units"
+   iL enum { "Sample Clock Periods"=101, "Seconds"=102 }	readwrite	49	00118D95
+   "Specifies the units used for the Started Event Delay Value property."	"pniFgen_StartedEventDelayUnits.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Started Event Delay Value"
+   "Events:Started:Advanced:Delay Value"
+   fD	readwrite	49	00118D94
+   "Specifies the amount of delay applied to a Started event with respect to the analog output of the signal generator."	"pniFgen_StartedEventDelayValue.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Started Event Latched Status"
+   "Events:Started:Advanced:Latched Status"
+   bool	readonly	17	00118D90
+   "Returns the latched status of the specified Started event."	"pniFgen_StartedEventLatchedStatus.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Done Event Output Terminal"
+   "Events:Done:Output Terminal"
+   string	readwrite	49	00118D6B
+   "Specifies the destination terminal for the Done event. For a list of the terminals available on your device, refer to the <b>Device Routes</b> tab in MAX."	"pniFgen_DoneEventOutputTerminal.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Done Event Output Behavior"
+   "Events:Done:Output Behavior"
+   iL enum { "Pulse"=101, "Level"=102 }	readwrite	49	00118D7C
+   "Specifies the output behavior for the Done event."	"pniFgen_DoneEventOutputBehavior.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Done Event Pulse Polarity"
+   "Events:Done:Pulse:Polarity"
+   iL enum { "Active High"=101, "Active Low"=102 }	readwrite	49	00118D6F
+   "Specifies the output polarity of the Done event."	"pniFgen_DoneEventPulsePolarity.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Done Event Pulse Width Units"
+   "Events:Done:Pulse:Width Units"
+   iL enum { "Sample Clock Periods"=101, "Seconds"=102 }	readwrite	49	00118D7E
+   "Specifies the pulse width units for the Done event."	"pniFgen_DoneEventPulseWidthUnits.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Done Event Pulse Width Value"
+   "Events:Done:Pulse:Width Value"
+   fD	readwrite	49	00118D80
+   "Specifies the pulse width for the Done event."	"pniFgen_DoneEventPulseWidthValue.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Done Event Active Level"
+   "Events:Done:Level:Active Level"
+   iL enum { "Active High"=101, "Active Low"=102 }	readwrite	49	00118D6D
+   "Specifies the output polarity of the Done event."	"pniFgen_DoneEventActiveLevel.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Done Event Delay Units"
+   "Events:Done:Advanced:Delay Units"
+   iL enum { "Sample Clock Periods"=101, "Seconds"=102 }	readwrite	49	00118D97
+   "Specifies the units used for the Done Event Delay Value property."	"pniFgen_DoneEventDelayUnits.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Done Event Delay Value"
+   "Events:Done:Advanced:Delay Value"
+   fD	readwrite	49	00118D96
+   "Specifies the amount of delay applied to a Done event with respect to the analog output of the signal generator."	"pniFgen_DoneEventDelayValue.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Done Event Latched Status"
+   "Events:Done:Advanced:Latched Status"
+   bool	readonly	17	00118D8F
+   "Returns the latched status of the specified Done event."	"pniFgen_DoneEventLatchedStatus.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Trigger Mode"
+   "Triggers:Trigger Mode"
+   iL enum { "NIFGEN_VAL_SINGLE"=1, "NIFGEN_VAL_CONTINUOUS"=2, "NIFGEN_VAL_STEPPED"=3, "NIFGEN_VAL_BURST"=4 }	readwrite	17	00118C9C
+   "Controls the trigger mode."	"pniFgen_TriggerMode.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Start Trigger Type"
+   "Triggers:Start:Trigger Type"
+   iL enum { "None"=101, "Digital Edge"=102, "Software Edge"=104, "P2P Endpoint Fullness"=106 }	readwrite	49	00118D48
+   "Specifies the type of Start trigger you want to use. You can also choose <b>None</b> as the value for this property."	"pniFgen_StartTriggerType.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Exported Start Trigger Output Terminal"
+   "Triggers:Start:Output Terminal"
+   string	readwrite	49	00118D4B
+   "Specifies the destination terminal for exporting the Start trigger.
+
+For a list of the terminals available on your device, refer to the <b>Device Routes</b> tab in MAX."	"pniFgen_ExportedStartTriggerOutputTerminal.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Start Trigger Digital Edge - Source"
+   "Triggers:Start:Digital Edge:Source"
+   string	readwrite	49	00118D49
+   "Specifies the source terminal for the Start trigger. This property is used only when the Start Trigger Type property is set to <b>Digital Edge</b>."	"pniFgen_StartTriggerDigitalEdge-Source.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Start Trigger Digital Edge - Edge"
+   "Triggers:Start:Digital Edge:Edge"
+   iL enum { "Rising Edge"=101, "Falling Edge"=102 }	readwrite	49	00118D4A
+   "Specifies the active edge for the Start trigger. This property is used only when the Start Trigger Type property is set to <b>Digital Edge</b>."	"pniFgen_StartTriggerDigitalEdge-Edge.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "P2P Endpoint Fullness Start Trigger Level"
+   "Triggers:Start:P2P Endpoint Fullness:Level"
+   iL	readwrite	17	00118DCA
+   "Specifies the number of samples the endpoint needs to receive before the signal generator starts generation. This property applies only when the Start Trigger Type property is set to <b>P2P Endpoint Fullness</b>. Refer to the Flow Control topic in the NI Signal Generators Help for more information about peer-to-peer operations. This property is coerced down to 8 byte boundaries."	"pniFgen_P2PEndpointFullnessStartTriggerLevel.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Script Trigger Type"
+   "Triggers:Script:Trigger Type"
+   iL enum { "None"=101, "Digital Edge"=102, "Digital Level"=103, "Software Edge"=104 }	readwrite	49	00118D52
+   "Specifies the Script trigger type. Depending upon the value of this property, additional properties may be needed to fully configure the trigger."	"pniFgen_ScriptTriggerType.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Exported Script Trigger Output Terminal"
+   "Triggers:Script:Output Terminal"
+   string	readwrite	49	00118D57
+   "Specifies the output terminal for the exported Script trigger."	"pniFgen_ExportedScriptTriggerOutputTerminal.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Script Trigger Digital Edge - Source"
+   "Triggers:Script:Digital Edge:Source"
+   string	readwrite	49	00118D53
+   "Specifies the source terminal for the Script trigger. This property is used when the Script Trigger Type property is set to <b>Digital Edge</b>."	"pniFgen_ScriptTriggerDigitalEdge-Source.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Script Trigger Digital Edge - Edge"
+   "Triggers:Script:Digital Edge:Edge"
+   iL enum { "Rising Edge"=101, "Falling Edge"=102 }	readwrite	49	00118D54
+   "Specifies the active edge for the Script trigger. This property is used when the Script Trigger Type property is set to <b>Digital Edge</b>."	"pniFgen_ScriptTriggerDigitalEdge-Edge.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Script Trigger Digital Level - Source"
+   "Triggers:Script:Digital Level:Source"
+   string	readwrite	49	00118D55
+   "Specifies the source terminal for the Script trigger. This property is used when the Script Trigger Type property is set to <b>Digital Level</b>."	"pniFgen_ScriptTriggerDigitalLevel-Source.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Script Trigger Digital Level - Active Level"
+   "Triggers:Script:Digital Level:Active Level"
+   iL enum { "High Level"=101, "Low Level"=102 }	readwrite	49	00118D56
+   "Specifies the active level for the Script trigger. This property is used when the Script Trigger Type property is set to <b>Digital Level</b>."	"pniFgen_ScriptTriggerDigitalLevel-ActiveLevel.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Bus Type"
+   "Instrument:Bus Type"
+   iL enum { "NIFGEN_VAL_BUS_INVALID"=0, "NIFGEN_VAL_BUS_AT"=1, "NIFGEN_VAL_BUS_PCI"=2, "NIFGEN_VAL_BUS_PXI"=3, "NIFGEN_VAL_BUS_VXI"=4, "NIFGEN_VAL_BUS_PCMCIA"=5, "NIFGEN_VAL_BUS_PXIE"=6 }	readonly	17	00118D07
+   "Returns the bus type of the signal generator."	"pniFgen_BusType.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Memory Size"
+   "Instrument:Memory Size"
+   iL	readonly	17	00118D22
+   "Returns the amount of memory in bytes on the signal generator."	"pniFgen_MemorySize.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Serial Number"
+   "Instrument:Serial Number"
+   string	readonly	17	00118D23
+   "Returns the serial number of the signal generator."	"pniFgen_SerialNumber.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Markers Count"
+   "Instrument:Marker Events Count"
+   iL	readonly	17	00118D3F
+   "Returns the number of markers supported by the device. Use this property when the Output Mode property is set to <b>NIFGEN_VAL_OUTPUT_SCRIPT</b>."	"pniFgen_MarkersCount.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Data Markers Count"
+   "Instrument:Data Marker Events Count"
+   iL	readonly	17	00118D41
+   "Returns the number of Data Marker events supported by the device."	"pniFgen_DataMarkersCount.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Script Triggers Count"
+   "Instrument:Script Triggers Count"
+   iL	readonly	17	00118D40
+   "Specifies the number of Script triggers supported by the device. Use this property when the Output Mode property is set to <b>NIFGEN_VAL_OUTPUT_SCRIPT</b>."	"pniFgen_ScriptTriggersCount.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Cal ADC Input"
+   "Instrument:Calibration:Cal ADC Input"
+   iL enum { "NIFGEN_VAL_ANALOG_OUTPUT"=0, "NIFGEN_VAL_INTERNAL_VOLTAGE_REFERENCE"=1, "NIFGEN_VAL_GROUND"=2, "NIFGEN_VAL_ANALOG_OUTPUT_DIFFERENTIAL"=3, "NIFGEN_VAL_ANALOG_OUTPUT_PLUS"=4, "NIFGEN_VAL_ANALOG_OUTPUT_MINUS"=5, "NIFGEN_VAL_ANALOG_OUTPUT_IDLE"=6 }	readwrite	49	00118D13
+   "Specifies the input of the calibration ADC. The ADC can take a reading from several inputs: the analog output, a 2.5 V reference, and ground. The latter two inputs are used to calibrate the ADC itself."	"pniFgen_CalADCInput.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Gain DAC Value"
+   "Instrument:Calibration:Gain DAC Value"
+   iL	readwrite	49	00118D0F
+   "Specifies the value programmed to the Gain DAC. The value should be treated as an unsigned, right-justified number."	"pniFgen_GainDACValue.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Offset DAC Value"
+   "Instrument:Calibration:Offset DAC Value"
+   iL	readwrite	49	00118D10
+   "Specifies the value programmed to the Offset DAC. The value should be treated as an unsigned, right-justified number."	"pniFgen_OffsetDACValue.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Oscillator Freq DAC Value"
+   "Instrument:Calibration:Oscillator Freq DAC Value"
+   iL	readwrite	49	00118D11
+   "Specifies the value programmed to the Oscillator DAC. The value should be treated as an unsigned, right-justified number."	"pniFgen_OscillatorFreqDACValue.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Pre-Amplifier Attenuation"
+   "Instrument:Calibration:Pre-Amplifier Attenuation"
+   fD	readwrite	49	00118D14
+   "Specifies the amount of preamplifier attenuation to apply to the signal (in dB)."	"pniFgen_Pre-AmplifierAttenuation.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Post-Amplifier Attenuation"
+   "Instrument:Calibration:Post-Amplifier Attenuation"
+   fD	readwrite	49	00118D15
+   "Specifies the amount of post-amplifier attenuation to apply to the signal (in dB)."	"pniFgen_Post-AmplifierAttenuation.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Range Check"
+   "Instrument:Inherent IVI Attributes:User Options:Range Check"
+   bool	readwrite	17	00100592
+   "Specifies whether to validate property values and VI parameters. Set this property to TRUE to enable range-checking."	"pniFgen_RangeCheck.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Query Instrument Status"
+   "Instrument:Inherent IVI Attributes:User Options:Query Instrument Status"
+   bool	readwrite	17	00100593
+   "Specifies whether NI-FGEN retains instrument status after each operation. Set this property to TRUE to query the instrument status."	"pniFgen_QueryInstrumentStatus.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Cache"
+   "Instrument:Inherent IVI Attributes:User Options:Cache"
+   bool	readwrite	17	00100594
+   "Specifies whether to cache the value of properties."	"pniFgen_Cache.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Simulate"
+   "Instrument:Inherent IVI Attributes:User Options:Simulate"
+   bool	readwrite	17	00100595
+   "Specifies whether or not to simulate NI-FGEN I/O operations. Set this property to TRUE to enable simulation."	"pniFgen_Simulate.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Record Value Coercions"
+   "Instrument:Inherent IVI Attributes:User Options:Record Value Coercions"
+   bool	readwrite	17	00100596
+   "Specifies whether the IVI engine keeps a list of the value coercions it makes for ViInt32 and ViReal64 properties. Set this property to TRUE to record the coercions. Use the niFgen Initialize With Options VI to override this value."	"pniFgen_RecordValueCoercions.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Interchange Check"
+   "Instrument:Inherent IVI Attributes:User Options:Interchange Check"
+   bool	readwrite	17	001005A5
+   "Specifies whether to perform interchangeability checking and log interchangeability warnings when you call VIs. Set this property to TRUE to enable interchangeability checking."	"pniFgen_InterchangeCheck.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Description"
+   "Instrument:Inherent IVI Attributes:Driver Identification:Description"
+   string	readonly	17	00100792
+   "Contains a brief description of the specific driver."	"pniFgen_Description.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Driver Prefix"
+   "Instrument:Inherent IVI Attributes:Driver Identification:Driver Prefix"
+   string	readonly	17	001006BE
+   "Contains the prefix for NI-FGEN. The name of each user-callable VI in NI-FGEN starts with this prefix."	"pniFgen_DriverPrefix.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Driver Vendor"
+   "Instrument:Inherent IVI Attributes:Driver Identification:Driver Vendor"
+   string	readonly	17	00100791
+   "Contains the name of the vendor that supplies NI-FGEN."	"pniFgen_DriverVendor.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Revision"
+   "Instrument:Inherent IVI Attributes:Driver Identification:Revision"
+   string	readonly	17	001007B7
+   "Contains additional version information about NI-FGEN."	"pniFgen_Revision.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Class Specification Major Version"
+   "Instrument:Inherent IVI Attributes:Driver Identification:Class Specification Major Version"
+   iL	readonly	17	00100793
+   "Returns the major version number of the class specification with which NI-FGEN is compliant."	"pniFgen_ClassSpecificationMajorVersion.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Class Specification Minor Version"
+   "Instrument:Inherent IVI Attributes:Driver Identification:Class Specification Minor Version"
+   iL	readonly	17	00100794
+   "Returns the minor version number of the class specification with which NI-FGEN is compliant."	"pniFgen_ClassSpecificationMinorVersion.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Supported Instrument Models"
+   "Instrument:Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models"
+   string	readonly	17	001006D7
+   "Contains a model code of the instrument. For drivers that support more than one device, this property contains a comma-separated list of supported instrument models."	"pniFgen_SupportedInstrumentModels.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Class Group Capabilities"
+   "Instrument:Inherent IVI Attributes:Driver Capabilities:Class Group Capabilities"
+   string	readonly	17	00100721
+   "Contains a comma-separated list of class-extension groups that NI-FGEN implements."	"pniFgen_ClassGroupCapabilities.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Channel Count"
+   "Instrument:Inherent IVI Attributes:Driver Capabilities:Channel Count"
+   iL	readonly	17	0010065B
+   "Indicates the number of channels that NI-FGEN supports. For each property for which IVI_VAL_MULTI_CHANNEL is set, the IVI engine maintains a separate cache value for each channel."	"pniFgen_ChannelCount.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Manufacturer"
+   "Instrument:Inherent IVI Attributes:Instrument Identification:Manufacturer"
+   string	readonly	17	0010078F
+   "Contains the name of the instrument manufacturer you are currently using."	"pniFgen_Manufacturer.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Model"
+   "Instrument:Inherent IVI Attributes:Instrument Identification:Model"
+   string	readonly	17	00100790
+   "Contains the model number or name of the instrument that you are currently using."	"pniFgen_Model.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Firmware Revision"
+   "Instrument:Inherent IVI Attributes:Instrument Identification:Firmware Revision"
+   string	readonly	17	0010078E
+   "Contains the firmware revision information for the instrument you are currently using."	"pniFgen_FirmwareRevision.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Module Revision"
+   "Instrument:Inherent IVI Attributes:Instrument Identification:Module Revision"
+   string	readonly	17	00118DB6
+   "Returns the revision letter of the module you are using."	"pniFgen_ModuleRevision.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Logical Name"
+   "Instrument:Inherent IVI Attributes:Advanced Session Information:Logical Name"
+   string	readonly	17	001006C1
+   "Contains the logical name you specified when opening the current IVI session."	"pniFgen_LogicalName.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Resource Descriptor"
+   "Instrument:Inherent IVI Attributes:Advanced Session Information:Resource Descriptor"
+   string	readonly	17	001006C0
+   "Indicates the resource descriptor NI-FGEN uses to identify the physical device."	"pniFgen_ResourceDescriptor.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Filter Correction Frequency"
+   "Instrument:5401/5411/5431:Filter Correction Frequency"
+   fD	readwrite	17	00118C98
+   "Specifies the filter correction frequency of the analog filter. This property can correct for the ripples in the analog filter frequency response at the frequency specified."	"pniFgen_FilterCorrectionFrequency.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Trigger Source"
+   "Instrument:5401/5411/5431:Trigger Source"
+   iL enum { "NIFGEN_VAL_IMMEDIATE"=0, "NIFGEN_VAL_EXTERNAL"=1, "NIFGEN_VAL_PFI_0"=1011, "NIFGEN_VAL_PFI_1"=1012, "NIFGEN_VAL_PFI_2"=1013, "NIFGEN_VAL_PFI_3"=1014, "NIFGEN_VAL_SOFTWARE_TRIG"=2, "NIFGEN_VAL_RTSI_0"=141, "NIFGEN_VAL_RTSI_1"=142, "NIFGEN_VAL_RTSI_2"=143, "NIFGEN_VAL_RTSI_3"=144, "NIFGEN_VAL_RTSI_4"=145, "NIFGEN_VAL_RTSI_5"=146, "NIFGEN_VAL_RTSI_6"=147, "NIFGEN_VAL_RTSI_7"=1010, "NIFGEN_VAL_PXI_STAR"=131, "NIFGEN_VAL_TTL0"=111, "NIFGEN_VAL_TTL1"=112, "NIFGEN_VAL_TTL2"=113, "NIFGEN_VAL_TTL3"=114, "NIFGEN_VAL_TTL4"=115, "NIFGEN_VAL_TTL5"=116, "NIFGEN_VAL_TTL6"=117, "NIFGEN_VAL_OTHER_TERMINAL"=1018 }	readwrite	49	001313FE
+   "Specifies which trigger source the signal generator uses. 
+
+After you call the niFgen Initiate Generation VI, the signal generator waits for the trigger you specify in this parameter. After it receives a trigger, the signal generator produces the number of cycles you specify in the Repeat Count property.
+
+The value you select for this property is also the source for the trigger in the other trigger modes as specified by the Trigger Mode property."	"pniFgen_TriggerSource.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Synchronization Source"
+   "Instrument:5401/5411/5431:Synchronization Source"
+   iL enum { "NIFGEN_VAL_NONE"=1000, "NIFGEN_VAL_RTSI_0"=141, "NIFGEN_VAL_RTSI_1"=142, "NIFGEN_VAL_RTSI_2"=143, "NIFGEN_VAL_RTSI_3"=144, "NIFGEN_VAL_RTSI_4"=145, "NIFGEN_VAL_RTSI_5"=146, "NIFGEN_VAL_RTSI_6"=147, "NIFGEN_VAL_TTL0"=111, "NIFGEN_VAL_TTL1"=112, "NIFGEN_VAL_TTL2"=113, "NIFGEN_VAL_TTL3"=114, "NIFGEN_VAL_TTL4"=115, "NIFGEN_VAL_TTL5"=116, "NIFGEN_VAL_TTL6"=117 }	readwrite	17	00118C9F
+   "Specifies the source of the synchronization signal to use."	"pniFgen_SynchronizationSource.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Video Waveform Type"
+   "Instrument:5401/5411/5431:Video Waveform Type"
+   iL enum { "NIFGEN_VAL_PAL_B"=0, "NIFGEN_VAL_PAL_D"=1, "NIFGEN_VAL_PAL_G"=2, "NIFGEN_VAL_PAL_H"=3, "NIFGEN_VAL_PAL_I"=4, "NIFGEN_VAL_PAL_M"=5, "NIFGEN_VAL_PAL_N"=6, "NIFGEN_VAL_NTSC_M"=7 }	readwrite	17	00118D08
+   "Specifies the waveform type the NI 5431 generates. Setting this property ensures the oscillator crystal is set to the proper frequency."	"pniFgen_VideoWaveformType.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Major Version"
+   "Instrument:Obsolete:Major Version"
+   iL	readonly	17	00100787
+   "Returns the major version number of NI-FGEN."	"pniFgen_MajorVersion.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Minor Version"
+   "Instrument:Obsolete:Minor Version"
+   iL	readonly	17	00100788
+   "Returns the minor version number of NI-FGEN."	"pniFgen_MinorVersion.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Error Elaboration"
+   "Instrument:Obsolete:Error Elaboration"
+   string	readwrite	17	001005F7
+   "Contains an optional string with additional information concerning the primary error condition."	"pniFgen_ErrorElaboration.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Primary Error"
+   "Instrument:Obsolete:Primary Error"
+   iL	readwrite	17	001005F5
+   "Describes the first error that occurred since the last call to the niFgen Error Message VI on the session."	"pniFgen_PrimaryError.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Secondary Error"
+   "Instrument:Obsolete:Secondary Error"
+   iL	readwrite	17	001005F6
+   "Provides an optional code with additional information concerning the primary error condition. The error and warning values can be status codes defined by IVI, VISA, class drivers, or specific drivers. Zero indicates no additional information."	"pniFgen_SecondaryError.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Operation Mode"
+   "Instrument:Obsolete:Operation Mode"
+   iL enum { "NIFGEN_VAL_OPERATE_CONTINUOUS"=0 }	readwrite	17	001312D5
+   "Specifies how the signal generator produces waveforms. NI signal generators currently support only one value: <b>NIFGEN_VAL_OPERATE_CONTINUOUS</b>. To control trigger mode, set the Trigger Mode property."	"pniFgen_OperationMode.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Ref Clock Source"
+   "Instrument:Obsolete:Ref Clock Source"
+   iL	readwrite	49	001312D2
+   "Controls the Reference clock source the signal generator uses."	"pniFgen_RefClockSource.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Update Clock Source"
+   "Instrument:Obsolete:Update Clock Source"
+   iL enum { "NIFGEN_VAL_INTERNAL"=0, "NIFGEN_VAL_EXTERNAL"=1, "NIFGEN_VAL_CLK_IN"=1202, "NIFGEN_VAL_DDC_CLK_IN"=1203, "NIFGEN_VAL_PXI_STAR"=131, "NIFGEN_VAL_RTSI_0"=141, "NIFGEN_VAL_RTSI_1"=142, "NIFGEN_VAL_RTSI_2"=143, "NIFGEN_VAL_RTSI_3"=144, "NIFGEN_VAL_RTSI_4"=145, "NIFGEN_VAL_RTSI_5"=146, "NIFGEN_VAL_RTSI_6"=147, "NIFGEN_VAL_RTSI_7"=1010, "NIFGEN_VAL_OTHER_TERMINAL"=1018 }	readwrite	49	00118C9A
+   "Controls the Update clock source."	"pniFgen_UpdateClockSource.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "Actual Arb Sample Rate"
+   "Instrument:Obsolete:Actual Arb Sample Rate"
+   fD	readonly	17	00118C9D
+   "Returns the actual sample rate value of the signal generator after any coercion or rounding."	"pniFgen_ActualArbSampleRate.html"	"<helpdir>:\nifgenpropref.chm"
+
+attribute: "DAQmx Task"
+   "Instrument:Obsolete:DAQmx Task"
+   iL	readonly	17	00118D0D
+   "Returns the NI-DAQmx task pointer."	"pniFgen_DAQmxTask.html"	"<helpdir>:\nifgenpropref.chm"

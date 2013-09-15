@@ -1,0 +1,1323 @@
+explicitActiveChannels: TRUE
+library: IviRFSigGen**.dll
+
+class: "IviRFSigGen"
+flags: 16
+sorted: no
+implements: ivi, iviResourceMgr
+attribute: "Active Channel" "Active Channel" string writeonly 3 -2	
+        "Specifies the channel name used to access all subsequent channel-based properties in this property node. Set the channel before setting channel-based properties. Pass a name that the instrument driver defines or a virtual channel name configured in MAX."
+"ActiveChannel.html" "../../help/lvivi.chm"
+attribute: "Range Check"
+	"Inherent IVI Settings:User Options:Range Check"
+	bool readwrite 1 00100592
+"Specifies whether to validate property values and VI parameters.  If enabled, the instrument driver validates the parameter values that you pass to driver VIs.  Range checking parameters is very useful for debugging.  After you validate your program, you can set this property to FALSE to disable range checking and maximize performance.
+    The default value is TRUE.   Use the IviRFSigGen Initialize With Options VI to override this value.
+    
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"CLASSPREFIX_ATTR_RANGE_CHECK.html" "../../help/lvivi.chm"
+attribute: "Query Instrument Status"
+	"Inherent IVI Settings:User Options:Query Instrument Status"
+	bool readwrite 1 00100593
+"Specifies whether the instrument driver queries the instrument status after each operation.  Querying the instrument status is very useful for debugging.  After you validate your program, you can set this property to FALSE to disable status checking and maximize performance
+    The instrument driver can choose to ignore status checking for particular properties regardless of the setting of this property.
+    The default value is FALSE.   Use the IviRFSigGen Initialize With Options.vi to override this value.
+    
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"CLASSPREFIX_ATTR_QUERY_INSTR_STATUS.html" "../../help/lvivi.chm"
+attribute: "Cache"
+	"Inherent IVI Settings:User Options:Cache"
+	bool readwrite 1 00100594
+"Specifies whether to cache the value of properties.  When caching is enabled, the instrument driver keeps track of the current instrument settings and avoids sending redundant commands to the instrument.  Thus, you can significantly increase execution speed.
+    The instrument driver can choose always to cache or never to cache particular properties regardless of the setting of this property.
+    The default value is TRUE.  Use the IviRFSigGen Initialize With Options VI to override this value.
+    
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"CLASSPREFIX_ATTR_CACHE.html" "../../help/lvivi.chm"
+attribute: "Simulate"
+	"Inherent IVI Settings:User Options:Simulate"
+	bool readwrite 1 00100595
+"Specifies whether or not to simulate instrument driver I/O operations.  For output parameters that represent instrument data, the instrument driver VIs return calculated values.
+    The default value is FALSE.   Use the IviRFSigGen Initialize With Options VI to override this value.
+    
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"CLASSPREFIX_ATTR_SIMULATE.html" "../../help/lvivi.chm"
+attribute: "Record Value Coercions"
+	"Inherent IVI Settings:User Options:Record Value Coercions"
+	bool readwrite 1 00100596
+"Specifies whether the IVI engine keeps a list of the value coercions it makes for integer and real type properties.  You call IviRFSigGen Get Next Coercion Record VI to extract and delete the oldest coercion record from the list.
+    The default value is FALSE.   Use the IviRFSigGen Initialize With Options VI to override this value.
+    
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"CLASSPREFIX_ATTR_RECORD_COERCIONS.html" "../../help/lvivi.chm"
+attribute: "Interchange Check"
+	"Inherent IVI Settings:User Options:Interchange Check"
+	bool readwrite 1 001005A5
+"Specifies whether to perform interchangeability checking and retrieve interchangeability warnings.
+
+The default value is FALSE.
+
+Interchangeability warnings indicate that using your application with a different instrument might cause different behavior.  You call IviRFSigGen Get Next Interchange Warning to extract interchange warnings.  Call the IviRFSigGen Clear Interchange Warnings VI to clear the list of interchangeability warnings without reading them.
+Interchangeability checking logs a warning for each property you have not set that affects the behavior of the instrument.
+    
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"CLASSPREFIX_ATTR_INTERCHANGE_CHECK.html" "../../help/lvivi.chm"
+attribute: "Description"
+	"Inherent IVI Settings:Class Driver Identification:Description"
+	string readonly 1 00100796
+"A string that contains a brief description of the specific driver.
+    "
+"CLASSPREFIX_ATTR_CLASS_DRIVER_DESCRIPTION.html" "../../help/lvivi.chm"
+attribute: "Driver Prefix"
+	"Inherent IVI Settings:Class Driver Identification:Driver Prefix"
+	string readonly 1 001006BD
+"A string that contains the prefix for the instrument driver.  The name of each user-callable VI in this driver starts with this prefix.
+    "
+"CLASSPREFIX_ATTR_CLASS_PREFIX.html" "../../help/lvivi.chm"
+attribute: "Driver Vendor"
+	"Inherent IVI Settings:Class Driver Identification:Driver Vendor"
+	string readonly 1 00100795
+"A string that contains the name of the vendor that supplies this driver.
+    "
+"CLASSPREFIX_ATTR_CLASS_DRIVER_VENDOR.html" "../../help/lvivi.chm"
+attribute: "Revision"
+	"Inherent IVI Settings:Class Driver Identification:Revision"
+	string readonly 1 001007B8
+"A string that contains additional version information about this instrument driver.
+    "
+"CLASSPREFIX_ATTR_CLASS_REVISION.html" "../../help/lvivi.chm"
+attribute: "Class Specification Major Version"
+	"Inherent IVI Settings:Class Driver Identification:Class Specification Major Version"
+	iL readonly 1 00100797
+"The major version number of the class specification with which this driver is compliant.
+    "
+"CLASSPREFIX_ATTR_CLASS_DRIVER_CLASS_SPEC_MAJOR_VERSION.html" "../../help/lvivi.chm"
+attribute: "Class Specification Minor Version"
+	"Inherent IVI Settings:Class Driver Identification:Class Specification Minor Version"
+	iL readonly 1 00100798
+"The minor version number of the class specification with which this driver is compliant.
+    "
+"CLASSPREFIX_ATTR_CLASS_DRIVER_CLASS_SPEC_MINOR_VERSION.html" "../../help/lvivi.chm"
+attribute: "Description"
+	"Inherent IVI Settings:Specific Driver Identification:Description"
+	string readonly 1 00100792
+"A string that contains a brief description of the specific driver
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_DESCRIPTION.html" "../../help/lvivi.chm"
+attribute: "Specific Driver Prefix"
+	"Inherent IVI Settings:Specific Driver Identification:Specific Driver Prefix"
+	string readonly 1 001006BE
+"A string that contains the prefix for the instrument driver.  The name of each user-callable VI in this driver starts with this prefix.
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_PREFIX.html" "../../help/lvivi.chm"
+attribute: "Specific Driver Locator"
+	"Inherent IVI Settings:Specific Driver Identification:Specific Driver Locator"
+	string readonly 1 001006BF
+"Indicates the location at which the class driver attempts to find the specific driver module file.
+"
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_LOCATOR.html" "../../help/lvivi.chm"
+attribute: "Specific Driver Vendor"
+	"Inherent IVI Settings:Specific Driver Identification:Specific Driver Vendor"
+	string readonly 1 00100791
+"A string that contains the name of the vendor that supplies this driver.
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_VENDOR.html" "../../help/lvivi.chm"
+attribute: "Revision"
+	"Inherent IVI Settings:Specific Driver Identification:Revision"
+	string readonly 1 001007B7
+"A string that contains additional version information about the specific driver.
+    "
+"CLASSPREFIX_ATTR_DRIVER_REVISION.html" "../../help/lvivi.chm"
+attribute: "Class Specification Major Version"
+	"Inherent IVI Settings:Specific Driver Identification:Class Specification Major Version"
+	iL readonly 1 00100793
+"The major version number of the class specification with which the specific driver is compliant.
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION.html" "../../help/lvivi.chm"
+attribute: "Class Specification Minor Version"
+	"Inherent IVI Settings:Specific Driver Identification:Class Specification Minor Version"
+	iL readonly 1 00100794
+"The minor version number of the class specification with which the specific driver is compliant.
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION.html" "../../help/lvivi.chm"
+attribute: "Supported Instrument Models"
+	"Inherent IVI Settings:Specific Driver Capabilities:Supported Instrument Models"
+	string readonly 1 001006D7
+"Contains a model code of the instrument. For drivers that support more than one device, this property contains a comma-separated list of supported instrument models.
+    "
+"CLASSPREFIX_ATTR_SUPPORTED_INSTRUMENT_MODELS.html" "../../help/lvivi.chm"
+attribute: "Group Capabilities"
+	"Inherent IVI Settings:Specific Driver Capabilities:Group Capabilities"
+	string readonly 1 00100721
+"Indicates the IviRFSigGen capability groups that the specific instrument driver supports.  This property is a comma-delimited list of the following group names:
+
+'IviRFSigGenBase' - Supports the basic signal generator capabilities.
+
+'IviRFSigGenModulateAM' - Supports signal generators that can apply amplitude modulation to the RF output signal.
+
+'IviRFSigGenModulateFM' - Supports signal generators that can apply frequency modulation to the RF output signal.
+
+'IviRFSigGenModulatePM' - Supports signal generators that can apply phase modulation to the RF output signal.
+
+'IviRFSigGenAnalogModulationSource' - Supports signal generators that can configure analog modulation source.
+
+'IviRFSigGenModulatePulse' - Supports signal generators that can apply pulse modulation to the RF output signal.
+
+'IviRFSigGenLFGenerator' - Supports the LF generator (within the RF signal generator), that is normally used as a source for the modulators.
+
+'IviRFSigGenLFGeneratorOutput' - Supports the output of the LF generator, if it is used as a source for external devices.
+
+'IviRFSigGenPulseGenerator' - Supports the pulse generator within the signal generator that is normally used as a source for the pulse modulator.
+
+'IviRFSigGenPulseDoubleGenerator' - Extends the IviRFSigGenPulseGenerator Extension Group to support double pulse generation.
+
+'IviRFSigGenPulseGeneratorOutput' - Requires the IviRFSigGenPulseGenerator extension group. The output of the pulse generator can be enabled or disabled and its polarity set.
+
+'IviRFSigGenSweep' - Supports signal generators with the ability to sweep (or step) the frequency or the power of the RF output signal.
+
+'IviRFSigGenFrequencySweep' - Supports signal generators that can apply a frequency sweep to the output signal.
+
+'IviRFSigGenPowerSweep' - Supports signal generators that can apply a power sweep to the output signal.
+
+'IviRFSigGenFrequencyStep' - Supports signal generators that can vary (sweep) the frequency of the RF output signal in steps.
+
+'IviRFSigGenPowerStep' - Supports signal generators that can vary (sweep) the power of the RF output signal in steps.
+
+'IviRFSigGenList' - Supports signal generators that can set the frequency and power of the RF output signal to values given as a list of values.
+
+'IviRFSigGenALC' - Supports for generators with configurable Automatic Level Control..
+
+'IviRFSigGenReferenceOscillator' - Supports signal generators with a configurable frequency reference.
+
+'IviRFSigGenSoftwareTrigger' - Supports RF signal generators that can generate output based on a software trigger signal.
+
+'IviRFSigGenModulateIQ' - Supports signal generators that can apply IQ (vector) modulation to the RF output signal.
+
+'IviRFSigGenIQImpairment' - Supports signal generators to simulate or correct impairment on IQ (vector) modulation.
+
+'IviRFSigGenArbGenerator' - Controls the internal arbitrary waveform generator.
+
+'IviRFSigGenDigitalModulationBase' - Supports signal generators to generate signals conforming to wireless communication standards (e.g. mobile cellular standards).
+
+'IviRFSigGenCDMABase' - Supports simulate mobile (cell) phone modulation based on Code Division Multiple Access (CDMA) standards.
+
+'IviRFSigGenTDMABase' - Supports simulate mobile (cell) phone modulation based on Time Division Multiple Access (TDMA) standards.
+    "
+"CLASSPREFIX_ATTR_GROUP_CAPABILITIES.html" "../../help/lvivi.chm"
+attribute: "Function Capabilities"
+	"Inherent IVI Settings:Specific Driver Capabilities:Function Capabilities"
+	string readonly 1 00100722
+"Indicates the IviRFSigGen VIs that the specific instrument driver supports.  This property is a comma-delimited list of the following functions:
+
+    'IviRFSigGen_init'
+    'IviRFSigGen_close'
+    'IviRFSigGen_reset'
+    'IviRFSigGen_self_test'
+    'IviRFSigGen_error_query'
+    'IviRFSigGen_error_message'
+    'IviRFSigGen_revision_query'
+    'IviRFSigGen_InitWithOptions'
+    'IviRFSigGen_ConfigureRF'
+    'IviRFSigGen_ConfigureALCEnabled'
+    'IviRFSigGen_ConfigureOutputEnabled'
+    'IviRFSigGen_DisableAllModulation'
+    'IviRFSigGen_IsSettled'
+    'IviRFSigGen_WaitUntilSettled'
+    'IviRFSigGen_ConfigureAMEnabled'
+    'IviRFSigGen_ConfigureAMExternalCoupling'
+    'IviRFSigGen_ConfigureAM'
+    'IviRFSigGen_ConfigureFMEnabled'
+    'IviRFSigGen_ConfigureFMExternalCoupling'
+    'IviRFSigGen_ConfigureFM'
+    'IviRFSigGen_ConfigurePMEnabled'
+    'IviRFSigGen_ConfigurePMExternalCoupling'
+    'IviRFSigGen_ConfigurePM'
+    'IviRFSigGen_GetAnalogModulationSourceName'
+    'IviRFSigGen_ConfigurePulseModulationEnabled'
+    'IviRFSigGen_ConfigurePulseModulationSource'
+    'IviRFSigGen_ConfigurePulseModulationExternalPolarity'
+    'IviRFSigGen_GetLFGeneratorName'
+    'IviRFSigGen_SetActiveLFGenerator'
+    'IviRFSigGen_ConfigureLFGenerator'
+    'IviRFSigGen_ConfigureLFGeneratorOutput'
+    'IviRFSigGen_ConfigurePulseExternalTrigger'
+    'IviRFSigGen_ConfigurePulseInternalTrigger'
+    'IviRFSigGen_ConfigurePulse'
+    'IviRFSigGen_ConfigurePulseDouble'
+    'IviRFSigGen_ConfigurePulseOutput'
+    'IviRFSigGen_ConfigureSweep'
+    'IviRFSigGen_ConfigureFrequencySweepStartStop'
+    'IviRFSigGen_ConfigureFrequencySweepCenterSpan'
+    'IviRFSigGen_ConfigureFrequencySweepTime'
+    'IviRFSigGen_ConfigurePowerSweepStartStop'
+    'IviRFSigGen_ConfigurePowerSweepTime'
+    'IviRFSigGen_ConfigureFrequencyStepStartStop'
+    'IviRFSigGen_ConfigureFrequencyStepDwell'
+    'IviRFSigGen_ResetFrequencyStep'
+    'IviRFSigGen_ConfigurePowerStepStartStop'
+    'IviRFSigGen_ConfigurePowerStepDwell'
+    'IviRFSigGen_ResetPowerStep'
+    'IviRFSigGen_CreateFrequencyList'
+    'IviRFSigGen_CreatePowerList'
+    'IviRFSigGen_CreateFrequencyPowerList'
+    'IviRFSigGen_SelectList'
+    'IviRFSigGen_ClearAllLists'
+    'IviRFSigGen_ConfigureListDwell'
+    'IviRFSigGen_ResetList'
+    'IviRFSigGen_ConfigureALC'
+    'IviRFSigGen_ConfigureReferenceOscillator'
+    'IviRFSigGen_SendSoftwareTrigger'
+    'IviRFSigGen_ConfigureIQEnabled'
+    'IviRFSigGen_ConfigureIQ'
+    'IviRFSigGen_CalibrateIQ'
+    'IviRFSigGen_ConfigureIQImpairmentEnabled'
+    'IviRFSigGen_ConfigureIQImpairment'
+    'IviRFSigGen_ConfigureArb'
+    'IviRFSigGen_WriteArbWaveform'
+    'IviRFSigGen_SelectArbWaveform'
+    'IviRFSigGen_ClearAllArbWaveforms'
+    'IviRFSigGen_QueryArbWaveformCapabilities'
+    'IviRFSigGen_ConfigureArbTriggerSource'
+    'IviRFSigGen_ConfigureArbExternalTriggerSlope'
+    'IviRFSigGen_GetDigitalModulationBaseStandardName'
+    'IviRFSigGen_SelectDigitalModulationBaseStandard'
+    'IviRFSigGen_ConfigureDigitalModulationBaseClockSource'
+    'IviRFSigGen_ConfigureDigitalModulationBaseDataSource'
+    'IviRFSigGen_ConfigureDigitalModulationBasePRBSType'
+    'IviRFSigGen_WriteDigitalModulationBaseBitSequence'
+    'IviRFSigGen_SelectDigitalModulationBaseBitSequence'
+    'IviRFSigGen_ClearAllDigitalModulationBaseBitSequences'
+    'IviRFSigGen_GetCDMAStandardName'
+    'IviRFSigGen_SelectCDMAStandard'
+    'IviRFSigGen_ConfigureCDMAClockSource'
+    'IviRFSigGen_ConfigureCDMATriggerSource'
+    'IviRFSigGen_ConfigureCDMAExternalTriggerSlope'
+    'IviRFSigGen_GetCDMATestModelName'
+    'IviRFSigGen_SelectCDMATestModel'
+    'IviRFSigGen_GetTDMAStandardName'
+    'IviRFSigGen_SelectTDMAStandard'
+    'IviRFSigGen_ConfigureTDMAClockSource'
+    'IviRFSigGen_ConfigureTDMATriggerSource'
+    'IviRFSigGen_ConfigureTDMAExternalTriggerSlope'
+    'IviRFSigGen_GetTDMAFrameName'
+    'IviRFSigGen_SelectTDMAFrame'
+    "
+"CLASSPREFIX_ATTR_FUNCTION_CAPABILITIES.html" "../../help/lvivi.chm"
+attribute: "Attribute Capabilities"
+	"Inherent IVI Settings:Specific Driver Capabilities:Attribute Capabilities"
+	string readonly 1 00100723
+"Indicates the IviRFSigGen properties that the specific instrument driver supports.  This property is a comma-delimited list of the following properties:
+
+    'IVIRFSIGGEN_ATTR_FREQUENCY'
+    'IVIRFSIGGEN_ATTR_POWER_LEVEL'
+    'IVIRFSIGGEN_ATTR_ALC_ENABLED'
+    'IVIRFSIGGEN_ATTR_OUTPUT_ENABLED'
+    'IVIRFSIGGEN_ATTR_AM_ENABLED'
+    'IVIRFSIGGEN_ATTR_AM_SOURCE'
+    'IVIRFSIGGEN_ATTR_AM_SCALING'
+    'IVIRFSIGGEN_ATTR_AM_EXTERNAL_COUPLING'
+    'IVIRFSIGGEN_ATTR_AM_NOMINAL_VOLTAGE'
+    'IVIRFSIGGEN_ATTR_AM_DEPTH'
+    'IVIRFSIGGEN_ATTR_FM_ENABLED'
+    'IVIRFSIGGEN_ATTR_FM_SOURCE'
+    'IVIRFSIGGEN_ATTR_FM_EXTERNAL_COUPLING'
+    'IVIRFSIGGEN_ATTR_FM_NOMINAL_VOLTAGE'
+    'IVIRFSIGGEN_ATTR_FM_DEVIATION'
+    'IVIRFSIGGEN_ATTR_PM_ENABLED'
+    'IVIRFSIGGEN_ATTR_PM_SOURCE'
+    'IVIRFSIGGEN_ATTR_PM_EXTERNAL_COUPLING'
+    'IVIRFSIGGEN_ATTR_PM_NOMINAL_VOLTAGE'
+    'IVIRFSIGGEN_ATTR_PM_DEVIATION'
+    'IVIRFSIGGEN_ATTR_ANALOG_MODULATION_SOURCE_COUNT'
+    'IVIRFSIGGEN_ATTR_PULSE_MODULATION_ENABLED'
+    'IVIRFSIGGEN_ATTR_PULSE_MODULATION_SOURCE'
+    'IVIRFSIGGEN_ATTR_PULSE_MODULATION_EXTERNAL_POLARITY'
+    'IVIRFSIGGEN_ATTR_ACTIVE_LF_GENERATOR'
+    'IVIRFSIGGEN_ATTR_LF_GENERATOR_COUNT'
+    'IVIRFSIGGEN_ATTR_LF_GENERATOR_FREQUENCY'
+    'IVIRFSIGGEN_ATTR_LF_GENERATOR_WAVEFORM'
+    'IVIRFSIGGEN_ATTR_LF_GENERATOR_OUTPUT_AMPLITUDE'
+    'IVIRFSIGGEN_ATTR_LF_GENERATOR_OUTPUT_ENABLED'
+    'IVIRFSIGGEN_ATTR_PULSE_INTERNAL_TRIGGER_PERIOD'
+    'IVIRFSIGGEN_ATTR_PULSE_WIDTH'
+    'IVIRFSIGGEN_ATTR_PULSE_GATING_ENABLED'
+    'IVIRFSIGGEN_ATTR_PULSE_TRIGGER_SOURCE'
+    'IVIRFSIGGEN_ATTR_PULSE_EXTERNAL_TRIGGER_SLOPE'
+    'IVIRFSIGGEN_ATTR_PULSE_EXTERNAL_TRIGGER_DELAY'
+    'IVIRFSIGGEN_ATTR_PULSE_DOUBLE_ENABLED'
+    'IVIRFSIGGEN_ATTR_PULSE_DOUBLE_DELAY'
+    'IVIRFSIGGEN_ATTR_PULSE_OUTPUT_POLARITY'
+    'IVIRFSIGGEN_ATTR_PULSE_OUTPUT_ENABLED'
+    'IVIRFSIGGEN_ATTR_SWEEP_MODE'
+    'IVIRFSIGGEN_ATTR_SWEEP_TRIGGER_SOURCE'
+    'IVIRFSIGGEN_ATTR_FREQUENCY_SWEEP_START'
+    'IVIRFSIGGEN_ATTR_FREQUENCY_SWEEP_STOP'
+    'IVIRFSIGGEN_ATTR_FREQUENCY_SWEEP_TIME'
+    'IVIRFSIGGEN_ATTR_POWER_SWEEP_START'
+    'IVIRFSIGGEN_ATTR_POWER_SWEEP_STOP'
+    'IVIRFSIGGEN_ATTR_POWER_SWEEP_TIME'
+    'IVIRFSIGGEN_ATTR_FREQUENCY_STEP_START'
+    'IVIRFSIGGEN_ATTR_FREQUENCY_STEP_STOP'
+    'IVIRFSIGGEN_ATTR_FREQUENCY_STEP_SCALING'
+    'IVIRFSIGGEN_ATTR_FREQUENCY_STEP_SIZE'
+    'IVIRFSIGGEN_ATTR_FREQUENCY_STEP_SINGLE_STEP_ENABLED'
+    'IVIRFSIGGEN_ATTR_FREQUENCY_STEP_DWELL'
+    'IVIRFSIGGEN_ATTR_POWER_STEP_START'
+    'IVIRFSIGGEN_ATTR_POWER_STEP_STOP'
+    'IVIRFSIGGEN_ATTR_POWER_STEP_SIZE'
+    'IVIRFSIGGEN_ATTR_POWER_STEP_SINGLE_STEP_ENABLED'
+    'IVIRFSIGGEN_ATTR_POWER_STEP_DWELL'
+    'IVIRFSIGGEN_ATTR_LIST_SELECTED_NAME'
+    'IVIRFSIGGEN_ATTR_LIST_SINGLE_STEP_ENABLED'
+    'IVIRFSIGGEN_ATTR_LIST_DWELL'
+    'IVIRFSIGGEN_ATTR_ALC_SOURCE'
+    'IVIRFSIGGEN_ATTR_ALC_BANDWIDTH'
+    'IVIRFSIGGEN_ATTR_REFERENCE_OSCILLATOR_SOURCE'
+    'IVIRFSIGGEN_ATTR_REFERENCE_OSCILLATOR_EXTERNAL_FREQUENCY'
+    'IVIRFSIGGEN_ATTR_IQ_ENABLED'
+    'IVIRFSIGGEN_ATTR_IQ_NOMINAL_VOLTAGE'
+    'IVIRFSIGGEN_ATTR_IQ_SOURCE'
+    'IVIRFSIGGEN_ATTR_IQ_SWAP_ENABLED'
+    'IVIRFSIGGEN_ATTR_IQ_IMPAIRMENT_ENABLED'
+    'IVIRFSIGGEN_ATTR_IQ_I_OFFSET'
+    'IVIRFSIGGEN_ATTR_IQ_Q_OFFSET'
+    'IVIRFSIGGEN_ATTR_IQ_RATIO'
+    'IVIRFSIGGEN_ATTR_IQ_SKEW'
+    'IVIRFSIGGEN_ATTR_ARB_SELECTED_WAVEFORM'
+    'IVIRFSIGGEN_ATTR_ARB_CLOCK_FREQUENCY'
+    'IVIRFSIGGEN_ATTR_ARB_FILTER_FREQUENCY'
+    'IVIRFSIGGEN_ATTR_ARB_MAX_NUMBER_WAVEFORMS'
+    'IVIRFSIGGEN_ATTR_ARB_WAVEFORM_QUANTUM'
+    'IVIRFSIGGEN_ATTR_ARB_WAVEFORM_SIZE_MIN'
+    'IVIRFSIGGEN_ATTR_ARB_WAVEFORM_SIZE_MAX'
+    'IVIRFSIGGEN_ATTR_ARB_TRIGGER_SOURCE'
+    'IVIRFSIGGEN_ATTR_ARB_EXTERNAL_TRIGGER_SLOPE'
+    'IVIRFSIGGEN_ATTR_DIGITAL_MODULATION_BASE_STANDARD_COUNT'
+    'IVIRFSIGGEN_ATTR_DIGITAL_MODULATION_BASE_SELECTED_STANDARD'
+    'IVIRFSIGGEN_ATTR_DIGITAL_MODULATION_BASE_DATA_SOURCE'
+    'IVIRFSIGGEN_ATTR_DIGITAL_MODULATION_BASE_PRBS_TYPE'
+    'IVIRFSIGGEN_ATTR_DIGITAL_MODULATION_BASE_SELECTED_BIT_SEQUENCE'
+    'IVIRFSIGGEN_ATTR_DIGITAL_MODULATION_BASE_CLOCK_SOURCE'
+    'IVIRFSIGGEN_ATTR_DIGITAL_MODULATION_BASE_EXTERNAL_CLOCK_TYPE'
+    'IVIRFSIGGEN_ATTR_CDMA_STANDARD_COUNT'
+    'IVIRFSIGGEN_ATTR_CDMA_SELECTED_STANDARD'
+    'IVIRFSIGGEN_ATTR_CDMA_TRIGGER_SOURCE'
+    'IVIRFSIGGEN_ATTR_CDMA_EXTERNAL_TRIGGER_SLOPE'
+    'IVIRFSIGGEN_ATTR_CDMA_TEST_MODEL_COUNT'
+    'IVIRFSIGGEN_ATTR_CDMA_SELECTED_TEST_MODEL'
+    'IVIRFSIGGEN_ATTR_CDMA_CLOCK_SOURCE'
+    'IVIRFSIGGEN_ATTR_TDMA_STANDARD_COUNT'
+    'IVIRFSIGGEN_ATTR_TDMA_SELECTED_STANDARD'
+    'IVIRFSIGGEN_ATTR_TDMA_TRIGGER_SOURCE'
+    'IVIRFSIGGEN_ATTR_TDMA_EXTERNAL_TRIGGER_SLOPE'
+    'IVIRFSIGGEN_ATTR_TDMA_FRAME_COUNT'
+    'IVIRFSIGGEN_ATTR_TDMA_SELECTED_FRAME'
+    'IVIRFSIGGEN_ATTR_TDMA_CLOCK_SOURCE'
+    'IVIRFSIGGEN_ATTR_TDMA_EXTERNAL_CLOCK_TYPE'
+    "
+attribute: "Channel Count"
+	"Inherent IVI Settings:Specific Driver Capabilities:Channel Count"
+	iL readonly 1 0010065B
+"Indicates the number of channels that the specific instrument driver supports.  
+    For each property for which the IVI_VAL_MULTI_CHANNEL flag is set, the IVI engine maintains a separate cache value for each channel.
+    "
+"CLASSPREFIX_ATTR_CHANNEL_COUNT.html" "../../help/lvivi.chm"
+attribute: "Manufacturer"
+	"Inherent IVI Settings:Instrument Identification:Manufacturer"
+	string readonly 1 0010078F
+"A string that contains the name of the instrument manufacturer you are currently using.
+    "
+"CLASSPREFIX_ATTR_INSTRUMENT_MANUFACTURER.html" "../../help/lvivi.chm"
+attribute: "Model"
+	"Inherent IVI Settings:Instrument Identification:Model"
+	string readonly 1 00100790
+"A string that contains the model number or name of the instrument that you are currently using.
+    "
+"CLASSPREFIX_ATTR_INSTRUMENT_MODEL.html" "../../help/lvivi.chm"
+attribute: "Firmware Revision"
+	"Inherent IVI Settings:Instrument Identification:Firmware Revision"
+	string readonly 1 0010078E
+"A string that contains the firmware revision information for the instrument you are currently using.
+    "
+"CLASSPREFIX_ATTR_INSTRUMENT_FIRMWARE_REVISION.html" "../../help/lvivi.chm"
+attribute: "Logical Name"
+	"Inherent IVI Settings:Advanced Session Information:Logical Name"
+	string readonly 1 001006C1
+"A string containing the logical name you specified when opening the current IVI session.
+     You may pass a logical name to the IviRFSigGen Initialize or IviRFSigGen Initialize With Options VIs.  The IVI Configuration utility must contain an entry for the logical name.  The logical name entry refers to a virtual instrument section in the IVI Configuration file.  The virtual instrument section specifies a physical device and initial user options.
+    "
+"CLASSPREFIX_ATTR_LOGICAL_NAME.html" "../../help/lvivi.chm"
+attribute: "I/O Resource Descriptor"
+	"Inherent IVI Settings:Advanced Session Information:I/O Resource Descriptor"
+	string readonly 1 001006C0
+"Indicates the resource descriptor the driver uses to identify the physical device.
+    If you initialize the driver with a logical name, this property contains the resource descriptor that corresponds to the entry in the IVI Configuration utility.  
+    If you initialize the instrument driver with the resource descriptor, this property contains that value.
+    "
+"CLASSPREFIX_ATTR_RESOURCE_DESCRIPTOR.html" "../../help/lvivi.chm"
+attribute: "Driver Setup"
+	"Inherent IVI Settings:Advanced Session Information:Driver Setup"
+	string readonly 1 00100597
+"Some cases exist where you must specify instrument driver options at initialization time.  An example of this is specifying a particular instrument model from among a family of instruments that the driver supports.  This is useful when using simulation.  You can specify driver-specific options through the DriverSetup keyword in the optionsString parameter to the IviRFSigGen Initialize With Options VI.  If you open an instrument using a logical name, you can also specify the options through the IVI Configuration Utility.
+    The default value is an empty string.
+    "
+"CLASSPREFIX_ATTR_DRIVER_SETUP.html" "../../help/lvivi.chm"
+attribute: "Frequency"
+	"RF:Frequency"
+	fD readwrite 1 001312D1
+"Specifies the frequency of the generated RF output signal."
+"IVIRFSIGGEN_ATTR_FREQUENCY.html" "../../help/lvivi.chm"
+attribute: "Power Level"
+	"RF:Power Level"
+	fD readwrite 1 001312D2
+"Specifies the amplitude (power level) of the RF output signal. The value is in dBm."
+"IVIRFSIGGEN_ATTR_POWER_LEVEL.html" "../../help/lvivi.chm"
+attribute: "ALC Enabled"
+	"RF:ALC Enabled"
+	bool readwrite 1 001312D3
+"Specifies whether to enable or disable Automatic Level Control (ALC).
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"IVIRFSIGGEN_ATTR_ALC_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Output Enabled"
+	"RF:Output Enabled"
+	bool readwrite 1 001312D4
+"Specifies whether to enable or disable the RF output signal.
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"IVIRFSIGGEN_ATTR_OUTPUT_ENABLED.html" "../../help/lvivi.chm"
+attribute: "AM Enabled [AM]"
+	"Analog Modulation:AM:AM Enabled [AM]"
+	bool readwrite 1 001312DB
+"Specifies whether the signal generator applies amplitude modulation to the RF output signal (TRUE) or not (FALSE).
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"IVIRFSIGGEN_ATTR_AM_ENABLED.html" "../../help/lvivi.chm"
+attribute: "AM Source [AM]"
+	"Analog Modulation:AM:AM Source [AM]"
+	string readwrite 1 001312DC
+"Specifies the source of the signal that is used as the modulating signal. If more than one source is specified, the voltages of all sources (internal and external) are summed.  Multiple source names are separated by commas."
+"IVIRFSIGGEN_ATTR_AM_SOURCE.html" "../../help/lvivi.chm"
+attribute: "AM Scaling [AM]"
+	"Analog Modulation:AM:AM Scaling [AM]"
+	iL enum { IVIRFSIGGEN_VAL_AM_SCALING_LINEAR=1, IVIRFSIGGEN_VAL_AM_SCALING_LOGARITHMIC=2} readwrite 1 001312DD
+"Specifies linear or logarithmic attenuation for amplitude modulation. The unit of the IviRFSigGen>>Analog Modulation>>AM>>AM Depth [AM] property is changed with this setting.
+IVIRFSIGGEN_VAL_AM_SCALING_LINEAR 1
+Enables linear attenuation for amplitude modulation.
+
+IVIRFSIGGEN_VAL_AM_SCALING_LOGARITHMIC 2
+Enables logarithmic attenuation for amplitude modulation."
+"IVIRFSIGGEN_ATTR_AM_SCALING.html" "../../help/lvivi.chm"
+attribute: "AM External Coupling [AM]"
+	"Analog Modulation:AM:AM External Coupling [AM]"
+	iL enum { IVIRFSIGGEN_VAL_AM_EXTERNAL_COUPLING_AC=1, IVIRFSIGGEN_VAL_AM_EXTERNAL_COUPLING_DC=2} readwrite 1 001312DE
+"Specifies the coupling of the external source of the modulating signal.
+IVIRFSIGGEN_VAL_AM_EXTERNAL_COUPLING_AC 1
+The external source is coupled for AC only.
+
+IVIRFSIGGEN_VAL_AM_EXTERNAL_COUPLING_DC 2
+The external source is coupled for both DC and AC"
+"IVIRFSIGGEN_ATTR_AM_EXTERNAL_COUPLING.html" "../../help/lvivi.chm"
+attribute: "AM Nominal Voltage [AM]"
+	"Analog Modulation:AM:AM Nominal Voltage [AM]"
+	fD readonly 1 001312DF
+"This is the voltage at which the instrument achieves the amount of modulation specified by the IviRFSigGen>>Analog Modulation>>AM>>AM Depth [AM] property.
+
+Note: This property is read only."
+"IVIRFSIGGEN_ATTR_AM_NOMINAL_VOLTAGE.html" "../../help/lvivi.chm"
+attribute: "AM Depth [AM]"
+	"Analog Modulation:AM:AM Depth [AM]"
+	fD readwrite 1 001312E0
+"Specifies the extend of modulation the signal generator applies to the RF-signal (carrier waveform) with the modulating signal as a result of summing all sources, internal and external.
+If the IviRFSigGen>>Analog Modulation>>AM>>AM Scaling [AM] property is set to Linear, then the units are percent (%). If the IviRFSigGen>>Analog Modulation>>AM>>AM Scaling [AM] property is set to logarithmic, then the units are dBm."
+"IVIRFSIGGEN_ATTR_AM_DEPTH.html" "../../help/lvivi.chm"
+attribute: "FM Enabled [FM]"
+	"Analog Modulation:FM:FM Enabled [FM]"
+	bool readwrite 1 001312E5
+"Specifies whether the signal generator applies frequency modulation to the RF output signal (TRUE) or not (FALSE).
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"IVIRFSIGGEN_ATTR_FM_ENABLED.html" "../../help/lvivi.chm"
+attribute: "FM Source [FM]"
+	"Analog Modulation:FM:FM Source [FM]"
+	string readwrite 1 001312E6
+"Specifies the source of the signal that is used as the modulating signal. If more than one source is specified, the voltages of all sources (internal and external) are summed.  Multiple source names are separated by commas."
+"IVIRFSIGGEN_ATTR_FM_SOURCE.html" "../../help/lvivi.chm"
+attribute: "FM External Coupling [FM]"
+	"Analog Modulation:FM:FM External Coupling [FM]"
+	iL enum { IVIRFSIGGEN_VAL_FM_EXTERNAL_COUPLING_AC=1, IVIRFSIGGEN_VAL_FM_EXTERNAL_COUPLING_DC=2} readwrite 1 001312E7
+"Specifies the coupling of the external source of the modulating signal.
+IVIRFSIGGEN_VAL_FM_EXTERNAL_COUPLING_AC 1
+The external source is coupled for AC only.
+
+IVIRFSIGGEN_VAL_FM_EXTERNAL_COUPLING_DC 2
+The external source is coupled for both DC and AC."
+"IVIRFSIGGEN_ATTR_FM_EXTERNAL_COUPLING.html" "../../help/lvivi.chm"
+attribute: "FM Nominal Voltage [FM]"
+	"Analog Modulation:FM:FM Nominal Voltage [FM]"
+	fD readonly 1 001312E8
+"This is the voltage at which the instrument achieves the amount of modulation specified by the IviRFSigGen>>Analog Modulation>>FM>>FM Deviation [FM] property.
+
+Note: This property is read only."
+"IVIRFSIGGEN_ATTR_FM_NOMINAL_VOLTAGE.html" "../../help/lvivi.chm"
+attribute: "FM Deviation [FM]"
+	"Analog Modulation:FM:FM Deviation [FM]"
+	fD readwrite 1 001312E9
+"Specifies the extent of modulation (peak frequency deviation) the signal generator applies to the RF-signal (carrier waveform) with the modulating signal as a result of summing all sources,internal and external. 
+The units are Hz."
+"IVIRFSIGGEN_ATTR_FM_DEVIATION.html" "../../help/lvivi.chm"
+attribute: "PM Enabled [PM]"
+	"Analog Modulation:PM:PM Enabled [PM]"
+	bool readwrite 1 001312EF
+"Specifies whether the signal generator applies phase modulation to the RF output signal (TRUE) or not (FALSE).
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"IVIRFSIGGEN_ATTR_PM_ENABLED.html" "../../help/lvivi.chm"
+attribute: "PM Source [PM]"
+	"Analog Modulation:PM:PM Source [PM]"
+	string readwrite 1 001312F0
+"Specifies the source of the signal that is used as the modulating signal. If more than one source is specified, the voltages of all sources (internal and external) are summed.  Multiple source names are separated by commas."
+"IVIRFSIGGEN_ATTR_PM_SOURCE.html" "../../help/lvivi.chm"
+attribute: "PM External Coupling [PM]"
+	"Analog Modulation:PM:PM External Coupling [PM]"
+	iL enum { IVIRFSIGGEN_VAL_PM_EXTERNAL_COUPLING_AC=1, IVIRFSIGGEN_VAL_PM_EXTERNAL_COUPLING_DC=2} readwrite 1 001312F1
+"Specifies the coupling of the external source of the modulating signal.
+IVIRFSIGGEN_VAL_PM_EXTERNAL_COUPLING_AC 1
+The external source is coupled for AC only.
+
+IVIRFSIGGEN_VAL_PM_EXTERNAL_COUPLING_DC 2
+The external source is coupled for both DC and AC."
+"IVIRFSIGGEN_ATTR_PM_EXTERNAL_COUPLING.html" "../../help/lvivi.chm"
+attribute: "PM Nominal Voltage [PM]"
+	"Analog Modulation:PM:PM Nominal Voltage [PM]"
+	fD readonly 1 001312F2
+"This is the voltage at which the instrument achieves the amount of modulation specified by the IviRFSigGen>>Analog Modulation>>PM>>PM Deviation [PM] property. 
+
+Note: This property is read only."
+"IVIRFSIGGEN_ATTR_PM_NOMINAL_VOLTAGE.html" "../../help/lvivi.chm"
+attribute: "PM Deviation [PM]"
+	"Analog Modulation:PM:PM Deviation [PM]"
+	fD readwrite 1 001312F3
+"Specifies the extent of modulation (peak phase deviation) the signal generator applies to the RF-signal (carrier waveform) with the modulating signal. The units are radians."
+"IVIRFSIGGEN_ATTR_PM_DEVIATION.html" "../../help/lvivi.chm"
+attribute: "Modulation Source Count [MS]"
+	"Analog Modulation:Source:Modulation Source Count [MS]"
+	iL readonly 1 001312F9
+"Specifies how many analog modulation sources are available."
+"IVIRFSIGGEN_ATTR_ANALOG_MODULATION_SOURCE_COUNT.html" "../../help/lvivi.chm"
+attribute: "Pulse Modulation Enabled [PULM]"
+	"Pulse Modulation:Pulse Modulation Enabled [PULM]"
+	bool readwrite 1 00131303
+"Specifies whether the signal generator applies pulse modulation to the RF output signal (TRUE) or not (FALSE).
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"IVIRFSIGGEN_ATTR_PULSE_MODULATION_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Pulse Modulation Source [PULM]"
+	"Pulse Modulation:Pulse Modulation Source [PULM]"
+	iL enum { IVIRFSIGGEN_VAL_PULSE_MODULATION_SOURCE_INTERNAL=1, IVIRFSIGGEN_VAL_PULSE_MODULATION_SOURCE_EXTERNAL=2} readwrite 1 00131304
+"Specifies the source of the signal that is used as the modulating signal.
+IVIRFSIGGEN_VAL_PULSE_MODULATION_SOURCE_INTERNAL 1
+An internal pulse generator (IviRFSigGenPulseGenerator Extension Group) is used for modulation.
+
+IVIRFSIGGEN_VAL_PULSE_MODULATION_SOURCE_EXTERNAL 2
+An external generator is used for modulation."
+"IVIRFSIGGEN_ATTR_PULSE_MODULATION_SOURCE.html" "../../help/lvivi.chm"
+attribute: "Pulse Modulation External Polarity [PULM]"
+	"Pulse Modulation:Pulse Modulation External Polarity [PULM]"
+	iL enum { IVIRFSIGGEN_VAL_PULSE_MODULATION_EXTERNAL_POLARITY_NORMAL=1, IVIRFSIGGEN_VAL_PULSE_MODULATION_EXTERNAL_POLARITY_INVERSE=2} readwrite 1 00131305
+"Specifies the polarity of the external source signal.
+IVIRFSIGGEN_VAL_PULSE_MODULATION_EXTERNAL_POLARITY_NORMAL 1
+The signal generator modulates the carrier signal with normal pulse polarity.
+
+IVIRFSIGGEN_VAL_PULSE_MODULATION_EXTERNAL_POLARITY_INVERSE 2
+The signal generator modulates the carrier signal with inverted pulse polarity."
+"IVIRFSIGGEN_ATTR_PULSE_MODULATION_EXTERNAL_POLARITY.html" "../../help/lvivi.chm"
+attribute: "Active LF Generator [LF]"
+	"LF Generator:Active LF Generator [LF]"
+	string readwrite 1 00131335
+"Specifies the LF generator which is currently active. The values for this property correspond to the LFGenerator repeated capability."
+"IVIRFSIGGEN_ATTR_ACTIVE_LF_GENERATOR.html" "../../help/lvivi.chm"
+attribute: "LF Generator Count [LF]"
+	"LF Generator:LF Generator Count [LF]"
+	iL readonly 1 00131338
+"Specifies the number of LF generator sources available for a particular instrument."
+"IVIRFSIGGEN_ATTR_LF_GENERATOR_COUNT.html" "../../help/lvivi.chm"
+attribute: "LF Generator Frequency [LF]"
+	"LF Generator:LF Generator Frequency [LF]"
+	fD readwrite 1 00131336
+"Specifies the frequency of the active LF generator. The unit is Hz."
+"IVIRFSIGGEN_ATTR_LF_GENERATOR_FREQUENCY.html" "../../help/lvivi.chm"
+attribute: "LF Generator Waveform [LF]"
+	"LF Generator:LF Generator Waveform [LF]"
+	iL enum { IVIRFSIGGEN_VAL_LF_GENERATOR_WAVEFORM_SINE=1, IVIRFSIGGEN_VAL_LF_GENERATOR_WAVEFORM_SQUARE=2, IVIRFSIGGEN_VAL_LF_GENERATOR_WAVEFORM_TRIANGLE=3, IVIRFSIGGEN_VAL_LF_GENERATOR_WAVEFORM_RAMP_UP=4, IVIRFSIGGEN_VAL_LF_GENERATOR_WAVEFORM_RAMP_DOWN=5} readwrite 1 00131337
+"Specifies the waveform of the active LF generator.
+IVIRFSIGGEN_VAL_LF_GENERATOR_WAVEFORM_SINE 1
+Configures the LF generator to produce a sinusoidal waveform.
+
+IVIRFSIGGEN_VAL_LF_GENERATOR_WAVEFORM_SQUARE 2
+Configures the LF generator to produce a square waveform.
+
+IVIRFSIGGEN_VAL_LF_GENERATOR_WAVEFORM_TRIANGLE 3
+Configures the LF generator to produce a triangle waveform.
+
+IVIRFSIGGEN_VAL_LF_GENERATOR_WAVEFORM_RAMP_UP 4
+Configures the LF generator to produce a rising ramp waveform.
+
+IVIRFSIGGEN_VAL_LF_GENERATOR_WAVEFORM_RAMP_DOWN 5
+Configures the LF generator to produce a falling ramp waveform."
+"IVIRFSIGGEN_ATTR_LF_GENERATOR_WAVEFORM.html" "../../help/lvivi.chm"
+attribute: "LF Generator Output Amplitude [LFO]"
+	"LF Generator:LF Generator Outputs:LF Generator Output Amplitude [LFO]"
+	fD readwrite 1 0013133F
+"Specifies the output voltage of the LF generator. The unit is V."
+"IVIRFSIGGEN_ATTR_LF_GENERATOR_OUTPUT_AMPLITUDE.html" "../../help/lvivi.chm"
+attribute: "LF Generator Output Enabled [LFO]"
+	"LF Generator:LF Generator Outputs:LF Generator Output Enabled [LFO]"
+	bool readwrite 1 00131340
+"Specifies whether the LF generator applies an output signal (TRUE) or not (FALSE).
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"IVIRFSIGGEN_ATTR_LF_GENERATOR_OUTPUT_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Pulse Internal Trigger Period [PG]"
+	"Pulse Generator:Pulse Internal Trigger Period [PG]"
+	fD readwrite 1 00131349
+"Specifies the period of the pulse generators output signal (if Pulse Trigger Source is set to Internal). The units are in seconds."
+"IVIRFSIGGEN_ATTR_PULSE_INTERNAL_TRIGGER_PERIOD.html" "../../help/lvivi.chm"
+attribute: "Pulse Width [PG]"
+	"Pulse Generator:Pulse Width [PG]"
+	fD readwrite 1 0013134A
+"Specifies the width of the output pulse. The units are in seconds."
+"IVIRFSIGGEN_ATTR_PULSE_WIDTH.html" "../../help/lvivi.chm"
+attribute: "Pulse Gating Enabled [PG]"
+	"Pulse Generator:Pulse Gating Enabled [PG]"
+	bool readwrite 1 0013134B
+"Specifies whether pulse gating is enabled(TRUE) or disabled(FALSE).
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"IVIRFSIGGEN_ATTR_PULSE_GATING_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Pulse Trigger Source [PG]"
+	"Pulse Generator:Pulse Trigger Source [PG]"
+	iL enum { IVIRFSIGGEN_VAL_PULSE_TRIGGER_SOURCE_INTERNAL=1, IVIRFSIGGEN_VAL_PULSE_TRIGGER_SOURCE_EXTERNAL=2} readwrite 1 0013134C
+"Specifies the source of the signal the pulse generator uses to generate one pulse.
+IVIRFSIGGEN_VAL_PULSE_TRIGGER_SOURCE_INTERNAL 1
+No external trigger is used. The pulse period is specified by the IviRFSigGen>>Pulse Generator>>Pulse Internal Trigger Period [PG] property.
+
+IVIRFSIGGEN_VAL_PULSE_TRIGGER_SOURCE_EXTERNAL 2
+The pulse is started with a trigger after the delay time specified by the IviRFSigGen>>Pulse Generator>>Pulse External Trigger Delay [PG] property."
+"IVIRFSIGGEN_ATTR_PULSE_TRIGGER_SOURCE.html" "../../help/lvivi.chm"
+attribute: "Pulse External Trigger Slope [PG]"
+	"Pulse Generator:Pulse External Trigger Slope [PG]"
+	iL enum { IVIRFSIGGEN_VAL_PULSE_EXTERNAL_TRIGGER_SLOPE_POSITIVE=1, IVIRFSIGGEN_VAL_PULSE_EXTERNAL_TRIGGER_SLOPE_NEGATIVE=2} readwrite 1 0013134D
+"Specifies whether the event occurs on the rising or falling edge of the input signal.
+IVIRFSIGGEN_VAL_PULSE_EXTERNAL_TRIGGER_SLOPE_POSITIVE 1
+Enables rising edge triggering.
+
+IVIRFSIGGEN_VAL_PULSE_EXTERNAL_TRIGGER_SLOPE_NEGATIVE 2
+Enables falling edge triggering."
+"IVIRFSIGGEN_ATTR_PULSE_EXTERNAL_TRIGGER_SLOPE.html" "../../help/lvivi.chm"
+attribute: "Pulse External Trigger Delay [PG]"
+	"Pulse Generator:Pulse External Trigger Delay [PG]"
+	fD readwrite 1 0013134E
+"Specifies the delay for starting the output pulse with respect to the trigger input. The units are in seconds."
+"IVIRFSIGGEN_ATTR_PULSE_EXTERNAL_TRIGGER_DELAY.html" "../../help/lvivi.chm"
+attribute: "Pulse Double Enabled [DPG]"
+	"Pulse Generator:Double Pulse Generators:Pulse Double Enabled [DPG]"
+	bool readwrite 1 00131353
+"Specifies whether double pulse mode is used (TRUE) or not (FALSE).
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"IVIRFSIGGEN_ATTR_PULSE_DOUBLE_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Pulse Double Delay [DPG]"
+	"Pulse Generator:Double Pulse Generators:Pulse Double Delay [DPG]"
+	fD readwrite 1 00131354
+"Specifies the delay of the second pulse. The units are in seconds."
+"IVIRFSIGGEN_ATTR_PULSE_DOUBLE_DELAY.html" "../../help/lvivi.chm"
+attribute: "Pulse Output Enabled [PGO]"
+	"Pulse Generator:Pulse Generator Output:Pulse Output Enabled [PGO]"
+	bool readwrite 1 0013135E
+"Specifies whether the output of the pulse generator is on  (TRUE) or off (FALSE).
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"IVIRFSIGGEN_ATTR_PULSE_OUTPUT_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Pulse Output Polarity [PGO]"
+	"Pulse Generator:Pulse Generator Output:Pulse Output Polarity [PGO]"
+	iL enum { IVIRFSIGGEN_VAL_PULSE_OUTPUT_POLARITY_NORMAL=1, IVIRFSIGGEN_VAL_PULSE_OUTPUT_POLARITY_INVERSE=2} readwrite 1 0013135D
+"Specifies the polarity of the output signal.
+IVIRFSIGGEN_VAL_PULSE_OUTPUT_POLARITY_NORMAL 1
+Specifies normal polarity.
+
+IVIRFSIGGEN_VAL_PULSE_OUTPUT_POLARITY_INVERSE 2
+Specifies inverted polarity."
+"IVIRFSIGGEN_ATTR_PULSE_OUTPUT_POLARITY.html" "../../help/lvivi.chm"
+attribute: "Sweep Mode [SWP]"
+	"Sweep:Sweep Mode [SWP]"
+	iL enum { IVIRFSIGGEN_VAL_SWEEP_MODE_NONE=1, IVIRFSIGGEN_VAL_SWEEP_MODE_FREQUENCY_SWEEP=2, IVIRFSIGGEN_VAL_SWEEP_MODE_POWER_SWEEP=3, IVIRFSIGGEN_VAL_SWEEP_MODE_FREQUENCY_STEP=4, IVIRFSIGGEN_VAL_SWEEP_MODE_POWER_STEP=5, IVIRFSIGGEN_VAL_SWEEP_MODE_LIST=6} readwrite 1 00131399
+"Specifies the sweep mode applied to the output signal.
+IVIRFSIGGEN_VAL_SWEEP_MODE_NONE 1
+The RF output of the signal generator is a non-swept signal (Continuous Wave). Frequency and power level from base capability group is used.
+
+IVIRFSIGGEN_VAL_SWEEP_MODE_FREQUENCY_SWEEP 2
+The signal generator sweeps the RF output signal's frequency in an analog form (non-stepped).
+
+IVIRFSIGGEN_VAL_SWEEP_MODE_POWER_SWEEP 3
+The signal generator sweeps the RF output signal's power level in an analog form (non-stepped).
+
+IVIRFSIGGEN_VAL_SWEEP_MODE_FREQUENCY_STEP 4
+The signal generator sweeps the RF output signals frequency in steps.
+
+IVIRFSIGGEN_VAL_SWEEP_MODE_POWER_STEP 5
+The signal generator sweeps the RF output signals power level in steps.
+
+IVIRFSIGGEN_VAL_SWEEP_MODE_LIST 6
+The signal generator uses two lists with frequency and power level values to sweep the RF output signals."
+"IVIRFSIGGEN_ATTR_SWEEP_MODE.html" "../../help/lvivi.chm"
+attribute: "Sweep Trigger Source [SWP]"
+	"Sweep:Sweep Trigger Source [SWP]"
+	iL enum { IVIRFSIGGEN_VAL_SWEEP_TRIGGER_SOURCE_IMMEDIATE=1, IVIRFSIGGEN_VAL_SWEEP_TRIGGER_SOURCE_EXTERNAL=2, IVIRFSIGGEN_VAL_SWEEP_TRIGGER_SOURCE_SOFTWARE=3} readwrite 1 0013139A
+"Specifies the trigger used to start a sweep operation.
+IVIRFSIGGEN_VAL_SWEEP_TRIGGER_SOURCE_IMMEDIATE 1
+The sweep system does not wait for a trigger of any kind, so it is running continuously.
+
+IVIRFSIGGEN_VAL_SWEEP_TRIGGER_SOURCE_EXTERNAL 2
+The sweep is started with an external signal.
+
+IVIRFSIGGEN_VAL_SWEEP_TRIGGER_SOURCE_SOFTWARE 3
+The sweep is started with a software programmable trigger."
+"IVIRFSIGGEN_ATTR_SWEEP_TRIGGER_SOURCE.html" "../../help/lvivi.chm"
+attribute: "Frequency Sweep Start [FSW]"
+	"Sweep:Frequency Sweep:Frequency Sweep Start [FSW]"
+	fD readwrite 1 001313A3
+"Specifies the start frequency of the sweep. If the stop frequency is less than the start frequency, the frequency decreases during the sweep. The units are in Hz."
+"IVIRFSIGGEN_ATTR_FREQUENCY_SWEEP_START.html" "../../help/lvivi.chm"
+attribute: "Frequency Sweep Stop [FSW]"
+	"Sweep:Frequency Sweep:Frequency Sweep Stop [FSW]"
+	fD readwrite 1 001313A4
+"Specifies the stop frequency of the sweep. If the stop frequency is less than the start frequency, the frequency decreases during the sweep. The units are in Hz."
+"IVIRFSIGGEN_ATTR_FREQUENCY_SWEEP_STOP.html" "../../help/lvivi.chm"
+attribute: "Frequency Sweep Time [FSW]"
+	"Sweep:Frequency Sweep:Frequency Sweep Time [FSW]"
+	fD readwrite 1 001313A5
+"Specifies the duration of one sweep from start to stop frequency. The units are in seconds."
+"IVIRFSIGGEN_ATTR_FREQUENCY_SWEEP_TIME.html" "../../help/lvivi.chm"
+attribute: "Power Sweep Start [PSW]"
+	"Sweep:Power Sweep:Power Sweep Start [PSW]"
+	fD readwrite 1 001313AD
+"Specifies the start power of the sweep. If the stop power is less than the start power, the power decreases in value during the sweep. The units are in dBm."
+"IVIRFSIGGEN_ATTR_POWER_SWEEP_START.html" "../../help/lvivi.chm"
+attribute: "Power Sweep Stop [PSW]"
+	"Sweep:Power Sweep:Power Sweep Stop [PSW]"
+	fD readwrite 1 001313AE
+"Specifies the stop power of the sweep. If the stop power is less than the start power, the power decreases in value during the sweep. The units are in dBm."
+"IVIRFSIGGEN_ATTR_POWER_SWEEP_STOP.html" "../../help/lvivi.chm"
+attribute: "Power Sweep Time [PSW]"
+	"Sweep:Power Sweep:Power Sweep Time [PSW]"
+	fD readwrite 1 001313AF
+"Specifies the duration of one sweep from start to stop power. The units are in seconds."
+"IVIRFSIGGEN_ATTR_POWER_SWEEP_TIME.html" "../../help/lvivi.chm"
+attribute: "Frequency Step Start [FST]"
+	"Sweep:Frequency Step:Frequency Step Start [FST]"
+	fD readwrite 1 001313C1
+"Specifies the start frequency of the stepped sweep. If the stop frequency is less than the start frequency, the frequency decreases during the sweep. The units are in Hz."
+"IVIRFSIGGEN_ATTR_FREQUENCY_STEP_START.html" "../../help/lvivi.chm"
+attribute: "Frequency Step Stop [FST]"
+	"Sweep:Frequency Step:Frequency Step Stop [FST]"
+	fD readwrite 1 001313C2
+"Specifies the stop frequency of the stepped sweep. If the stop frequency is less than the start frequency, the frequency decreases during the sweep. The units are in Hz."
+"IVIRFSIGGEN_ATTR_FREQUENCY_STEP_STOP.html" "../../help/lvivi.chm"
+attribute: "Frequency Step Scaling [FST]"
+	"Sweep:Frequency Step:Frequency Step Scaling [FST]"
+	iL enum { IVIRFSIGGEN_VAL_FREQUENCY_STEP_SCALING_LINEAR=1, IVIRFSIGGEN_VAL_FREQUENCY_STEP_SCALING_LOGARITHMIC=2} readwrite 1 001313C3
+"Specifies the spacing of the steps.
+IVIRFSIGGEN_VAL_FREQUENCY_STEP_SCALING_LINEAR 1
+Enables linear scaling.
+
+IVIRFSIGGEN_VAL_FREQUENCY_STEP_SCALING_LOGARITHMIC 2
+Enables logarithmic scaling."
+"IVIRFSIGGEN_ATTR_FREQUENCY_STEP_SCALING.html" "../../help/lvivi.chm"
+attribute: "Frequency Step Size [FST]"
+	"Sweep:Frequency Step:Frequency Step Size [FST]"
+	fD readwrite 1 001313C4
+"Specifies the step size. The units are in Hz when the IviRFSigGen>>Sweep>>Frequency Step>>Frequency Step Scaling [FST] property is set to IVIRFSIGGEN_VAL_FREQUENCY_STEP_SCALING_LINEAR. 
+The value is unitless (factor) when the  IviRFSigGen>>Sweep>>Frequency Step>>Frequency Step Scaling [FST] property is set to IVIRFSIGGEN_VAL_FREQUENCY_STEP_SCALING_LOGARITHMIC."
+"IVIRFSIGGEN_ATTR_FREQUENCY_STEP_SIZE.html" "../../help/lvivi.chm"
+attribute: "Frequency Step Single Step Enabled [FST]"
+	"Sweep:Frequency Step:Frequency Step Single Step Enabled [FST]"
+	bool readwrite 1 001313C5
+"Specifies whether the trigger initiates the next step (TRUE), or the next step is taken after dwell time (FALSE).
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"IVIRFSIGGEN_ATTR_FREQUENCY_STEP_SINGLE_STEP_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Frequency Step Dwell [FST]"
+	"Sweep:Frequency Step:Frequency Step Dwell [FST]"
+	fD readwrite 1 001313C6
+"Specifies the duration time of one step. The units are in seconds.
+Dwell time starts immediate after tigger or next step; no settling time is added.
+This property is ignored if Frequency Step Single Step Enabled is set to TRUE."
+"IVIRFSIGGEN_ATTR_FREQUENCY_STEP_DWELL.html" "../../help/lvivi.chm"
+attribute: "Power Step Start [PST]"
+	"Sweep:Power Step:Power Step Start [PST]"
+	fD readwrite 1 001313D5
+"Specifies the start power of the stepped sweep. If the stop power is less than the start power, the power decreases in value during the sweep. The units are in dBm."
+"IVIRFSIGGEN_ATTR_POWER_STEP_START.html" "../../help/lvivi.chm"
+attribute: "Power Step Stop [PST]"
+	"Sweep:Power Step:Power Step Stop [PST]"
+	fD readwrite 1 001313D6
+"Specifies the stop power of the stepped sweep. If the stop power is less than the start power, the power decreases in value during the sweep. The units are in dBm."
+"IVIRFSIGGEN_ATTR_POWER_STEP_STOP.html" "../../help/lvivi.chm"
+attribute: "Power Step Size [PST]"
+	"Sweep:Power Step:Power Step Size [PST]"
+	fD readwrite 1 001313D7
+"Specifies the step size. The units are in dBm."
+"IVIRFSIGGEN_ATTR_POWER_STEP_SIZE.html" "../../help/lvivi.chm"
+attribute: "Single Step Enabled [PST]"
+	"Sweep:Power Step:Single Step Enabled [PST]"
+	bool readwrite 1 001313D8
+"Specifies whether the trigger initiates the next step (TRUE), or the next step is taken after dwell time (FALSE).
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"IVIRFSIGGEN_ATTR_POWER_STEP_SINGLE_STEP_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Power Step Dwell [PST]"
+	"Sweep:Power Step:Power Step Dwell [PST]"
+	fD readwrite 1 001313D9
+"Specifies the duration time of one step. The units are in seconds.
+This property is ignored if Frequency Step Single Step Enabled is set to TRUE."
+"IVIRFSIGGEN_ATTR_POWER_STEP_DWELL.html" "../../help/lvivi.chm"
+attribute: "List Selected Name [LST]"
+	"Sweep:List:List Selected Name [LST]"
+	string readwrite 1 001313E9
+"Specifies the name of the selected list to become active. The name must be one of the lists created ."
+"IVIRFSIGGEN_ATTR_LIST_SELECTED_NAME.html" "../../help/lvivi.chm"
+attribute: "List Single Step Enabled [LST]"
+	"Sweep:List:List Single Step Enabled [LST]"
+	bool readwrite 1 001313EA
+"Enables or disables single step mode.
+TRUE: The list will advance when the next trigger event occurs.
+FALSE: The list will advance immediatly after the dwell time ends.
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"IVIRFSIGGEN_ATTR_LIST_SINGLE_STEP_ENABLED.html" "../../help/lvivi.chm"
+attribute: "List Dwell [LST]"
+	"Sweep:List:List Dwell [LST]"
+	fD readwrite 1 001313EB
+"Specifies the duration time of one step. The units are in seconds.
+This property is ignored if List Single Step Enabled is set to TRUE."
+"IVIRFSIGGEN_ATTR_LIST_DWELL.html" "../../help/lvivi.chm"
+attribute: "ALC Source [ALC]"
+	"ALC:ALC Source [ALC]"
+	iL enum { IVIRFSIGGEN_VAL_ALC_SOURCE_INTERNAL=1, IVIRFSIGGEN_VAL_ALC_SOURCE_EXTERNAL=2} readwrite 1 001313FD
+"Specifies the source of the controlling voltage for the Automatic Level Control.
+IVIRFSIGGEN_VAL_ALC_SOURCE_INTERNAL 1
+The ALC is controlled by an internal measurement source.
+
+IVIRFSIGGEN_VAL_ALC_SOURCE_EXTERNAL 2
+The ALC is controlled by an external voltage."
+"IVIRFSIGGEN_ATTR_ALC_SOURCE.html" "../../help/lvivi.chm"
+attribute: "ALC Bandwidth [ALC]"
+	"ALC:ALC Bandwidth [ALC]"
+	fD readwrite 1 001313FE
+"Specifies the bandwidth of Automatic Level Control."
+"IVIRFSIGGEN_ATTR_ALC_BANDWIDTH.html" "../../help/lvivi.chm"
+attribute: "Reference Oscillator Source [RO]"
+	"Reference Oscillator:Reference Oscillator Source [RO]"
+	iL enum { IVIRFSIGGEN_VAL_REFERENCE_OSCILLATOR_SOURCE_INTERNAL=1, IVIRFSIGGEN_VAL_REFERENCE_OSCILLATOR_SOURCE_EXTERNAL=2} readwrite 1 00131411
+"Specifies the reference frequency source used to generate the exact RF output frequency.
+IVIRFSIGGEN_VAL_REFERENCE_OSCILLATOR_SOURCE_INTERNAL 1
+An internal reference oscillator is used.
+
+IVIRFSIGGEN_VAL_REFERENCE_OSCILLATOR_SOURCE_EXTERNAL 2
+An external reference oscillator is used."
+"IVIRFSIGGEN_ATTR_REFERENCE_OSCILLATOR_SOURCE.html" "../../help/lvivi.chm"
+attribute: "Reference Oscillator External Frequency [RO]"
+	"Reference Oscillator:Reference Oscillator External Frequency [RO]"
+	fD readwrite 1 00131412
+"Specifies the frequency of the external signal, which is used as reference for internal RF frequency generation. This value is used only if the IviRFSigGen>>Reference Oscillator>>Reference Oscillator Source [RO] property is set to External."
+"IVIRFSIGGEN_ATTR_REFERENCE_OSCILLATOR_EXTERNAL_FREQUENCY.html" "../../help/lvivi.chm"
+attribute: "IQ Enabled [MIQ]"
+	"IQ:IQ Enabled [MIQ]"
+	bool readwrite 1 00131461
+"Specifies whether the signal generator applies IQ (vector) modulation to the output RF signal (TRUE) or not (FALSE).
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"IVIRFSIGGEN_ATTR_IQ_ENABLED.html" "../../help/lvivi.chm"
+attribute: "IQ Nominal Voltage [MIQ]"
+	"IQ:IQ Nominal Voltage [MIQ]"
+	fD readonly 1 00131462
+"This is the voltage at which the instrument achieves full modulation. The value is calculated by SQRT(I^2+Q^2)."
+"IVIRFSIGGEN_ATTR_IQ_NOMINAL_VOLTAGE.html" "../../help/lvivi.chm"
+attribute: "IQ Source [MIQ]"
+	"IQ:IQ Source [MIQ]"
+	iL enum { IVIRFSIGGEN_VAL_IQ_SOURCE_DIGITAL_MODULATION_BASE=1, IVIRFSIGGEN_VAL_IQ_SOURCE_CDMA_BASE=2, IVIRFSIGGEN_VAL_IQ_SOURCE_TDMA_BASE=3, IVIRFSIGGEN_VAL_IQ_SOURCE_ARB_GENERATOR=4, IVIRFSIGGEN_VAL_IQ_SOURCE_EXTERNAL=5} readwrite 1 00131463
+"Specifies the source of the signal that the signal generator uses for IQ modulation.
+IVIRFSIGGEN_VAL_IQ_SOURCE_DIGITAL_MODULATION_BASE 1
+The signal generator uses the internally generated digital modulation signal to apply IQ modulation to the output RF signal.
+
+IVIRFSIGGEN_VAL_IQ_SOURCE_CDMA_BASE 2
+The signal generator uses the internally generated CDMA signal to apply IQ modulation to the output RF signal.
+
+IVIRFSIGGEN_VAL_IQ_SOURCE_TDMA_BASE 3
+The signal generator uses the internally generated TDMA signal to apply IQ modulation to the output RF signal.
+
+IVIRFSIGGEN_VAL_IQ_SOURCE_ARB_GENERATOR 4
+The signal generator uses the internally generated Arb signal to apply IQ modulation to the output RF signal.
+
+IVIRFSIGGEN_VAL_IQ_SOURCE_EXTERNAL 5
+The signal generator uses data from an external source for IQ modulation."
+"IVIRFSIGGEN_ATTR_IQ_SOURCE.html" "../../help/lvivi.chm"
+attribute: "IQSwap Enabled [MIQ]"
+	"IQ:IQSwap Enabled [MIQ]"
+	bool readwrite 1 00131464
+"Enables or disables the inverse phase rotation of the IQ signal by swapping the I and Q inputs.  If TRUE, the RF signal generator applies non-inverse phase rotation of the IQ signal.  If FALSE, the RF signal generator applies inverse phase rotation of the IQ signal.
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"IVIRFSIGGEN_ATTR_IQ_SWAP_ENABLED.html" "../../help/lvivi.chm"
+attribute: "IQ Impairment Enabled [IQI]"
+	"IQ:IQ Impairment:IQ Impairment Enabled [IQI]"
+	bool readwrite 1 00131475
+"Enables IQ impairment. When set to TRUE, the following impairment properties are applied.
+ 
+IviRFSigGen>>IQ>>IQ Impairment>>IQ I-Offset [IQI]
+IviRFSigGen>>IQ>>IQ Impairment>>IQ Q-Offset [IQI]
+IviRFSigGen>>IQ>>IQ Impairment>>IQ Ratio [IQI]
+IviRFSigGen>>IQ>>IQ Impairment>>IQ Skew [IQI]
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+"IVIRFSIGGEN_ATTR_IQ_IMPAIRMENT_ENABLED.html" "../../help/lvivi.chm"
+attribute: "IQ I Offset [IQI]"
+	"IQ:IQ Impairment:IQ I Offset [IQI]"
+	fD readwrite 1 00131476
+"Specifies an origin offset voltage to the I signal. The range of values allowed is -100% to +100%. The value is expressed as percentage (%)."
+"IVIRFSIGGEN_ATTR_IQ_I_OFFSET.html" "../../help/lvivi.chm"
+attribute: "IQ Q Offset [IQI]"
+	"IQ:IQ Impairment:IQ Q Offset [IQI]"
+	fD readwrite 1 00131477
+"Specifies an origin offset voltage to the Q signal. The range of values allowed is -100% to +100%. The value is expressed as percentage (%)."
+"IVIRFSIGGEN_ATTR_IQ_Q_OFFSET.html" "../../help/lvivi.chm"
+attribute: "IQ Ratio [IQI]"
+	"IQ:IQ Impairment:IQ Ratio [IQI]"
+	fD readwrite 1 00131478
+"Specifies the gain imbalance between the I and Q channels. For no imbalance this value is set to 0 %. The value is expressed as percentage (%)."
+"IVIRFSIGGEN_ATTR_IQ_RATIO.html" "../../help/lvivi.chm"
+attribute: "IQ Skew [IQI]"
+	"IQ:IQ Impairment:IQ Skew [IQI]"
+	fD readwrite 1 00131479
+"Specifies the adjustment of the phase angle between the I and Q vectors. If this skew is zero, the phase angle is 90 degrees. The units are degrees."
+"IVIRFSIGGEN_ATTR_IQ_SKEW.html" "../../help/lvivi.chm"
+attribute: "ARB Clock Frequency [ARB]"
+	"ARB Generator:ARB Clock Frequency [ARB]"
+	fD readwrite 1 00131494
+"Specifies the sample frequency. The waveform is generated with this clock frequency."
+"IVIRFSIGGEN_ATTR_ARB_CLOCK_FREQUENCY.html" "../../help/lvivi.chm"
+attribute: "ARB Filter Frequency [ARB]"
+	"ARB Generator:ARB Filter Frequency [ARB]"
+	fD readwrite 1 00131495
+"Specifies the cut-off frequency of the low pass filter. The waveform is filtered before output with this filter for antialiasing. The filter frequency normally is lower than the clock frequency. The units are Hertz."
+"IVIRFSIGGEN_ATTR_ARB_FILTER_FREQUENCY.html" "../../help/lvivi.chm"
+attribute: "ARB Selected Waveform [ARB]"
+	"ARB Generator:Waveform:ARB Selected Waveform [ARB]"
+	string readwrite 1 00131493
+"Specifies the selected waveform from the pool of available waveforms."
+"IVIRFSIGGEN_ATTR_ARB_SELECTED_WAVEFORM.html" "../../help/lvivi.chm"
+attribute: "ARB Max Number Waveforms [ARB]"
+	"ARB Generator:Waveform:ARB Max Number Waveforms [ARB]"
+	iL readonly 1 00131496
+"Returns the max number of waveforms the instrument can hold in the memory. The number may depend on the length of the waveform already in the pool of waveforms saved in the instrument. "
+"IVIRFSIGGEN_ATTR_ARB_MAX_NUMBER_WAVEFORMS.html" "../../help/lvivi.chm"
+attribute: "ARB Waveform Quantum [ARB]"
+	"ARB Generator:Waveform:ARB Waveform Quantum [ARB]"
+	iL readonly 1 00131497
+"Returns the waveform quantum where the waveform length is a multiple of this quantum. If the waveform quantum is 1, there is no restriction on the waveform length other than min and max size."
+"IVIRFSIGGEN_ATTR_ARB_WAVEFORM_QUANTUM.html" "../../help/lvivi.chm"
+attribute: "ARB Waveform Size Min [ARB]"
+	"ARB Generator:Waveform:ARB Waveform Size Min [ARB]"
+	iL readwrite 1 00131498
+"Returns the minimum size of the waveform length in number of samples. The waveform length must equal or greater than this minimum size. If the minimum size is 1, there is no restriction on the waveform length other than max size and quantum."
+"IVIRFSIGGEN_ATTR_ARB_WAVEFORM_SIZE_MIN.html" "../../help/lvivi.chm"
+attribute: "ARB Waveform Size Max [ARB]"
+	"ARB Generator:Waveform:ARB Waveform Size Max [ARB]"
+	iL readonly 1 00131499
+"Returns the maximum waveform length in the number of samples. The waveform length must be equal or less than this maximum size."
+"IVIRFSIGGEN_ATTR_ARB_WAVEFORM_SIZE_MAX.html" "../../help/lvivi.chm"
+attribute: "ARB Trigger Source [ARB]"
+	"ARB Generator:Trigger:ARB Trigger Source [ARB]"
+	iL enum { IVIRFSIGGEN_VAL_ARB_TRIGGER_SOURCE_IMMEDIATE=1, IVIRFSIGGEN_VAL_ARB_TRIGGER_SOURCE_EXTERNAL=2, IVIRFSIGGEN_VAL_ARB_TRIGGER_SOURCE_SOFTWARE=3} readwrite 1 0013149A
+"Specifies how the Arb waveform is started (triggered).
+IVIRFSIGGEN_VAL_ARB_TRIGGER_SOURCE_IMMEDIATE 1
+The ARB generator system does not wait for a trigger. The ARB runs continuously.
+
+IVIRFSIGGEN_VAL_ARB_TRIGGER_SOURCE_EXTERNAL 2
+The sweep is started with an external signal.
+
+IVIRFSIGGEN_VAL_ARB_TRIGGER_SOURCE_SOFTWARE 3
+The sweep is started with a software programmable trigger."
+"IVIRFSIGGEN_ATTR_ARB_TRIGGER_SOURCE.html" "../../help/lvivi.chm"
+attribute: "ARB External Trigger Slope [ARB]"
+	"ARB Generator:Trigger:ARB External Trigger Slope [ARB]"
+	iL enum { IVIRFSIGGEN_VAL_ARB_EXTERNAL_TRIGGER_SLOPE_POSITIVE=1, IVIRFSIGGEN_VAL_ARB_EXTERNAL_TRIGGER_SLOPE_NEGATIVE=2} readwrite 1 0013149B
+"Specifies whether the trigger event occurs on the rising or falling edge of the input signal.
+IVIRFSIGGEN_VAL_ARB_EXTERNAL_TRIGGER_SLOPE_POSITIVE 1
+Enables rising edge triggering.
+
+IVIRFSIGGEN_VAL_ARB_EXTERNAL_TRIGGER_SLOPE_NEGATIVE 2
+Enables falling edge triggering."
+"IVIRFSIGGEN_ATTR_ARB_EXTERNAL_TRIGGER_SLOPE.html" "../../help/lvivi.chm"
+attribute: "DigitalModulationBase Standard Count [DMB]"
+	"Digital Modulation:DigitalModulationBase Standard Count [DMB]"
+	iL readonly 1 001314C5
+"Specifies the number of DigitalModulationBase standards available for a particular instrument."
+"IVIRFSIGGEN_ATTR_DIGITAL_MODULATION_BASE_STANDARD_COUNT.html" "../../help/lvivi.chm"
+attribute: "DigitalModulationBase Selected Standard [DMB]"
+	"Digital Modulation:DigitalModulationBase Selected Standard [DMB]"
+	string readwrite 1 001314C6
+"Specifies the actual standard used by the instrument. The coding, mapping, symbol rate or bit clock frequency, filter together with the according filter parameters, FSK deviation or ASK depth (in case of FSK or ASK modulation) are set as defined in the selected standard. "
+"IVIRFSIGGEN_ATTR_DIGITAL_MODULATION_BASE_SELECTED_STANDARD.html" "../../help/lvivi.chm"
+attribute: "DigitalModulationBase Data Source [DMB]"
+	"Digital Modulation:DigitalModulationBase Data Source [DMB]"
+	iL enum { IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_DATA_SOURCE_EXTERNAL=1, IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_DATA_SOURCE_PRBS=2, IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_DATA_SOURCE_BIT_SEQUENCE=3} readwrite 1 001314C7
+"Specifies the source of data. The data is used to modulate the RF signal according to the standard selected with the DigitalModulationBase Selected Standard property.
+IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_DATA_SOURCE_EXTERNAL 1
+The data from an external device connected to the instrument is used.
+
+IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_DATA_SOURCE_PRBS 2
+The internal PRBS (Pseudo Random Binary Sequence) generator is used as data source.
+
+IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_DATA_SOURCE_BIT_SEQUENCE 3
+A constant bit sequence is used as data source and repeated continuously."
+"IVIRFSIGGEN_ATTR_DIGITAL_MODULATION_BASE_DATA_SOURCE.html" "../../help/lvivi.chm"
+attribute: "DigitalModulationBase PRBS Type [DMB]"
+	"Digital Modulation:DigitalModulationBase PRBS Type [DMB]"
+	iL enum { IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_PRBS_TYPE_PRBS9=1, IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_PRBS_TYPE_PRBS11=2, IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_PRBS_TYPE_PRBS15=3, IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_PRBS_TYPE_PRBS16=4, IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_PRBS_TYPE_PRBS20=5, IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_PRBS_TYPE_PRBS21=6, IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_PRBS_TYPE_PRBS23=7} readwrite 1 001314C8
+"Specifies the type of the PRBS as defined in the CCITT-V.52 standard. The PRBS (Pseudo Random Binary Sequence) is used only if DigitalModulationBase Data Source is set to PRBS.
+IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_PRBS_TYPE_PRBS9 1
+Length of PRBS sequence is 2^9 -1.
+
+IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_PRBS_TYPE_PRBS11 2
+Length of PRBS sequence is 2^11 -1.
+
+IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_PRBS_TYPE_PRBS15 3
+Length of PRBS sequence is 2^15 -1.
+
+IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_PRBS_TYPE_PRBS16 4
+Length of PRBS sequence is 2^16 -1.
+
+IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_PRBS_TYPE_PRBS20 5
+Length of PRBS sequence is 2^20 -1.
+
+IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_PRBS_TYPE_PRBS21 6
+Length of PRBS sequence is 2^21 -1.
+
+IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_PRBS_TYPE_PRBS23 7
+Length of PRBS sequence is 2^23 -1."
+"IVIRFSIGGEN_ATTR_DIGITAL_MODULATION_BASE_PRBS_TYPE.html" "../../help/lvivi.chm"
+attribute: "DigitalModulationBase Selected Bit Sequence [DMB]"
+	"Digital Modulation:DigitalModulationBase Selected Bit Sequence [DMB]"
+	string readwrite 1 001314C9
+"Specifies name of the bit sequence (stream) used as data for digital modulation. The sequence is used only if DigitalModulationBase Data Source is set to BitSequence."
+"IVIRFSIGGEN_ATTR_DIGITAL_MODULATION_BASE_SELECTED_BIT_SEQUENCE.html" "../../help/lvivi.chm"
+attribute: "DigitalModulationBase Clock Source [DMB]"
+	"Digital Modulation:DigitalModulationBase Clock Source [DMB]"
+	iL enum { IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_CLOCK_SOURCE_INTERNAL=1, IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_CLOCK_SOURCE_EXTERNAL=2} readwrite 1 001314CA
+"Specifies the source of the clock signal used to generate the digital modulation according to the selected standard.
+IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_CLOCK_SOURCE_INTERNAL 1
+An internal clock generator is used.
+
+IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_CLOCK_SOURCE_EXTERNAL 2
+A connected external clock generator (bit or symbol clock frequency) is used."
+"IVIRFSIGGEN_ATTR_DIGITAL_MODULATION_BASE_CLOCK_SOURCE.html" "../../help/lvivi.chm"
+attribute: "DigitalModulationBase External Clock Type [DMB]"
+	"Digital Modulation:DigitalModulationBase External Clock Type [DMB]"
+	iL enum { IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_EXTERNAL_CLOCK_TYPE_BIT=1, IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_EXTERNAL_CLOCK_TYPE_SYMBOL=2} readwrite 1 001314CB
+"Specifies the type of the external clock signal used to generate the digital modulation. This value is used only if the DigitalModulationBase Clock Source property is set to External.
+IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_EXTERNAL_CLOCK_TYPE_BIT 1
+The external clock frequency is equal to the bit clock frequency of the digital modulation.
+
+IVIRFSIGGEN_VAL_DIGITAL_MODULATION_BASE_EXTERNAL_CLOCK_TYPE_SYMBOL 2
+The external clock frequency is equal to the symbol clock frequency of the digital modulation."
+"IVIRFSIGGEN_ATTR_DIGITAL_MODULATION_BASE_EXTERNAL_CLOCK_TYPE.html" "../../help/lvivi.chm"
+attribute: "CDMA Standard Count [CDMA]"
+	"CDMA:CDMA Standard Count [CDMA]"
+	iL readonly 1 00131529
+"Returns the number of CDMA standards available for a particular instrument."
+"IVIRFSIGGEN_ATTR_CDMA_STANDARD_COUNT.html" "../../help/lvivi.chm"
+attribute: "CDMA Selected Standard [CDMA]"
+	"CDMA:CDMA Selected Standard [CDMA]"
+	string readwrite 1 0013152A
+"Specifies the actual standard used by the instrument. The modulation type, bit clock frequency and filter together with the according filter parameters are set as defined in the selected standard."
+"IVIRFSIGGEN_ATTR_CDMA_SELECTED_STANDARD.html" "../../help/lvivi.chm"
+attribute: "CDMA Test Model Count [CDMA]"
+	"CDMA:CDMA Test Model Count [CDMA]"
+	iL readonly 1 0013152D
+"Returns the number of CDMA test models available for a particular instrument."
+"IVIRFSIGGEN_ATTR_CDMA_TEST_MODEL_COUNT.html" "../../help/lvivi.chm"
+attribute: "CDMA Selected Test Model [CDMA]"
+	"CDMA:CDMA Selected Test Model [CDMA]"
+	string readwrite 1 0013152E
+"Specifies the actual CDMA test model used by the instrument."
+"IVIRFSIGGEN_ATTR_CDMA_SELECTED_TEST_MODEL.html" "../../help/lvivi.chm"
+attribute: "CDMA Clock Source [CDMA]"
+	"CDMA:CDMA Clock Source [CDMA]"
+	iL enum { IVIRFSIGGEN_VAL_CDMA_CLOCK_SOURCE_INTERNAL=1, IVIRFSIGGEN_VAL_CDMA_CLOCK_SOURCE_EXTERNAL=2} readwrite 1 0013152F
+"Specifies the source of the clock signal used to generate the digital modulation according to the selected standard.
+IVIRFSIGGEN_VAL_CDMA_CLOCK_SOURCE_INTERNAL 1
+The internal clock generator is used.
+
+IVIRFSIGGEN_VAL_CDMA_CLOCK_SOURCE_EXTERNAL 2
+A connected external clock generator (bit or symbol clock frequency) is used."
+"IVIRFSIGGEN_ATTR_CDMA_CLOCK_SOURCE.html" "../../help/lvivi.chm"
+attribute: "CDMA Trigger Source [CDMA]"
+	"CDMA:Trigger:CDMA Trigger Source [CDMA]"
+	iL enum { IVIRFSIGGEN_VAL_CDMA_TRIGGER_SOURCE_IMMEDIATE=1, IVIRFSIGGEN_VAL_CDMA_TRIGGER_SOURCE_EXTERNAL=2, IVIRFSIGGEN_VAL_CDMA_TRIGGER_SOURCE_SOFTWARE=3} readwrite 1 0013152B
+"Specifies the source of the trigger signal that starts the channel coding generation.
+IVIRFSIGGEN_VAL_CDMA_TRIGGER_SOURCE_IMMEDIATE 1
+The CDMA generator system does not wait for a trigger. Each channel coding is run continuously.
+
+IVIRFSIGGEN_VAL_CDMA_TRIGGER_SOURCE_EXTERNAL 2
+Each channel coding is started with an external signal.
+
+IVIRFSIGGEN_VAL_CDMA_TRIGGER_SOURCE_SOFTWARE 3
+Each channel coding is started with a software programmable trigger."
+"IVIRFSIGGEN_ATTR_CDMA_TRIGGER_SOURCE.html" "../../help/lvivi.chm"
+attribute: "CDMA External Trigger Slope [CDMA]"
+	"CDMA:Trigger:CDMA External Trigger Slope [CDMA]"
+	iL enum { IVIRFSIGGEN_VAL_CDMA_EXTERNAL_TRIGGER_SLOPE_POSITIVE=1, IVIRFSIGGEN_VAL_CDMA_EXTERNAL_TRIGGER_SLOPE_NEGATIVE=2} readwrite 1 0013152C
+"Specifies whether the trigger event occurs on the rising or falling edge of the input signal.
+IVIRFSIGGEN_VAL_CDMA_EXTERNAL_TRIGGER_SLOPE_POSITIVE 1
+Enables rising edge triggering.
+
+IVIRFSIGGEN_VAL_CDMA_EXTERNAL_TRIGGER_SLOPE_NEGATIVE 2
+Enables falling edge triggering."
+"IVIRFSIGGEN_ATTR_CDMA_EXTERNAL_TRIGGER_SLOPE.html" "../../help/lvivi.chm"
+attribute: "TDMA Standard Count [TDMA]"
+	"TDMA:TDMA Standard Count [TDMA]"
+	iL readonly 1 0013158D
+"Specifies the number of TDMA standards available for a particular instrument. "
+"IVIRFSIGGEN_ATTR_TDMA_STANDARD_Count.html" "../../help/lvivi.chm"
+attribute: "TDMA Selected Standard [TDMA]"
+	"TDMA:TDMA Selected Standard [TDMA]"
+	string readwrite 1 0013158E
+"Specifies the actual standard used by the instrument. The coding, mapping, symbol rate or bit clock frequency, filter together with the according filter parameters, FSK deviation or ASK depth (in case of FSK or ASK modulation) are set as defined in the selected standard."
+"IVIRFSIGGEN_ATTR_TDMA_SELECTED_STANDARD.html" "../../help/lvivi.chm"
+attribute: "TDMA Frame Count [TDMA]"
+	"TDMA:TDMA Frame Count [TDMA]"
+	iL readonly 1 00131591
+"Specifies the number of TDMA frames available for a particular instrument."
+"IVIRFSIGGEN_ATTR_TDMA_FRAME_COUNT.html" "../../help/lvivi.chm"
+attribute: "TDMA Selected Frame [TDMA]"
+	"TDMA:TDMA Selected Frame [TDMA]"
+	string readwrite 1 00131592
+"Specifies the actual frame used by the instrument. It is selected from the list queried with the Get TDMA Frame Names VI."
+"IVIRFSIGGEN_ATTR_TDMA_SELECTED_FRAME.html" "../../help/lvivi.chm"
+attribute: "TDMA Clock Source [TDMA]"
+	"TDMA:TDMA Clock Source [TDMA]"
+	iL enum { IVIRFSIGGEN_VAL_TDMA_CLOCK_SOURCE_INTERNAL=1, IVIRFSIGGEN_VAL_TDMA_CLOCK_SOURCE_EXTERNAL=2} readwrite 1 00131593
+"Specifies the source of the clock signal used to generate the digital modulation according to the selected standard.
+IVIRFSIGGEN_VAL_TDMA_CLOCK_SOURCE_INTERNAL 1
+The internal clock generator is used.
+
+IVIRFSIGGEN_VAL_TDMA_CLOCK_SOURCE_EXTERNAL 2
+A connected external clock generator (bit or symbol clock frequency) is used."
+"IVIRFSIGGEN_ATTR_TDMA_CLOCK_SOURCE.html" "../../help/lvivi.chm"
+attribute: "TDMA Clock Type [TDMA]"
+	"TDMA:TDMA Clock Type [TDMA]"
+	iL enum { IVIRFSIGGEN_VAL_TDMA_EXTERNAL_CLOCK_TYPE_BIT=1, IVIRFSIGGEN_VAL_TDMA_EXTERNAL_CLOCK_TYPE_SYMBOL=2} readwrite 1 00131594
+"Specifies the type of the external clock signal used to generate the digital modulation. This value is used only if the IviRFSigGen>>TDMA>>TDMA Clock Source [TDMA] property is set to External.
+IVIRFSIGGEN_VAL_TDMA_EXTERNAL_CLOCK_TYPE_BIT 1
+The external clock frequency is equal to the bit clock frequency of the digital modulation.
+
+IVIRFSIGGEN_VAL_TDMA_EXTERNAL_CLOCK_TYPE_SYMBOL 2
+The external clock frequency is equal to the symbol clock frequency of the digital modulation."
+"IVIRFSIGGEN_ATTR_TDMA_EXTERNAL_CLOCK_TYPE.html" "../../help/lvivi.chm"
+attribute: "TDMA Trigger Source [TDMA]"
+	"TDMA:Trigger:TDMA Trigger Source [TDMA]"
+	iL enum { IVIRFSIGGEN_VAL_TDMA_TRIGGER_SOURCE_IMMEDIATE=1, IVIRFSIGGEN_VAL_TDMA_TRIGGER_SOURCE_EXTERNAL=2, IVIRFSIGGEN_VAL_TDMA_TRIGGER_SOURCE_SOFTWARE=3} readwrite 1 0013158F
+"Specifies the source of the trigger signal that starts the frame/slots generation.
+IVIRFSIGGEN_VAL_TDMA_TRIGGER_SOURCE_IMMEDIATE 1
+The TDMA generator system does not wait for a trigger of any kind, so it is running the frames continuously.
+
+IVIRFSIGGEN_VAL_TDMA_TRIGGER_SOURCE_EXTERNAL 2
+Each frame is started with an external signal.
+
+IVIRFSIGGEN_VAL_TDMA_TRIGGER_SOURCE_SOFTWARE 3
+Each frame is started with a software programmable trigger."
+"IVIRFSIGGEN_ATTR_TDMA_TRIGGER_SOURCE.html" "../../help/lvivi.chm"
+attribute: "TDMA External Trigger Slope [TDMA]"
+	"TDMA:Trigger:TDMA External Trigger Slope [TDMA]"
+	iL enum { IVIRFSIGGEN_VAL_TDMA_EXTERNAL_TRIGGER_SLOPE_POSITIVE=1, IVIRFSIGGEN_VAL_TDMA_EXTERNAL_TRIGGER_SLOPE_NEGATIVE=2} readwrite 1 00131590
+"Specifies whether the trigger event occurs on the rising or falling edge of the input signal.
+IVIRFSIGGEN_VAL_TDMA_EXTERNAL_TRIGGER_SLOPE_POSITIVE 1
+Enables rising edge triggering.
+
+IVIRFSIGGEN_VAL_TDMA_EXTERNAL_TRIGGER_SLOPE_NEGATIVE 2
+Enables falling edge triggering."
+"IVIRFSIGGEN_ATTR_TDMA_EXTERNAL_TRIGGER_SLOPE.html" "../../help/lvivi.chm"

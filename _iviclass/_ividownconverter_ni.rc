@@ -1,0 +1,753 @@
+explicitActiveChannels: FALSE
+library: IviDownconverter_ni**.dll
+
+class: "IviDownconverter"
+flags: 16
+sorted: no
+implements: ivi, iviResourceMgr
+attribute: "Range Check"
+	"Inherent IVI Settings:User Options:Range Check"
+	bool readwrite 1 00100592
+"Specifies whether to validate property values and VI parameters.  If enabled, the instrument driver validates the parameter values that you pass to driver VIs.  Range checking parameters is very useful for debugging.  After you validate your program, you can set this property to FALSE to disable range checking and maximize performance.
+    The default value is TRUE.   Use the Initialize With Options VI to override this value.
+    
+TRUE 1
+True
+
+FALSE 0
+False"
+"CLASSPREFIX_ATTR_RANGE_CHECK.html" "../../help/lvivi.chm"
+attribute: "Query Instrument Status"
+	"Inherent IVI Settings:User Options:Query Instrument Status"
+	bool readwrite 1 00100593
+"Specifies whether the instrument driver queries the instrument status after each operation.  Querying the instrument status is very useful for debugging.  After you validate your program, you can set this property to FALSE to disable status checking and maximize performance
+    The instrument driver can choose to ignore status checking for particular properties regardless of the setting of this property.
+    The default value is FALSE.   Use the Initialize With Options VI to override this value.
+    
+TRUE 1
+True
+
+FALSE 0
+False"
+"CLASSPREFIX_ATTR_QUERY_INSTR_STATUS.html" "../../help/lvivi.chm"
+attribute: "Cache"
+	"Inherent IVI Settings:User Options:Cache"
+	bool readwrite 1 00100594
+"Specifies whether to cache the value of properties.  When caching is enabled, the instrument driver keeps track of the current instrument settings and avoids sending redundant commands to the instrument.  Thus, you can significantly increase execution speed.
+    The instrument driver can choose always to cache or never to cache particular properties regardless of the setting of this property.
+    The default value is TRUE.   Use the Initialize With Options VI to override this value.
+    
+TRUE 1
+True
+
+FALSE 0
+False"
+"CLASSPREFIX_ATTR_CACHE.html" "../../help/lvivi.chm"
+attribute: "Simulate"
+	"Inherent IVI Settings:User Options:Simulate"
+	bool readwrite 1 00100595
+"Specifies whether or not to simulate instrument driver I/O operations.  If simulation is enabled, instrument driver VIs perform range checking and set and get properties, but they do not perform instrument I/O.  For output parameters that represent instrument data, the instrument driver VIs return calculated values.
+    The default value is FALSE.   Use the Initialize With Options VI to override this value.
+    
+TRUE 1
+True
+
+FALSE 0
+False"
+"CLASSPREFIX_ATTR_SIMULATE.html" "../../help/lvivi.chm"
+attribute: "Use Specific Simulation"
+	"Inherent IVI Settings:User Options:Use Specific Simulation"
+	bool readwrite 1 001005A7
+"Specifies whether to simulate instrument driver I/O operations in the specific or class driver.  This property affects instrument driver operation only when the IviDownconverter>>Inherent IVI Settings>>User Options>>Simulate property is set to TRUE.
+    The default value is FALSE.
+    
+TRUE 1
+True
+
+FALSE 0
+False"
+"CLASSPREFIX_ATTR_USE_SPECIFIC_SIMULATION.html" "../../help/lvivi.chm"
+attribute: "Record Value Coercions"
+	"Inherent IVI Settings:User Options:Record Value Coercions"
+	bool readwrite 1 00100596
+"Specifies whether the instrument driver keeps a list of the value coercions it makes for integer and real type properties.  If IviDownconverter>>Inherent IVI Settings>>User Options>>Spy is set to TRUE, you use the NI I/O Trace utility to view coercion information.  If IviDownconverter>>Inherent IVI Settings>>User Options>>Spy is set to FALSE you call Get Next Coercion Record to extract and delete the oldest coercion record from the list.
+    The default value is FALSE.   Use the IVI Configuration utility or the Initialize With Options VI to override this value.
+    
+TRUE 1
+True
+
+FALSE 0
+False"
+"CLASSPREFIX_ATTR_RECORD_COERCIONS.html" "../../help/lvivi.chm"
+attribute: "Interchange Check"
+	"Inherent IVI Settings:User Options:Interchange Check"
+	bool readwrite 1 001005A5
+"Specifies whether to perform interchangeability checking and retrieve interchangeability warnings when you call the Wait Until Settled VI.  The default value is FALSE.  Interchangeability warnings indicate that using your application with a different instrument might cause different behavior.  If IviDownconverter>>Inherent IVI Settings>>User Options>>Spy is set to FALSE, you call Get Next Interchange Warning to extract interchange warnings.  Call the Clear Interchange Warnings VI to clear the list of interchangeability warnings without reading them.
+If IviDownconverter>>Inherent IVI Settings>>User Options>>Spy is set to TRUE, you can use the NI I/O Trace utility to view interchange warnings.
+     Interchangeability checking examines the properties in a capability group only if you specify a value for at least one property within that group.  Interchangeability warnings can occur under the following conditions:
+
+(1) A property affects the behavior of the instrument and you have not set that property.
+
+(2) The IviDownconverter class defines values for a property and you have set that property to a value not defined by the IviDownconverter class.
+
+(3) The IviDownconverter class defines a property as read-only and you have set that property.
+
+
+TRUE 1
+True
+
+FALSE 0
+False"
+"CLASSPREFIX_ATTR_INTERCHANGE_CHECK.html" "../../help/lvivi.chm"
+attribute: "Spy"
+	"Inherent IVI Settings:User Options:Spy"
+	bool readwrite 1 001005A6
+"Specifies whether to log class VI calls to the NI I/O Trace utility.  If spying is enabled, you can use NI I/O Trace to view the input and output parameters, return values, coercion records, and interchangeability warnings of class VI calls.
+    The default value is TRUE.
+    
+TRUE 1
+True
+
+FALSE 0
+False"
+"CLASSPREFIX_ATTR_SPY.html" "../../help/lvivi.chm"
+attribute: "Description"
+	"Inherent IVI Settings:Class Driver Identification:Description"
+	string readonly 1 00100796
+"A string that contains a brief description of the class driver
+    "
+"CLASSPREFIX_ATTR_CLASS_DRIVER_DESCRIPTION.html" "../../help/lvivi.chm"
+attribute: "Class Driver Prefix"
+	"Inherent IVI Settings:Class Driver Identification:Class Driver Prefix"
+	string readonly 1 001006BD
+"A string that contains the prefix for the class driver.  The name of each user-callable VI in this driver starts with this prefix.
+    "
+"CLASSPREFIX_ATTR_CLASS_PREFIX.html" "../../help/lvivi.chm"
+attribute: "Class Driver Vendor"
+	"Inherent IVI Settings:Class Driver Identification:Class Driver Vendor"
+	string readonly 1 00100795
+"A string that contains the name of the vendor that supplies this class driver.
+    "
+"CLASSPREFIX_ATTR_CLASS_DRIVER_VENDOR.html" "../../help/lvivi.chm"
+attribute: "Revision"
+	"Inherent IVI Settings:Class Driver Identification:Revision"
+	string readonly 1 001007B8
+"A string that contains additional version information about the class driver.
+    "
+"CLASSPREFIX_ATTR_CLASS_REVISION.html" "../../help/lvivi.chm"
+attribute: "Class Specification Major Version"
+	"Inherent IVI Settings:Class Driver Identification:Class Specification Major Version"
+	iL readonly 1 00100797
+"The major version number of the class specification with which the class driver is compliant.
+    "
+"CLASSPREFIX_ATTR_CLASS_DRIVER_CLASS_SPEC_MAJOR_VERSION.html" "../../help/lvivi.chm"
+attribute: "Class Specification Minor Version"
+	"Inherent IVI Settings:Class Driver Identification:Class Specification Minor Version"
+	iL readonly 1 00100798
+"The minor version number of the class specification with which the class driver is compliant.
+    "
+"CLASSPREFIX_ATTR_CLASS_DRIVER_CLASS_SPEC_MINOR_VERSION.html" "../../help/lvivi.chm"
+attribute: "Description"
+	"Inherent IVI Settings:Specific Driver Identification:Description"
+	string readonly 1 00100792
+"A string that contains a brief description of the specific driver
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_DESCRIPTION.html" "../../help/lvivi.chm"
+attribute: "Specific Driver Prefix"
+	"Inherent IVI Settings:Specific Driver Identification:Specific Driver Prefix"
+	string readonly 1 001006BE
+"A string that contains the prefix for the instrument driver.  The name of each user-callable VI in this driver starts with this prefix.
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_PREFIX.html" "../../help/lvivi.chm"
+attribute: "Specific Driver Locator"
+	"Inherent IVI Settings:Specific Driver Identification:Specific Driver Locator"
+	string readonly 1 001006BF
+"Indicates the location at which the class driver attempts to find the specific driver module file.
+"
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_LOCATOR.html" "../../help/lvivi.chm"
+attribute: "Specific Driver Vendor"
+	"Inherent IVI Settings:Specific Driver Identification:Specific Driver Vendor"
+	string readonly 1 00100791
+"A string that contains the name of the vendor that supplies this driver.
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_VENDOR.html" "../../help/lvivi.chm"
+attribute: "Revision"
+	"Inherent IVI Settings:Specific Driver Identification:Revision"
+	string readonly 1 001007B7
+"A string that contains additional version information about the specific driver.
+    "
+"CLASSPREFIX_ATTR_DRIVER_REVISION.html" "../../help/lvivi.chm"
+attribute: "Class Specification Major Version"
+	"Inherent IVI Settings:Specific Driver Identification:Class Specification Major Version"
+	iL readonly 1 00100793
+"The major version number of the class specification with which the specific driver is compliant.
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION.html" "../../help/lvivi.chm"
+attribute: "Class Specification Minor Version"
+	"Inherent IVI Settings:Specific Driver Identification:Class Specification Minor Version"
+	iL readonly 1 00100794
+"The minor version number of the class specification with which the specific driver is compliant.
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION.html" "../../help/lvivi.chm"
+attribute: "Supported Instrument Models"
+	"Inherent IVI Settings:Specific Driver Capabilities:Supported Instrument Models"
+	string readonly 1 001006D7
+"Contains a model code of the instrument. For specific drivers that support more than one device, this property contains a comma-separated list of supported instrument models.
+    "
+"CLASSPREFIX_ATTR_SUPPORTED_INSTRUMENT_MODELS.html" "../../help/lvivi.chm"
+attribute: "Group Capabilities"
+	"Inherent IVI Settings:Specific Driver Capabilities:Group Capabilities"
+	string readonly 1 00100721
+"Indicates the IviDownconverter capability groups that the specific instrument driver supports.  This property is a comma-delimited list of the following group names:
+
+'IviDownconverterBase' - Supports fundamental downconverter capabilities.
+
+'IviDownconverterBypass' - Supports IviDownconverterBase with the capability to route the RF input completely around the downconverter.
+
+'IviDownconverterExternalMixer' - Supports IviDownconverterBase with the capability to use an external mixer.
+
+'IviDownconverterFrequencyStep' - Supports IviDownconverterBase with the capability to sweep the frequency of the RF input signal in steps.
+
+'IviDownconverterFrequencySweep' - Supports IviDownconverterBase with the capability to apply a sweep to the RF input frequency.
+
+'IviDownconverterFrequencySweepList' - Supports IviDownconverterBase with the capability to set the frequency of the RF input signal to values given as a list of values.
+
+'IviDownconverterBandCrossingInformation' - Supports IviDownconverterBase with the capability to return frequency band information for frequency sweeps.
+
+'IviDownconverterSoftwareTrigger' - Supports IviDownconverterBase with the capability to generate output based on a software trigger signal.
+
+'IviDownconverterIFFilter' - Supports IviDownconverterBase with the capability to configure a filter on the IF output.
+
+'IviDownconverterPreselector' - Supports IviDownconverterBase with the capability to bypass the preselection filter.
+
+'IviDownconverterVideoDetectorBandwidth' - Supports IviDownconverterBase with the capability to apply video bandwidth detection at the IF output.
+
+'IviDownconverterCalibration' - Supports IviDownconverterBase with the capability to perform self-calibration.
+
+'IviDownconverterReferenceOscillator' - Supports IviDownconverterBase with the capability to configure frequency reference.
+
+    "
+"CLASSPREFIX_ATTR_GROUP_CAPABILITIES.html" "../../help/lvivi.chm"
+attribute: "Function Capabilities"
+	"Inherent IVI Settings:Specific Driver Capabilities:Function Capabilities"
+	string readonly 1 00100722
+"Indicates the IviDownconverter VIs that the specific instrument driver supports.  This property is a comma-delimited list of the following functions:
+
+    'IviDownconverter_init'
+    'IviDownconverter_close'
+    'IviDownconverter_reset'
+    'IviDownconverter_self_test'
+    'IviDownconverter_error_query'
+    'IviDownconverter_error_message'
+    'IviDownconverter_revision_query'
+    'IviDownconverter_InitWithOptions'
+    'IviDownconverter_ConfigureIFOutputEnabled'
+    'IviDownconverter_ConfigureIFOutputGain'
+    'IviDownconverter_GetIFOutputName'
+    'IviDownconverter_SetActiveIFOutput'
+    'IviDownconverter_ConfigureRFInputAttenuation'
+    'IviDownconverter_ConfigureRFInputFrequency'
+    'IviDownconverter_GetRFInputName'
+    'IviDownconverter_SetActiveRFInput'
+    'IviDownconverter_WaitUntilSettled'
+    'IviDownconverter_ConfigureBypass'
+    'IviDownconverter_ConfigureExternalMixerBias'
+    'IviDownconverter_ConfigureFrequencyStepDwell'
+    'IviDownconverter_ConfigureFrequencyStepStartStop'
+    'IviDownconverter_ResetFrequencyStep'
+    'IviDownconverter_ConfigureFrequencySweep'
+    'IviDownconverter_ConfigureFrequencySweepStartStop'
+    'IviDownconverter_ConfigureFrequencySweepTime'
+    'IviDownconverter_WaitUntilFrequencySweepComplete' 
+    'IviDownconverter_ClearAllFrequencySweepLists'
+    'IviDownconverter_ConfigureFrequencySweepListDwell'
+    'IviDownconverter_CreateFrequencySweepList'
+    'IviDownconverter_ResetFrequencySweepList'
+    'IviDownconverter_GetBandCrossingInfo'
+    'IviDownconverter_SendSoftwareTrigger'
+    'IviDownconverter_ConfigureIFOutputFilterBandwidth'
+    'IviDownconverter_ConfigurePreselectorEnabled'
+    'IviDownconverter_ConfigureIFOutputVideoDetectorBandwidth'
+    'IviDownconverter_Calibrate'
+    'IviDownconverter_IsCalibrationComplete'
+    'IviDownconverter_IsCalibrated'
+    'IviDownconverter_ConfigureReferenceOscillator'
+    'IviDownconverter_ConfigureReferenceOscillatorOutputEnabled'
+    "
+"CLASSPREFIX_ATTR_FUNCTION_CAPABILITIES.html" "../../help/lvivi.chm"
+attribute: "Manufacturer"
+	"Inherent IVI Settings:Instrument Identification:Manufacturer"
+	string readonly 1 0010078F
+"A string that contains the name of the instrument manufacturer you are currently using.
+    "
+"CLASSPREFIX_ATTR_INSTRUMENT_MANUFACTURER.html" "../../help/lvivi.chm"
+attribute: "Model"
+	"Inherent IVI Settings:Instrument Identification:Model"
+	string readonly 1 00100790
+"A string that contains the model number or name of the instrument that you are currently using.
+    "
+"CLASSPREFIX_ATTR_INSTRUMENT_MODEL.html" "../../help/lvivi.chm"
+attribute: "Firmware Revision"
+	"Inherent IVI Settings:Instrument Identification:Firmware Revision"
+	string readonly 1 0010078E
+"A string that contains the firmware revision information for the instrument you are currently using.
+    "
+"CLASSPREFIX_ATTR_INSTRUMENT_FIRMWARE_REVISION.html" "../../help/lvivi.chm"
+attribute: "Driver Setup"
+	"Inherent IVI Settings:Advanced Session Information:Driver Setup"
+	string readonly 1 00100597
+"Some cases exist where you must specify instrument driver options at initialization time.  An example of this is specifying a particular instrument model from among a family of instruments that the driver supports.  This is useful when using simulation.  
+     You can specify driver-specific options through the DriverSetup keyword in the optionsString parameter to the Init With Options VI.  If you open an instrument using a logical name, you can also specify the options through the IVI Configuration Utility.
+     The default value is an empty string.
+     "
+"CLASSPREFIX_ATTR_DRIVER_SETUP.html" "../../help/lvivi.chm"
+attribute: "Logical Name"
+	"Inherent IVI Settings:Advanced Session Information:Logical Name"
+	string readonly 1 001006C1
+"A string containing the logical name you specified when opening the current IVI session.
+     You may pass a logical name to the Initialize or Initialize With Options VIs.  The IVI Configuration utility must contain an entry for the logical name.  The logical name entry refers to a virtual instrument section in the IVI Configuration file.  The virtual instrument section specifies a physical device and initial user options.
+    "
+"CLASSPREFIX_ATTR_LOGICAL_NAME.html" "../../help/lvivi.chm"
+attribute: "IO Resource Descriptor"
+	"Inherent IVI Settings:Advanced Session Information:IO Resource Descriptor"
+	string readonly 1 001006C0
+"Indicates the resource descriptor the driver uses to identify the physical device.
+    If you initialize the driver with a logical name, this property contains the resource descriptor that corresponds to the entry in the IVI Configuration utility.  
+    If you initialize the instrument driver with the resource descriptor, this property contains that value.
+    "
+"CLASSPREFIX_ATTR_RESOURCE_DESCRIPTOR.html" "../../help/lvivi.chm"
+attribute: "Active RF Input"
+	"RF Input:Active RF Input"
+	string readwrite 1 001312D1
+"Specifies the RF input that is currently active.
+Subsequent calls to VIs and properties that are based on the RF Input repeated capability will be applied to the Active RF Input specified here.
+The values for this property correspond to the allowed repeated capability names for the RF Input repeated capability.
+If the driver defines a qualified RF Input name, this property returns the qualified name.
+Use the IviDownconverter Get RF Input Name VI to read the allowed values for this property.
+    "
+"IVIDOWNCONVERTER_ATTR_ACTIVE_RF_INPUT.html" "../../help/lvivi.chm"
+attribute: "Bypass [BP]"
+	"RF Input:Bypass [BP]"
+	bool readwrite 1 00131334
+"Specifies whether or not the RF input signal bypasses the entire downconverter.
+When set to True, the RF input signal is routed directly to the IF output indicated by the IviDownconverter>>IF Output>>Active IF Output property.
+When set to False, the RF input signal is routed into the front end of the downconverter and follows the normal signal path.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIDOWNCONVERTER_ATTR_BYPASS.html" "../../help/lvivi.chm"
+attribute: "RF Input Corrections Enabled"
+	"RF Input:RF Input Corrections Enabled"
+	bool readwrite 1 00131424
+"Enables or disables automatic global corrections on the device.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIDOWNCONVERTER_ATTR_RF_INPUT_CORRECTIONS_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Frequency Sweep Mode [FSW]"
+	"RF Input:Frequency Sweep:Frequency Sweep Mode [FSW]"
+	iL enum { IVIDOWNCONVERTER_VAL_FREQUENCY_SWEEP_MODE_NONE=0, IVIDOWNCONVERTER_VAL_FREQUENCY_SWEEP_MODE_SWEEP=1, IVIDOWNCONVERTER_VAL_FREQUENCY_SWEEP_MODE_STEP=2, IVIDOWNCONVERTER_VAL_FREQUENCY_SWEEP_MODE_LIST=3} readwrite 1 001313A2
+"Specifies the sweep mode of the RF input signal.
+
+IVIDOWNCONVERTER_VAL_FREQUENCY_SWEEP_MODE_NONE 0
+The RF input of the downconverter is a non-swept signal (continuous wave).
+
+IVIDOWNCONVERTER_VAL_FREQUENCY_SWEEP_MODE_SWEEP 1
+Sweeps the RF input signal frequency in analog form (non-stepped).
+
+IVIDOWNCONVERTER_VAL_FREQUENCY_SWEEP_MODE_STEP 2
+Sweeps the RF input signal frequency in steps.
+
+IVIDOWNCONVERTER_VAL_FREQUENCY_SWEEP_MODE_LIST 3
+Uses a list to sweep the RF input signal frequency.
+    "
+"IVIDOWNCONVERTER_ATTR_FREQUENCY_SWEEP_MODE.html" "../../help/lvivi.chm"
+attribute: "Frequency Sweep Trigger Source [FSW]"
+	"RF Input:Frequency Sweep:Frequency Sweep Trigger Source [FSW]"
+	string readwrite 1 001313A6
+"Specifies the trigger used to start an LO sweep operation.
+    
+Trigger Sources:
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_NONE ('') - No trigger source.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_IMMEDIATE ('Immediate') - Trigger Immediately.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_EXTERNAL ('External') - External trigger source.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_INTERNAL ('Internal') - Internal trigger source.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_SOFTWARE ('Software') - Software trigger.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_LAN0 ('LAN0') - LAN0 (LXI defined 'LAN0' LAN message).
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_LAN1 ('LAN1') - LAN1 (LXI defined 'LAN1' LAN message).
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_LAN2 ('LAN2') - LAN2 (LXI defined 'LAN2' LAN message).
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_LAN3 ('LAN3') - LAN3 (LXI defined 'LAN3' LAN message).
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_LAN4 ('LAN4') - LAN4 (LXI defined 'LAN4' LAN message).
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_LAN5 ('LAN5') - LAN5 (LXI defined 'LAN5' LAN message).
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_LAN6 ('LAN6') - LAN6 (LXI defined 'LAN6' LAN message).
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_LAN7 ('LAN7') - LAN7 (LXI defined 'LAN7' LAN message).
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_LXI0 ('LXI0') - LXI Trigger Bus Line 0.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_LXI1 ('LXI1') - LXI Trigger Bus Line 1.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_LXI2 ('LXI2') - LXI Trigger Bus Line 2.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_LXI3 ('LXI3') - LXI Trigger Bus Line 3.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_LXI4 ('LXI4') - LXI Trigger Bus Line 4.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_LXI5 ('LXI5') - LXI Trigger Bus Line 5.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_LXI6 ('LXI6') - LXI Trigger Bus Line 6.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_LXI7 ('LXI7') - LXI Trigger Bus Line 7.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_TTL0 ('TTL0') - TTL Interface 0.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_TTL1 ('TTL1') - TTL Interface 1.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_TTL2 ('TTL2') - TTL Interface 2.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_TTL3 ('TTL3') - TTL Interface 3.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_TTL4 ('TTL4') - TTL Interface 4.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_TTL5 ('TTL5') - TTL Interface 5.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_TTL6 ('TTL6') - TTL Interface 6.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_TTL7 ('TTL7') - TTL Interface 7.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_PXI_STAR ('PXI_STAR') - PXI Star Interface.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG0 ('PXI_TRIG0') - PXI Trigger Bus Line 0.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG1 ('PXI_TRIG1') - PXI Trigger Bus Line 1.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG2 ('PXI_TRIG2') - PXI Trigger Bus Line 2.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG3 ('PXI_TRIG3') - PXI Trigger Bus Line 3.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG4 ('PXI_TRIG4') - PXI Trigger Bus Line 4.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG5 ('PXI_TRIG5') - PXI Trigger Bus Line 5.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG6 ('PXI_TRIG6') - PXI Trigger Bus Line 6.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_PXI_TRIG7 ('PXI_TRIG7') - PXI Trigger Bus Line 7.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_PXIE_DSTARA ('PXIe_DSTARA') - PXI Express DStar Line A.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_PXIE_DSTARB ('PXIe_DSTARB') - PXI Express DStar Line B.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_PXIE_DSTARC ('PXIe_DSTARC') - PXI Express DStar Line C.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_RTSI0 ('RTSI0') - RTSI Bus Line 0.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_RTSI1 ('RTSI1') - RTSI Bus Line 1.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_RTSI2 ('RTSI2') - RTSI Bus Line 2.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_RTSI3 ('RTSI3') - RTSI Bus Line 3.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_RTSI4 ('RTSI4') - RTSI Bus Line 4.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_RTSI5 ('RTSI5') - RTSI Bus Line 5.
+    IVIDOWNCONVERTER_VAL_TRIGGER_SOURCE_RTSI6 ('RTSI6') - RTSI Bus Line 6.
+    "
+"IVIDOWNCONVERTER_ATTR_FREQUENCY_SWEEP_TRIGGER_SOURCE.html" "../../help/lvivi.chm"
+attribute: "Is Sweeping [FSW]"
+	"RF Input:Frequency Sweep:Is Sweeping [FSW]"
+	bool readonly 1 001313A7
+"Indicates if the downconverter is currently sweeping the RF input frequency.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    " 
+"IVIDOWNCONVERTER_ATTR_IS_SWEEPING.html" "../../help/lvivi.chm"
+attribute: "Number of Bands [BCI]"
+	"RF Input:Frequency Sweep:Number of Bands [BCI]"
+	iL readonly 1 001313FC
+"Returns the number of frequency bands. The count returned here indicates the number of start-stop frequency pairs.
+    "
+"IVIDOWNCONVERTER_ATTR_NUM_BANDS.html" "../../help/lvivi.chm"
+attribute: "Frequency Sweep Start [FSW]"
+	"RF Input:Frequency Sweep:Analog:Frequency Sweep Start [FSW]"
+	fD readwrite 1 001313A3
+"Specifies the start frequency of the LO sweep.
+If the stop frequency is less than the start frequency, the frequency decreases during the sweep. The units are Hertz.
+    "
+"IVIDOWNCONVERTER_ATTR_FREQUENCY_SWEEP_START.html" "../../help/lvivi.chm"
+attribute: "Frequency Sweep Stop [FSW]"
+	"RF Input:Frequency Sweep:Analog:Frequency Sweep Stop [FSW]"
+	fD readwrite 1 001313A4
+"Specifies the stop frequency of the LO sweep.
+If the stop frequency is less than the start frequency, the frequency decreases during the sweep. The units are Hertz.
+	"
+"IVIDOWNCONVERTER_ATTR_FREQUENCY_SWEEP_STOP.html" "../../help/lvivi.chm"
+attribute: "Frequency Sweep Time [FSW]"
+	"RF Input:Frequency Sweep:Analog:Frequency Sweep Time [FSW]"
+	fD readwrite 1 001313A5
+"Specifies the duration of one LO sweep from start to stop frequency. The units are seconds.
+    "
+"IVIDOWNCONVERTER_ATTR_FREQUENCY_SWEEP_TIME.html" "../../help/lvivi.chm"
+attribute: "Frequency Step Dwell [FST]"
+	"RF Input:Frequency Sweep:Step:Frequency Step Dwell [FST]"
+	fD readwrite 1 00131398
+"Specifies the duration of one step. The units are seconds.
+The dwell time starts immediately at the start of each step. No settling time is added. This property is valid only when the IviDownconverter>>RF Input>>Frequency Sweep>>Step>>Frequency Step Single Step Enabled [FST] property is set to FALSE.
+    "
+"IVIDOWNCONVERTER_ATTR_FREQUENCY_STEP_DWELL.html" "../../help/lvivi.chm"
+attribute: "Frequency Step Scaling [FST]"
+	"RF Input:Frequency Sweep:Step:Frequency Step Scaling [FST]"
+	iL enum { IVIDOWNCONVERTER_VAL_FREQUENCY_STEP_SCALING_LINEAR=0, IVIDOWNCONVERTER_VAL_FREQUENCY_STEP_SCALING_LOGARITHMIC=1} readwrite 1 00131399
+"Specifies the spacing of the steps.
+
+IVIDOWNCONVERTER_VAL_FREQUENCY_STEP_SCALING_LINEAR 0
+Enables linear scaling for step sizes in stepped sweeps.
+
+IVIDOWNCONVERTER_VAL_FREQUENCY_STEP_SCALING_LOGARITHMIC 1
+Enables logarithmic scaling for step sizes in stepped sweeps.
+    "
+"IVIDOWNCONVERTER_ATTR_FREQUENCY_STEP_SCALING.html" "../../help/lvivi.chm"
+attribute: "Frequency Step Single Step Enabled [FST]"
+	"RF Input:Frequency Sweep:Step:Frequency Step Single Step Enabled [FST]"
+	bool readwrite 1 0013139A
+"Enables or disables single step mode.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIDOWNCONVERTER_ATTR_FREQUENCY_STEP_SINGLE_STEP_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Frequency Step Size [FST]"
+	"RF Input:Frequency Sweep:Step:Frequency Step Size [FST]"
+	fD readwrite 1 0013139B
+"Specifies the step size. The units are Hertz if the IviDownconverter>>RF Input>>Frequency Sweep>>Step>>Frequency Step Scaling [FST] property is set to Linear and unitless (factor) if the IviDownconverter>>RF Input>>Frequency Sweep>>Step>>Frequency Step Scaling [FST] property is set to Logarithmic.
+    "
+"IVIDOWNCONVERTER_ATTR_FREQUENCY_STEP_SIZE.html" "../../help/lvivi.chm"
+attribute: "Frequency Step Start [FST]"
+	"RF Input:Frequency Sweep:Step:Frequency Step Start [FST]"
+	fD readwrite 1 0013139C
+"Specifies the start frequency of the stepped sweep.
+If the stop frequency is less than the start frequency, the frequency decreases during the sweep. The units are Hertz.
+    "
+"IVIDOWNCONVERTER_ATTR_FREQUENCY_STEP_START.html" "../../help/lvivi.chm"
+attribute: "Frequency Step Stop [FST]"
+	"RF Input:Frequency Sweep:Step:Frequency Step Stop [FST]"
+	fD readwrite 1 0013139D
+"Specifies the stop frequency of the stepped sweep.
+If the stop frequency is less than the start frequency, the frequency decreases during the sweep. The units are Hertz.
+    "
+"IVIDOWNCONVERTER_ATTR_FREQUENCY_STEP_STOP.html" "../../help/lvivi.chm"
+attribute: "Frequency Sweep List Dwell [FSL]"
+	"RF Input:Frequency Sweep:List:Frequency Sweep List Dwell [FSL]"
+	fD readwrite 1 001313AC
+"Specifies the duration of one step. The units are seconds.
+This property is valid only when the IviDownconverter>>RF Input>>Frequency Sweep>>List>>Frequency Sweep List Single Step Enabled [FSL] property is set to FALSE.
+    "
+"IVIDOWNCONVERTER_ATTR_FREQUENCY_SWEEP_LIST_DWELL.html" "../../help/lvivi.chm"
+attribute: "Frequency Sweep List Selected Name [FSL]"
+	"RF Input:Frequency Sweep:List:Frequency Sweep List Selected Name [FSL]"
+	string readwrite 1 001313AD
+"Specifies the name of the selected list to become active. The name shall be one of the lists created.
+    "
+"IVIDOWNCONVERTER_ATTR_FREQUENCY_SWEEP_LIST_SELECTED_NAME.html" "../../help/lvivi.chm"
+attribute: "Frequency Sweep List Single Step Enabled [FSL]"
+	"RF Input:Frequency Sweep:List:Frequency Sweep List Single Step Enabled [FSL]"
+	bool readwrite 1 001313AE
+"Enables or disables single step mode.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIDOWNCONVERTER_ATTR_FREQUENCY_SWEEP_LIST_SINGLE_STEP_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Preselector Enabled [PS]"
+	"RF Input:Preselector Enabled [PS]"
+	bool readwrite 1 00131410
+"Enables or disables bypassing the pre-selection filter for the active RF Input.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIDOWNCONVERTER_ATTR_PRESELECTOR_ENABLED.html" "../../help/lvivi.chm"
+attribute: "RF Input Attenuation"
+	"RF Input:RF Input Attenuation"
+	fD readwrite 1 001312D9
+"Specifies the amount of attenuation (or gain) to apply to the active RF input of the downconverter. The units are dB.
+Positive values for this property represent attenuation while negative values represent gain.
+	"
+"IVIDOWNCONVERTER_ATTR_RF_INPUT_ATTENUATION.html" "../../help/lvivi.chm"
+attribute: "RF Input Count"
+	"RF Input:RF Input Count"
+	iL readonly 1 001312DB
+"Returns the number of RF Inputs available on the device.
+    "
+"IVIDOWNCONVERTER_ATTR_RF_INPUT_COUNT.html" "../../help/lvivi.chm"
+attribute: "RF Input Coupling"
+	"RF Input:RF Input Coupling"
+	iL enum { IVIDOWNCONVERTER_VAL_INPUT_COUPLING_AC=0, IVIDOWNCONVERTER_VAL_INPUT_COUPLING_DC=1} readwrite 1 001312DA
+"Specifies the coupling applied to active RF input.
+    
+IVIDOWNCONVERTER_VAL_INPUT_COUPLING_AC 0
+AC couples the RF input signal.
+
+IVIDOWNCONVERTER_VAL_INPUT_COUPLING_DC 1
+DC couples the RF input signal.
+	"
+"IVIDOWNCONVERTER_ATTR_RF_INPUT_COUPLING.html" "../../help/lvivi.chm"
+attribute: "RF Input Frequency"
+	"RF Input:RF Input Frequency"
+	fD readwrite 1 001312DC
+"Specifies the frequency of the active RF input. The units are Hertz.
+    "
+"IVIDOWNCONVERTER_ATTR_RF_INPUT_FREQUENCY.html" "../../help/lvivi.chm"
+attribute: "Active IF Output"
+	"IF Output:Active IF Output"
+	string readwrite 1 001312D0
+"Specifies the IF output that is currently active.
+Subsequent calls to VIs and properties that are based on the IF Output repeated capability will be applied to the Active IF Output specified here.
+The values for this property correspond to the allowed repeated capability names for the IF Output repeated capability.
+If the driver defines a qualified IF Output name, this property returns the qualified name.
+Use the IviDownconverter Get IF Output Name VI to read the allowed values for this property.
+Note that this property does not enable the specified output. This property only controls the IF Output repeated capability instance to which other VIs and properties apply.
+Use the IviDownconverter>>IF Output>>IF Output Enabled property to route the IF signal to a specific output.
+   "
+"IVIDOWNCONVERTER_ATTR_ACTIVE_IF_OUTPUT.html" "../../help/lvivi.chm"
+attribute: "IF Output Filter Bandwidth [IFF]"
+	"IF Output:IF Output Filter Bandwidth [IFF]"
+	fD readwrite 1 00131406
+"Specifies the maximum effective IF signal bandwidth that the downconverter's active IF Output can present to the digitizer. The units are Hertz.  
+This value is a measure of the spectral width between two points for which the amplitude profile is 3 dB below a peak close to mid band.
+    "
+"IVIDOWNCONVERTER_ATTR_IF_OUTPUT_FILTER_BANDWIDTH.html" "../../help/lvivi.chm"
+attribute: "IF Output Count"
+	"IF Output:IF Output Count"
+	iL readonly 1 001312D4
+"Returns the number of IF Outputs available on the device.
+	"
+"IVIDOWNCONVERTER_ATTR_IF_OUTPUT_COUNT.html" "../../help/lvivi.chm"
+attribute: "IF Output Enabled"
+	"IF Output:IF Output Enabled"
+	bool readwrite 1 001312D5
+"Enables or disables the active IF output.
+Only a single IF Output can be enabled at a time. Thus, when this property is set to True for a particular IF output, all other IF outputs are disabled.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIDOWNCONVERTER_ATTR_IF_OUTPUT_ENABLED.html" "../../help/lvivi.chm"
+attribute: "IF Output Frequency"
+	"IF Output:IF Output Frequency"
+	fD readonly 1 001312D6
+"Returns the frequency of the active IF output. The units are Hertz.
+    "
+"IVIDOWNCONVERTER_ATTR_IF_OUTPUT_FREQUENCY.html" "../../help/lvivi.chm"
+attribute: "IF Output Gain"
+	"IF Output:IF Output Gain"
+	fD readwrite 1 001312D7
+"Specifies the amount of gain (or attenuation) to apply to the active IF output of the downconverter. The units are dB.
+Positive values for this property represent signal gain while negative values represent attenuation.
+    "
+"IVIDOWNCONVERTER_ATTR_IF_OUTPUT_GAIN.html" "../../help/lvivi.chm"
+attribute: "IF Output Video Detector Bandwidth [VDB]"
+	"IF Output:IF Output Video Detector Bandwidth [VDB]"
+	fD readwrite 1 0013141A
+"Specifies the 3 dB bandwidth of the active IF output video detection filter. The units are Hertz.
+    "
+"IVIDOWNCONVERTER_ATTR_IF_OUTPUT_VIDEO_DETECTOR_BANDWIDTH.html" "../../help/lvivi.chm"
+attribute: "Is Settled"
+	"IF Output:Is Settled"
+	bool readonly 1 001312D8
+"Indicates whether the downconverter has settled from changes to either the RF input signal or changes to device control parameters, such as IF Output Gain, IF Frequency, or RF Attenuation.
+This property indicates whether or not the active IF output is valid for processing by another downstream system component, such as a digitizer.
+
+TRUE 1
+True
+
+FALSE 0
+False
+	"	 
+"IVIDOWNCONVERTER_ATTR_IS_SETTLED.html" "../../help/lvivi.chm"
+attribute: "External LO Enabled"
+	"External LO:External LO Enabled"
+	bool readwrite 1 001312D2
+"Enables or disables the external LO.
+If the driver does not support an external LO and this property is set to True, then the driver returns the Invalid Value error.
+
+TRUE 1
+True
+
+FALSE 0
+False
+	"
+"IVIDOWNCONVERTER_ATTR_EXTERNAL_LO_ENABLED.html" "../../help/lvivi.chm"
+attribute: "External LO Frequency"
+	"External LO:External LO Frequency"
+	fD readwrite 1 001312D3
+"Specifies the frequency of the external LO. The units are Hertz.
+    "
+"IVIDOWNCONVERTER_ATTR_EXTERNAL_LO_FREQUENCY.html" "../../help/lvivi.chm"
+attribute: "External Mixer Bias Enabled [EM]"
+	"External Mixer:Bias:External Mixer Bias Enabled [EM]"
+	bool readwrite 1 00131341
+"Enables or disables the external mixer bias.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIDOWNCONVERTER_ATTR_EXTERNAL_MIXER_BIAS_ENABLED.html" "../../help/lvivi.chm"
+attribute: "External Mixer Bias Level [EM]"
+	"External Mixer:Bias:External Mixer Bias Level [EM]"
+	fD readwrite 1 0013133F
+"Specifies the external mixer bias current. The units are Amps.
+    "
+"IVIDOWNCONVERTER_ATTR_EXTERNAL_MIXER_BIAS_LEVEL.html" "../../help/lvivi.chm"
+attribute: "External Mixer Bias Limit [EM]"
+	"External Mixer:Bias:External Mixer Bias Limit [EM]"
+	fD readwrite 1 00131340
+"Specifies the external mixer bias current limit. The units are Amps.
+	"
+"IVIDOWNCONVERTER_ATTR_EXTERNAL_MIXER_BIAS_LIMIT.html" "../../help/lvivi.chm"
+attribute: "External Mixer Enabled [EM]"
+	"External Mixer:External Mixer Enabled [EM]"
+	bool readwrite 1 0013133E
+"Enables or disables the external mixer.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIDOWNCONVERTER_ATTR_EXTERNAL_MIXER_ENABLED.html" "../../help/lvivi.chm"
+attribute: "External Mixer Harmonic [EM]"
+	"External Mixer:External Mixer Harmonic [EM]"
+	iL readwrite 1 00131342
+"Specifies the order n of the harmonic used for conversion.
+	"
+"IVIDOWNCONVERTER_ATTR_EXTERNAL_MIXER_HARMONIC.html" "../../help/lvivi.chm"
+attribute: "External Mixer Number Of Ports [EM]"
+	"External Mixer:External Mixer Number Of Ports [EM]"
+	iL readwrite 1 00131343
+"Specifies the number of ports.
+    "
+"IVIDOWNCONVERTER_ATTR_EXTERNAL_MIXER_NUMBER_OF_PORTS.html" "../../help/lvivi.chm"
+attribute: "Reference Oscillator External Frequency [RO]"
+	"Reference Oscillator:Reference Oscillator External Frequency [RO]"
+	fD readwrite 1 00131425
+"Specifies the frequency of the external signal that is used as reference for internal IF frequency generation.
+This property is valid only when IviDownconverter>>Reference Oscillator>>Reference Oscillator Source [RO] property is set to External. The units are Hertz.
+	"
+"IVIDOWNCONVERTER_ATTR_REFERENCE_OSCILLATOR_EXTERNAL_FREQUENCY.html" "../../help/lvivi.chm"
+attribute: "Reference Oscillator Source [RO]"
+	"Reference Oscillator:Reference Oscillator Source [RO]"
+	iL enum { IVIDOWNCONVERTER_VAL_REFERENCE_OSCILLATOR_SOURCE_INTERNAL=0, IVIDOWNCONVERTER_VAL_REFERENCE_OSCILLATOR_SOURCE_EXTERNAL=1} readwrite 1 00131426
+"Specifies the reference oscillator source used to generate the precise IF output frequency.
+    
+IVIDOWNCONVERTER_VAL_REFERENCE_OSCILLATOR_SOURCE_INTERNAL 0
+Internal reference oscillator.
+
+IVIDOWNCONVERTER_VAL_REFERENCE_OSCILLATOR_SOURCE_EXTERNAL 1
+External reference oscillator.
+	"
+"IVIDOWNCONVERTER_ATTR_REFERENCE_OSCILLATOR_SOURCE.html" "../../help/lvivi.chm"
+attribute: "Reference Oscillator Output Enabled [RO]"
+	"Reference Oscillator:Reference Oscillator Output Enabled [RO]"
+	bool readwrite 1 00131427
+"Enables or disables the reference output.
+
+TRUE 1
+True
+
+FALSE 0
+False
+    "
+"IVIDOWNCONVERTER_ATTR_REFERENCE_OSCILLATOR_OUTPUT_ENABLED.html" "../../help/lvivi.chm"

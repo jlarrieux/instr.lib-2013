@@ -1,0 +1,1527 @@
+explicitActiveChannels: TRUE
+library: IviDigitizer_ni**.dll
+
+class: "IviDigitizer"
+flags: 16
+sorted: no
+implements: ivi, iviResourceMgr
+
+attribute: "Active Channel" "Active Channel" string writeonly 3 -2
+"Specifics the channel name used to access all subsequent channel-based properties in this property node.  Set the channel before setting channel-based properties.  Pass a name that the instrument driver defines or a virtual channel name configured in MAX."
+"ActiveTrace.html" "../../help/lvivi.chm"
+attribute: "Range Check"
+	"Inherent IVI Settings:User Options:Range Check"
+	bool readwrite 1 100592
+	//const: IVIDIGITIZER_ATTR_RANGE_CHECK
+"Specifies whether to validate property values and VI parameters.  If enabled, the instrument driver validates the parameter values that you pass to driver VIs.  Range checking parameters is very useful for debugging.  After you validate your program, you can set this property to FALSE to disable range checking and maximize performance.
+    The default value is TRUE.   Use the IviDigitizer Initialize With Options.vi to override this value.
+    
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+"
+"CLASSPREFIX_ATTR_RANGE_CHECK.html" "../../help/lvivi.chm"
+attribute: "Query Instrument Status"
+	"Inherent IVI Settings:User Options:Query Instrument Status"
+	bool readwrite 1 100593
+	//const: IVIDIGITIZER_ATTR_QUERY_INSTRUMENT_STATUS
+"Specifies whether the instrument driver queries the instrument status after each operation.  Querying the instrument status is very useful for debugging.  After you validate your program, you can set this property to FALSE to disable status checking and maximize performance
+    The instrument driver can choose to ignore status checking for particular properties regardless of the setting of this property.
+    The default value is FALSE.   Use the IviDigitizer_InitWithOptionsfunction to override this value.
+    
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+"
+"CLASSPREFIX_ATTR_QUERY_INSTR_STATUS.html" "../../help/lvivi.chm"
+attribute: "Cache"
+	"Inherent IVI Settings:User Options:Cache"
+	bool readwrite 1 100594
+	//const: IVIDIGITIZER_ATTR_CACHE
+"Specifies whether to cache the value of properties.  When caching is enabled, the instrument driver keeps track of the current instrument settings and avoids sending redundant commands to the instrument.  Thus, you can significantly increase execution speed.
+    The instrument driver can choose always to cache or never to cache particular properties regardless of the setting of this property.
+    The default value is TRUE.   Use the IviDigitizer Initialize With Options.vi to override this value.
+    
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+"
+"CLASSPREFIX_ATTR_CACHE.html" "../../help/lvivi.chm"
+attribute: "Simulate"
+	"Inherent IVI Settings:User Options:Simulate"
+	bool readwrite 1 100595
+	//const: IVIDIGITIZER_ATTR_SIMULATE
+"Specifies whether or not to simulate instrument driver I/O operations.  If simulation is enabled, instrument driver VIs perform range checking and call Ivi_GetAttribute and Ivi_SetAttribute VIs, but they do not perform instrument I/O.  For output parameters that represent instrument data, the instrument driver VIs return calculated values.
+    The default value is FALSE.   Use the IviDigitizer Initialize With Options.vi to override this value.
+    
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+"
+"CLASSPREFIX_ATTR_SIMULATE.html" "../../help/lvivi.chm"
+attribute: "Record Value Coercions"
+	"Inherent IVI Settings:User Options:Record Value Coercions"
+	bool readwrite 1 100596
+	//const: IVIDIGITIZER_ATTR_RECORD_COERCIONS
+"Specifies whether the IVI engine keeps a list of the value coercions it makes for integer and real type properties.  You call IviDigitizer Get Next Coercion Record.vi to extract and delete the oldest coercion record from the list.
+    The default value is FALSE.   Use the IviDigitizer Initialize With Options.vi to override this value.
+    
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+"
+"CLASSPREFIX_ATTR_RECORD_COERCIONS.html" "../../help/lvivi.chm"
+attribute: "Interchange Check"
+	"Inherent IVI Settings:User Options:Interchange Check"
+	bool readwrite 1 1005A5
+	//const: IVIDIGITIZER_ATTR_INTERCHANGE_CHECK
+"Specifies whether to perform interchangeability checking and retrieve interchangeability warnings.
+
+The default value is FALSE.
+
+Interchangeability warnings indicate that using your application with a different instrument might cause different behavior.  You call IviDigitizer Get Next Interchange Warning.vi to extract interchange warnings.  Call the IviDigitizer Clear Interchange Warnings.vi to clear the list of interchangeability warnings without reading them.
+Interchangeability checking logs a warning for each property you have not set that affects the behavior of the instrument.
+    
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+"
+"CLASSPREFIX_ATTR_INTERCHANGE_CHECK.html" "../../help/lvivi.chm"
+attribute: "Spy"
+	"Inherent IVI Settings:User Options:Spy"
+	bool readwrite 1 001005A6
+"Specifies whether to log class VI calls to the NI I/O Trace utility.  If spying is enabled, you can use NI I/O Trace to view the input and output parameters, return values, coercion records, and interchangeability warnings of class VI calls.
+    The default value is TRUE.
+    
+TRUE 1
+True
+
+FALSE 0
+False"
+"CLASSPREFIX_ATTR_SPY.html" "../../help/lvivi.chm"
+attribute: "Description"
+	"Inherent IVI Settings:Class Driver Identification:Description"
+	string readonly 1 00100796
+"A string that contains a brief description of the class driver
+    "
+"CLASSPREFIX_ATTR_CLASS_DRIVER_DESCRIPTION.html" "../../help/lvivi.chm"
+attribute: "Class Driver Prefix"
+	"Inherent IVI Settings:Class Driver Identification:Class Driver Prefix"
+	string readonly 1 001006BD
+"A string that contains the prefix for the class driver.  The name of each user-callable VI in this driver starts with this prefix.
+    "
+"CLASSPREFIX_ATTR_CLASS_PREFIX.html" "../../help/lvivi.chm"
+attribute: "Class Driver Vendor"
+	"Inherent IVI Settings:Class Driver Identification:Class Driver Vendor"
+	string readonly 1 00100795
+"A string that contains the name of the vendor that supplies this class driver.
+    "
+"CLASSPREFIX_ATTR_CLASS_DRIVER_VENDOR.html" "../../help/lvivi.chm"
+attribute: "Revision"
+	"Inherent IVI Settings:Class Driver Identification:Revision"
+	string readonly 1 001007B8
+"A string that contains additional version information about the class driver.
+    "
+"CLASSPREFIX_ATTR_CLASS_REVISION.html" "../../help/lvivi.chm"
+attribute: "Class Specification Major Version"
+	"Inherent IVI Settings:Class Driver Identification:Class Specification Major Version"
+	iL readonly 1 00100797
+"The major version number of the class specification with which the class driver is compliant.
+    "
+"CLASSPREFIX_ATTR_CLASS_DRIVER_CLASS_SPEC_MAJOR_VERSION.html" "../../help/lvivi.chm"
+attribute: "Class Specification Minor Version"
+	"Inherent IVI Settings:Class Driver Identification:Class Specification Minor Version"
+	iL readonly 1 00100798
+"The minor version number of the class specification with which the class driver is compliant.
+    "
+"CLASSPREFIX_ATTR_CLASS_DRIVER_CLASS_SPEC_MINOR_VERSION.html" "../../help/lvivi.chm"
+attribute: "Description"
+	"Inherent IVI Settings:Specific Driver Identification:Description"
+	string readonly 1 00100792
+"A string that contains a brief description of the specific driver
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_DESCRIPTION.html" "../../help/lvivi.chm"
+attribute: "Specific Driver Prefix"
+	"Inherent IVI Settings:Specific Driver Identification:Specific Driver Prefix"
+	string readonly 1 001006BE
+"A string that contains the prefix for the instrument driver.  The name of each user-callable VI in this driver starts with this prefix.
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_PREFIX.html" "../../help/lvivi.chm"
+attribute: "Specific Driver Locator"
+	"Inherent IVI Settings:Specific Driver Identification:Specific Driver Locator"
+	string readonly 1 001006BF
+"Indicates the location at which the class driver attempts to find the specific driver module file.
+"
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_LOCATOR.html" "../../help/lvivi.chm"
+attribute: "Specific Driver Vendor"
+	"Inherent IVI Settings:Specific Driver Identification:Specific Driver Vendor"
+	string readonly 1 00100791
+"A string that contains the name of the vendor that supplies this driver.
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_VENDOR.html" "../../help/lvivi.chm"
+attribute: "Revision"
+	"Inherent IVI Settings:Specific Driver Identification:Revision"
+	string readonly 1 001007B7
+"A string that contains additional version information about the specific driver.
+    "
+"CLASSPREFIX_ATTR_DRIVER_REVISION.html" "../../help/lvivi.chm"
+attribute: "Class Specification Major Version"
+	"Inherent IVI Settings:Specific Driver Identification:Class Specification Major Version"
+	iL readonly 1 00100793
+"The major version number of the class specification with which the specific driver is compliant.
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION.html" "../../help/lvivi.chm"
+attribute: "Class Specification Minor Version"
+	"Inherent IVI Settings:Specific Driver Identification:Class Specification Minor Version"
+	iL readonly 1 00100794
+"The minor version number of the class specification with which the specific driver is compliant.
+    "
+"CLASSPREFIX_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION.html" "../../help/lvivi.chm"
+attribute: "Supported Instrument Models"
+	"Inherent IVI Settings:Specific Driver Capabilities:Supported Instrument Models"
+	string readonly 1 001006D7
+"Contains a model code of the instrument. For specific drivers that support more than one device, this property contains a comma-separated list of supported instrument models.
+    "
+"CLASSPREFIX_ATTR_SUPPORTED_INSTRUMENT_MODELS.html" "../../help/lvivi.chm"
+attribute: "Channel Count"
+	"Inherent IVI Settings:Specific Driver Capabilities:Channel Count"
+	iL readonly 1 10065B
+	//const: IVIDIGITIZER_ATTR_CHANNEL_COUNT
+"Indicates the number of channels that the specific instrument driver supports.  
+    For each property for which the IVI_VAL_MULTI_CHANNEL (1024)  flag is set, the IVI engine maintains a separate cache value for each channel.
+    
+"
+"CLASSPREFIX_ATTR_CHANNEL_COUNT.html" "../../help/lvivi.chm"
+attribute: "Supported Instrument Models"
+	"Inherent IVI Settings:Specific Driver Capabilities:Supported Instrument Models"
+	string readonly 1 1006D7
+	//const: IVIDIGITIZER_ATTR_SUPPORTED_INSTRUMENT_MODELS
+"Contains a model code of the instrument. For drivers that support more than one device, this property contains a comma-separated list of supported instrument models.
+    
+"
+"CLASSPREFIX_ATTR_SUPPORTED_INSTRUMENT_MODELS.html" "../../help/lvivi.chm"
+attribute: "Class Group Capabilities"
+	"Inherent IVI Settings:Specific Driver Capabilities:Class Group Capabilities"
+	string readonly 1 100721
+	//const: IVIDIGITIZER_ATTR_GROUP_CAPABILITIES
+"A string that contains a comma-separated list of class-extention groups that this driver implements.
+    
+"
+"CLASSPREFIX_ATTR_GROUP_CAPABILITIES.html" "../../help/lvivi.chm"
+attribute: "Function Capabilities"
+	"Inherent IVI Settings:Specific Driver Capabilities:Function Capabilities"
+	string readonly 1 00100722
+	//const: IVIDIGITIZER_ATTR_FUNCTION_CAPABILITIES
+"This property is a comma-separated string that identifies the class functions that the specific instrument driver implements.
+
+"
+"CLASSPREFIX_ATTR_FUNCTION_CAPABILITIES.html" "../../help/lvivi.chm"
+attribute: "Attribute Capabilities"
+	"Inherent IVI Settings:Specific Driver Capabilities:Attribute Capabilities"
+	string readonly 1 00100723
+	//const: IVIDIGITIZER_ATTR_ATTRIBUTE_CAPABILITIES
+"This property is a comma-separated string that identifies the class properties that the specific instrument driver implements.
+
+"
+"CLASSPREFIX_ATTR_ATTRIBUTE_CAPABILITIES.html" "../../help/lvivi.chm"
+attribute: "Manufacturer"
+	"Inherent IVI Settings:Instrument Identification:Manufacturer"
+	string readonly 1 10078F
+	//const: IVIDIGITIZER_ATTR_INSTRUMENT_MANUFACTURER
+"A string that contains the name of the instrument manufacturer you are currently using.
+    
+"
+"CLASSPREFIX_ATTR_INSTRUMENT_MANUFACTURER.html" "../../help/lvivi.chm"
+attribute: "Model"
+	"Inherent IVI Settings:Instrument Identification:Model"
+	string readonly 1 100790
+	//const: IVIDIGITIZER_ATTR_INSTRUMENT_MODEL
+"A string that contains the model number or name of the instrument that you are currently using.
+    
+"
+"CLASSPREFIX_ATTR_INSTRUMENT_MODEL.html" "../../help/lvivi.chm"
+attribute: "Firmware Revision"
+	"Inherent IVI Settings:Instrument Identification:Firmware Revision"
+	string readonly 1 10078E
+	//const: IVIDIGITIZER_ATTR_INSTRUMENT_FIRMWARE_REVISION
+"A string that contains the firmware revision information for the instrument you are currently using.
+    
+"
+"CLASSPREFIX_ATTR_INSTRUMENT_FIRMWARE_REVISION.html" "../../help/lvivi.chm"
+attribute: "Logical Name"
+	"Inherent IVI Settings:Advanced Session Information:Logical Name"
+	string readonly 1 1006C1
+	//const: IVIDIGITIZER_ATTR_LOGICAL_NAME
+"A string containing the logical name you specified when opening the current IVI session.
+     You may pass a logical name to the IviDigitizer Initialize.vi or IviDigitizer Initialize With Options.vi VIs.  The IVI Configuration utility must contain an entry for the logical name.  The logical name entry refers to a driver session section in the IVI Configuration file.  The driver session section specifies a physical device and initial user options.
+    
+"
+"CLASSPREFIX_ATTR_LOGICAL_NAME.html" "../../help/lvivi.chm"
+attribute: "I/O Resource Descriptor"
+	"Inherent IVI Settings:Advanced Session Information:I/O Resource Descriptor"
+	string readonly 1 1006C0
+	//const: IVIDIGITIZER_ATTR_IO_RESOURCE_DESCRIPTOR
+"Indicates the resource descriptor the driver uses to identify the physical device.
+    If you initialize the driver with a logical name, this property contains the resource descriptor that corresponds to the entry in the IVI Configuration utility.  
+    If you initialize the instrument driver with the resource descriptor, this property contains that value.
+    
+"
+"CLASSPREFIX_ATTR_RESOURCE_DESCRIPTOR.html" "../../help/lvivi.chm"
+attribute: "Driver Setup"
+	"Inherent IVI Settings:Advanced Session Information:Driver Setup"
+	string readonly 1 100597
+	//const: IVIDIGITIZER_ATTR_DRIVER_SETUP
+"Some cases exist where you must specify instrument driver options at initialization time.  An example of this is specifying a particular instrument model from among a family of instruments that the driver supports.  This is useful when using simulation.  You can specify driver-specific options through the DriverSetup keyword in the optionsString parameter to the IviDigitizer Initialize With Options.vi.  If you open an instrument using a logical name, you can also specify the options through the IVI Configuration Utility.
+    The default value is an empty string.
+    
+"
+"CLASSPREFIX_ATTR_DRIVER_SETUP.html" "../../help/lvivi.chm"
+attribute: "Active Arm Source [ARM]"
+	"Arm:Active Arm Source [ARM]"
+	string readwrite 1 1316B8
+	//const: IVIDIGITIZER_ATTR_ACTIVE_ARM_SOURCE
+"Specifies the source the digitizer monitors for the arm event. The value specified here must be one of the valid repeated capability names for the ArmSource repeated capability.
+
+Notes:
+(1) This property is part of the IviDigitizerArm [ARM] extension group.
+"
+"IVIDIGITIZER_ATTR_ACTIVE_ARM_SOURCE.html" "../../help/lvivi.chm"
+attribute: "Arm Count [ARM]"
+	"Arm:Arm Count [ARM]"
+	iL readwrite 1 1316B9
+	//const: IVIDIGITIZER_ATTR_ARM_COUNT
+"Specifies the number of times the arm has to occur to complete the arm loop; that is, the number of arms that are accepted before the acquisition must be initiated again.
+
+Notes:
+(1) This property is part of the IviDigitizerArm [ARM] extension group.
+"
+"IVIDIGITIZER_ATTR_ARM_COUNT.html" "../../help/lvivi.chm"
+attribute: "Arm Source Count [ARM]"
+	"Arm:Arm Source Count [ARM]"
+	iL readonly 1 1316C0
+	//const: IVIDIGITIZER_ATTR_ARM_SOURCE_COUNT
+"Returns the number of arm sources available on the device.
+
+Notes:
+(1) This property is part of the IviDigitizerArm [ARM] extension group.
+"
+"IVIDIGITIZER_ATTR_ARM_SOURCE_COUNT.html" "../../help/lvivi.chm"
+attribute: "Arm Coupling [ARM]"
+	"Arm:Arm Coupling [ARM]"
+	iL enum { IVIDIGITIZER_VAL_TRIGGER_COUPLING_AC=0, IVIDIGITIZER_VAL_TRIGGER_COUPLING_DC=1, IVIDIGITIZER_VAL_TRIGGER_COUPLING_HF_REJECT=2, IVIDIGITIZER_VAL_TRIGGER_COUPLING_LF_REJECT=3, IVIDIGITIZER_VAL_TRIGGER_COUPLING_NOISE_REJECT=4 } readwrite 1 1316BA
+	//const: IVIDIGITIZER_ATTR_ARM_COUPLING
+"Specifies how the digitizer couples the arm source.
+
+Notes:
+(1) This property is part of the IviDigitizerArm [ARM] extension group.
+
+IVIDIGITIZER_VAL_TRIGGER_COUPLING_AC (0)
+The digitizer AC couples the trigger signal.
+
+IVIDIGITIZER_VAL_TRIGGER_COUPLING_DC (1)
+The digitizer DC couples the trigger signal.
+
+IVIDIGITIZER_VAL_TRIGGER_COUPLING_HF_REJECT (2)
+The digitizer filters out the high frequencies from the trigger signal.
+
+IVIDIGITIZER_VAL_TRIGGER_COUPLING_LF_REJECT (3)
+The digitizer filters out the low frequencies from the trigger signal.
+
+IVIDIGITIZER_VAL_TRIGGER_COUPLING_NOISE_REJECT (4)
+The digitizer filters out the noise from the trigger signal.
+"
+"IVIDIGITIZER_ATTR_ARM_COUPLING.html" "../../help/lvivi.chm"
+attribute: "Arm Delay [ARM]"
+	"Arm:Arm Delay [ARM]"
+	fD readwrite 1 1316BB
+	//const: IVIDIGITIZER_ATTR_ARM_DELAY
+"Specifies the delay from when the arm logic satisfied until the waiting for trigger state is entered.  The units are seconds.
+
+Notes:
+(1) This property is part of the IviDigitizerArm [ARM] extension group.
+"
+"IVIDIGITIZER_ATTR_ARM_DELAY.html" "../../help/lvivi.chm"
+attribute: "Arm Hysteresis [ARM]"
+	"Arm:Arm Hysteresis [ARM]"
+	fD readwrite 1 1316BC
+	//const: IVIDIGITIZER_ATTR_ARM_HYSTERESIS
+"Specifies the arm hysteresis in Volts.
+
+Notes:
+(1) This property is part of the IviDigitizerArm [ARM] extension group.
+"
+"IVIDIGITIZER_ATTR_ARM_HYSTERESIS.html" "../../help/lvivi.chm"
+attribute: "Arm Level [ARM]"
+	"Arm:Arm Level [ARM]"
+	fD readwrite 1 1316BD
+	//const: IVIDIGITIZER_ATTR_ARM_LEVEL
+"Specifies the voltage threshold for the arm sub-system. The units are Volts.
+
+Notes:
+(1) This property is part of the IviDigitizerArm [ARM] extension group.
+"
+"IVIDIGITIZER_ATTR_ARM_LEVEL.html" "../../help/lvivi.chm"
+attribute: "Arm Output Enabled [ARM]"
+	"Arm:Arm Output Enabled [ARM]"
+	bool readwrite 1 1316BE
+	//const: IVIDIGITIZER_ATTR_ARM_OUTPUT_ENABLED
+"Specifies whether or not an accepted arm appears at an output of the digitizer.
+
+Notes:
+(1) This property is part of the IviDigitizerArm [ARM] extension group.
+"
+"IVIDIGITIZER_ATTR_ARM_OUTPUT_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Arm Type [ARM]"
+	"Arm:Arm Type [ARM]"
+	iL enum { IVIDIGITIZER_VAL_EDGE_ARM=1, IVIDIGITIZER_VAL_WIDTH_ARM=2, IVIDIGITIZER_VAL_RUNT_ARM=3, IVIDIGITIZER_VAL_GLITCH_ARM=4, IVIDIGITIZER_VAL_TV_ARM=5, IVIDIGITIZER_VAL_WINDOW_ARM=6 } readwrite 1 1316C1
+	//const: IVIDIGITIZER_ATTR_ARM_TYPE
+"The kind of event that arms the digitizer.
+
+Notes:
+(1) This property is part of the IviDigitizerArm [ARM] extension group.
+
+IVIDIGITIZER_VAL_EDGE_ARM (1)
+Configures the digitizer for edge triggering.
+
+IVIDIGITIZER_VAL_WIDTH_ARM (2)
+Configures the digitizer for width triggering.
+
+IVIDIGITIZER_VAL_RUNT_ARM (3)
+Configures the digitizer for runt triggering.
+
+IVIDIGITIZER_VAL_GLITCH_ARM (4)
+Configures the digitizer for glitch triggering.
+
+IVIDIGITIZER_VAL_TV_ARM (5)
+Configures the digitizer for triggering on TV signals.
+
+IVIDIGITIZER_VAL_WINDOW_ARM (6)
+Configures the digitizer for window triggering.
+"
+"IVIDIGITIZER_ATTR_ARM_TYPE.html" "../../help/lvivi.chm"
+attribute: "Arm Slope [ARM]"
+	"Arm:Edge Arming:Arm Slope [ARM]"
+	iL enum { IVIDIGITIZER_VAL_NEGATIVE=0, IVIDIGITIZER_VAL_POSITIVE=1 } readwrite 1 1316BF
+	//const: IVIDIGITIZER_ATTR_ARM_SLOPE
+"Specifies whether a rising or a falling edge arms the digitizer.
+
+Notes:
+(1) This property is part of the IviDigitizerArm [ARM] extension group.
+
+IVIDIGITIZER_VAL_NEGATIVE (0)
+A negative (falling) edge passing through the trigger level triggers the digitizer.
+
+IVIDIGITIZER_VAL_POSITIVE (1)
+A positive (rising) edge passing through the trigger level triggers the digitizer.
+"
+"IVIDIGITIZER_ATTR_ARM_SLOPE.html" "../../help/lvivi.chm"
+attribute: "Glitch Arm Condition [GA]"
+	"Arm:Glitch Arming:Glitch Arm Condition [GA]"
+	iL enum { IVIDIGITIZER_VAL_GLITCH_LESS_THAN=1, IVIDIGITIZER_VAL_GLITCH_GREATER_THAN=2 } readwrite 1 131780
+	//const: IVIDIGITIZER_ATTR_GLITCH_ARM_CONDITION
+"Specifies the glitch condition. This property determines whether the glitch arm happens when the digitizer detects a pulse with a width less than or greater than the width value.
+
+Notes:
+(1) This property is part of the IviDigitizerGlitchArm [GA] extension group.
+
+IVIDIGITIZER_VAL_GLITCH_LESS_THAN (1)
+The digitizer triggers when the pulse width is less than the value you specify with the Glitch Width property.
+
+IVIDIGITIZER_VAL_GLITCH_GREATER_THAN (2)
+The digitizer triggers when the pulse width is greater than the value you specify with the Glitch Width property.
+"
+"IVIDIGITIZER_ATTR_GLITCH_ARM_CONDITION.html" "../../help/lvivi.chm"
+attribute: "Glitch Arm Polarity [GA]"
+	"Arm:Glitch Arming:Glitch Arm Polarity [GA]"
+	iL enum { IVIDIGITIZER_VAL_GLITCH_POSITIVE=1, IVIDIGITIZER_VAL_GLITCH_NEGATIVE=2, IVIDIGITIZER_VAL_GLITCH_EITHER=3 } readwrite 1 131781
+	//const: IVIDIGITIZER_ATTR_GLITCH_ARM_POLARITY
+"Specifies the polarity of the glitch that arms the digitizer.
+
+Notes:
+(1) This property is part of the IviDigitizerGlitchArm [GA] extension group.
+
+IVIDIGITIZER_VAL_GLITCH_POSITIVE (1)
+The digitizer trigger on a positive glitch.
+
+IVIDIGITIZER_VAL_GLITCH_NEGATIVE (2)
+The digitizer trigger on a negative glitch.
+
+IVIDIGITIZER_VAL_GLITCH_EITHER (3)
+The digitizer trigger on either a positive or negative glitch.
+"
+"IVIDIGITIZER_ATTR_GLITCH_ARM_POLARITY.html" "../../help/lvivi.chm"
+attribute: "Glitch Arm Width [GA]"
+	"Arm:Glitch Arming:Glitch Arm Width [GA]"
+	fD readwrite 1 131782
+	//const: IVIDIGITIZER_ATTR_GLITCH_ARM_WIDTH
+"Specifies the glitch width. The units are seconds. The digitizer triggers when it detects a pulse with a width less than or greater than this value, depending on the Glitch Condition property.
+
+Notes:
+(1) This property is part of the IviDigitizerGlitchArm [GA] extension group.
+"
+"IVIDIGITIZER_ATTR_GLITCH_ARM_WIDTH.html" "../../help/lvivi.chm"
+attribute: "Arm Source List [MA]"
+	"Arm:Multi Arming:Arm Source List [MA]"
+	string readwrite 1 13171C
+	//const: IVIDIGITIZER_ATTR_ARM_SOURCE_LIST
+"A comma separated list of source names to be used in a multi arm scenario. This property only affects instrument behavior when the Arm Source Operator property is set to AND or OR.
+
+Notes:
+(1) This property is part of the IviDigitizerMultiArm [MA] extension group.
+"
+"IVIDIGITIZER_ATTR_ARM_SOURCE_LIST.html" "../../help/lvivi.chm"
+attribute: "Arm Source Operator [MA]"
+	"Arm:Multi Arming:Arm Source Operator [MA]"
+	iL enum { IVIDIGITIZER_VAL_ARM_SOURCE_OPERATOR_AND=0, IVIDIGITIZER_VAL_ARM_SOURCE_OPERATOR_OR=1, IVIDIGITIZER_VAL_ARM_SOURCE_OPERATOR_NONE=2 } readwrite 1 13171D
+	//const: IVIDIGITIZER_ATTR_ARM_SOURCE_OPERATOR
+"Specifies the boolean operation to apply to the arm sources specified by the Arm Source List property.
+
+Notes:
+(1) This property is part of the IviDigitizerMultiArm [MA] extension group.
+
+IVIDIGITIZER_VAL_ARM_SOURCE_OPERATOR_AND (0)
+Arm sources are AND'd together.
+
+IVIDIGITIZER_VAL_ARM_SOURCE_OPERATOR_OR (1)
+Arm sources are OR'd together.
+
+IVIDIGITIZER_VAL_ARM_SOURCE_OPERATOR_NONE (2)
+No operator is applied to the configured list of arm sources.
+"
+"IVIDIGITIZER_ATTR_ARM_SOURCE_OPERATOR.html" "../../help/lvivi.chm"
+attribute: "Runt Arm High Threshold [RA]"
+	"Arm:Runt Arming:Runt Arm High Threshold [RA]"
+	fD readwrite 1 1317E4
+	//const: IVIDIGITIZER_ATTR_RUNT_ARM_HIGH_THRESHOLD
+"The high threshold the digitizer uses for runt arming. The units are volts.
+
+Notes:
+(1) This property is part of the IviDigitizerRuntArm [RA] extension group.
+"
+"IVIDIGITIZER_ATTR_RUNT_ARM_HIGH_THRESHOLD.html" "../../help/lvivi.chm"
+attribute: "Runt Arm Low Threshold [RA]"
+	"Arm:Runt Arming:Runt Arm Low Threshold [RA]"
+	fD readwrite 1 1317E5
+	//const: IVIDIGITIZER_ATTR_RUNT_ARM_LOW_THRESHOLD
+"The low threshold the digitizer uses for runt arming. The units are volts.
+
+Notes:
+(1) This property is part of the IviDigitizerRuntArm [RA] extension group.
+"
+"IVIDIGITIZER_ATTR_RUNT_ARM_LOW_THRESHOLD.html" "../../help/lvivi.chm"
+attribute: "Runt Arm Polarity [RA]"
+	"Arm:Runt Arming:Runt Arm Polarity [RA]"
+	iL enum { IVIDIGITIZER_VAL_RUNT_POSITIVE=1, IVIDIGITIZER_VAL_RUNT_NEGATIVE=2, IVIDIGITIZER_VAL_RUNT_EITHER=3 } readwrite 1 1317E6
+	//const: IVIDIGITIZER_ATTR_RUNT_ARM_POLARITY
+"Specifies the polarity of the runt that arms the digitizer.
+
+Notes:
+(1) This property is part of the IviDigitizerRuntArm [RA] extension group.
+
+IVIDIGITIZER_VAL_RUNT_POSITIVE (1)
+The digitizer triggers on a positive runt.
+
+IVIDIGITIZER_VAL_RUNT_NEGATIVE (2)
+The digitizer triggers on a negative runt.
+
+IVIDIGITIZER_VAL_RUNT_EITHER (3)
+The digitizer triggers on either a positive or negative runt.
+"
+"IVIDIGITIZER_ATTR_RUNT_ARM_POLARITY.html" "../../help/lvivi.chm"
+attribute: "TV Arm Event [TVA]"
+	"Arm:TV Arming:TV Arm Event [TVA]"
+	iL enum { IVIDIGITIZER_VAL_TV_EVENT_FIELD1=1, IVIDIGITIZER_VAL_TV_EVENT_FIELD2=2, IVIDIGITIZER_VAL_TV_EVENT_ANY_FIELD=3, IVIDIGITIZER_VAL_TV_EVENT_ANY_LINE=4, IVIDIGITIZER_VAL_TV_EVENT_LINE_NUMBER=5 } readwrite 1 131848
+	//const: IVIDIGITIZER_ATTR_TV_ARM_EVENT
+"Specifies the event on which the digitizer arms.
+
+Notes:
+(1) This property is part of the IviDigitizerTVArm [TVA] extension group.
+
+IVIDIGITIZER_VAL_TV_EVENT_FIELD1 (1)
+Sets the digitizer to trigger on field 1 of the video signal.
+
+IVIDIGITIZER_VAL_TV_EVENT_FIELD2 (2)
+Sets the digitizer to trigger on field 2 of the video signal.
+
+IVIDIGITIZER_VAL_TV_EVENT_ANY_FIELD (3)
+Sets the digitizer to trigger on any field.
+
+IVIDIGITIZER_VAL_TV_EVENT_ANY_LINE (4)
+Sets the digitizer to trigger on any field.
+
+IVIDIGITIZER_VAL_TV_EVENT_LINE_NUMBER (5)
+Sets the digitizer to trigger on a specific line number you specify with the TV Trigger Line Number property.
+"
+"IVIDIGITIZER_ATTR_TV_ARM_EVENT.html" "../../help/lvivi.chm"
+attribute: "TV Arm Line Number [TVA]"
+	"Arm:TV Arming:TV Arm Line Number [TVA]"
+	iL readwrite 1 131849
+	//const: IVIDIGITIZER_ATTR_TV_ARM_LINE_NUMBER
+"Specifies the line on which the digitizer arms. The driver uses this property when the TV Arm Event is set to TV Event Line Number. The line number setting is independent of the field. 
+
+Notes:
+(1) This property is part of the IviDigitizerTVArm [TVA] extension group.
+"
+"IVIDIGITIZER_ATTR_TV_ARM_LINE_NUMBER.html" "../../help/lvivi.chm"
+attribute: "TV Arm Polarity [TVA]"
+	"Arm:TV Arming:TV Arm Polarity [TVA]"
+	iL enum { IVIDIGITIZER_VAL_TV_POSITIVE=1, IVIDIGITIZER_VAL_TV_NEGATIVE=2 } readwrite 1 13184A
+	//const: IVIDIGITIZER_ATTR_TV_ARM_POLARITY
+"Specifies the polarity of the TV signal.
+
+Notes:
+(1) This property is part of the IviDigitizerTVArm [TVA] extension group.
+
+IVIDIGITIZER_VAL_TV_POSITIVE (1)
+Configures the digitizer to trigger on a positive video sync pulse.
+
+IVIDIGITIZER_VAL_TV_NEGATIVE (2)
+Configures the digitizer to trigger on a negative video sync pulse.
+"
+"IVIDIGITIZER_ATTR_TV_ARM_POLARITY.html" "../../help/lvivi.chm"
+attribute: "TV Arm Signal Format [TVA]"
+	"Arm:TV Arming:TV Arm Signal Format [TVA]"
+	iL enum { IVIDIGITIZER_VAL_NTSC=1, IVIDIGITIZER_VAL_PAL=2, IVIDIGITIZER_VAL_SECAM=3 } readwrite 1 13184B
+	//const: IVIDIGITIZER_ATTR_TV_ARM_SIGNAL_FORMAT
+"Specifies the format of TV signal on which the digitizer arms.
+
+Notes:
+(1) This property is part of the IviDigitizerTVArm [TVA] extension group.
+
+IVIDIGITIZER_VAL_NTSC (1)
+Configures the digitizer to trigger on the NTSC signal format.
+
+IVIDIGITIZER_VAL_PAL (2)
+Configures the digitizer to trigger on the PAL signal format.
+
+IVIDIGITIZER_VAL_SECAM (3)
+Configures the digitizer to trigger on the SECAM signal format.
+"
+"IVIDIGITIZER_ATTR_TV_ARM_SIGNAL_FORMAT.html" "../../help/lvivi.chm"
+attribute: "Width Arm Condition [WA]"
+	"Arm:Width Arming:Width Arm Condition [WA]"
+	iL enum { IVIDIGITIZER_VAL_WIDTH_WITHIN=1, IVIDIGITIZER_VAL_WIDTH_OUTSIDE=2 } readwrite 1 1318AC
+	//const: IVIDIGITIZER_ATTR_WIDTH_ARM_CONDITION
+"Specifies whether a pulse that is within or outside the high and low thresholds arms the digitizer.
+
+Notes:
+(1) This property is part of the IviDigitizerWidthArm [WA] extension group.
+
+IVIDIGITIZER_VAL_WIDTH_WITHIN (1)
+Configures the digitizer to trigger on pulses that have a width that is less than the high threshold and greater than the low threshold.
+
+IVIDIGITIZER_VAL_WIDTH_OUTSIDE (2)
+Configures the digitizer to trigger on pulses that have a width that is either greater than the high threshold or less than a low threshold.
+"
+"IVIDIGITIZER_ATTR_WIDTH_ARM_CONDITION.html" "../../help/lvivi.chm"
+attribute: "Width Arm High Threshold [WA]"
+	"Arm:Width Arming:Width Arm High Threshold [WA]"
+	fD readwrite 1 1318AD
+	//const: IVIDIGITIZER_ATTR_WIDTH_ARM_HIGH_THRESHOLD
+"Specifies the high width threshold time in seconds.
+
+Notes:
+(1) This property is part of the IviDigitizerWidthArm [WA] extension group.
+"
+"IVIDIGITIZER_ATTR_WIDTH_ARM_HIGH_THRESHOLD.html" "../../help/lvivi.chm"
+attribute: "Width Arm Low Threshold [WA]"
+	"Arm:Width Arming:Width Arm Low Threshold [WA]"
+	fD readwrite 1 1318AE
+	//const: IVIDIGITIZER_ATTR_WIDTH_ARM_LOW_THRESHOLD
+"Specifies the low width threshold time in seconds.
+
+Notes:
+(1) This property is part of the IviDigitizerWidthArm [WA] extension group.
+"
+"IVIDIGITIZER_ATTR_WIDTH_ARM_LOW_THRESHOLD.html" "../../help/lvivi.chm"
+attribute: "Width Arm Polarity [WA]"
+	"Arm:Width Arming:Width Arm Polarity [WA]"
+	iL enum { IVIDIGITIZER_VAL_WIDTH_POSITIVE=1, IVIDIGITIZER_VAL_WIDTH_NEGATIVE=2, IVIDIGITIZER_VAL_WIDTH_EITHER=3 } readwrite 1 1318AF
+	//const: IVIDIGITIZER_ATTR_WIDTH_ARM_POLARITY
+"Specifies the polarity of the pulse that arms the digitizer.
+
+Notes:
+(1) This property is part of the IviDigitizerWidthArm [WA] extension group.
+
+IVIDIGITIZER_VAL_WIDTH_POSITIVE (1)
+Configures the digitizer to trigger on positive pulses.
+
+IVIDIGITIZER_VAL_WIDTH_NEGATIVE (2)
+Configures the digitizer to trigger on negative.
+
+IVIDIGITIZER_VAL_WIDTH_EITHER (3)
+Configures the digitizer to trigger on either positive or negative pulses.
+"
+"IVIDIGITIZER_ATTR_WIDTH_ARM_POLARITY.html" "../../help/lvivi.chm"
+attribute: "Window Arm Condition [WINA]"
+	"Arm:Window Arming:Window Arm Condition [WINA]"
+	iL enum { IVIDIGITIZER_VAL_WINDOW_CONDITION_ENTERING=1, IVIDIGITIZER_VAL_WINDOW_CONDITION_LEAVING=2 } readwrite 1 131910
+	//const: IVIDIGITIZER_ATTR_WINDOW_ARM_CONDITION
+"Specifies whether a signal that is entering or leaving the voltage window defined by the high and low thresholds arms the digitizer.
+
+Notes:
+(1) This property is part of the IviDigitizerWindowArm [WINA] extension group.
+
+IVIDIGITIZER_VAL_WINDOW_CONDITION_ENTERING (1)
+Configures the digitizer to trigger on signals when they enter the given triggering window. 
+
+IVIDIGITIZER_VAL_WINDOW_CONDITION_LEAVING (2)
+Configures the digitizer to trigger on signals when they leave the given triggering window.
+"
+"IVIDIGITIZER_ATTR_WINDOW_ARM_CONDITION.html" "../../help/lvivi.chm"
+attribute: "Window Arm High Threshold [WINA]"
+	"Arm:Window Arming:Window Arm High Threshold [WINA]"
+	fD readwrite 1 131911
+	//const: IVIDIGITIZER_ATTR_WINDOW_ARM_HIGH_THRESHOLD
+"Specifies the high window threshold voltage in Volts.
+
+Notes:
+(1) This property is part of the IviDigitizerWindowArm [WINA] extension group.
+"
+"IVIDIGITIZER_ATTR_WINDOW_ARM_HIGH_THRESHOLD.html" "../../help/lvivi.chm"
+attribute: "Window Arm Low Threshold [WINA]"
+	"Arm:Window Arming:Window Arm Low Threshold [WINA]"
+	fD readwrite 1 131912
+	//const: IVIDIGITIZER_ATTR_WINDOW_ARM_LOW_THRESHOLD
+"Specifies the low window threshold voltage in Volts.
+
+Notes:
+(1) This property is part of the IviDigitizerWindowArm [WINA] extension group.
+"
+"IVIDIGITIZER_ATTR_WINDOW_ARM_LOW_THRESHOLD.html" "../../help/lvivi.chm"
+attribute: "Channel Enabled"
+	"Channel:Channel Enabled"
+	bool readwrite 1 1312D2
+	//const: IVIDIGITIZER_ATTR_CHANNEL_ENABLED
+"Specifies whether the digitizer acquires a waveform for the channel.
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+"
+"IVIDIGITIZER_ATTR_CHANNEL_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Data Interleaved Channel List [DIC]"
+	"Channel:Data Interleaved Channel List [DIC]"
+	string readwrite 1 1314C4
+	//const: IVIDIGITIZER_ATTR_DATA_INTERLEAVED_CHANNEL_LIST
+"This property is used to combine this channel with one or more other channels to interleave the returned data. The string provided here specifies which channels should operate in combined mode with the current channel. This property is a comma-separated list of one or more channel names. Users may specify either physical or virtual repeated capability identifiers in this list. An empty string or VI_NULL (0)  can be used to indicate that no channels should be combined (or that none are currently combined, in the case of a query).
+
+Notes:
+(1) This property is part of the IviDigitizerDataInterleavedChannels [DIC] extension group.
+"
+"IVIDIGITIZER_ATTR_DATA_INTERLEAVED_CHANNEL_LIST.html" "../../help/lvivi.chm"
+attribute: "Downconversion Enabled [DC]"
+	"Channel:Downconversion:Downconversion Enabled [DC]"
+	bool readwrite 1 131654
+	//const: IVIDIGITIZER_ATTR_DOWNCONVERSION_ENABLED
+"Enables or disables downconversion. When enabled, the Read and Fetch VIs return data according to the setting of the Fetch IQ Interleaved Data property.
+
+Notes:
+(1) This property is part of the IviDigitizerDownconversion [DC] extension group.
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+"
+"IVIDIGITIZER_ATTR_DOWNCONVERSION_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Downconversion Center Frequency [DC]"
+	"Channel:Downconversion:Downconversion Center Frequency [DC]"
+	fD readwrite 1 131655
+	//const: IVIDIGITIZER_ATTR_DOWNCONVERSION_CENTER_FREQUENCY
+"Specifies the center frequency, in Hz, from which the digitizer should downconvert.
+
+Notes:
+(1) This property is part of the IviDigitizerDownconversion [DC] extension group.
+"
+"IVIDIGITIZER_ATTR_DOWNCONVERSION_CENTER_FREQUENCY.html" "../../help/lvivi.chm"
+attribute: "Downconversion IQ Interleaved [DC]"
+	"Channel:Downconversion:Downconversion IQ Interleaved [DC]"
+	bool readwrite 1 131656
+	//const: IVIDIGITIZER_ATTR_DOWNCONVERSION_IQ_INTERLEAVED
+"Controls how the Read and Fetch VIs return data when downconversion is enabled. When this property is True and downconversion is enabled, the data returned from the Read and Fetch VIs is interleaved I-Q data points. When this property is False and downconversion is enabled, the Read and Fetch VIs return data with all I data points in sequence followed by all Q data points. This property has no effect when the Downconversion Enabled property is False.
+
+Notes:
+(1) This property is part of the IviDigitizerDownconversion [DC] extension group.
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+"
+"IVIDIGITIZER_ATTR_DOWNCONVERSION_IQ_INTERLEAVED.html" "../../help/lvivi.chm"
+attribute: "Input Filter Bypass [CF]"
+	"Channel:Channel Filter:Input Filter Bypass [CF]"
+	bool readwrite 1 131398
+	//const: IVIDIGITIZER_ATTR_INPUT_FILTER_BYPASS
+"Specifies whether or not to bypass the input filter.
+
+Notes:
+(1) This property is part of the IviDigitizerChannelFilter [CF] extension group.
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+"
+"IVIDIGITIZER_ATTR_INPUT_FILTER_BYPASS.html" "../../help/lvivi.chm"
+attribute: "Input Filter Max Frequency [CF]"
+	"Channel:Channel Filter:Input Filter Max Frequency [CF]"
+	fD readwrite 1 131399
+	//const: IVIDIGITIZER_ATTR_INPUT_FILTER_MAX_FREQUENCY
+"Specifies the maximum input filter frequency.  Specifying a value of zero means that the device should be set to the full bandwidth that the filter can deliver without being bypassed.
+
+Notes:
+(1) This property is part of the IviDigitizerChannelFilter [CF] extension group.
+"
+"IVIDIGITIZER_ATTR_INPUT_FILTER_MAX_FREQUENCY.html" "../../help/lvivi.chm"
+attribute: "Input Filter Min Frequency [CF]"
+	"Channel:Channel Filter:Input Filter Min Frequency [CF]"
+	fD readwrite 1 13139A
+	//const: IVIDIGITIZER_ATTR_INPUT_FILTER_MIN_FREQUENCY
+"Specifies the minimum input filter frequency.  Specifying a value of zero means that the device should be set to the full bandwidth that the filter can deliver without being bypassed.
+
+Notes:
+(1) This property is part of the IviDigitizerChannelFilter [CF] extension group.
+"
+"IVIDIGITIZER_ATTR_INPUT_FILTER_MIN_FREQUENCY.html" "../../help/lvivi.chm"
+attribute: "Input Connector Selection"
+	"Channel:Channel Filter:Input Connector Selection"
+	iL readwrite 1 1312D3
+	//const: IVIDIGITIZER_ATTR_INPUT_CONNECTOR_SELECTION
+"Some digitizers include multiple connectors for each digitizer input channel. These connectors are often simply a matter of convenience for system cabling ¨C multiple signals can be routed to the various connectors, the desired signal can be sent into the digitizer by changing an internal switch.  With other digitizers, the connectors may be of different types or even different impedances.  This property is used to determine which connector is to be used.
+"
+"IVIDIGITIZER_ATTR_INPUT_CONNECTOR_SELECTION.html" "../../help/lvivi.chm"
+attribute: "Input Impedance"
+	"Channel:Channel Filter:Input Impedance"
+	fD readwrite 1 1312D4
+	//const: IVIDIGITIZER_ATTR_INPUT_IMPEDANCE
+"The input impedance of this channel. The units are Ohms.
+"
+"IVIDIGITIZER_ATTR_INPUT_IMPEDANCE.html" "../../help/lvivi.chm"
+attribute: "Time Interleaved Channel List [TIC]"
+	"Channel:Channel Filter:Time Interleaved Channel List [TIC]"
+	string readwrite 1 131460
+	//const: IVIDIGITIZER_ATTR_TIME_INTERLEAVED_CHANNEL_LIST
+"This property is used to combine this channel with one or more other channels to achieve higher effective sampling rates and/or greater memory depth. The string provided here specifies which channels should operate in combined mode with the current channel. This property is a comma-separated list of one or more channel names. Users may specify either physical or virtual repeated capability identifiers in this list. An empty string or VI_NULL (0)  can be used to indicate that no channels should be combined (or that none are currently combined, in the case of a query).
+
+Notes:
+(1) This property is part of the IviDigitizerTimeInterleavedChannels [TIC] extension group.
+"
+"IVIDIGITIZER_ATTR_TIME_INTERLEAVED_CHANNEL_LIST.html" "../../help/lvivi.chm"
+attribute: "Vertical Coupling"
+	"Channel:Channel Filter:Vertical Coupling"
+	iL enum { IVIDIGITIZER_VAL_VERTICAL_COUPLING_AC=0, IVIDIGITIZER_VAL_VERTICAL_COUPLING_DC=1, IVIDIGITIZER_VAL_VERTICAL_COUPLING_GND=2 } readwrite 1 1312E8
+	//const: IVIDIGITIZER_ATTR_VERTICAL_COUPLING
+"Specifies how the digitizer couples the input signal for the channel.
+
+IVIDIGITIZER_VAL_VERTICAL_COUPLING_AC (0)
+The digitizer AC couples the input signal.
+
+IVIDIGITIZER_VAL_VERTICAL_COUPLING_DC (1)
+The digitizer DC couples the input signal.
+
+IVIDIGITIZER_VAL_VERTICAL_COUPLING_GND (2)
+The digitizer couples the channel to the ground.
+"
+"IVIDIGITIZER_ATTR_VERTICAL_COUPLING.html" "../../help/lvivi.chm"
+attribute: "Vertical Offset"
+	"Channel:Channel Filter:Vertical Offset"
+	fD readwrite 1 1312E9
+	//const: IVIDIGITIZER_ATTR_VERTICAL_OFFSET
+"The location of the center of the range that you specify with the Range property. The units are Volts, with respect to ground.
+"
+"IVIDIGITIZER_ATTR_VERTICAL_OFFSET.html" "../../help/lvivi.chm"
+attribute: "Vertical Range"
+	"Channel:Channel Filter:Vertical Range"
+	fD readwrite 1 1312EA
+	//const: IVIDIGITIZER_ATTR_VERTICAL_RANGE
+"The absolute value of the input range the digitizer can acquire for the channel. The units are Volts.
+"
+"IVIDIGITIZER_ATTR_VERTICAL_RANGE.html" "../../help/lvivi.chm"
+attribute: "Reference Oscillator Source [RO]"
+	"Reference Oscillator:Reference Oscillator Source [RO]"
+	iL enum { IVIDIGITIZER_VAL_REFERENCE_OSCILLATOR_SOURCE_INTERNAL=0, IVIDIGITIZER_VAL_REFERENCE_OSCILLATOR_SOURCE_EXTERNAL=1, IVIDIGITIZER_VAL_REFERENCE_OSCILLATOR_SOURCE_PXI_CLK10=2, IVIDIGITIZER_VAL_REFERENCE_OSCILLATOR_SOURCE_PXIE_CLK100=3 } readwrite 1 13152A
+	//const: IVIDIGITIZER_ATTR_REFERENCE_OSCILLATOR_SOURCE
+"Specifies the reference frequency source used.
+
+Notes:
+(1) This property is part of the IviDigitizerReferenceOscillator [RO] extension group.
+
+IVIDIGITIZER_VAL_REFERENCE_OSCILLATOR_SOURCE_INTERNAL (0)
+The internal reference oscillator is used.
+
+IVIDIGITIZER_VAL_REFERENCE_OSCILLATOR_SOURCE_EXTERNAL (1)
+An external reference oscillator is used.
+
+IVIDIGITIZER_VAL_REFERENCE_OSCILLATOR_SOURCE_PXI_CLK10 (2)
+The PXI/PXIe backplane 10 MHz reference oscillator is used.
+
+IVIDIGITIZER_VAL_REFERENCE_OSCILLATOR_SOURCE_PXIE_CLK100 (3)
+The PXIe backplane 100 MHz reference oscillator is used.
+"
+"IVIDIGITIZER_ATTR_REFERENCE_OSCILLATOR_SOURCE.html" "../../help/lvivi.chm"
+attribute: "Reference Oscillator External Frequency [RO]"
+	"Reference Oscillator:Reference Oscillator External Frequency [RO]"
+	fD readwrite 1 131528
+	//const: IVIDIGITIZER_ATTR_REFERENCE_OSCILLATOR_EXTERNAL_FREQUENCY
+"Specifies the frequency of the external signal which is as a frequency reference. This value is used only if the Reference Oscillator Source property is set to External. The units are Hertz.
+
+Notes:
+(1) This property is part of the IviDigitizerReferenceOscillator [RO] extension group.
+"
+"IVIDIGITIZER_ATTR_REFERENCE_OSCILLATOR_EXTERNAL_FREQUENCY.html" "../../help/lvivi.chm"
+attribute: "Reference Oscillator Output Enabled [RO]"
+	"Reference Oscillator:Reference Oscillator Output Enabled [RO]"
+	bool readwrite 1 131529
+	//const: IVIDIGITIZER_ATTR_REFERENCE_OSCILLATOR_OUTPUT_ENABLED
+"Specifies whether or not the reference frequency signal appears at an output of the digitizer.
+
+Notes:
+(1) This property is part of the IviDigitizerReferenceOscillator [RO] extension group.
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+"
+"IVIDIGITIZER_ATTR_REFERENCE_OSCILLATOR_OUTPUT_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Sample Clock Source [SC]"
+	"Sample Clock:Sample Clock Source [SC]"
+	iL enum { IVIDIGITIZER_VAL_SAMPLE_CLOCK_SOURCE_INTERNAL=0, IVIDIGITIZER_VAL_SAMPLE_CLOCK_SOURCE_EXTERNAL=1 } readwrite 1 13158F
+	//const: IVIDIGITIZER_ATTR_SAMPLE_CLOCK_SOURCE
+"Specifies the clock used to pace acquisition sampling.
+
+Notes:
+(1) This property is part of the IviDigitizerSampleClock [SC] extension group.
+
+IVIDIGITIZER_VAL_SAMPLE_CLOCK_SOURCE_INTERNAL (0)
+The internal sample clock is used.
+
+IVIDIGITIZER_VAL_SAMPLE_CLOCK_SOURCE_EXTERNAL (1)
+An external sample clock is used.
+"
+"IVIDIGITIZER_ATTR_SAMPLE_CLOCK_SOURCE.html" "../../help/lvivi.chm"
+attribute: "Sample Clock External Frequency [SC]"
+	"Sample Clock:Sample Clock External Frequency [SC]"
+	fD readwrite 1 13158E
+	//const: IVIDIGITIZER_ATTR_SAMPLE_CLOCK_EXTERNAL_FREQUENCY
+"Specifies the frequency of the external signal which is as a sample clock. This value is used only if the Sample Clock Source property is set to External. The units are Hertz.
+
+Notes:
+(1) This property is part of the IviDigitizerSampleClock [SC] extension group.
+"
+"IVIDIGITIZER_ATTR_SAMPLE_CLOCK_EXTERNAL_FREQUENCY.html" "../../help/lvivi.chm"
+attribute: "Sample Clock Output Enabled [SC]"
+	"Sample Clock:Sample Clock Output Enabled [SC]"
+	bool readwrite 1 13158D
+	//const: IVIDIGITIZER_ATTR_SAMPLE_CLOCK_OUTPUT_ENABLED
+"Specifies whether or not the sample clock appears at a reference output of the digitizer.
+
+Notes:
+(1) This property is part of the IviDigitizerSampleClock [SC] extension group.
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+"
+"IVIDIGITIZER_ATTR_SAMPLE_CLOCK_OUTPUT_ENABLED.html" "../../help/lvivi.chm"
+attribute: "Sample Clock External Divider [SC]"
+	"Sample Clock:Sample Clock External Divider [SC]"
+	fD readwrite 1 13158C
+	//const: IVIDIGITIZER_ATTR_SAMPLE_CLOCK_EXTERNAL_DIVIDER
+"Specifies the value by which the external sample clock should be divided. This value is used only if the Sample Clock Source property is set to External.
+
+Notes:
+(1) This property is part of the IviDigitizerSampleClock [SC] extension group.
+"
+"IVIDIGITIZER_ATTR_SAMPLE_CLOCK_EXTERNAL_DIVIDER.html" "../../help/lvivi.chm"
+attribute: "Board Temperature [BT]"
+	"Temperature:Board Temperature [BT]"
+	fD readonly 1 131334
+	//const: IVIDIGITIZER_ATTR_BOARD_TEMPERATURE
+"Indicates the temperature of the entire board. The units are governed by the Temperature Units property.
+
+Notes:
+(1) This property is part of the IviDigitizerBoardTemperature [BT extension group.
+"
+"IVIDIGITIZER_ATTR_BOARD_TEMPERATURE.html" "../../help/lvivi.chm"
+attribute: "Channel Temperature [CT]"
+	"Temperature:Channel Temperature [CT]"
+	fD readonly 1 1313FC
+	//const: IVIDIGITIZER_ATTR_CHANNEL_TEMPERATURE
+"Indicates the temperature of the channel. The units are governed by the Temperature Units property.
+
+Notes:
+(1) This property is part of the IviDigitizerChannelTemperature [CT] extension group.
+"
+"IVIDIGITIZER_ATTR_CHANNEL_TEMPERATURE.html" "../../help/lvivi.chm"
+attribute: "Temperature Units [BT]"
+	"Temperature:Temperature Units [BT]"
+	iL enum { IVIDIGITIZER_VAL_CELSIUS=0, IVIDIGITIZER_VAL_FAHRENHEIT=1, IVIDIGITIZER_VAL_KELVIN=2 } readwrite 1 131335
+	//const: IVIDIGITIZER_ATTR_TEMPERATURE_UNITS
+"Specifies the temperature units returned by the Board Temperature and the Channel Temperature properties.
+
+Notes:
+(1) This property is part of the IviDigitizerBoardTemperature [BT] extension group.
+
+IVIDIGITIZER_VAL_CELSIUS (0)
+Temperature values returned from the digitizer are in degrees Celsius.
+
+IVIDIGITIZER_VAL_FAHRENHEIT (1)
+Temperature values returned from the digitizer are in degrees Fahrenheit.
+
+IVIDIGITIZER_VAL_KELVIN (2)
+Temperature values returned from the digitizer are in degrees Kelvin.
+"
+"IVIDIGITIZER_ATTR_TEMPERATURE_UNITS.html" "../../help/lvivi.chm"
+attribute: "Active Trigger Source"
+	"Trigger:Active Trigger Source"
+	string readwrite 1 1312D1
+	//const: IVIDIGITIZER_ATTR_ACTIVE_TRIGGER_SOURCE
+"Specifies the source the digitizer monitors for the trigger event. The value specified here must be one of the valid repeated capability names for the TriggerSource repeated capability.
+"
+"IVIDIGITIZER_ATTR_ACTIVE_TRIGGER_SOURCE.html" "../../help/lvivi.chm"
+attribute: "Pretrigger Samples"
+	"Trigger:Pretrigger Samples"
+	iQ readwrite 1 131A3C
+	//const: IVIDIGITIZER_ATTR_PRETRIGGER_SAMPLES
+"Specifies the number of samples that must be collected before a trigger event will be recognized.  The Pretrigger Samples property affects instrument operation only when the digitizer requires multiple acquisitions to build a complete waveform.  If Trigger Samples and Pretrigger Samples are are both non-zero, then both conditions must be satisfied before the digitizer will accept a trigger.
+
+"
+"IVIDIGITIZER_ATTR_PRETRIGGER_SAMPLES.html" "../../help/lvivi.chm"
+attribute: "Trigger Source Count"
+	"Trigger:Trigger Source Count"
+	iL readonly 1 1312E6
+	//const: IVIDIGITIZER_ATTR_TRIGGER_SOURCE_COUNT
+"Returns the number of trigger sources available on the device.
+"
+"IVIDIGITIZER_ATTR_TRIGGER_SOURCE_COUNT.html" "../../help/lvivi.chm"
+attribute: "Trigger Coupling"
+	"Trigger:Trigger Coupling"
+	iL enum { IVIDIGITIZER_VAL_TRIGGER_COUPLING_AC=0, IVIDIGITIZER_VAL_TRIGGER_COUPLING_DC=1, IVIDIGITIZER_VAL_TRIGGER_COUPLING_HF_REJECT=2, IVIDIGITIZER_VAL_TRIGGER_COUPLING_LF_REJECT=3, IVIDIGITIZER_VAL_TRIGGER_COUPLING_NOISE_REJECT=4 } readwrite 1 1312E0
+	//const: IVIDIGITIZER_ATTR_TRIGGER_COUPLING
+"Specifies how the digitizer couples the trigger source.
+
+IVIDIGITIZER_VAL_TRIGGER_COUPLING_AC (0)
+The digitizer AC couples the trigger signal.
+
+IVIDIGITIZER_VAL_TRIGGER_COUPLING_DC (1)
+The digitizer DC couples the trigger signal.
+
+IVIDIGITIZER_VAL_TRIGGER_COUPLING_HF_REJECT (2)
+The digitizer filters out the high frequencies from the trigger signal.
+
+IVIDIGITIZER_VAL_TRIGGER_COUPLING_LF_REJECT (3)
+The digitizer filters out the low frequencies from the trigger signal.
+
+IVIDIGITIZER_VAL_TRIGGER_COUPLING_NOISE_REJECT (4)
+The digitizer filters out the noise from the trigger signal.
+"
+"IVIDIGITIZER_ATTR_TRIGGER_COUPLING.html" "../../help/lvivi.chm"
+attribute: "Trigger Modifier [TM]"
+	"Trigger:Trigger Modifier [TM]"
+	iL enum { IVIDIGITIZER_VAL_TRIGGER_MODIFIER_NONE=1, IVIDIGITIZER_VAL_TRIGGER_MODIFIER_AUTO=2, IVIDIGITIZER_VAL_TRIGGER_MODIFIER_AUTO_LEVEL=3 } readwrite 1 131974
+	//const: IVIDIGITIZER_ATTR_TRIGGER_MODIFIER
+"Specifies the trigger modifier. The trigger modifier determines the digitizer's behavior in the absence of the configured trigger.
+
+Notes:
+(1) This property is part of the IviDigitizerTriggerModifier [TM] extension group.
+
+IVIDIGITIZER_VAL_TRIGGER_MODIFIER_NONE (1)
+The digitizer waits until the trigger the end-user specifies occurs.
+
+IVIDIGITIZER_VAL_TRIGGER_MODIFIER_AUTO (2)
+The digitizer automatically triggers if the configured trigger does not occur within the digitizer timeout period.
+
+IVIDIGITIZER_VAL_TRIGGER_MODIFIER_AUTO_LEVEL (3)
+The digitizer adjusts the trigger level if the trigger the end-user specifies does not occur.
+"
+"IVIDIGITIZER_ATTR_TRIGGER_MODIFIER.html" "../../help/lvivi.chm"
+attribute: "Trigger Delay"
+	"Trigger:Trigger Delay"
+	fD readwrite 1 1312E1
+	//const: IVIDIGITIZER_ATTR_TRIGGER_DELAY
+"Specifies the length of time from the trigger event to the first point in the waveform record. The units are seconds.
+"
+"IVIDIGITIZER_ATTR_TRIGGER_DELAY.html" "../../help/lvivi.chm"
+attribute: "Trigger Holdoff [TH]"
+	"Trigger:Trigger Holdoff [TH]"
+	fD readwrite 1 131AA0
+	//const: IVIDIGITIZER_ATTR_TRIGGER_HOLDOFF
+"Specifies the length of time the digitizer waits after it detects a trigger until the digitizer enables the trigger to detect another trigger. The units are seconds. The Trigger Holdoff property affects instrument operation only when the digitizer requires multiple acquisitions to build a complete waveform.  If Trigger Holdoff and Pretrigger Samples are are both non-zero, then both conditions must be satisfied before the digitizer will accept a trigger. 
+
+Notes:
+(1) This property is part of the IviDigitizerTriggerHoldoff [TH] extension group.
+"
+"IVIDIGITIZER_ATTR_TRIGGER_HOLDOFF.html" "../../help/lvivi.chm"
+attribute: "Trigger Hysteresis"
+	"Trigger:Trigger Hysteresis"
+	fD readwrite 1 1312E2
+	//const: IVIDIGITIZER_ATTR_TRIGGER_HYSTERESIS
+"Specifies the trigger hysteresis in Volts.
+
+"
+"IVIDIGITIZER_ATTR_TRIGGER_HYSTERESIS.html" "../../help/lvivi.chm"
+attribute: "Trigger Level"
+	"Trigger:Trigger Level"
+	fD readwrite 1 1312E3
+	//const: IVIDIGITIZER_ATTR_TRIGGER_LEVEL
+"Specifies the voltage threshold for the trigger sub-system. The units are Volts.
+"
+"IVIDIGITIZER_ATTR_TRIGGER_LEVEL.html" "../../help/lvivi.chm"
+attribute: "Trigger Output Enabled"
+	"Trigger:Trigger Output Enabled"
+	bool readwrite 1 1312E4
+	//const: IVIDIGITIZER_ATTR_TRIGGER_LEVEL
+"Specifies whether or not an accepted trigger appears at an output of the digitizer.
+"
+"IVIDIGITIZER_ATTR_TRIGGER_LEVEL.html" "../../help/lvivi.chm"
+attribute: "Trigger Type"
+	"Trigger:Trigger Type"
+	iL enum { IVIDIGITIZER_VAL_EDGE_TRIGGER=1, IVIDIGITIZER_VAL_WIDTH_TRIGGER=2, IVIDIGITIZER_VAL_RUNT_TRIGGER=3, IVIDIGITIZER_VAL_GLITCH_TRIGGER=4, IVIDIGITIZER_VAL_TV_TRIGGER=5, IVIDIGITIZER_VAL_WINDOW_TRIGGER=6 } readwrite 1 1312E7
+	//const: IVIDIGITIZER_ATTR_TRIGGER_TYPE
+"The kind of event that triggers the digitizer.
+
+IVIDIGITIZER_VAL_EDGE_TRIGGER (1)
+Configures the digitizer for edge triggering.
+
+IVIDIGITIZER_VAL_WIDTH_TRIGGER (2)
+Configures the digitizer for width triggering.
+
+IVIDIGITIZER_VAL_RUNT_TRIGGER (3)
+Configures the digitizer for runt triggering.
+
+IVIDIGITIZER_VAL_GLITCH_TRIGGER (4)
+Configures the digitizer for glitch triggering.
+
+IVIDIGITIZER_VAL_TV_TRIGGER (5)
+Configures the digitizer for triggering on TV signals.
+
+IVIDIGITIZER_VAL_WINDOW_TRIGGER (6)
+Configures the digitizer for window triggering.
+"
+"IVIDIGITIZER_ATTR_TRIGGER_TYPE.html" "../../help/lvivi.chm"
+attribute: "Trigger Slope"
+	"Trigger:Edge Triggering:Trigger Slope"
+	iL enum { IVIDIGITIZER_VAL_NEGATIVE=0, IVIDIGITIZER_VAL_POSITIVE=1 } readwrite 1 1312E5
+	//const: IVIDIGITIZER_ATTR_TRIGGER_SLOPE
+"Specifies whether a rising or a falling edge triggers the digitizer.
+
+IVIDIGITIZER_VAL_NEGATIVE (0)
+A negative (falling) edge passing through the trigger level triggers the digitizer.
+
+IVIDIGITIZER_VAL_POSITIVE (1)
+A positive (rising) edge passing through the trigger level triggers the digitizer.
+"
+"IVIDIGITIZER_ATTR_TRIGGER_SLOPE.html" "../../help/lvivi.chm"
+attribute: "Glitch Trigger Condition [GT]"
+	"Trigger:Glitch Triggering:Glitch Trigger Condition [GT]"
+	iL enum { IVIDIGITIZER_VAL_GLITCH_LESS_THAN=1, IVIDIGITIZER_VAL_GLITCH_GREATER_THAN=2 } readwrite 1 131B04
+	//const: IVIDIGITIZER_ATTR_GLITCH_TRIGGER_CONDITION
+"Specifies the glitch condition. This property determines whether the glitch trigger happens when the digitizer detects a pulse with a width less than or greater than the width value.
+
+Notes:
+(1) This property is part of the IviDigitizerGlitchTrigger [GT] extension group.
+
+IVIDIGITIZER_VAL_GLITCH_LESS_THAN (1)
+The digitizer triggers when the pulse width is less than the value you specify with the Glitch Width property.
+
+IVIDIGITIZER_VAL_GLITCH_GREATER_THAN (2)
+The digitizer triggers when the pulse width is greater than the value you specify with the Glitch Width property.
+"
+"IVIDIGITIZER_ATTR_GLITCH_TRIGGER_CONDITION.html" "../../help/lvivi.chm"
+attribute: "Glitch Trigger Polarity [GT]"
+	"Trigger:Glitch Triggering:Glitch Trigger Polarity [GT]"
+	iL enum { IVIDIGITIZER_VAL_GLITCH_POSITIVE=1, IVIDIGITIZER_VAL_GLITCH_NEGATIVE=2, IVIDIGITIZER_VAL_GLITCH_EITHER=3 } readwrite 1 131B05
+	//const: IVIDIGITIZER_ATTR_GLITCH_TRIGGER_POLARITY
+"Specifies the polarity of the glitch that triggers the digitizer.
+
+Notes:
+(1) This property is part of the IviDigitizerGlitchTrigger [GT] extension group.
+
+IVIDIGITIZER_VAL_GLITCH_POSITIVE (1)
+The digitizer trigger on a positive glitch.
+
+IVIDIGITIZER_VAL_GLITCH_NEGATIVE (2)
+The digitizer trigger on a negative glitch.
+
+IVIDIGITIZER_VAL_GLITCH_EITHER (3)
+The digitizer trigger on either a positive or negative glitch.
+"
+"IVIDIGITIZER_ATTR_GLITCH_TRIGGER_POLARITY.html" "../../help/lvivi.chm"
+attribute: "Glitch Trigger Width [GT]"
+	"Trigger:Glitch Triggering:Glitch Trigger Width [GT]"
+	fD readwrite 1 131B06
+	//const: IVIDIGITIZER_ATTR_GLITCH_TRIGGER_WIDTH
+"Specifies the glitch width. The units are seconds. The digitizer triggers when it detects a pulse with a width less than or greater than this value, depending on the Glitch Condition property.
+
+Notes:
+(1) This property is part of the IviDigitizerGlitchTrigger [GT] extension group.
+"
+"IVIDIGITIZER_ATTR_GLITCH_TRIGGER_WIDTH.html" "../../help/lvivi.chm"
+attribute: "Trigger Source List [MT]"
+	"Trigger:Multi Triggering:Trigger Source List [MT]"
+	string readwrite 1 1319D8
+	//const: IVIDIGITIZER_ATTR_TRIGGER_SOURCE_LIST
+"A comma separated list of source names to be used in a multi trigger scenario. This property only affects instrument behavior when the Trigger Source Operator property is set to AND or OR.
+
+Notes:
+(1) This property is part of the IviDigitizerMultiTrigger [MT] extension group.
+"
+"IVIDIGITIZER_ATTR_TRIGGER_SOURCE_LIST.html" "../../help/lvivi.chm"
+attribute: "Trigger Source Operator [MT]"
+	"Trigger:Multi Triggering:Trigger Source Operator [MT]"
+	iL enum { IVIDIGITIZER_VAL_TRIGGER_SOURCE_OPERATOR_AND=0, IVIDIGITIZER_VAL_TRIGGER_SOURCE_OPERATOR_OR=1, IVIDIGITIZER_VAL_TRIGGER_SOURCE_OPERATOR_NONE=2 } readwrite 1 1319D9
+	//const: IVIDIGITIZER_ATTR_TRIGGER_SOURCE_OPERATOR
+"Specifies the boolean operation to apply to the trigger sources specified by the Trigger Source List property.
+
+Notes:
+(1) This property is part of the IviDigitizerMultiTrigger [MT] extension group.
+
+IVIDIGITIZER_VAL_TRIGGER_SOURCE_OPERATOR_AND (0)
+Trigger sources are AND'd together.
+
+IVIDIGITIZER_VAL_TRIGGER_SOURCE_OPERATOR_OR (1)
+Trigger sources are OR'd together.
+
+IVIDIGITIZER_VAL_TRIGGER_SOURCE_OPERATOR_NONE (2)
+No operator is applied to the configured list of Trigger sources.
+"
+"IVIDIGITIZER_ATTR_TRIGGER_SOURCE_OPERATOR.html" "../../help/lvivi.chm"
+attribute: "Runt Trigger High Threshold [RT]"
+	"Trigger:Runt Triggering:Runt Trigger High Threshold [RT]"
+	fD readwrite 1 131B68
+	//const: IVIDIGITIZER_ATTR_RUNT_TRIGGER_HIGH_THRESHOLD
+"The high threshold the digitizer uses for runt triggering. The units are volts.
+
+Notes:
+(1) This property is part of the IviDigitizerRuntTrigger [RT] extension group.
+"
+"IVIDIGITIZER_ATTR_RUNT_TRIGGER_HIGH_THRESHOLD.html" "../../help/lvivi.chm"
+attribute: "Runt Trigger Low Threshold [RT]"
+	"Trigger:Runt Triggering:Runt Trigger Low Threshold [RT]"
+	fD readwrite 1 131B69
+	//const: IVIDIGITIZER_ATTR_RUNT_TRIGGER_LOW_THRESHOLD
+"The low threshold the digitizer uses for runt triggering. The units are volts.
+
+Notes:
+(1) This property is part of the IviDigitizerRuntTrigger [RT] extension group.
+"
+"IVIDIGITIZER_ATTR_RUNT_TRIGGER_LOW_THRESHOLD.html" "../../help/lvivi.chm"
+attribute: "Runt Trigger Polarity [RT]"
+	"Trigger:Runt Triggering:Runt Trigger Polarity [RT]"
+	iL enum { IVIDIGITIZER_VAL_RUNT_POSITIVE=1, IVIDIGITIZER_VAL_RUNT_NEGATIVE=2, IVIDIGITIZER_VAL_RUNT_EITHER=3 } readwrite 1 131B6A
+	//const: IVIDIGITIZER_ATTR_RUNT_TRIGGER_POLARITY
+"Specifies the polarity of the runt that triggers the digitizer.
+
+Notes:
+(1) This property is part of the IviDigitizerRuntTrigger [RT] extension group.
+
+IVIDIGITIZER_VAL_RUNT_POSITIVE (1)
+The digitizer triggers on a positive runt.
+
+IVIDIGITIZER_VAL_RUNT_NEGATIVE (2)
+The digitizer triggers on a negative runt.
+
+IVIDIGITIZER_VAL_RUNT_EITHER (3)
+The digitizer triggers on either a positive or negative runt.
+"
+"IVIDIGITIZER_ATTR_RUNT_TRIGGER_POLARITY.html" "../../help/lvivi.chm"
+attribute: "TV Trigger Event [TVT]"
+	"Trigger:TV Triggering:TV Trigger Event [TVT]"
+	iL enum { IVIDIGITIZER_VAL_TV_EVENT_FIELD1=1, IVIDIGITIZER_VAL_TV_EVENT_FIELD2=2, IVIDIGITIZER_VAL_TV_EVENT_ANY_FIELD=3, IVIDIGITIZER_VAL_TV_EVENT_ANY_LINE=4, IVIDIGITIZER_VAL_TV_EVENT_LINE_NUMBER=5 } readwrite 1 131BCC
+	//const: IVIDIGITIZER_ATTR_TV_TRIGGER_EVENT
+"Specifies the event on which the digitizer triggers.
+
+Notes:
+(1) This property is part of the IviDigitizerTVTrigger [TVT] extension group.
+
+IVIDIGITIZER_VAL_TV_EVENT_FIELD1 (1)
+Sets the digitizer to trigger on field 1 of the video signal.
+
+IVIDIGITIZER_VAL_TV_EVENT_FIELD2 (2)
+Sets the digitizer to trigger on field 2 of the video signal.
+
+IVIDIGITIZER_VAL_TV_EVENT_ANY_FIELD (3)
+Sets the digitizer to trigger on any field.
+
+IVIDIGITIZER_VAL_TV_EVENT_ANY_LINE (4)
+Sets the digitizer to trigger on any field.
+
+IVIDIGITIZER_VAL_TV_EVENT_LINE_NUMBER (5)
+Sets the digitizer to trigger on a specific line number you specify with the TV Trigger Line Number property.
+"
+"IVIDIGITIZER_ATTR_TV_TRIGGER_EVENT.html" "../../help/lvivi.chm"
+attribute: "TV Trigger Line Number [TVT]"
+	"Trigger:TV Triggering:TV Trigger Line Number [TVT]"
+	iL readwrite 1 131BCD
+	//const: IVIDIGITIZER_ATTR_TV_TRIGGER_LINE_NUMBER
+"Specifies the line on which the digitizer triggers. The driver uses this property when the TV Trigger Event is set to TV Event Line Number. The line number setting is independent of the field. 
+
+Notes:
+(1) This property is part of the IviDigitizerTVTrigger [TVT] extension group.
+"
+"IVIDIGITIZER_ATTR_TV_TRIGGER_LINE_NUMBER.html" "../../help/lvivi.chm"
+attribute: "TV Trigger Polarity [TVT]"
+	"Trigger:TV Triggering:TV Trigger Polarity [TVT]"
+	iL enum { IVIDIGITIZER_VAL_TV_POSITIVE=1, IVIDIGITIZER_VAL_TV_NEGATIVE=2 } readwrite 1 131BCE
+	//const: IVIDIGITIZER_ATTR_TV_TRIGGER_POLARITY
+"Specifies the polarity of the TV signal.
+
+Notes:
+(1) This property is part of the IviDigitizerTVTrigger [TVT] extension group.
+
+IVIDIGITIZER_VAL_TV_POSITIVE (1)
+Configures the digitizer to trigger on a positive video sync pulse.
+
+IVIDIGITIZER_VAL_TV_NEGATIVE (2)
+Configures the digitizer to trigger on a negative video sync pulse.
+"
+"IVIDIGITIZER_ATTR_TV_TRIGGER_POLARITY.html" "../../help/lvivi.chm"
+attribute: "TV Trigger Signal Format [TVT]"
+	"Trigger:TV Triggering:TV Trigger Signal Format [TVT]"
+	iL enum { IVIDIGITIZER_VAL_NTSC=1, IVIDIGITIZER_VAL_PAL=2, IVIDIGITIZER_VAL_SECAM=3 } readwrite 1 131BCF
+	//const: IVIDIGITIZER_ATTR_TV_TRIGGER_SIGNAL_FORMAT
+"Specifies the format of TV signal on which the digitizer triggers.
+
+Notes:
+(1) This property is part of the IviDigitizerTVTrigger [TVT] extension group.
+
+IVIDIGITIZER_VAL_NTSC (1)
+Configures the digitizer to trigger on the NTSC signal format.
+
+IVIDIGITIZER_VAL_PAL (2)
+Configures the digitizer to trigger on the PAL signal format.
+
+IVIDIGITIZER_VAL_SECAM (3)
+Configures the digitizer to trigger on the SECAM signal format.
+"
+"IVIDIGITIZER_ATTR_TV_TRIGGER_SIGNAL_FORMAT.html" "../../help/lvivi.chm"
+attribute: "Width Trigger Condition [WT]"
+	"Trigger:Width Triggering:Width Trigger Condition [WT]"
+	iL enum { IVIDIGITIZER_VAL_WIDTH_WITHIN=1, IVIDIGITIZER_VAL_WIDTH_OUTSIDE=2 } readwrite 1 131C30
+	//const: IVIDIGITIZER_ATTR_WIDTH_TRIGGER_CONDITION
+"Specifies whether a pulse that is within or outside the high and low thresholds triggers the digitizer.
+
+Notes:
+(1) This property is part of the IviDigitizerWidthTrigger [WT] extension group.
+
+IVIDIGITIZER_VAL_WIDTH_WITHIN (1)
+Configures the digitizer to trigger on pulses that have a width that is less than the high threshold and greater than the low threshold.
+
+IVIDIGITIZER_VAL_WIDTH_OUTSIDE (2)
+Configures the digitizer to trigger on pulses that have a width that is either greater than the high threshold or less than a low threshold.
+"
+"IVIDIGITIZER_ATTR_WIDTH_TRIGGER_CONDITION.html" "../../help/lvivi.chm"
+attribute: "Width Trigger High Threshold [WT]"
+	"Trigger:Width Triggering:Width Trigger High Threshold [WT]"
+	fD readwrite 1 131C31
+	//const: IVIDIGITIZER_ATTR_WIDTH_TRIGGER_HIGH_THRESHOLD
+"Specifies the high width threshold time in seconds.
+
+Notes:
+(1) This property is part of the IviDigitizerWidthTrigger [WT] extension group.
+"
+"IVIDIGITIZER_ATTR_WIDTH_TRIGGER_HIGH_THRESHOLD.html" "../../help/lvivi.chm"
+attribute: "Width Trigger Low Threshold [WT]"
+	"Trigger:Width Triggering:Width Trigger Low Threshold [WT]"
+	fD readwrite 1 131C32
+	//const: IVIDIGITIZER_ATTR_WIDTH_TRIGGER_LOW_THRESHOLD
+"Specifies the low width threshold time in seconds.
+
+Notes:
+(1) This property is part of the IviDigitizerWidthTrigger [WT] extension group.
+"
+"IVIDIGITIZER_ATTR_WIDTH_TRIGGER_LOW_THRESHOLD.html" "../../help/lvivi.chm"
+attribute: "Width Trigger Polarity [WT]"
+	"Trigger:Width Triggering:Width Trigger Polarity [WT]"
+	iL enum { IVIDIGITIZER_VAL_WIDTH_POSITIVE=1, IVIDIGITIZER_VAL_WIDTH_NEGATIVE=2, IVIDIGITIZER_VAL_WIDTH_EITHER=3 } readwrite 1 131C33
+	//const: IVIDIGITIZER_ATTR_WIDTH_TRIGGER_POLARITY
+"Specifies the polarity of the pulse that triggers the digitizer.
+
+Notes:
+(1) This property is part of the IviDigitizerWidthTrigger [WT] extension group.
+
+IVIDIGITIZER_VAL_WIDTH_POSITIVE (1)
+Configures the digitizer to trigger on positive pulses.
+
+IVIDIGITIZER_VAL_WIDTH_NEGATIVE (2)
+Configures the digitizer to trigger on negative.
+
+IVIDIGITIZER_VAL_WIDTH_EITHER (3)
+Configures the digitizer to trigger on either positive or negative pulses.
+"
+"IVIDIGITIZER_ATTR_WIDTH_TRIGGER_POLARITY.html" "../../help/lvivi.chm"
+attribute: "Window Trigger Condition [WINT]"
+	"Trigger:Window Triggering:Window Trigger Condition [WINT]"
+	iL enum { IVIDIGITIZER_VAL_WINDOW_CONDITION_ENTERING=1, IVIDIGITIZER_VAL_WINDOW_CONDITION_LEAVING=2 } readwrite 1 131C94
+	//const: IVIDIGITIZER_ATTR_WINDOW_TRIGGER_CONDITION
+"Specifies whether a signal that is entering or leaving the voltage window defined by the high and low thresholds triggers the digitizer.
+
+Notes:
+(1) This property is part of the IviDigitizerWindowTrigger [WINT] extension group.
+
+IVIDIGITIZER_VAL_WINDOW_CONDITION_ENTERING (1)
+Configures the digitizer to trigger on signals when they enter the given triggering window. 
+
+IVIDIGITIZER_VAL_WINDOW_CONDITION_LEAVING (2)
+Configures the digitizer to trigger on signals when they leave the given triggering window.
+"
+"IVIDIGITIZER_ATTR_WINDOW_TRIGGER_CONDITION.html" "../../help/lvivi.chm"
+attribute: "Window Trigger High Threshold [WINT]"
+	"Trigger:Window Triggering:Window Trigger High Threshold [WINT]"
+	fD readwrite 1 131C95
+	//const: IVIDIGITIZER_ATTR_WINDOW_TRIGGER_HIGH_THRESHOLD
+"Specifies the high window threshold voltage in Volts.
+
+Notes:
+(1) This property is part of the IviDigitizerWindowTrigger [WINT] extension group.
+"
+"IVIDIGITIZER_ATTR_WINDOW_TRIGGER_HIGH_THRESHOLD.html" "../../help/lvivi.chm"
+attribute: "Window Trigger Low Threshold [WINT]"
+	"Trigger:Window Triggering:Window Trigger Low Threshold [WINT]"
+	fD readwrite 1 131C96
+	//const: IVIDIGITIZER_ATTR_WINDOW_TRIGGER_LOW_THRESHOLD
+"Specifies the low window threshold voltage in Volts.
+
+Notes:
+(1) This property is part of the IviDigitizerWindowTrigger [WINT] extension group.
+"
+"IVIDIGITIZER_ATTR_WINDOW_TRIGGER_LOW_THRESHOLD.html" "../../help/lvivi.chm"
+attribute: "Is Idle"
+	"Waveform Acquisition:Is Idle"
+	iL readonly 1 1312D5
+	//const: IVIDIGITIZER_ATTR_IS_IDLE
+"Returns whether the device is currently in the Idle state. If the driver cannot query the digitizer to return its state, the driver returns the value Unknown.
+"
+"IVIDIGITIZER_ATTR_IS_IDLE.html" "../../help/lvivi.chm"
+attribute: "Is Measuring"
+	"Waveform Acquisition:Is Measuring"
+	iL readonly 1 1312D6
+	//const: IVIDIGITIZER_ATTR_IS_MEASURING
+"Returns whether the device is currently in the Measuring state. If the driver cannot query the digitizer to return its state, the driver returns the value Unknown.
+"
+"IVIDIGITIZER_ATTR_IS_MEASURING.html" "../../help/lvivi.chm"
+attribute: "Is Waiting For Arm"
+	"Waveform Acquisition:Is Waiting For Arm"
+	iL readonly 1 1312D7
+	//const: IVIDIGITIZER_ATTR_IS_WAITING_FOR_ARM
+"Returns whether the device is currently in the Waiting For Arm state. If the driver cannot query the digitizer to return its state, the driver returns the value Unknown.
+"
+"IVIDIGITIZER_ATTR_IS_WAITING_FOR_ARM.html" "../../help/lvivi.chm"
+attribute: "Is Waiting For Trigger"
+	"Waveform Acquisition:Is Waiting For Trigger"
+	iL readonly 1 1312D8
+	//const: IVIDIGITIZER_ATTR_IS_WAITING_FOR_TRIGGER
+"Returns whether the device is currently in the Waiting For Trigger state. If the driver cannot query the digitizer to return its state, the driver returns the value Unknown.
+"
+"IVIDIGITIZER_ATTR_IS_WAITING_FOR_TRIGGER.html" "../../help/lvivi.chm"
+attribute: "Max First Valid Point Value"
+	"Waveform Acquisition:Max First Valid Point Value"
+	iQ readonly 1 1312D9
+	//const: IVIDIGITIZER_ATTR_MAX_FIRST_VALID_POINT_VAL
+"Returns the maximum value that the First Valid Point parameter of the readout VIs may assume. This value is necessary to calculate to minimum size of the required data buffer to retrieved the entire acquisition.
+"
+"IVIDIGITIZER_ATTR_MAX_FIRST_VALID_POINT_VAL.html" "../../help/lvivi.chm"
+attribute: "Max Samples Per Channel"
+	"Waveform Acquisition:Max Samples Per Channel"
+	iQ readonly 1 1312DA
+	//const: IVIDIGITIZER_ATTR_MAX_SAMPLES_PER_CHANNEL
+"Returns the maximum number of samples per channel that can be captured.
+"
+"IVIDIGITIZER_ATTR_MAX_SAMPLES_PER_CHANNEL.html" "../../help/lvivi.chm"
+attribute: "Min Record Size"
+	"Waveform Acquisition:Min Record Size"
+	iQ readonly 1 1312DB
+	//const: IVIDIGITIZER_ATTR_MIN_RECORD_SIZE
+"Indicates the minimum waveform record size. If the digitizer can support any arbitrary size record, then this property returns 1.
+"
+"IVIDIGITIZER_ATTR_MIN_RECORD_SIZE.html" "../../help/lvivi.chm"
+attribute: "Num Acquired Records"
+	"Waveform Acquisition:Num Acquired Records"
+	iQ readonly 1 1312DC
+	//const: IVIDIGITIZER_ATTR_NUM_ACQUIRED_RECORDS
+"Gets the total number of records acquired since the acquistion was last initiated.
+"
+"IVIDIGITIZER_ATTR_NUM_ACQUIRED_RECORDS.html" "../../help/lvivi.chm"
+attribute: "Num Records To Acquire"
+	"Waveform Acquisition:Num Records To Acquire"
+	iQ readwrite 1 1312DD
+	//const: IVIDIGITIZER_ATTR_NUM_RECORDS_TO_ACQUIRE
+"Specifies the number of waveform records to acquire.
+"
+"IVIDIGITIZER_ATTR_NUM_RECORDS_TO_ACQUIRE.html" "../../help/lvivi.chm"
+attribute: "Record Size"
+	"Waveform Acquisition:Record Size"
+	iQ readwrite 1 1312DE
+	//const: IVIDIGITIZER_ATTR_RECORD_SIZE
+"Specifies the number of samples to acquire in each waveform record.
+"
+"IVIDIGITIZER_ATTR_RECORD_SIZE.html" "../../help/lvivi.chm"
+attribute: "Sample Mode [SM]"
+	"Waveform Acquisition:Sample Mode [SM]"
+	iL enum { IVIDIGITIZER_VAL_SAMPLE_MODE_REAL_TIME=0, IVIDIGITIZER_VAL_SAMPLE_MODE_EQUIVALENT_TIME=1 } readwrite 1 1315F0
+	//const: IVIDIGITIZER_ATTR_SAMPLE_MODE
+"Specifies whether the digitizer uses real-time or equivalent-time sampling.
+
+Notes:
+(1) This property is part of the IviDigitizerSampleMode [SM] extension group.
+
+IVIDIGITIZER_VAL_SAMPLE_MODE_REAL_TIME (0)
+Specifies real-time sampling.
+
+IVIDIGITIZER_VAL_SAMPLE_MODE_EQUIVALENT_TIME (1)
+Specifies equivalent-time sampling.
+"
+"IVIDIGITIZER_ATTR_SAMPLE_MODE.html" "../../help/lvivi.chm"
+attribute: "Sample Rate"
+	"Waveform Acquisition:Sample Rate"
+	fD readwrite 1 1312DF
+	//const: IVIDIGITIZER_ATTR_SAMPLE_RATE
+"Specifies the rate of the sample clock in samples per second.
+"
+"IVIDIGITIZER_ATTR_SAMPLE_RATE.html" "../../help/lvivi.chm"
+attribute: "Time Interleaved Channel List Auto [TIC]"
+	"Waveform Acquisition:Time Interleaved Channel List Auto [TIC]"
+	bool readwrite 1 131461
+	//const: IVIDIGITIZER_ATTR_TIME_INTERLEAVED_CHANNEL_LIST_AUTO
+"Specifies whether or not the instrument should automatically combine enabled channels to satisfy user-specified sample rates. When set to True, the instrument will automatically combine channels to meet the sample rate 
+  requirements specified via the Sample Rate property.
+
+Notes:
+(1) This property is part of the IviDigitizerTimeInterleavedChannels [TIC] extension group.
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+"
+"IVIDIGITIZER_ATTR_TIME_INTERLEAVED_CHANNEL_LIST_AUTO.html" "../../help/lvivi.chm"

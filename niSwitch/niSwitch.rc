@@ -1,0 +1,332 @@
+explicitActiveChannels: TRUE
+library: niswitch_*.*
+      
+class: "niSwitch"
+flags: 0
+sorted: no
+implements: ivi, iviswtch, iviResourceMgr
+
+attribute: "Active Channel"
+   "Active Channel"
+   string	writeonly	19	-2
+   "Specifies the channel name the instrument driver uses to access all subsequent channel-based properties in this property node. Set the active channel before setting channel-based properties."	"pniSwitch_ActiveChannel.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Is Configuration Channel"
+   "Channel Configuration:Is Configuration Channel"
+   bool	readwrite	17	001312D3
+   "Specifies whether to designate the channel as a configuration channel--a channel reserved for internal path creation. The instrument driver uses configuration channels to create paths between the channels you specify in the niSwitch Connect Channels VI."	"pniSwitch_IsConfigurationChannel.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Is Source Channel"
+   "Channel Configuration:Is Source Channel"
+   bool	readwrite	17	001312D1
+   "Specifies whether to designate the channel as a source channel."	"pniSwitch_IsSourceChannel.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Analog Bus Sharing Enable"
+   "Channel Configuration:Analog Bus Sharing Enable"
+   bool	readwrite	17	00118C42
+   "Enables or disables sharing of an analog bus line so that multiple NI SwitchBlock devices may connect to it simultaneously. To enable multiple NI SwitchBlock devices to share an analog bus line, set this property to TRUE for each device on the channel that corresponds with the shared analog bus line. The default value for all devices is FALSE, which disables sharing of the analog bus."	"pniSwitch_AnalogBusSharingEnable.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Driver Setup"
+   "Inherent IVI Attributes:Advanced Session Information:Driver Setup"
+   string	readonly	17	00100597
+   "Contains the Driver Setup string that you specified when initializing the instrument driver."	"pniSwitch_DriverSetup.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "IO Resource Descriptor"
+   "Inherent IVI Attributes:Advanced Session Information:IO Resource Descriptor"
+   string	readonly	17	001006C0
+   "Contains the resource descriptor the instrument driver uses to identify the physical device."	"pniSwitch_IOResourceDescriptor.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Logical Name"
+   "Inherent IVI Attributes:Advanced Session Information:Logical Name"
+   string	readonly	17	001006C1
+   "Contains the logical name you specified when opening the current IVI session."	"pniSwitch_LogicalName.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Channel Count"
+   "Inherent IVI Attributes:Driver Capabilities:Channel Count"
+   iL	readonly	17	0010065B
+   "Contains the number of channels that the instrument driver supports."	"pniSwitch_ChannelCount.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Class Group Capabilities"
+   "Inherent IVI Attributes:Driver Capabilities:Class Group Capabilities"
+   string	readonly	17	00100721
+   "Contains a comma-separated (,) list of class-extension groups that the instrument driver implements."	"pniSwitch_ClassGroupCapabilities.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Supported Instrument Models"
+   "Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models"
+   string	readonly	17	001006D7
+   "Contains a comma-separated (,) list of supported instrument models."	"pniSwitch_SupportedInstrumentModels.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Class Specification Major Version"
+   "Inherent IVI Attributes:Driver Identification:Class Specification Major Version"
+   iL	readonly	17	00100793
+   "Contains the major version number of the IviSwtch class specification."	"pniSwitch_ClassSpecificationMajorVersion.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Class Specification Minor Version"
+   "Inherent IVI Attributes:Driver Identification:Class Specification Minor Version"
+   iL	readonly	17	00100794
+   "Contains the minor version number of the class specification with which the instrument driver is compliant."	"pniSwitch_ClassSpecificationMinorVersion.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Description"
+   "Inherent IVI Attributes:Driver Identification:Description"
+   string	readonly	17	00100792
+   "Contains a brief description of the instrument driver."	"pniSwitch_Description.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Driver Prefix"
+   "Inherent IVI Attributes:Driver Identification:Driver Prefix"
+   string	readonly	17	001006BE
+   "Contains the prefix for all of the instrument driver VIs."	"pniSwitch_DriverPrefix.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Driver Vendor"
+   "Inherent IVI Attributes:Driver Identification:Driver Vendor"
+   string	readonly	17	00100791
+   "Contains the name of the vendor that supplies the instrument driver."	"pniSwitch_DriverVendor.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Revision"
+   "Inherent IVI Attributes:Driver Identification:Revision"
+   string	readonly	17	001007B7
+   "Contains additional version information about the instrument driver."	"pniSwitch_Revision.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Firmware Revision"
+   "Inherent IVI Attributes:Instrument Identification:Firmware Revision"
+   string	readonly	17	0010078E
+   "Contains the firmware revision information for the instrument currently in use."	"pniSwitch_FirmwareRevision.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Manufacturer"
+   "Inherent IVI Attributes:Instrument Identification:Manufacturer"
+   string	readonly	17	0010078F
+   "Contains the name of the manufacturer of the instrument currently in use."	"pniSwitch_Manufacturer.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Model"
+   "Inherent IVI Attributes:Instrument Identification:Model"
+   string	readonly	17	00100790
+   "Contains the model number or name of the instrument currently in use."	"pniSwitch_Model.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Cache"
+   "Inherent IVI Attributes:User Options:Cache"
+   bool	readwrite	17	00100594
+   "Specifies whether to cache the value of properties. The default value is TRUE. Use the niSwitch Initialize With Options VI to override the default value."	"pniSwitch_Cache.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Interchange Check"
+   "Inherent IVI Attributes:User Options:Interchange Check"
+   bool	readwrite	17	001005A5
+   "Specifies whether to perform interchangeability checking and retrieve interchangeability warnings when you call the niSwitch Connect Channels, niSwitch Set Path and niSwitch Initiate Scan VIs. The default value is FALSE."	"pniSwitch_InterchangeCheck.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Query Instrument Status"
+   "Inherent IVI Attributes:User Options:Query Instrument Status"
+   bool	readwrite	17	00100593
+   "Specifies whether the instrument driver queries the instrument status after each operation. The default value is TRUE. Use the niSwitch Initialize With Options VI to override the default value."	"pniSwitch_QueryInstrumentStatus.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Range Check"
+   "Inherent IVI Attributes:User Options:Range Check"
+   bool	readwrite	17	00100592
+   "Specifies whether to validate property values and VI parameters. The default value is TRUE. Use the niSwitch Initialize With Options VI to override the default value."	"pniSwitch_RangeCheck.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Record Value Coercions"
+   "Inherent IVI Attributes:User Options:Record Value Coercions"
+   bool	readwrite	17	00100596
+   "Specifies whether the IVI engine keeps a list of the value coercions it makes for properties with ViInt32 and ViReal64 datatypes. The default value is FALSE. Use the niSwitch Initialize With Options VI to override the default value."	"pniSwitch_RecordValueCoercions.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Simulate"
+   "Inherent IVI Attributes:User Options:Simulate"
+   bool	readwrite	17	00100595
+   "Specifies whether to simulate instrument driver I/O operations. The default value is FALSE. Use the niSwitch Initialize With Options VI to override the default value."	"pniSwitch_Simulate.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Number of Columns"
+   "Matrix Configuration:Number of Columns"
+   iL	readonly	17	001312E3
+   "Returns the number of channels on the column of a matrix or scanner. If the switch module is a scanner, this property returns the number of input channels."	"pniSwitch_NumberofColumns.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Number of Rows"
+   "Matrix Configuration:Number of Rows"
+   iL	readonly	17	001312E2
+   "Returns the number of channels on the row of a matrix or scanner. If the switch module is a scanner, this property returns the number of output channels."	"pniSwitch_NumberofRows.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Bandwidth"
+   "Module Characteristics:Bandwidth"
+   fD	readonly	17	001312D5
+   "Returns the bandwidth for the channel in hertz."	"pniSwitch_Bandwidth.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Characteristic Impedance"
+   "Module Characteristics:Characteristic Impedance"
+   fD	readonly	17	001312E0
+   "Returns the characteristic impedance for the channel in ohms."	"pniSwitch_CharacteristicImpedance.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Is Debounced"
+   "Module Characteristics:Is Debounced"
+   bool	readonly	17	001312D2
+   "Indicates whether the entire switch module has settled since the last switching command. A value of TRUE indicates that all signals going through the switch module are valid."	"pniSwitch_IsDebounced.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Maximum AC Voltage"
+   "Module Characteristics:Maximum AC Voltage"
+   fD	readonly	17	001312D7
+   "Returns the maximum AC voltage the channel can switch in volts RMS."	"pniSwitch_MaximumACVoltage.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Maximum Carry AC Current"
+   "Module Characteristics:Maximum Carry AC Current"
+   fD	readonly	17	001312DB
+   "Returns the maximum AC current the channel can carry in amperes RMS."	"pniSwitch_MaximumCarryACCurrent.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Maximum Carry AC Power"
+   "Module Characteristics:Maximum Carry AC Power"
+   fD	readonly	17	001312DF
+   "Returns the maximum AC power the channel can carry in volt-amperes."	"pniSwitch_MaximumCarryACPower.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Maximum Carry DC Current"
+   "Module Characteristics:Maximum Carry DC Current"
+   fD	readonly	17	001312DA
+   "Returns the maximum DC current the channel can carry in amperes."	"pniSwitch_MaximumCarryDCCurrent.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Maximum Carry DC Power"
+   "Module Characteristics:Maximum Carry DC Power"
+   fD	readonly	17	001312DE
+   "Returns the maximum DC power the channel can carry in watts."	"pniSwitch_MaximumCarryDCPower.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Maximum DC Voltage"
+   "Module Characteristics:Maximum DC Voltage"
+   fD	readonly	17	001312D6
+   "Returns the maximum DC voltage the channel can switch in volts."	"pniSwitch_MaximumDCVoltage.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Maximum Switching AC Current"
+   "Module Characteristics:Maximum Switching AC Current"
+   fD	readonly	17	001312D9
+   "Returns the maximum AC current the channel can switch in amperes RMS."	"pniSwitch_MaximumSwitchingACCurrent.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Maximum Switching AC Power"
+   "Module Characteristics:Maximum Switching AC Power"
+   fD	readonly	17	001312DD
+   "Returns the maximum AC power the channel can switch in volt-amperes."	"pniSwitch_MaximumSwitchingACPower.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Maximum Switching DC Current"
+   "Module Characteristics:Maximum Switching DC Current"
+   fD	readonly	17	001312D8
+   "Returns the maximum DC current the channel can switch in amperes."	"pniSwitch_MaximumSwitchingDCCurrent.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Maximum Switching DC Power"
+   "Module Characteristics:Maximum Switching DC Power"
+   fD	readonly	17	001312DC
+   "Returns the maximum DC power the channel can switch in watts."	"pniSwitch_MaximumSwitchingDCPower.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Number of Relays"
+   "Module Characteristics:Number of Relays"
+   iL	readonly	17	00118C3E
+   "Returns the number of relays that the instrument driver supports."	"pniSwitch_NumberofRelays.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Power Down Latching Relays After Debounce"
+   "Module Characteristics:Power Down Latching Relays After Debounce"
+   bool	readwrite	17	00118C41
+   "Specifies whether to power down latching relays after calling the niSwitch Wait For Debounce VI. Set this property to TRUE to ensure that the relays settle and the latching relays power down after you call the niSwitch Wait for Debounce VI."	"pniSwitch_PowerDownLatchingRelaysAfterDebounce.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Serial Number"
+   "Module Characteristics:Serial Number"
+   string	readonly	17	00118C3F
+   "Returns the serial number for the switch module controlled by the instrument driver. If the switch module does not return a serial number, the instrument driver returns the Invalid Attribute error."	"pniSwitch_SerialNumber.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Settling Time"
+   "Module Characteristics:Settling Time"
+   fD	readwrite	17	001312D4
+   "Returns the maximum length of time in seconds from after you make a connection until the signal flowing through the channel settles. Settling time can vary depending on the switch module."	"pniSwitch_SettlingTime.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Temperature"
+   "Module Characteristics:Temperature"
+   fD	readonly	17	00118C43
+   "Returns the temperature as read by the Switch module in degrees Celsius. Refer to the device documentation for more information."	"pniSwitch_Temperature.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Wire mode"
+   "Module Characteristics:Wire mode"
+   iL	readonly	17	001312E1
+   "Returns the wire mode of the switch module. This property affects the values of the Number of Rows and Number of Columns properties. The actual number of input and output lines on the switch module does not change, but the number of channels depends on how many lines constitute each channel."	"pniSwitch_Wiremode.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Continuous Scan"
+   "Scanning Configuration:Continuous Scan"
+   bool	readwrite	17	00118C32
+   "Specifies whether to continuously scan through a scan list. Set the property to FALSE to stop scanning after one pass through the scan list. Set this property to TRUE to loop continuously through the scan list."	"pniSwitch_ContinuousScan.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Digital Filter Enable"
+   "Scanning Configuration:Digital Filter Enable"
+   bool	readwrite	17	00118C40
+   "Specifies whether to apply the pulse width filter to the Trigger Input. Set the property to TRUE to prevent the switch module from being triggered by pulses that are less than 150 ns on PXI trigger lines 0-7."	"pniSwitch_DigitalFilterEnable.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Handshaking Initiation"
+   "Scanning Configuration:Handshaking Initiation"
+   iL enum { "Switch_Initiated"=1, "Measurement_Device_Initiated"=0 }	readwrite	17	00118C3D
+   "Specifies how to start handshaking with a measurement device."	"pniSwitch_HandshakingInitiation.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Is Scanning"
+   "Scanning Configuration:Is Scanning"
+   bool	readonly	17	001312E8
+   "Indicates whether the switch module has completed the scan operation. TRUE indicates that the scan has completed."	"pniSwitch_IsScanning.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Is Waiting for Trigger?"
+   "Scanning Configuration:Is Waiting for Trigger?"
+   bool	readonly	17	00118C34
+   "Indicates with a semi-colon (;) that at that point in the scan list, the scan engine should pause until a trigger is received from the trigger input. If you generate that trigger through either a hardware pulse or the niSwitch Send Software Trigger VI, you must know when the scan engine has reached such a state."	"pniSwitch_IsWaitingforTrigger.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Scan Advanced Output"
+   "Scanning Configuration:Scan Advanced Output"
+   iL enum { "NONE"=0, "EXTERNAL"=2, "TRIG0"=111, "TRIG1"=112, "TRIG2"=113, "TRIG3"=114, "TRIG4"=115, "TRIG5"=116, "TRIG6"=117, "TRIG7"=118, "PXI_STAR"=125, "FRONTCONNECTOR"=1001, "FRONTCONNECTOR_MODULE1"=1041, "FRONTCONNECTOR_MODULE2"=1042, "FRONTCONNECTOR_MODULE3"=1043, "FRONTCONNECTOR_MODULE4"=1044, "FRONTCONNECTOR_MODULE5"=1045, "FRONTCONNECTOR_MODULE6"=1046, "FRONTCONNECTOR_MODULE7"=1047, "FRONTCONNECTOR_MODULE8"=1048, "FRONTCONNECTOR_MODULE9"=1049, "FRONTCONNECTOR_MODULE10"=1050, "FRONTCONNECTOR_MODULE11"=1051, "FRONTCONNECTOR_MODULE12"=1052 }	readwrite	17	001312E7
+   "Specifies the method to use to notify another instrument that all signals through the switch module have settled following the processing of one entry in the scan list."	"pniSwitch_ScanAdvancedOutput.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Scan Advanced Polarity"
+   "Scanning Configuration:Scan Advanced Polarity"
+   iL enum { "RISING_EDGE"=0, "FALLING_EDGE"=1 }	readwrite	17	00118C3B
+   "Specifies the driving level for the Scan Advanced Output signal sent from the switch module through either the external (PXI/PXIe) or front connector (SCXI) lines. When the Scan Advanced Output signal is sent to one of the TTL lines, the driven level is always low and this property is ignored. Between each Scan Advanced Output signal, the line is not driven and is in a high-impedance state."	"pniSwitch_ScanAdvancedPolarity.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Scan Delay"
+   "Scanning Configuration:Scan Delay"
+   fD	readwrite	17	001312E9
+   "Specifies the minimum amount of time the switch module waits before it asserts the scan advanced output trigger after opening or closing the switch. The switch module always waits for debounce before asserting the trigger. Thus, the actual delay will always be the greater value of the settling time and the value you specify as the switch delay, measured in seconds. Settling time can vary depending on the switch module."	"pniSwitch_ScanDelay.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Scan List"
+   "Scanning Configuration:Scan List"
+   string	readwrite	17	001312E4
+   "Contains a scan list (a string that specifies channel connections and trigger conditions). The niSwitch Initiate Scan VI makes or breaks connections and waits for triggers according to the instructions in the scan list. The scan list is comprised of channel names separated by special characters that determine the operations the scanner performs on the channels when it executes the scan list."	"pniSwitch_ScanList.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Scan Mode"
+   "Scanning Configuration:Scan Mode"
+   iL enum { "NONE"=0, "BREAK_BEFORE_MAKE"=1, "BREAK_AFTER_MAKE"=2 }	readwrite	17	001312E5
+   "Specifies how to handle existing connections that conflict with the connections you make in a scan list. For example, if CH1 is already connected to CH2 and the scan list instructs the switch module to connect CH1 to CH3, this property specifies what happens to the connection between CH1 and CH2."	"pniSwitch_ScanMode.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Trigger Input"
+   "Scanning Configuration:Trigger Input"
+   iL enum { "IMMEDIATE"=1, "SW_TRIG_FUNC"=3, "EXTERNAL"=2, "TRIG0"=111, "TRIG1"=112, "TRIG2"=113, "TRIG3"=114, "TRIG4"=115, "TRIG5"=116, "TRIG6"=117, "TRIG7"=118, "PXI_STAR"=125, "REARCONNECTOR"=1000, "FRONTCONNECTOR"=1001, "REARCONNECTOR_MODULE1"=1021, "REARCONNECTOR_MODULE2"=1022, "REARCONNECTOR_MODULE3"=1023, "REARCONNECTOR_MODULE4"=1024, "REARCONNECTOR_MODULE5"=1025, "REARCONNECTOR_MODULE6"=1026, "REARCONNECTOR_MODULE7"=1027, "REARCONNECTOR_MODULE8"=1028, "REARCONNECTOR_MODULE9"=1029, "REARCONNECTOR_MODULE10"=1030, "REARCONNECTOR_MODULE11"=1031, "REARCONNECTOR_MODULE12"=1032, "FRONTCONNECTOR_MODULE1"=1041, "FRONTCONNECTOR_MODULE2"=1042, "FRONTCONNECTOR_MODULE3"=1043, "FRONTCONNECTOR_MODULE4"=1044, "FRONTCONNECTOR_MODULE5"=1045, "FRONTCONNECTOR_MODULE6"=1046, "FRONTCONNECTOR_MODULE7"=1047, "FRONTCONNECTOR_MODULE8"=1048, "FRONTCONNECTOR_MODULE9"=1049, "FRONTCONNECTOR_MODULE10"=1050, "FRONTCONNECTOR_MODULE11"=1051, "FRONTCONNECTOR_MODULE12"=1052 }	readwrite	17	001312E6
+   "Specifies the source of the trigger for which the switch module can wait upon encountering a semi-colon (;) when processing a scan list. When the trigger occurs, the switch module advances to the next entry in the scan list."	"pniSwitch_TriggerInput.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Trigger Input Polarity"
+   "Scanning Configuration:Trigger Input Polarity"
+   iL enum { "RISING_EDGE"=0, "FALLING_EDGE"=1 }	readwrite	17	00118C3A
+   "Determines the behavior of the trigger input."	"pniSwitch_TriggerInputPolarity.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Cabled Module Scan Advanced Bus"
+   "Obsolete Attributes:Cabled Module Scan Advanced Bus"
+   iL	readwrite	17	00118C39
+   "This property has been deprecated and might be removed from a future release of NI-SWITCH. Use niSwitch Route Scan Advanced Output VI instead."	"pniSwitch_CabledModuleScanAdvancedBus.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Cabled Module Trigger Bus"
+   "Obsolete Attributes:Cabled Module Trigger Bus"
+   iL	readwrite	17	00118C38
+   "This property has been deprecated and might be removed from a future release of NI-SWITCH. Use the niSwitch Route Trigger Input VI instead."	"pniSwitch_CabledModuleTriggerBus.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Master Slave Scan Advanced Bus"
+   "Obsolete Attributes:Master Slave Scan Advanced Bus"
+   iL	readwrite	17	00118C37
+   "This property has been deprecated and might be removed from a future release of NI-SWITCH. Use niSwitch Route Scan Advanced Output VI instead."	"pniSwitch_MasterSlaveScanAdvancedBus.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Master Slave Trigger Bus"
+   "Obsolete Attributes:Master Slave Trigger Bus"
+   iL	readwrite	17	00118C36
+   "This property has been deprecated and might be removed from a future release of NI-SWITCH. Use the niSwitch Route Trigger Input VI instead."	"pniSwitch_MasterSlaveTriggerBus.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Parsed Scan List"
+   "Obsolete Attributes:Parsed Scan List"
+   string	readonly	17	00118C3C
+   "This property has been deprecated and might be removed from a future release of NI-SWITCH."	"pniSwitch_ParsedScanList.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Serial Number (I32)"
+   "Obsolete Attributes:Serial Number"
+   iL	readonly	17	00118C31
+   "This property has been deprecated and might be removed from a future release of NI-SWITCH."	"pniSwitch_SerialNumber_I32.html"	"<helpdir>:\switchpropref.chm"
+
+attribute: "Trigger Mode"
+   "Obsolete Attributes:Trigger Mode"
+   iL	readwrite	17	00118C35
+   "This property has been deprecated and might be removed from a future release of NI-SWITCH. Use the niSwitch Route Trigger Input and/or niSwitch Route Scan Advanced Output VIs instead."	"pniSwitch_TriggerMode.html"	"<helpdir>:\switchpropref.chm"

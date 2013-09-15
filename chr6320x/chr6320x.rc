@@ -1,0 +1,1212 @@
+library: chr6320x_*.*
+
+class: "chr6320x"
+implements: ivi, IviGeneral, iviResourceMgr
+sorted: no
+
+attribute: "Driver Setup"
+	"Inherent IVI Properties:Driver Setup"
+	string readonly local 100597
+	//const: CHR6320X_ATTR_DRIVER_SETUP
+"This property indicates the Driver Setup string that the user specified when initializing the driver.
+
+Some cases exist where the end-user must specify instrument driver options at initialization time.  An example of this is specifying a particular instrument model from among a family of instruments that the driver supports.  This is useful when using simulation.  The end-user can specify driver-specific options through the DriverSetup keyword in the optionsString parameter to the chr6320x Initialize With Options.vi, or through the IVI Configuration Utility.
+
+If the user does not specify a Driver Setup string, this property returns an empty string.
+    
+
+"
+attribute: "Range Check"
+	"Inherent IVI Properties:User Options:Range Check"
+	bool readwrite local 100592
+	//const: CHR6320X_ATTR_RANGE_CHECK
+"Specifies whether to validate property values and function parameters.  If enabled, the instrument driver validates the parameter values that you pass to driver VIs.  Range checking parameters is very useful for debugging.  After you validate your program, you can set this property to FALSE to disable range checking and maximize performance.
+    The default value is TRUE.   Use the chr6320x Initialize With Options.vi to override this value.
+    
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+
+"
+attribute: "Query Instrument Status"
+	"Inherent IVI Properties:User Options:Query Instrument Status"
+	bool readwrite local 100593
+	//const: CHR6320X_ATTR_QUERY_INSTRUMENT_STATUS
+"Specifies whether the instrument driver queries the instrument status after each operation.  Querying the instrument status is very useful for debugging.  After you validate your program, you can set this property to FALSE to disable status checking and maximize performance
+    The instrument driver can choose to ignore status checking for particular properties regardless of the setting of this property.
+    The default value is TRUE.   Use the chr6320x Initialize With Options.vi to override this value.
+    
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+
+"
+attribute: "Cache"
+	"Inherent IVI Properties:User Options:Cache"
+	bool readwrite local 100594
+	//const: CHR6320X_ATTR_CACHE
+"Specifies whether to cache the value of properties.  When caching is enabled, the instrument driver keeps track of the current instrument settings and avoids sending redundant commands to the instrument.  Thus, you can significantly increase execution speed.
+    The instrument driver can choose always to cache or never to cache particular properties regardless of the setting of this property.
+    The default value is TRUE.   Use the chr6320x Initialize With Options.vi to override this value.
+    
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+
+"
+attribute: "Simulate"
+	"Inherent IVI Properties:User Options:Simulate"
+	bool readwrite local 100595
+	//const: CHR6320X_ATTR_SIMULATE
+"Specifies whether or not to simulate instrument driver I/O operations.  If simulation is enabled, instrument driver VIs perform range checking and call Ivi_GetAttribute and Ivi_SetAttribute functions, but they do not perform instrument I/O.  For output parameters that represent instrument data, the instrument driver VIs return calculated values.
+    The default value is FALSE.   Use the chr6320x Initialize With Options.vi to override this value.
+    
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+
+"
+attribute: "Record Value Coercions"
+	"Inherent IVI Properties:User Options:Record Value Coercions"
+	bool readwrite local 100596
+	//const: CHR6320X_ATTR_RECORD_COERCIONS
+"Specifies whether the IVI engine keeps a list of the value coercions it makes for integer and ViReal64 properties.  You call chr6320x Get Next Coercion Record.vi to extract and delete the oldest coercion record from the list.
+    The default value is FALSE.   Use the chr6320x Initialize With Options.vi to override this value.
+    
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+
+"
+attribute: "Interchange Check"
+	"Inherent IVI Properties:User Options:Interchange Check"
+	bool readwrite local 1005A5
+	//const: CHR6320X_ATTR_INTERCHANGE_CHECK
+"This property is not valid in nonclass drivers.    
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+
+"
+attribute: "Description"
+	"Inherent IVI Properties:Driver Identification:Description"
+	string readonly local 100792
+	//const: CHR6320X_ATTR_SPECIFIC_DRIVER_DESCRIPTION
+"A string that contains a brief description of the specific driver
+    
+
+"
+attribute: "Driver Prefix"
+	"Inherent IVI Properties:Driver Identification:Driver Prefix"
+	string readonly local 1006BE
+	//const: CHR6320X_ATTR_SPECIFIC_DRIVER_PREFIX
+"A string that contains the prefix for the instrument driver.  The name of each user-callable function in this driver starts with this prefix.
+    
+
+"
+attribute: "Driver Vendor"
+	"Inherent IVI Properties:Driver Identification:Driver Vendor"
+	string readonly local 100791
+	//const: CHR6320X_ATTR_SPECIFIC_DRIVER_VENDOR
+"A string that contains the name of the vendor that supplies this driver.
+    
+
+"
+attribute: "Revision"
+	"Inherent IVI Properties:Driver Identification:Revision"
+	string readonly local 1007B7
+	//const: CHR6320X_ATTR_SPECIFIC_DRIVER_REVISION
+"A string that contains additional version information about this instrument driver.
+    
+
+"
+attribute: "Class Specification Major Version"
+	"Inherent IVI Properties:Driver Identification:Class Specification Major Version"
+	iL readonly local 100793
+	//const: CHR6320X_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION
+"The major version number of the class specification with which this driver is compliant.
+    
+
+"
+attribute: "Class Specification Minor Version"
+	"Inherent IVI Properties:Driver Identification:Class Specification Minor Version"
+	iL readonly local 100794
+	//const: CHR6320X_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION
+"The minor version number of the class specification with which this driver is compliant.
+    
+
+"
+attribute: "Supported Instrument Models"
+	"Inherent IVI Properties:Driver Capabilities:Supported Instrument Models"
+	string readonly local 1006D7
+	//const: CHR6320X_ATTR_SUPPORTED_INSTRUMENT_MODELS
+"Contains a model code of the instrument. For drivers that support more than one device, this property contains a comma-separated list of supported instrument models.
+    
+
+"
+attribute: "Class Group Capabilities"
+	"Inherent IVI Properties:Driver Capabilities:Class Group Capabilities"
+	string readonly local 100721
+	//const: CHR6320X_ATTR_GROUP_CAPABILITIES
+"A string that contains a comma-separated list of class-extention groups that this driver implements.
+    
+
+"
+attribute: "Number of Channels"
+	"Inherent IVI Properties:Driver Capabilities:Number of Channels"
+	iL readonly local 10065B
+	//const: CHR6320X_ATTR_CHANNEL_COUNT
+"Indicates the number of channels that the specific instrument driver supports.  
+    For each property for which the IVI_VAL_MULTI_CHANNEL (1024)  flag property is set, the IVI engine maintains a separate cache value for each channel.
+    
+
+"
+attribute: "Manufacturer"
+	"Inherent IVI Properties:Instrument Identification:Manufacturer"
+	string readonly local 10078F
+	//const: CHR6320X_ATTR_INSTRUMENT_MANUFACTURER
+"A string that contains the name of the instrument manufacturer you are currently using.
+    
+
+"
+attribute: "Model"
+	"Inherent IVI Properties:Instrument Identification:Model"
+	string readonly local 100790
+	//const: CHR6320X_ATTR_INSTRUMENT_MODEL
+"A string that contains the model number or name of the instrument that you are currently using.
+    
+
+"
+attribute: "Firmware Revision"
+	"Inherent IVI Properties:Instrument Identification:Firmware Revision"
+	string readonly local 10078E
+	//const: CHR6320X_ATTR_INSTRUMENT_FIRMWARE_REVISION
+"A string that contains the firmware revision information for the instrument you are currently using.
+    
+
+"
+attribute: "Logical Name"
+	"Inherent IVI Properties:Advanced Session Information:Logical Name"
+	string readonly local 1006C1
+	//const: CHR6320X_ATTR_LOGICAL_NAME
+"A string containing the logical name you specified when opening the current IVI session.
+     You may pass a logical name to the chr6320x Initialize.vi or chr6320x Initialize With Options.vi VIs.  The IVI Configuration utility must contain an entry for the logical name.  The logical name entry refers to a virtual instrument section in the IVI Configuration file.  The virtual instrument section specifies a physical device and initial user options.
+    
+
+"
+attribute: "Resource Descriptor"
+	"Inherent IVI Properties:Advanced Session Information:Resource Descriptor"
+	string readonly local 1006C0
+	//const: CHR6320X_ATTR_IO_RESOURCE_DESCRIPTOR
+"Indicates the resource descriptor the driver uses to identify the physical device.
+    If you initialize the driver with a logical name, this property contains the resource descriptor that corresponds to the entry in the IVI Configuration utility.  
+    If you initialize the instrument driver with the resource descriptor, this property contains that value.
+    
+
+"
+attribute: "Address GPIB"
+	"SYSTem:Address GPIB"
+	iL readwrite local 118C32
+	//const: CHR6320X_ATTR_ADDRESS_GPIB
+"This property sets the GPIB address and close the whole sessions.
+ 
+Valid Values: 1,2,...,30
+
+"
+attribute: "Address RS485"
+	"SYSTem:Address RS485"
+	iL readwrite local 118C33
+	//const: CHR6320X_ATTR_ADDRESS_RS485
+"This property specifies the RS485 address.
+
+Valid Values: 0,1,2,...,5
+
+"
+attribute: "Serial Baud"
+	"SYSTem:Serial Baud"
+	iL enum { CHR6320X_VAL_BAUD_4800=0, CHR6320X_VAL_BAUD_9600=1, CHR6320X_VAL_BAUD_19200=2, CHR6320X_VAL_BAUD_38400=3, CHR6320X_VAL_BAUD_57600=4, CHR6320X_VAL_BAUD_115200=5 } readwrite local 118C34
+	//const: CHR6320X_ATTR_SERIAL_BAUD
+"This property sets the RS232 baud rate (bps).
+
+Valid Values: 
+    CHR6320X_VAL_BAUD_4800 (0) :     4800
+    CHR6320X_VAL_BAUD_9600 (1) :     9600
+    CHR6320X_VAL_BAUD_19200 (2) :   19200
+    CHR6320X_VAL_BAUD_38400 (3) :   38400
+    CHR6320X_VAL_BAUD_57600 (4) :   57600
+    CHR6320X_VAL_BAUD_115200 (5) : 115200 
+
+CHR6320X_VAL_BAUD_4800 (0)
+baud rate: 4800
+
+CHR6320X_VAL_BAUD_9600 (1)
+baud rate: 9600
+
+CHR6320X_VAL_BAUD_19200 (2)
+baud rate:19200
+
+CHR6320X_VAL_BAUD_38400 (3)
+baud rate: 38400
+
+CHR6320X_VAL_BAUD_57600 (4)
+baud rate: 57600
+
+CHR6320X_VAL_BAUD_115200 (5)
+baud rate: 115200
+
+"
+attribute: "Serial Bits"
+	"SYSTem:Serial Bits"
+	iL enum { CHR6320X_VAL_SERIAL_BITS_8=0, CHR6320X_VAL_SERIAL_BITS_7=1 } readwrite local 118C35
+	//const: CHR6320X_ATTR_SERIAL_BITS
+"This property sets the bit length of serial communication.
+
+Valid Values:
+    CHR6320X_VAL_ADDRESS_BITS_8: 8bits
+    CHR6320X_VAL_ADDRESS_BITS_7: 7bits
+
+CHR6320X_VAL_SERIAL_BITS_8 (0)
+Bit length: 8
+
+CHR6320X_VAL_SERIAL_BITS_7 (1)
+Bit length: 7
+
+"
+attribute: "Serial Parity"
+	"SYSTem:Serial Parity"
+	iL enum { CHR6320X_VAL_SERIAL_PARITY_NONE=0, CHR6320X_VAL_SERIAL_PARITY_EVEN=1, CHR6320X_VAL_SERIAL_PARITY_ODD=2 } readwrite local 118C36
+	//const: CHR6320X_ATTR_SERIAL_PARITY
+"This property sets the parity of serial communication.
+
+Valid Values:
+    CHR6320X_VAL_SERIAL_PARITY_NONE (0) : none
+    CHR6320X_VAL_SERIAL_PARITY_EVEN (1) : even
+    CHR6320X_VAL_SERIAL_PARITY_ODD (2) :   odd
+
+CHR6320X_VAL_SERIAL_PARITY_NONE (0)
+none
+
+CHR6320X_VAL_SERIAL_PARITY_EVEN (1)
+even
+
+CHR6320X_VAL_SERIAL_PARITY_ODD (2)
+odd
+
+"
+attribute: "Serial Stop bits"
+	"SYSTem:Serial Stop bits"
+	iL enum { CHR6320X_VAL_SERIAL_STOP_BITS_2=0, CHR6320X_VAL_SERIAL_STOP_BITS_1=1 } readwrite local 118C37
+	//const: CHR6320X_ATTR_SERIAL_STOP_BITS
+"This property sets the number of the stop bits.
+
+Valid Values:
+    CHR6320X_VAL_SERIAL_STOP_BITS_2 (0) : 2bits
+    CHR6320X_VAL_SERIAL_STOP_BITS_1 (1) : 1bits
+
+CHR6320X_VAL_SERIAL_STOP_BITS_2 (0)
+2 stop bits
+
+CHR6320X_VAL_SERIAL_STOP_BITS_1 (1)
+1 stop bit
+
+"
+attribute: "Parallel Mode"
+	"SYSTem:Parallel Mode"
+	iL enum { CHR6320X_VAL_PARALLEL_MODE_NONE=0, CHR6320X_VAL_PARALLEL_MODE_MASTER=1, CHR6320X_VAL_PARALLEL_MODE_SLAVE=2, CHR6320X_VAL_PARALLEL_MODE_MSTSYNC=3 } readwrite local 118C38
+	//const: CHR6320X_ATTR_PARALLEL_MODE
+"This property sets the parallel mode.
+
+Valid Values:
+    CHR6320X_VAL_PARALLEL_MODE_NONE (0) :        none
+    CHR6320X_VAL_PARALLEL_MODE_MASTER (1) :   master
+    CHR6320X_VAL_PARALLEL_MODE_SLAVE (2) :       slave
+    CHR6320X_VAL_PARALLEL_MODE_MSTSYNC (3) : master sync
+
+CHR6320X_VAL_PARALLEL_MODE_NONE (0)
+Parallel mode: none
+
+CHR6320X_VAL_PARALLEL_MODE_MASTER (1)
+Paralllel mode: master
+
+CHR6320X_VAL_PARALLEL_MODE_SLAVE (2)
+Parallel mode: slave
+
+CHR6320X_VAL_PARALLEL_MODE_MSTSYNC (3)
+Parallel mode: master sync
+
+"
+attribute: "Parallel Display"
+	"SYSTem:Parallel Display"
+	iL enum { CHR6320X_VAL_PARALLEL_DISPLAY_SOLE=0, CHR6320X_VAL_PARALLEL_DISPLAY_SUM=1 } readwrite local 118C39
+	//const: CHR6320X_ATTR_PARALLEL_DISPLAY
+"This property sets the display type in parallel-master mode.
+
+Valid Values:
+    CHR6320X_VAL_PARALLEL_DISPLAY_SOLE (0) : sole
+    CHR6320X_VAL_PARALLEL_DISPLAY_SUM (1) :   sum
+
+CHR6320X_VAL_PARALLEL_DISPLAY_SOLE (0)
+display only itself's measurements
+
+CHR6320X_VAL_PARALLEL_DISPLAY_SUM (1)
+Display the sum of the total measurements
+
+"
+attribute: "Slave Number"
+	"SYSTem:Slave Number"
+	iL readwrite local 118C3A
+	//const: CHR6320X_ATTR_SLAVE_NUMBER
+"This property specifies the slave number.
+
+Valid Range: 1 ~ 5
+
+"
+attribute: "Slave Model"
+	"SYSTem:Slave Model"
+	iL enum { CHR6320X_VAL_SLAVE_MODEL_NONE=0, CHR6320X_VAL_SLAVE_MODEL_63201=1, CHR6320X_VAL_SLAVE_MODEL_63202=2, CHR6320X_VAL_SLAVE_MODEL_63203=3, CHR6320X_VAL_SLAVE_MODEL_63204=4, CHR6320X_VAL_SLAVE_MODEL_63206=5, CHR6320X_VAL_SLAVE_MODEL_63208=6, CHR6320X_VAL_SLAVE_MODEL_63205=7, CHR6320X_VAL_SLAVE_MODEL_63207=8, CHR6320X_VAL_SLAVE_MODEL_63209=9, CHR6320X_VAL_SLAVE_MODEL_63210=10 } readwrite local 118C3B
+	//const: CHR6320X_ATTR_SLAVE_MODEL
+"This property specifies the slave model of the slave number.
+
+Valid Values:
+CHR6320X_VAL_SLAVE_MODEL_NONE (0) 
+CHR6320X_VAL_SLAVE_MODEL_63201 (1) 
+CHR6320X_VAL_SLAVE_MODEL_63202 (2) 
+CHR6320X_VAL_SLAVE_MODEL_63203 (3) 
+CHR6320X_VAL_SLAVE_MODEL_63204 (4) 
+CHR6320X_VAL_SLAVE_MODEL_63205 (7) 
+CHR6320X_VAL_SLAVE_MODEL_63206 (5) 
+CHR6320X_VAL_SLAVE_MODEL_63207 (8) 
+CHR6320X_VAL_SLAVE_MODEL_63208 (6) 
+CHR6320X_VAL_SLAVE_MODEL_63209 (9) 
+CHR6320X_VAL_SLAVE_MODEL_63210 (10) 
+
+CHR6320X_VAL_SLAVE_MODEL_NONE (0)
+none
+
+CHR6320X_VAL_SLAVE_MODEL_63201 (1)
+model : 63201
+
+CHR6320X_VAL_SLAVE_MODEL_63202 (2)
+model: 63202
+
+CHR6320X_VAL_SLAVE_MODEL_63203 (3)
+model: 63203
+
+CHR6320X_VAL_SLAVE_MODEL_63204 (4)
+model: 63204
+
+CHR6320X_VAL_SLAVE_MODEL_63206 (5)
+model: 63206
+
+CHR6320X_VAL_SLAVE_MODEL_63208 (6)
+model: 63208
+
+CHR6320X_VAL_SLAVE_MODEL_63205 (7)
+model: 63205
+
+CHR6320X_VAL_SLAVE_MODEL_63207 (8)
+model: 63207
+
+CHR6320X_VAL_SLAVE_MODEL_63209 (9)
+model: 63209
+
+CHR6320X_VAL_SLAVE_MODEL_63210 (10)
+model: 63210
+
+"
+attribute: "CC CP Voltage Range"
+	"CONFigure:CC CP Voltage Range"
+	iL enum { CHR6320X_VAL_LOW=0, CHR6320X_VAL_HIGH=1 } readwrite local 118C3C
+	//const: CHR6320X_ATTR_CC_CP_VOLTAGE_RANGE
+"This property specifies the voltage range in CC and CP mode.
+
+Valid Values:
+    CHR6320X_VAL_LOW (0) :  low range
+    CHR6320X_VAL_HIGH (1) : high range
+
+CHR6320X_VAL_LOW (0)
+low
+
+CHR6320X_VAL_HIGH (1)
+high
+
+"
+attribute: "Von Point"
+	"CONFigure:Von Point"
+	fD readwrite local 118C3D
+	//const: CHR6320X_ATTR_VON_POINT
+"This property specifies the voltage level the DC load starts to sink. The units are Volts.
+
+Valid Range:
+When CC CP Voltage Range is low:
+    Model     |   votage range
+--------------------------------
+    M63201  |   0.0 - 16.0
+    M63202  |   0.0 - 125.0
+    M63203  |   0.0 - 16.0
+    M63204  |   0.0 - 125.0
+    M63205  |   0.0 - 16.0 
+    M63206  |   0.0 - 16.0
+    M63207  |   0.0 - 16.0
+    M63208  |   0.0 - 16.0 
+    M63209  |   0.0 - 16.0
+    M63210  |   0.0 - 125.0
+
+When CC CP Voltage Range is high:
+    Model     |   votage range
+--------------------------------
+    M63201  |   0.0 - 80.0
+    M63202  |   0.0 - 500.0
+    M63203  |   0.0 - 80.0
+    M63204  |   0.0 - 500.0
+    M63205  |   0.0 - 80.0 
+    M63206  |   0.0 - 80.0
+    M63207  |   0.0 - 80.0
+    M63208  |   0.0 - 80.0 
+    M63209  |   0.0 - 80.0
+    M63210  |   0.0 - 500.0
+
+"
+attribute: "Von Latch"
+	"CONFigure:Von Latch"
+	bool readwrite local 118C3E
+	//const: CHR6320X_ATTR_VON_LATCH
+"Enable/disable the voltage latch as voltage level has been reached.
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+
+"
+attribute: "CV Current Limit"
+	"CONFigure:CV Current Limit"
+	fD readwrite local 118C3F
+	//const: CHR6320X_ATTR_CV_CURRENT_LIMIT
+"This property specifies the current limit in CV mode.
+
+Valid Range:
+    Model     |   current range
+--------------------------------
+    M63201  |   0.0 - 300.0
+    M63202  |   0.0 - 50.0
+    M63203  |   0.0 - 600.0
+    M63204  |   0.0 - 100.0
+    M63205  |   0.0 - 180.0
+    M63206  |   0.0 - 600.0
+    M63207  |   0.0 - 300.0
+    M63208  |   0.0 - 600.0
+    M63209  |   0.0 - 1000.0
+    M63210  |   0.0 - 150.0
+
+"
+attribute: "Voltage Polarity"
+	"CONFigure:Voltage Polarity"
+	iL enum { CHR6320X_VAL_VOLTAGE_POLARITY_MINUS=0, CHR6320X_VAL_VOLTAGE_POLARITY_PLUS=1 } readwrite local 118C40
+	//const: CHR6320X_ATTR_VOLTAGE_POLARITY
+"This property sets the polarity of the measurement voltage.
+
+Valid Values:
+    CHR6320X_VAL_VOLTAGE_POLARITY_MINUS (0) : minus
+    CHR6320X_VAL_VOLTAGE_POLARITY_PLUS (1) :    plus
+
+CHR6320X_VAL_VOLTAGE_POLARITY_MINUS (0)
+minus
+
+CHR6320X_VAL_VOLTAGE_POLARITY_PLUS (1)
+plus
+
+"
+attribute: "Power Ohm"
+	"CONFigure:Power Ohm"
+	iL enum { CHR6320X_VAL_OHM=0, CHR6320X_VAL_POWER=1 } readwrite local 118C41
+	//const: CHR6320X_ATTR_POWER_OHM
+"This property specifies the instriment to display measurement with power or ohm.
+
+Valid Values:
+    CHR6320X_VAL_POWER (1) : power
+    CHR6320X_VAL_OHM (0) :   ohm
+
+CHR6320X_VAL_OHM (0)
+ohm
+
+CHR6320X_VAL_POWER (1)
+power
+
+"
+attribute: "Enter Next"
+	"CONFigure:Enter Next"
+	bool readwrite local 118C42
+	//const: CHR6320X_ATTR_ENTER_NEXT
+"Enable/disable the enter-next function.
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+
+"
+attribute: "Sound"
+	"CONFigure:Sound"
+	bool readwrite local 118C43
+	//const: CHR6320X_ATTR_SOUND
+"Enable/disable the sound.
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+
+"
+attribute: "Auto Load"
+	"CONFigure:Auto Load"
+	bool readwrite local 118C44
+	//const: CHR6320X_ATTR_AUTO_LOAD
+"Enable/disable auto loading.
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+
+"
+attribute: "Auto Mode"
+	"CONFigure:Auto Mode"
+	iL enum { CHR6320X_VAL_AUTO_MODE_PROGRAM=0, CHR6320X_VAL_AUTO_MODE_LOAD=1 } readwrite local 118C45
+	//const: CHR6320X_ATTR_AUTO_MODE
+"This property specifies the auto-load mode.
+
+Valid Values
+    CHR6320X_VAL_AUTO_MODE_PROGRAM (0) : program
+    CHR6320X_VAL_AUTO_MODE_LOAD (1) :          load
+
+CHR6320X_VAL_AUTO_MODE_PROGRAM (0)
+program
+
+CHR6320X_VAL_AUTO_MODE_LOAD (1)
+load
+
+"
+attribute: "Short Key"
+	"CONFigure:Short Key"
+	iL enum { CHR6320X_VAL_SHORT_KEY_HOLD=0, CHR6320X_VAL_SHORT_KEY_TOGGLE=1 } readwrite local 118C46
+	//const: CHR6320X_ATTR_SHORT_KEY
+"This property specifies the short key mode.
+
+Valid Values:
+    CHR6320X_VAL_SHORT_KEY_HOLD (0) :      hold mode
+    CHR6320X_VAL_SHORT_KEY_TOGGLE (1) : toggle mode
+
+CHR6320X_VAL_SHORT_KEY_HOLD (0)
+hold
+
+CHR6320X_VAL_SHORT_KEY_TOGGLE (1)
+toggle
+
+"
+attribute: "Save File"
+	"Save or Recall File:Save File"
+	iL writeonly local 118C47
+	//const: CHR6320X_ATTR_SAVE_FILE
+"This property specifies the file number to be saved.
+
+Valid Values: 1 - 100
+
+"
+attribute: "Recall File"
+	"Save or Recall File:Recall File"
+	iL writeonly local 118C48
+	//const: CHR6320X_ATTR_RECALL_FILE
+"This property specifies the file number to be recalled.
+
+Valid Values: 1 - 100
+
+"
+attribute: "Mode"
+	"MODE OPERation:Mode"
+	iL enum { CHR6320X_VAL_MODE_CCL=0, CHR6320X_VAL_MODE_CCH=1, CHR6320X_VAL_MODE_CCDL=2, CHR6320X_VAL_MODE_CCDH=3, CHR6320X_VAL_MODE_CRL=4, CHR6320X_VAL_MODE_CRH=5, CHR6320X_VAL_MODE_CVL=6, CHR6320X_VAL_MODE_CVH=7, CHR6320X_VAL_MODE_CPL=8, CHR6320X_VAL_MODE_CPH=9, CHR6320X_VAL_MODE_CCEL=10, CHR6320X_VAL_MODE_CCEH=11 } readwrite local 118C49
+	//const: CHR6320X_ATTR_MODE
+"This property specifies the operating mode.
+
+Valid Values:
+    CHR6320X_VAL_MODE_CCL (0) 
+    CHR6320X_VAL_MODE_CCH (1) 
+    CHR6320X_VAL_MODE_CCDL (2) 
+    CHR6320X_VAL_MODE_CCDH (3) 
+    CHR6320X_VAL_MODE_CRL (4) 
+    CHR6320X_VAL_MODE_CRH (5) 
+    CHR6320X_VAL_MODE_CVL (6) 
+    CHR6320X_VAL_MODE_CVH (7) 
+    CHR6320X_VAL_MODE_CPL (8) 
+    CHR6320X_VAL_MODE_CPH (9) 
+    CHR6320X_VAL_MODE_CCEL (10) 
+    CHR6320X_VAL_MODE_CCEH
+
+CHR6320X_VAL_MODE_CCL (0)
+CCL
+
+CHR6320X_VAL_MODE_CCH (1)
+CCH
+
+CHR6320X_VAL_MODE_CCDL (2)
+CCDL
+
+CHR6320X_VAL_MODE_CCDH (3)
+CCDH
+
+CHR6320X_VAL_MODE_CRL (4)
+CRL
+
+CHR6320X_VAL_MODE_CRH (5)
+CRH
+
+CHR6320X_VAL_MODE_CVL (6)
+CVL
+
+CHR6320X_VAL_MODE_CVH (7)
+CVH
+
+CHR6320X_VAL_MODE_CPL (8)
+CPL
+
+CHR6320X_VAL_MODE_CPH (9)
+CPH
+
+CHR6320X_VAL_MODE_CCEL (10)
+CCEL
+
+CHR6320X_VAL_MODE_CCEH (11)
+CCEH
+
+"
+attribute: "Ab"
+	"MODE OPERation:Ab"
+	iL enum { CHR6320X_VAL_AB_A=1, CHR6320X_VAL_AB_B=0 } writeonly local 118C4A
+	//const: CHR6320X_ATTR_AB
+"This property specifies the loading level A (L1) or B (L2) in CC, CR, CV, CP and CCE mode.
+
+Valid Values:
+    CHR6320X_VAL_AB_A (1) 
+    CHR6320X_VAL_AB_B
+
+CHR6320X_VAL_AB_A (1)
+Level A (L1)
+
+CHR6320X_VAL_AB_B (0)
+Level B (L2)
+
+"
+attribute: "L1"
+	"MODE OPERation:L1"
+	fD readwrite local 118C4B
+	//const: CHR6320X_ATTR_L1
+"This property specifies the loading level L1. It's unit is Amphere in CC and CCD mode, ohm in CR mode, voltage in CV mode, and power in CP mode.
+
+"
+attribute: "L2"
+	"MODE OPERation:L2"
+	fD readwrite local 118C4C
+	//const: CHR6320X_ATTR_L2
+"This property specifies the loading level L2. It's unit is Amphere in CC and CCD mode, ohm in CR mode, voltage in CV mode, and power in CP mode.
+
+"
+attribute: "T1"
+	"MODE OPERation:T1"
+	fD readwrite local 118C4D
+	//const: CHR6320X_ATTR_T1
+"This property specifies the duty corrosponding to level L1 in dynamic mode. It's unit is second.
+    Valid range: 0.000025 ~ 30.0
+    Note: The precision value is 6 that the number of digits after the decimal point.
+
+"
+attribute: "T2"
+	"MODE OPERation:T2"
+	fD readwrite local 118C4E
+	//const: CHR6320X_ATTR_T2
+"This property specifies the duty corrosponding to level L2 in dynamic mode. It's unit is second.
+    Valid range: 0.000025 ~ 30.0
+    Note: The precision value is 6 that the number of digits after the decimal point.
+
+"
+attribute: "Rise"
+	"MODE OPERation:Rise"
+	fD readwrite local 118C4F
+	//const: CHR6320X_ATTR_RISE
+"This property specifies the rising slew rate. It's unit is A/uS.
+
+"
+attribute: "Fall"
+	"MODE OPERation:Fall"
+	fD readwrite local 118C50
+	//const: CHR6320X_ATTR_FALL
+"This property specifies the falling slew rate. It's unit is A/uS.
+
+"
+attribute: "CV Response"
+	"MODE OPERation:CV Response"
+	iL enum { CHR6320X_VAL_CV_RESPONSE_SLOW=0, CHR6320X_VAL_CV_RESPONSE_FAST=1 } readwrite local 118C51
+	//const: CHR6320X_ATTR_CV_RESPONSE
+"This property sepecifies the response speed in CV mode.
+
+CHR6320X_VAL_CV_RESPONSE_SLOW (0)
+slow
+
+CHR6320X_VAL_CV_RESPONSE_FAST (1)
+fast
+
+"
+attribute: "Hold"
+	"HOLD OPERation:Hold"
+	bool writeonly local 118C52
+	//const: CHR6320X_ATTR_HOLD
+"Enable/disable hold.
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+
+"
+attribute: "Hold L1"
+	"HOLD OPERation:Hold L1"
+	fD readwrite local 118C53
+	//const: CHR6320X_ATTR_HOLD_L1
+"This property specifies the holding level L1. It's unit is Amphere in CC and CCD mode, ohm in CR mode, voltage in CV mode, and power in CP mode.
+
+"
+attribute: "Hold L2"
+	"HOLD OPERation:Hold L2"
+	fD readwrite local 118C54
+	//const: CHR6320X_ATTR_HOLD_L2
+"This property specifies the loading level L2. It's unit is Amphere in CCD mode.
+
+"
+attribute: "Load"
+	"LOADing:Load"
+	bool readwrite local 118C55
+	//const: CHR6320X_ATTR_LOAD
+"Enable/disable loading.
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+
+"
+attribute: "Short"
+	"LOADing:Short"
+	bool readwrite local 118C56
+	//const: CHR6320X_ATTR_SHORT
+"Enable/disable short function.
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+
+"
+attribute: "Run Program"
+	"PROGram:Run Program"
+	bool readwrite local 118C57
+	//const: CHR6320X_ATTR_RUN_PROGRAM
+"Enable/disable running the program files.
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+
+"
+attribute: "Program File"
+	"PROGram:Program File"
+	iL readwrite local 118C58
+	//const: CHR6320X_ATTR_PROGRAM_FILE
+"This property specifies the number of the program file to be edited.
+
+    Valid Values: 1,2,...,10
+
+"
+attribute: "Program Chain"
+	"PROGram:Program Chain"
+	iL readwrite local 118C59
+	//const: CHR6320X_ATTR_PROGRAM_CHAIN
+"This property specifies the number of program file to be run afer the running file.
+
+    Valid Values: 0,1,2,...,10
+    Note: 0 for none.
+
+"
+attribute: "Program Key"
+	"PROGram:Program Key"
+	iL enum { CHR6320X_VAL_KEY_1=0, CHR6320X_VAL_KEY_2=1, CHR6320X_VAL_KEY_3=2, CHR6320X_VAL_KEY_4=3, CHR6320X_VAL_KEY_5=4, CHR6320X_VAL_KEY_6=5, CHR6320X_VAL_KEY_7=6, CHR6320X_VAL_KEY_8=7, CHR6320X_VAL_KEY_9=8, CHR6320X_VAL_KEY_10=9, CHR6320X_VAL_KEY_UP=10, CHR6320X_VAL_KEY_DOWN=11 } writeonly local 118C5A
+	//const: CHR6320X_ATTR_PROGRAM_KEY
+"This property specifies the next number of the running sequence when the sequence mode is manual.
+
+    CHR6320X_VAL_KEY_1 (0) 
+    CHR6320X_VAL_KEY_2 (1) 
+    CHR6320X_VAL_KEY_3 (2) 
+    CHR6320X_VAL_KEY_4 (3) 
+    CHR6320X_VAL_KEY_5 (4) 
+    CHR6320X_VAL_KEY_6 (5) 
+    CHR6320X_VAL_KEY_7 (6) 
+    CHR6320X_VAL_KEY_8 (7) 
+    CHR6320X_VAL_KEY_9 (8) 
+    CHR6320X_VAL_KEY_10 (9) 
+    CHR6320X_VAL_KEY_UP (10) 
+    CHR6320X_VAL_KEY_DOWN
+
+CHR6320X_VAL_KEY_1 (0)
+Sequence: 1
+
+CHR6320X_VAL_KEY_2 (1)
+Sequence: 2
+
+CHR6320X_VAL_KEY_3 (2)
+Sequence: 3
+
+CHR6320X_VAL_KEY_4 (3)
+Sequence: 4
+
+CHR6320X_VAL_KEY_5 (4)
+Sequence: 5
+
+CHR6320X_VAL_KEY_6 (5)
+Sequence: 6
+
+CHR6320X_VAL_KEY_7 (6)
+Sequence: 7
+
+CHR6320X_VAL_KEY_8 (7)
+Sequence: 8
+
+CHR6320X_VAL_KEY_9 (8)
+Sequence: 9
+
+CHR6320X_VAL_KEY_10 (9)
+Sequence: 10
+
+CHR6320X_VAL_KEY_UP (10)
+Sequence: Up
+
+CHR6320X_VAL_KEY_DOWN (11)
+Sequence: Down
+
+"
+attribute: "Seqence File"
+	"PROGram:Seqence File"
+	iL readwrite local 118C5B
+	//const: CHR6320X_ATTR_SEQUENCE_FILE
+"This property specifies the number of the sequence to be edited.
+
+    Valid Values: 1,2,...10
+
+"
+attribute: "Sequence Mode"
+	"PROGram:Sequence Mode"
+	iL enum { CHR6320X_VAL_SEQUENCE_SKIP=0, CHR6320X_VAL_SEQUENCE_AUTO=1, CHR6320X_VAL_SEQUENCE_MANUAL=2 } readwrite local 118C5C
+	//const: CHR6320X_ATTR_SEQUENCE_MODE
+"This property specifies the sequence mode.
+
+Valid Values:
+    CHR6320X_VAL_SEQUENCE_SKIP (0) 
+    CHR6320X_VAL_SEQUENCE_AUTO (1) 
+    CHR6320X_VAL_SEQUENCE_MANUAL
+
+CHR6320X_VAL_SEQUENCE_SKIP (0)
+skip
+
+CHR6320X_VAL_SEQUENCE_AUTO (1)
+auto
+
+CHR6320X_VAL_SEQUENCE_MANUAL (2)
+manual
+
+"
+attribute: "Sequence On Time"
+	"PROGram:Sequence On Time"
+	fD readwrite local 118C5D
+	//const: CHR6320X_ATTR_SEQUENCE_ON_TIME
+"This property specifies the load-on time in the sequence.
+
+    Valid Range: 0.0 ~ 30.0
+    Note: The precision value is 1 that the number of digits after the decimal point.
+
+"
+attribute: "Sequence Off Time"
+	"PROGram:Sequence Off Time"
+	fD readwrite local 118C5E
+	//const: CHR6320X_ATTR_SEQUENCE_OFF_TIME
+"This property specifies the load-off time of the sequence.
+
+    Valid Range: 0.0 ~ 30.0
+    Note: The precision value is 1 that the number of digits after the decimal point.   
+
+"
+attribute: "Sequence Short Delay"
+	"PROGram:Sequence Short Delay"
+	fD readwrite local 118C5F
+	//const: CHR6320X_ATTR_SEQUENCE_SHORT_DELAY
+"This property specifies the short-on delay time of the sequence.
+
+    Valid Range: 0.0 ~ 60.0
+    Note: The precision value is 1 that the number of digits after the decimal point.
+
+"
+attribute: "Sequence Short Time"
+	"PROGram:Sequence Short Time"
+	fD readwrite local 118C60
+	//const: CHR6320X_ATTR_SEQUENCE_SHORT_TIME
+"This property specifies the short-on time of the sequence.
+
+    Valid Range: 0.0 ~ 60.0
+    Note: The precision value is 1 that the number of digits after the decimal point.
+
+"
+attribute: "Sequence Pf Delay"
+	"PROGram:Sequence Pf Delay"
+	fD readwrite local 118C61
+	//const: CHR6320X_ATTR_SEQUENCE_PF_DELAY
+"This property specifies the pass/fail delay time of the sequence.
+
+    Valid Range: 0.0 ~ 60.0
+    Note: The precision value is 1 that the number of digits after the decimal point.
+
+"
+attribute: "Sequence Pf Time"
+	"PROGram:Sequence Pf Time"
+	fD readwrite local 118C62
+	//const: CHR6320X_ATTR_SEQUENCE_PF_TIME
+"This property specifies the pass/fail on time of the sequence.
+
+    Valid Range: 0.0 ~ 60.0
+    Note: The precision value is 1 that the number of digits after the decimal point.
+
+"
+attribute: "Spec Test"
+	"SPECification:Spec Test"
+	bool readwrite local 118C63
+	//const: CHR6320X_ATTR_SPEC_TEST
+"Enable/disable specification testing.
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+
+"
+attribute: "Spec Result"
+	"SPECification:Spec Result"
+	bool readonly local 118C64
+	//const: CHR6320X_ATTR_SPEC_RESULT
+"This property returns the test result.
+
+VI_TRUE (1)
+True
+
+VI_FALSE (0)
+False
+
+"
+attribute: "Spec Unit"
+	"SPECification:Spec Unit"
+	iL enum { CHR6320X_VAL_SPEC_UNIT_PERCENT=0, CHR6320X_VAL_SPEC_UNIT_VALUE=1 } readwrite local 118C65
+	//const: CHR6320X_ATTR_SPEC_UNIT
+"This property specifies the specification unit.
+
+Valid Values:
+    CHR6320X_VAL_SPEC_UNIT_PERCENT (0) 
+    CHR6320X_VAL_SPEC_UNIT_VALUE
+
+CHR6320X_VAL_SPEC_UNIT_PERCENT (0)
+%
+
+CHR6320X_VAL_SPEC_UNIT_VALUE (1)
+value
+
+"
+attribute: "Spec High"
+	"SPECification:Spec High"
+	fD readwrite local 118C66
+	//const: CHR6320X_ATTR_SPEC_HIGH
+"This property specifies the specification upper limit.
+
+    Note: If the unit is percentage, the precision value is 1 that the number of digits after the decimal point. Otherwise, the precision value is 3.
+
+"
+attribute: "Spec Low"
+	"SPECification:Spec Low"
+	fD readwrite local 118C67
+	//const: CHR6320X_ATTR_SPEC_LOW
+"This property specifies the specification low limit.
+
+    Note: If the unit is percentage, the precision value is 1 that the number of digits after the decimal point. Otherwise, the precision value is 3.
+
+"
+attribute: "Spec Center"
+	"SPECification:Spec Center"
+	fD readwrite local 118C68
+	//const: CHR6320X_ATTR_SPEC_CENTER
+"This property specifies the middle value of the specification.
+
+    Note: The precision value is 3 that the number of digits after the decimal point.
+
+"
+attribute: "Set Measure Input"
+	"MEASure & FEAch:Set Measure Input"
+	iL enum { CHR6320X_VAL_MEASURE_LOAD=0, CHR6320X_VAL_MEASURE_UUT=1 } writeonly local 118C69
+	//const: CHR6320X_ATTR_SET_MEASURE_INPUT
+"This property specifies the measure input from LOAD or UUT.
+
+Valid Values:
+    CHR6320X_VAL_MEASURE_LOAD (0) 
+    CHR6320X_VAL_MEASURE_UUT
+
+CHR6320X_VAL_MEASURE_LOAD (0)
+load
+
+CHR6320X_VAL_MEASURE_UUT (1)
+load
+
+"
+attribute: "Measure Voltage"
+	"MEASure & FEAch:Measure Voltage"
+	fD readonly local 118C6A
+	//const: CHR6320X_ATTR_MEASURE_VOLTAGE
+"This property is to get the instant voltage from the instriment.
+
+"
+attribute: "Measure Current"
+	"MEASure & FEAch:Measure Current"
+	fD readonly local 118C6B
+	//const: CHR6320X_ATTR_MEASURE_CURRENT
+"This property is to get the instant current from the instriment.
+
+"
+attribute: "Measure Resistance"
+	"MEASure & FEAch:Measure Resistance"
+	fD readonly local 118C71
+	//const: CHR6320X_ATTR_MEASURE_RESISTANCE
+"This property is to get the instant resistance from the instriment.
+
+"
+attribute: "Measure Power"
+	"MEASure & FEAch:Measure Power"
+	fD readonly local 118C73
+	//const: CHR6320X_ATTR_MEASURE_POWER
+"This property is to get the instant power from the instriment.
+
+"
+attribute: "Measure Status"
+	"MEASure & FEAch:Measure Status"
+	iL readonly local 118C6C
+	//const: CHR6320X_ATTR_MEASURE_STATUS
+"This property is to get the instant status from the instriment.
+
+    bit0:  OCP
+    bit1:  OVP
+    bit2:  OPP
+    bit3:  REV
+    bit4:  OTP
+    bit5:  Load On/Off
+    bit6:  Short On/Off
+    bit7:  Spec Pass/Fail
+    bit8:  Spec On/Off
+    bit9:  reserved
+    bit10: reserved
+    bit11: reserved
+    bit12: Fan Fail/Pass
+    bit13: UUT/Load
+    bit14: Program Run 
+    bit15: reserved
+
+"
+attribute: "Fetch Voltage"
+	"MEASure & FEAch:Fetch Voltage"
+	fD readonly local 118C6D
+	//const: CHR6320X_ATTR_FETCH_VOLTAGE
+"This property is to get the average voltage from the instriment's buffer.
+
+"
+attribute: "Fetch Current"
+	"MEASure & FEAch:Fetch Current"
+	fD readonly local 118C6E
+	//const: CHR6320X_ATTR_FETCH_CURRENT
+"This property is to get the average current form the instriment's buffer.
+
+"
+attribute: "Fetch Resistance"
+	"MEASure & FEAch:Fetch Resistance"
+	fD readonly local 118C72
+	//const: CHR6320X_ATTR_FETCH_RESISTANCE
+"This property is to get the average resistance form the instriment's buffer.
+
+"
+attribute: "Fetch Power"
+	"MEASure & FEAch:Fetch Power"
+	fD readonly local 118C74
+	//const: CHR6320X_ATTR_FETCH_POWER
+"This property is to get the average power form the instriment's buffer.
+
+"
+attribute: "Fetch Status"
+	"MEASure & FEAch:Fetch Status"
+	iL readonly local 118C6F
+	//const: CHR6320X_ATTR_FETCH_STATUS
+"This property is to get the status from the instriment's buffer.
+
+"
+attribute: "ID Query Response"
+	"Miscellaneous Properties:ID Query Response"
+	string readonly local 118C31
+	//const: CHR6320X_ATTR_ID_QUERY_RESPONSE
+"Returns the ID Query response string.  The instrument driver gets the value of this property when you pass TRUE for the ID Query parameter to the chr6320x Initialize.vi or chr6320x Initialize With Options.vi.
+    
+
+"
+attribute: "Model Index"
+	"Miscellaneous Properties:Hidden Properties (not user-viewable):Model Index"
+	iL readonly local 118C70
+	//const: CHR6320X_ATTR_MODEL_INDEX
+"This property specifies a number to represent the model.
+
+    number |   model
+-----------------------
+          0     |   M63201
+          1     |   M63202
+          2     |   M63203
+          3     |   M63204
+          4     |   M63206
+          5     |   M63208   
+          6     |   M63205
+          7     |   M63207
+          8     |   M63209
+          9     |   M63210
+
+"

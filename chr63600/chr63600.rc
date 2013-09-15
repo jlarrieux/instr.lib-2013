@@ -1,0 +1,1535 @@
+library: chr63600.dll
+
+class: "chr63600"
+implements: ivi, iviResourceMgr
+attribute: "Range Check"
+	"Inherent IVI Attributes:User Options:Range Check"
+	bool readwrite local 00100592
+"Specifies whether to validate property values and function parameters.  If enabled, the instrument driver validates the parameter values that you pass to driver functions.  Range checking parameters is very useful for debugging.  After you validate your program, you can set this property to FALSE to disable range checking and maximize performance.
+    The default value is TRUE.   Use the chr63600_InitWithOptions function to override this value.
+    
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+attribute: "Query Instrument Status"
+	"Inherent IVI Attributes:User Options:Query Instrument Status"
+	bool readwrite local 00100593
+"Specifies whether the instrument driver queries the instrument status after each operation.  Querying the instrument status is very useful for debugging.  After you validate your program, you can set this property to FALSE to disable status checking and maximize performance
+    The instrument driver can choose to ignore status checking for particular properties regardless of the setting of this property.
+    The default value is TRUE.   Use the chr63600_InitWithOptions function to override this value.
+    
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+attribute: "Cache"
+	"Inherent IVI Attributes:User Options:Cache"
+	bool readwrite local 00100594
+"Specifies whether to cache the value of properties.  When caching is enabled, the instrument driver keeps track of the current instrument settings and avoids sending redundant commands to the instrument.  Thus, you can significantly increase execution speed.
+    The instrument driver can choose always to cache or never to cache particular properties regardless of the setting of this property.
+    The default value is TRUE.   Use the chr63600_InitWithOptions function to override this value.
+    
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+attribute: "Simulate"
+	"Inherent IVI Attributes:User Options:Simulate"
+	bool readwrite local 00100595
+"Specifies whether or not to simulate instrument driver I/O operations.  If simulation is enabled, instrument driver functions perform range checking and call Ivi_GetAttribute and Ivi_SetAttribute functions, but they do not perform instrument I/O.  For output parameters that represent instrument data, the instrument driver functions return calculated values.
+    The default value is FALSE.   Use the chr63600_InitWithOptions function to override this value.
+    
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+attribute: "Record Value Coercions"
+	"Inherent IVI Attributes:User Options:Record Value Coercions"
+	bool readwrite local 00100596
+"Specifies whether the IVI engine keeps a list of the value coercions it makes for ViInt32 and ViReal64 properties.  You call chr63600_GetNextCoercionRecord to extract and delete the oldest coercion record from the list.
+    The default value is FALSE.   Use the chr63600_InitWithOptions function to override this value.
+    
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+attribute: "Description"
+	"Inherent IVI Attributes:Driver Identification:Description"
+	string readonly local 00100792
+"A string that contains a brief description of the specific driver
+    "
+attribute: "Driver Prefix"
+	"Inherent IVI Attributes:Driver Identification:Driver Prefix"
+	string readonly local 001006BE
+"A string that contains the prefix for the instrument driver.  The name of each user-callable function in this driver starts with this prefix.
+    "
+attribute: "Driver Vendor"
+	"Inherent IVI Attributes:Driver Identification:Driver Vendor"
+	string readonly local 00100791
+"A string that contains the name of the vendor that supplies this driver.
+    "
+attribute: "Major Version"
+	"Inherent IVI Attributes:Driver Identification:Major Version"
+	iL readonly local 00100787
+"The major version number of this instrument driver.
+    "
+attribute: "Minor Version"
+	"Inherent IVI Attributes:Driver Identification:Minor Version"
+	iL readonly local 00100788
+"The minor version number of this instrument driver.
+    "
+attribute: "Revision"
+	"Inherent IVI Attributes:Driver Identification:Revision"
+	string readonly local 001007B7
+"A string that contains additional version information about this instrument driver.
+    "
+attribute: "Class Specification Major Version"
+	"Inherent IVI Attributes:Driver Identification:Class Specification Major Version"
+	iL readonly local 00100793
+"The major version number of the class specification with which this driver is compliant.
+    "
+attribute: "Class Specification Minor Version"
+	"Inherent IVI Attributes:Driver Identification:Class Specification Minor Version"
+	iL readonly local 00100794
+"The minor version number of the class specification with which this driver is compliant.
+    "
+attribute: "Supported Instrument Models"
+	"Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models"
+	string readonly local 001006D7
+"Contains a model code of the instrument. For drivers that support more than one device, this property contains a comma-separated list of supported instrument models.
+    "
+attribute: "Class Group Capabilities"
+	"Inherent IVI Attributes:Driver Capabilities:Class Group Capabilities"
+	string readonly local 00100721
+"A string that contains a comma-separated list of class-extention groups that this driver implements.
+    "
+attribute: "Number of Channels"
+	"Inherent IVI Attributes:Driver Capabilities:Number of Channels"
+	iL readonly local 0010065B
+"Indicates the number of channels that the specific instrument driver supports.  
+    For each property for which the IVI_VAL_MULTI_CHANNEL flag property is set, the IVI engine maintains a separate cache value for each channel.
+    "
+attribute: "Manufacturer"
+	"Inherent IVI Attributes:Instrument Identification:Manufacturer"
+	string readonly local 0010078F
+"A string that contains the name of the instrument manufacturer you are currently using.
+    "
+attribute: "Model"
+	"Inherent IVI Attributes:Instrument Identification:Model"
+	string readonly local 00100790
+"A string that contains the model number or name of the instrument that you are currently using.
+    "
+attribute: "Firmware Revision"
+	"Inherent IVI Attributes:Instrument Identification:Firmware Revision"
+	string readonly local 0010078E
+"A string that contains the firmware revision information for the instrument you are currently using.
+    "
+attribute: "Primary Error"
+	"Inherent IVI Attributes:Error Info:Primary Error"
+	iL readwrite local 001005F5
+"A code that describes the first error that occurred since the last call to chr63600_GetErrorInfo on the session.  The value follows the VXIplug&play completion code conventions.  A negative value describes an error condition.  A positive value describes a warning condition and indicates that no error occurred.  A zero indicates that no error or warning occurred. The error and warning values can be status codes defined by IVI, VISA, class drivers, or specific drivers.
+    "
+attribute: "Secondary Error"
+	"Inherent IVI Attributes:Error Info:Secondary Error"
+	iL readwrite local 001005F6
+"An optional code that provides additional information concerning the primary error condition.  The error and warning values can be status codes defined by IVI, VISA, class drivers, or specific drivers.  Zero indicates no additional information.
+    "
+attribute: "Error Elaboration"
+	"Inherent IVI Attributes:Error Info:Error Elaboration"
+	string readwrite local 001005F7
+"An optional string that contains additional information concerning the primary error condition.
+    "
+attribute: "Logical Name"
+	"Inherent IVI Attributes:Advanced Session Information:Logical Name"
+	string readonly local 001006C1
+"A string containing the logical name you specified when opening the current IVI session.
+     You may pass a logical name to the chr63600_init or chr63600_InitWithOptions functions.  The IVI Configuration utility must contain an entry for the logical name.  The logical name entry refers to a virtual instrument section in the IVI Configuration file.  The virtual instrument section specifies a physical device and initial user options.
+    "
+attribute: "Resource Descriptor"
+	"Inherent IVI Attributes:Advanced Session Information:Resource Descriptor"
+	string readonly local 001006C0
+"Indicates the resource descriptor the driver uses to identify the physical device.
+    If you initialize the driver with a logical name, this property contains the resource descriptor that corresponds to the entry in the IVI Configuration utility.  
+    If you initialize the instrument driver with the resource descriptor, this property contains that value.
+    "
+attribute: "I/O Session Type"
+	"Inherent IVI Attributes:Advanced Session Information:I/O Session Type"
+	string readonly local 001006D4
+"Contains the type of the I/O session that this driver uses to communicate with the instrument.     "
+attribute: "CHR63600_ATTR_CHANNEL"
+	"Channel Attributes:CHR63600_ATTR_CHANNEL"
+	iL readwrite local 00118C36
+"Type: Channel-Specific
+
+Description: Select a channel of which the coming channel-specific command will be received and executed.
+
+Valid Range:
+Model 63600-1: 1-2
+Model 63600-2: 1-4
+Model 63600-5: 1-10
+
+Default Value: 1"
+attribute: "CHR63600_ATTR_CHANNEL_ACTIVE"
+	"Channel Attributes:CHR63600_ATTR_CHANNEL_ACTIVE"
+	bool readwrite local 00118C7D
+"Type: Channel-Specific
+
+Description: Enable or disable the load module.
+
+Valid Range: 
+TRUE  (1) - enable the load module
+FALSE (0) - disable the load module
+
+Default Value: TRUE
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+attribute: "CHR63600_ATTR_CHANNEL_ID"
+	"Channel Attributes:CHR63600_ATTR_CHANNEL_ID"
+	string readonly local 00118C7C
+"Type: Channel-Specific
+
+Description: A string that contains the model number or name of the module.
+    
+Restrictions:  Not settable.
+
+Default Value: CHROMA,63630-80-60,0,1.00,1.00"
+attribute: "CHR63600_ATTR_CONF_VOLT_RANGE"
+	"Configure Attributes:CHR63600_ATTR_CONF_VOLT_RANGE"
+	iL enum { CHR63600_VAL_CONG_VRANGE_LOW=0, CHR63600_VAL_CONG_VRANGE_MIDDLE=1, CHR63600_VAL_CONG_VRANGE_HIGH=2} readwrite local 00118C4C
+"Type: Channel-Specific
+
+Description: Specifies the voltage measurement range in CC mode to the e-load.
+
+Valid Range:
+0 - voltage measurement range sets to LOW
+1 - voltage measurement range sets to MIDDLE
+2 - voltage measurement range sets to HIGH
+
+Default Value: 2
+CHR63600_VAL_CONG_VRANGE_LOW 0
+voltage measurement range sets to LOW
+
+CHR63600_VAL_CONG_VRANGE_MIDDLE 1
+voltage measurement range sets to MIDDLE
+
+CHR63600_VAL_CONG_VRANGE_HIGH 2
+voltage measurement range sets to HIGH"
+attribute: "CHR63600_ATTR_CONF_VOLT_ON"
+	"Configure Attributes:CHR63600_ATTR_CONF_VOLT_ON"
+	fD readwrite local 00118C4D
+"Type: Channel-Specific
+
+Description: Specifies the voltage of start to sink current to the e-load.
+
+Units: Volt
+
+Valid Range:
+
+  Model                          |  Range
+-------------------------------------------------
+  63610-80-20(CC_VRANGE=LOW)     |  0.0 - 6
+  63610-80-20(CC_VRANGE=MIDDLE)  |  0.0 - 16
+  63610-80-20(CC_VRANGE=HIGH)    |  0.0 - 80
+  63630-80-60(CC_VRANGE=LOW)     |  0.0 - 6
+  63630-80-60(CC_VRANGE=MIDDLE)  |  0.0 - 16
+  63630-80-60(CC_VRANGE=HIGH)    |  0.0 - 80
+  63640-80-80(CC_VRANGE=LOW)     |  0.0 - 6
+  63640-80-80(CC_VRANGE=MIDDLE)  |  0.0 - 16
+  63640-80-80(CC_VRANGE=HIGH)    |  0.0 - 80
+   
+Default Value: 0.2"
+attribute: "CHR63600_ATTR_CONF_VOLT_OFF"
+	"Configure Attributes:CHR63600_ATTR_CONF_VOLT_OFF"
+	fD readwrite local 00118C4E
+"Type: Channel-Specific
+
+Description: Specifies the voltage of stop to sink current to the e-load.
+
+Units: Volt
+
+Valid Range:
+
+  Model                          |  Range
+-------------------------------------------------
+  63610-80-20(CC_VRANGE=LOW)     |  0.0 - 6
+  63610-80-20(CC_VRANGE=MIDDLE)  |  0.0 - 16
+  63610-80-20(CC_VRANGE=HIGH)    |  0.0 - 80
+  63630-80-60(CC_VRANGE=LOW)     |  0.0 - 6
+  63630-80-60(CC_VRANGE=MIDDLE)  |  0.0 - 16
+  63630-80-60(CC_VRANGE=HIGH)    |  0.0 - 80
+  63640-80-80(CC_VRANGE=LOW)     |  0.0 - 6
+  63640-80-80(CC_VRANGE=MIDDLE)  |  0.0 - 16
+  63640-80-80(CC_VRANGE=HIGH)    |  0.0 - 80
+   
+Default Value: 0.0"
+attribute: "CHR63600_ATTR_CONF_ALLRUN"
+	"Configure Attributes:CHR63600_ATTR_CONF_ALLRUN"
+	bool readwrite local 00118C7E
+"Type: Channel-Specific
+
+Description: Specifies the all run state to the e-load.
+
+Valid Range: 
+TRUE  (1) - all run state sets to ON
+FALSE (0) - all run state sets to OFF
+
+Default Value: TRUE
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+attribute: "CHR63600_ATTR_CONF_AUTO_ON"
+	"Configure Attributes:CHR63600_ATTR_CONF_AUTO_ON"
+	bool readwrite local 00118C7F
+"Type: Channel-Specific
+
+Description: Specifies the load module to perform auto load on during power-on.
+
+Valid Range: 
+TRUE  (1) - auto load on sets to ON
+FALSE (0) - auto load on sets to OFF
+
+Default Value: FALSE
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+attribute: "CHR63600_ATTR_CONF_EXT_WAVE"
+	"Configure Attributes:CHR63600_ATTR_CONF_EXT_WAVE"
+	bool readwrite local 00118C80
+"Type: Channel-Specific
+
+Description: Specifies the external waveform function on/off.
+
+Valid Range: 
+TRUE  (1) - external waveform function sets to ON
+FALSE (0) - external waveform function sets to OFF
+
+Default Value: FALSE
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+attribute: "CHR63600_ATTR_CONF_SOUND"
+	"Configure Attributes:CHR63600_ATTR_CONF_SOUND"
+	bool readwrite local 00118C81
+"Type: Channel-Specific
+
+Description: Specifies the buzzer on/off to the e-load.
+
+Valid Range: 
+TRUE  (1) - buzzer sets to ON
+FALSE (0) - buzzer sets to OFF
+
+Default Value: TRUE
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+attribute: "CHR63600_ATTR_CONF_VON_LATCH"
+	"Configure Attributes:CHR63600_ATTR_CONF_VON_LATCH"
+	bool readwrite local 00118C82
+"Type: Channel-Specific
+
+Description: Specifies the action type of Von to the e-load.
+
+Valid Range: 
+TRUE  (1) - Von latch sets to ON
+FALSE (0) - Von latch sets to OFF
+
+Default Value: FALSE
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+attribute: "CHR63600_ATTR_CONF_VOLT_SIGN"
+	"Configure Attributes:CHR63600_ATTR_CONF_VOLT_SIGN"
+	bool readwrite local 00118C83
+"Type: Channel-Specific
+
+Description: Specifies the sign of voltage measurement to Plus/Minus.
+
+Valid Range: 
+TRUE  (1) - sign of voltage measurement sets to MINUS
+FALSE (0) - sign of voltage measurement sets to PLUS
+
+Default Value: FALSE
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+attribute: "CHR63600_ATTR_CONF_WINDOW"
+	"Configure Attributes:CHR63600_ATTR_CONF_WINDOW"
+	fD readwrite local 00118C84
+"Type: Channel-Specific
+
+Description: Specifies the time of measure over which the window calculation is to be performed.
+
+Units: Second
+
+Valid Range: 0.001-10
+
+Default Value: 0.002"
+attribute: "CHR63600_ATTR_MEAS_INPUT"
+	"Configure Attributes:CHR63600_ATTR_MEAS_INPUT"
+	bool readwrite local 00118C72
+"Type: Channel-Specific
+
+Description: Selects the input port of the e-load to measure voltage.
+
+Valid Range: 
+TRUE  (1) - input port sets to UUT
+FALSE (0) - input port sets to LOAD
+
+Default Value: FALSE
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+attribute: "CHR63600_ATTR_SHORT_KEY"
+	"Configure Attributes:CHR63600_ATTR_SHORT_KEY"
+	bool readwrite local 00118C7A
+"Type: Channel-Specific
+
+Description: Specifies the mode of short key to the e-load.
+
+Valid Range: 
+TRUE  (1) - the mode of short key sets to TOGGLE
+FALSE (0) - the mode of short key sets to HOLD
+
+Default Value: FALSE
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+attribute: "CHR63600_ATTR_L1"
+	"Mode Attribute:CHR63600_ATTR_L1"
+	fD readwrite local 00118C37
+"Type: Channel-Specific
+
+Description: Specifies the L1 value to the e-load.
+
+Default Value: 0"
+attribute: "CHR63600_ATTR_L2"
+	"Mode Attribute:CHR63600_ATTR_L2"
+	fD readwrite local 00118C41
+"Type: Channel-Specific
+
+Description: Specifies the L2 value to the e-load.
+
+Default Value: 0"
+attribute: "CHR63600_ATTR_FALL"
+	"Mode Attribute:CHR63600_ATTR_FALL"
+	fD readwrite local 00118C39
+"Type: Channel-Specific
+
+Description: Specifies the falling slew rate to the e-load.
+
+Default Value: 0.01"
+attribute: "CHR63600_ATTR_RISE"
+	"Mode Attribute:CHR63600_ATTR_RISE"
+	fD readwrite local 00118C38
+"Type: Channel-Specific
+
+Description: Specifies the rising slew rate to the e-load.
+
+Default Value: 0.01"
+attribute: "CHR63600_ATTR_MODE"
+	"Mode Attribute:CHR63600_ATTR_MODE"
+	iL enum { CHR63600_VAL_MODE_CCL=0, CHR63600_VAL_MODE_CCM=1, CHR63600_VAL_MODE_CCH=2, CHR63600_VAL_MODE_CRL=3, CHR63600_VAL_MODE_CRM=4, CHR63600_VAL_MODE_CRH=5, CHR63600_VAL_MODE_CVL=6, CHR63600_VAL_MODE_CVM=7, CHR63600_VAL_MODE_CVH=8, CHR63600_VAL_MODE_CPL=9, CHR63600_VAL_MODE_CPM=10, CHR63600_VAL_MODE_CPH=11, CHR63600_VAL_MODE_CZL=12, CHR63600_VAL_MODE_CZM=13, CHR63600_VAL_MODE_CZH=14, CHR63600_VAL_MODE_CCDL=15, CHR63600_VAL_MODE_CCDM=16, CHR63600_VAL_MODE_CCDH=17, CHR63600_VAL_MODE_CCFSL=18, CHR63600_VAL_MODE_CCFSM=19, CHR63600_VAL_MODE_CCFSH=20, CHR63600_VAL_MODE_TIML=21, CHR63600_VAL_MODE_TIMM=22, CHR63600_VAL_MODE_TIMH=23, CHR63600_VAL_MODE_ACL=24, CHR63600_VAL_MODE_ACM=25, CHR63600_VAL_MODE_ACH=26, CHR63600_VAL_MODE_IRL=27, CHR63600_VAL_MODE_IRM=28, CHR63600_VAL_MODE_IRH=29, CHR63600_VAL_MODE_OCPL=30, CHR63600_VAL_MODE_OCPM=31, CHR63600_VAL_MODE_OCPH=32, CHR63600_VAL_MODE_PROG=33} readwrite local 00118C35
+"Type: Channel-Specific
+
+Description: Specifies the operational mode for the e-load.
+
+Valid Range: 
+0 - operational mode sets to CCL
+1 - operational mode sets to CCM
+2 - operational mode sets to CCH
+3 - operational mode sets to CRL
+4 - operational mode sets to CRM
+5 - operational mode sets to CRH
+6 - operational mode sets to CVL
+7 - operational mode sets to CVM
+8 - operational mode sets to CVH
+9 - operational mode sets to CPL
+10 - operational mode sets to CPM
+11 - operational mode sets to CPH
+12 - operational mode sets to CZL
+13 - operational mode sets to CZM
+14 - operational mode sets to CZH
+15 - operational mode sets to CCDL
+16 - operational mode sets to CCDM
+17 - operational mode sets to CCDH
+18 - operational mode sets to CCFSL
+19 - operational mode sets to CCFSM
+20 - operational mode sets to CCFSH
+21 - operational mode sets to TIML
+22 - operational mode sets to TIMM
+23 - operational mode sets to TIMH
+24 - operational mode sets to ACL
+25 - operational mode sets to ACM
+26 - operational mode sets to ACH
+27 - operational mode sets to IRL
+28 - operational mode sets to IRM
+29 - operational mode sets to IRH
+30 - operational mode sets to OCPL
+31 - operational mode sets to OCPM
+32 - operational mode sets to OCPH
+33 - operational mode sets to PROG
+
+Default Value: 0
+CHR63600_VAL_MODE_CCL 0
+operational mode sets to CCL
+
+CHR63600_VAL_MODE_CCM 1
+operational mode sets to CCM
+
+CHR63600_VAL_MODE_CCH 2
+operational mode sets to CCH
+
+CHR63600_VAL_MODE_CRL 3
+operational mode sets to CRL
+
+CHR63600_VAL_MODE_CRM 4
+operational mode sets to CRM
+
+CHR63600_VAL_MODE_CRH 5
+operational mode sets to CRH
+
+CHR63600_VAL_MODE_CVL 6
+operational mode sets to CVL
+
+CHR63600_VAL_MODE_CVM 7
+operational mode sets to CVM
+
+CHR63600_VAL_MODE_CVH 8
+operational mode sets to CVH
+
+CHR63600_VAL_MODE_CPL 9
+operational mode sets to CPL
+
+CHR63600_VAL_MODE_CPM 10
+operational mode sets to CPM
+
+CHR63600_VAL_MODE_CPH 11
+operational mode sets to CPH
+
+CHR63600_VAL_MODE_CZL 12
+operational mode sets to CZL
+
+CHR63600_VAL_MODE_CZM 13
+operational mode sets to CZM
+
+CHR63600_VAL_MODE_CZH 14
+operational mode sets to CZH
+
+CHR63600_VAL_MODE_CCDL 15
+operational mode sets to CCDL
+
+CHR63600_VAL_MODE_CCDM 16
+operational mode sets to CCDM
+
+CHR63600_VAL_MODE_CCDH 17
+operational mode sets to CCDH
+
+CHR63600_VAL_MODE_CCFSL 18
+operational mode sets to CCFSL
+
+CHR63600_VAL_MODE_CCFSM 19
+operational mode sets to CCFSM
+
+CHR63600_VAL_MODE_CCFSH 20
+operational mode sets to CCFSH
+
+CHR63600_VAL_MODE_TIML 21
+operational mode sets to TIML
+
+CHR63600_VAL_MODE_TIMM 22
+operational mode sets to TIMM
+
+CHR63600_VAL_MODE_TIMH 23
+operational mode sets to TIMH
+
+CHR63600_VAL_MODE_ACL 24
+operational mode sets to ACL
+
+CHR63600_VAL_MODE_ACM 25
+operational mode sets to ACM
+
+CHR63600_VAL_MODE_ACH 26
+operational mode sets to ACH
+
+CHR63600_VAL_MODE_IRL 27
+operational mode sets to IRL
+
+CHR63600_VAL_MODE_IRM 28
+operational mode sets to IRM
+
+CHR63600_VAL_MODE_IRH 29
+operational mode sets to IRH
+
+CHR63600_VAL_MODE_OCPL 30
+operational mode sets to OCPL
+
+CHR63600_VAL_MODE_OCPM 31
+operational mode sets to OCPM
+
+CHR63600_VAL_MODE_OCPH 32
+operational mode sets to OCPH
+
+CHR63600_VAL_MODE_PROG 33
+operational mode sets to PROG"
+attribute: "CHR63600_ATTR_VOLT_CURR_LIMIT"
+	"Mode Attribute:CHR63600_ATTR_VOLT_CURR_LIMIT"
+	fD readwrite local 00118C3C
+"Type: Channel-Specific
+
+Description: Specifies the current limit for constant voltage mode to the e-load.
+
+Units: Ampere
+
+Valid Range:
+
+  Model        |  Range
+-------------------------------
+  63610-80-20  |  0.0 - 20
+  63630-80-60  |  0.0 - 60
+  63640-80-80  |  0.0 - 80
+
+Default Value: 0"
+attribute: "CHR63600_ATTR_VOLT_RESPONSE"
+	"Mode Attribute:CHR63600_ATTR_VOLT_RESPONSE"
+	iL enum { CHR63600_VAL_VOLT_FAST=0, CHR63600_VAL_VOLT_NORMAL=1, CHR63600_VAL_VOLT_SLOW=2} readwrite local 00118C3A
+"Type: Channel-Specific
+
+Description: Specifies the response speed in constant voltage mode for the e-load.
+
+Valid Range: 
+0 - response speed sets to FAST
+1 - response speed sets to NORMAL
+2 - response speed sets to SLOW
+
+Default Value: 0
+CHR63600_VAL_VOLT_FAST 0
+response speed in constant voltage mode sets to FAST
+
+CHR63600_VAL_VOLT_NORMAL 1
+response speed in constant voltage mode sets to NORMAL
+
+CHR63600_VAL_VOLT_SLOW 2
+response speed in constant voltage mode sets to SLOW"
+attribute: "CHR63600_ATTR_VOLT_TYPE"
+	"Mode Attribute:CHR63600_ATTR_VOLT_TYPE"
+	bool readwrite local 00118C3B
+"Type: Channel-Specific
+
+Description: Specifies the execution type in constant voltage mode for the e-load.
+
+Valid Range: 
+TRUE(1)  - execution type sets to VOLT/PSU
+FALSE(0) - execution type sets to CURR/PSU
+
+Default Value: FALSE
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+attribute: "CHR63600_ATTR_IMPEDANCE_LS"
+	"Mode Attribute:CHR63600_ATTR_IMPEDANCE_LS"
+	fD readwrite local 00118C3E
+"Type: Channel-Specific
+
+Description: Specifies the equivalent series inductance for constant impedance mode for the e-load.
+
+Units: Henry
+
+Valid Range: 0-0.00002
+
+Default Value: 0"
+attribute: "CHR63600_ATTR_IMPEDANCE_RS"
+	"Mode Attribute:CHR63600_ATTR_IMPEDANCE_RS"
+	fD readwrite local 00118C3F
+"Type: Channel-Specific
+
+Description: Specifies the equivalent series resistance for constant impedance mode for the e-load.
+
+Units: Ohm
+
+Valid Range: 0.01-20
+
+Default Value: 0.01"
+attribute: "CHR63600_ATTR_IMPEDANCE_RL"
+	"Mode Attribute:CHR63600_ATTR_IMPEDANCE_RL"
+	fD readwrite local 00118C40
+"Type: Channel-Specific
+
+Description: Specifies the equivalent parallel load resistance for constant impedance mode for the e-load.
+
+Units: Ohm
+
+Default Value: 10.0"
+attribute: "CHR63600_ATTR_IMPEDANCE_CL"
+	"Mode Attribute:CHR63600_ATTR_IMPEDANCE_CL"
+	fD readwrite local 00118C3D
+"Type: Channel-Specific
+
+Description: Specifies the parallel load capacitance for constant impedance mode for the e-load.
+
+Units: Farad
+
+Valid Range: 0.00003-0.05
+
+Default Value: 0.00003"
+attribute: "CHR63600_ATTR_CURR_DYN_T1"
+	"Mode Attribute:CHR63600_ATTR_CURR_DYN_T1"
+	fD readwrite local 00118C42
+"Type: Channel-Specific
+
+Description: Specifies the duration parameter T1 for constant current dynamic mode to the e-load.
+
+Units: Second
+
+Valid Range: 0.00001-100
+
+Default Value: 100"
+attribute: "CHR63600_ATTR_CURR_DYN_T2"
+	"Mode Attribute:CHR63600_ATTR_CURR_DYN_T2"
+	fD readwrite local 00118C43
+"Type: Channel-Specific
+
+Description: Specifies the duration parameter T2 for constant current dynamic mode to the e-load.
+
+Units: Second
+
+Valid Range: 0.00001-100
+
+Default Value: 100"
+attribute: "CHR63600_ATTR_CURR_DYN_REPEAT"
+	"Mode Attribute:CHR63600_ATTR_CURR_DYN_REPEAT"
+	iL readwrite local 00118C44
+"Type: Channel-Specific
+
+Description: Specifies the repeat count for constant current dynamic mode to the e-load.
+
+Valid Range: 0-65535
+
+Default Value: 0"
+attribute: "CHR63600_ATTR_CURR_SWP_IMAX"
+	"Mode Attribute:CHR63600_ATTR_CURR_SWP_IMAX"
+	fD readwrite local 00118C45
+"Type: Channel-Specific
+
+Description: Specifies the maximum current for constant current frequency sweep mode to the e-load.
+
+Units: Ampere
+
+Valid Range:
+
+  Model               |  Range
+--------------------------------------
+  63610-80-20(CCFSL)  |  0.0 - 0.2
+  63610-80-20(CCFSM)  |  0.0 - 2
+  63610-80-20(CCFSH)  |  0.0 - 20
+  63630-80-60(CCFSL)  |  0.0 - 0.6
+  63630-80-60(CCFSM)  |  0.0 - 6
+  63630-80-60(CCFSH)  |  0.0 - 60
+  63640-80-80(CCFSL)  |  0.0 - 0.8
+  63640-80-80(CCFSM)  |  0.0 - 8
+  63640-80-80(CCFSH)  |  0.0 - 80
+
+Default Value: 0.0"
+attribute: "CHR63600_ATTR_CURR_SWP_IMIN"
+	"Mode Attribute:CHR63600_ATTR_CURR_SWP_IMIN"
+	fD readwrite local 00118C46
+"Type: Channel-Specific
+
+Description: Specifies the minimum current for constant current frequency sweep mode to the e-load.
+
+Units: Ampere
+
+Valid Range:
+
+  Model               |  Range
+--------------------------------------
+  63610-80-20(CCFSL)  |  0.0 - 0.2
+  63610-80-20(CCFSM)  |  0.0 - 2
+  63610-80-20(CCFSH)  |  0.0 - 20
+  63630-80-60(CCFSL)  |  0.0 - 0.6
+  63630-80-60(CCFSM)  |  0.0 - 6
+  63630-80-60(CCFSH)  |  0.0 - 60
+  63640-80-80(CCFSL)  |  0.0 - 0.8
+  63640-80-80(CCFSM)  |  0.0 - 8
+  63640-80-80(CCFSH)  |  0.0 - 80
+
+Default Value: 0.0"
+attribute: "CHR63600_ATTR_CURR_SWP_FSTART"
+	"Mode Attribute:CHR63600_ATTR_CURR_SWP_FSTART"
+	fD readwrite local 00118C47
+"Type: Channel-Specific
+
+Description: Specifies the start of frequency for constant current frequency sweep mode to the e-load.
+
+Units: Hertz
+
+Valid Range: 0.01-50000
+
+Default Value: 500.0"
+attribute: "CHR63600_ATTR_CURR_SWP_FEND"
+	"Mode Attribute:CHR63600_ATTR_CURR_SWP_FEND"
+	fD readwrite local 00118C48
+"Type: Channel-Specific
+
+Description: Specifies the end of frequency for constant current frequency sweep mode to the e-load.
+
+Units: Hertz
+
+Valid Range: 0.01-50000
+
+Default Value: 500.0"
+attribute: "CHR63600_ATTR_CURR_SWP_FSTEP"
+	"Mode Attribute:CHR63600_ATTR_CURR_SWP_FSTEP"
+	fD readwrite local 00118C49
+"Type: Channel-Specific
+
+Description: Specifies the step of frequency for constant current frequency sweep mode to the e-load.
+
+Units: Hertz
+
+Valid Range: 0.01-50000
+
+Default Value: 0.01"
+attribute: "CHR63600_ATTR_CURR_SWP_DWELL"
+	"Mode Attribute:CHR63600_ATTR_CURR_SWP_DWELL"
+	fD readwrite local 00118C4A
+"Type: Channel-Specific
+
+Description: Specifies the dwell time for constant current frequency sweep mode to the e-load.
+
+Units: Second
+
+Valid Range: 0.001-100
+
+Default Value: 1.0"
+attribute: "CHR63600_ATTR_CURR_SWP_DUTY"
+	"Mode Attribute:CHR63600_ATTR_CURR_SWP_DUTY"
+	fD readwrite local 00118C4B
+"Type: Channel-Specific
+
+Description: Specifies the duty cycle for constant current frequency sweep mode to the e-load.
+
+Valid Range: 1.00-99
+
+Default Value: 50.0"
+attribute: "CHR63600_ATTR_TIME_MODE"
+	"Mode Attribute:CHR63600_ATTR_TIME_MODE"
+	iL enum { CHR63600_VAL_TIME_MODE_CC=0, CHR63600_VAL_TIME_MODE_CR=1, CHR63600_VAL_TIME_MODE_CP=2} readwrite local 00118C4F
+"Type: Channel-Specific
+
+Description: Specifies the run mode in timing mode to the e-load.
+
+Valid Range:
+0 - run mode sets to CC
+1 - run mode sets to CR
+2 - run mode sets to CP
+
+Default Value: 0
+CHR63600_VAL_TIME_MODE_CC 0
+run mode sets to CC
+
+CHR63600_VAL_TIME_MODE_CR 1
+run mode sets to CR
+
+CHR63600_VAL_TIME_MODE_CP 2
+run mode sets to CP"
+attribute: "CHR63600_ATTR_TIME_VALUE"
+	"Mode Attribute:CHR63600_ATTR_TIME_VALUE"
+	fD readwrite local 00118C50
+"Type: Channel-Specific
+
+Description: Specifies the load value according to the run mode in timing mode to the e-load.
+
+Valid Range:
+Refer to respective specification for valid value range.
+
+Default Value: 0"
+attribute: "CHR63600_ATTR_TIME_TRG_MODE"
+	"Mode Attribute:CHR63600_ATTR_TIME_TRG_MODE"
+	iL enum { CHR63600_VAL_TIME_TRG_FALL=0, CHR63600_VAL_TIME_TRG_RISE=1, CHR63600_VAL_TIME_TRG_HOLDUP=2} readwrite local 00118C51
+"Type: Channel-Specific
+
+Description: Specifies the trigger mode in timing mode to the e-load.
+
+Valid Range:
+0 - trigger mode sets to FALL
+1 - trigger mode sets to RISE
+2 - trigger mode sets to HOLDUP
+
+Default Value: 0
+CHR63600_VAL_TIME_TRG_FALL 0
+trigger mode sets to FALL
+
+CHR63600_VAL_TIME_TRG_RISE 1
+trigger mode sets to RISE
+
+CHR63600_VAL_TIME_TRG_HOLDUP 2
+trigger mode sets to HOLDUP"
+attribute: "CHR63600_ATTR_TIME_TRG_VSTART"
+	"Mode Attribute:CHR63600_ATTR_TIME_TRG_VSTART"
+	fD readwrite local 00118C52
+"Type: Channel-Specific
+
+Description: Specifies the start voltage of trigger in timing mode to the e-load.
+
+Units: Volt
+
+Valid Range:
+In CC or CP mode, refer to specification of CC_VRANGE. In CR mode, refer to specification of CV.
+
+Default Value: 0"
+attribute: "CHR63600_ATTR_TIME_TRG_VEND"
+	"Mode Attribute:CHR63600_ATTR_TIME_TRG_VEND"
+	fD readwrite local 00118C53
+"Type: Channel-Specific
+
+Description: Specifies the end voltage of trigger in timing mode to the e-load.
+
+Units: Volt
+
+Valid Range:
+In CC or CP mode, refer to specification of CC_VRANGE. In CR mode, refer to specification of CV.
+
+Default Value: 0"
+attribute: "CHR63600_ATTR_TIME_ENDVOLT"
+	"Mode Attribute:CHR63600_ATTR_TIME_ENDVOLT"
+	fD readwrite local 00118C54
+"Type: Channel-Specific
+
+Description: Specifies the end voltage when trigger mode set to HOLDUP for timing mode.
+
+Units: Volt
+
+Valid Range:
+In CC or CP mode, refer to specification of CC_VRANGE. In CR mode, refer to specification of CV.
+
+Default Value: 0"
+attribute: "CHR63600_ATTR_TIME_TOUT"
+	"Mode Attribute:CHR63600_ATTR_TIME_TOUT"
+	iL readwrite local 00118C55
+"Type: Channel-Specific
+
+Description: Specifies timeout in timing mode to the e-load.
+
+Units: Second
+
+Valid Range: 0-60000
+
+Default Value: 120"
+attribute: "CHR63600_ATTR_OCP_ISTART"
+	"Mode Attribute:CHR63600_ATTR_OCP_ISTART"
+	fD readwrite local 00118C56
+"Type: Channel-Specific
+
+Description: Specifies the start current for OCP test mode to the e-load.
+
+Units: Ampere
+
+Valid Range:
+
+  Model              |  Range
+-------------------------------------
+  63610-80-20(OCPL)  |  0.0 - 0.2
+  63610-80-20(OCPM)  |  0.0 - 2
+  63610-80-20(OCPH)  |  0.0 - 20
+  63630-80-60(OCPL)  |  0.0 - 0.6
+  63630-80-60(OCPM)  |  0.0 - 6
+  63630-80-60(OCPH)  |  0.0 - 60
+  63640-80-80(OCPL)  |  0.0 - 0.8
+  63640-80-80(OCPM)  |  0.0 - 8
+  63640-80-80(OCPH)  |  0.0 - 80
+   
+Default Value: 0.0"
+attribute: "CHR63600_ATTR_OCP_IEND"
+	"Mode Attribute:CHR63600_ATTR_OCP_IEND"
+	fD readwrite local 00118C57
+"Type: Channel-Specific
+
+Description: Specifies the end current for OCP test mode to the e-load.
+
+Units: Ampere
+
+Valid Range:
+
+  Model              |  Range
+-------------------------------------
+  63610-80-20(OCPL)  |  0.0 - 0.2
+  63610-80-20(OCPM)  |  0.0 - 2
+  63610-80-20(OCPH)  |  0.0 - 20
+  63630-80-60(OCPL)  |  0.0 - 0.6
+  63630-80-60(OCPM)  |  0.0 - 6
+  63630-80-60(OCPH)  |  0.0 - 60
+  63640-80-80(OCPL)  |  0.0 - 0.8
+  63640-80-80(OCPM)  |  0.0 - 8
+  63640-80-80(OCPH)  |  0.0 - 80
+   
+Default Value: 0.0"
+attribute: "CHR63600_ATTR_OCP_STEP "
+	"Mode Attribute:CHR63600_ATTR_OCP_STEP "
+	iL readwrite local 00118C58
+"Type: Channel-Specific
+Description: Specifies the step count for OCP test mode to the e-load.
+
+Valid Range: 1-1000
+
+Default Value: 1"
+attribute: "CHR63600_ATTR_OCP_DWELL"
+	"Mode Attribute:CHR63600_ATTR_OCP_DWELL"
+	fD readwrite local 00118C59
+"Type: Channel-Specific
+Description: Specifies the dwell time for OCP test mode to the e-load.
+
+Units: Second
+
+Valid Range: 0.00001-1
+
+Default Value: 0.1"
+attribute: "CHR63600_ATTR_OCP_TRG_VOLT"
+	"Mode Attribute:CHR63600_ATTR_OCP_TRG_VOLT"
+	fD readwrite local 00118C5A
+"Type: Channel-Specific
+Description: Specifies the trigger voltage for OCP test mode to the e-load.
+
+Units: Volt
+
+Valid Range: Refer to specification of CC_VRANGE
+
+Default Value: 0.1"
+attribute: "CHR63600_ATTR_OCP_SPEC_L"
+	"Mode Attribute:CHR63600_ATTR_OCP_SPEC_L"
+	fD readwrite local 00118C5B
+"Type: Channel-Specific
+
+Description: Specifies the low level current of specification for OCP test mode to the e-load.
+
+Units: Ampere
+
+Valid Range:
+
+  Model              |  Range
+-------------------------------------
+  63610-80-20(OCPL)  |  0.0 - 0.2
+  63610-80-20(OCPM)  |  0.0 - 2
+  63610-80-20(OCPH)  |  0.0 - 20
+  63630-80-60(OCPL)  |  0.0 - 0.6
+  63630-80-60(OCPM)  |  0.0 - 6
+  63630-80-60(OCPH)  |  0.0 - 60
+  63640-80-80(OCPL)  |  0.0 - 0.8
+  63640-80-80(OCPM)  |  0.0 - 8
+  63640-80-80(OCPH)  |  0.0 - 80
+   
+Default Value: 0.0"
+attribute: "CHR63600_ATTR_OCP_SPEC_H"
+	"Mode Attribute:CHR63600_ATTR_OCP_SPEC_H"
+	fD readwrite local 00118C5C
+"Type: Channel-Specific
+
+Description: Specifies the high level current of specification for OCP test mode to the e-load.
+
+Units: Ampere
+
+Valid Range:
+
+  Model              |  Range
+-------------------------------------
+  63610-80-20(OCPL)  |  0.0 - 0.2
+  63610-80-20(OCPM)  |  0.0 - 2
+  63610-80-20(OCPH)  |  0.0 - 20
+  63630-80-60(OCPL)  |  0.0 - 0.6
+  63630-80-60(OCPM)  |  0.0 - 6
+  63630-80-60(OCPH)  |  0.0 - 60
+  63640-80-80(OCPL)  |  0.0 - 0.8
+  63640-80-80(OCPM)  |  0.0 - 8
+  63640-80-80(OCPH)  |  0.0 - 80
+   
+Default Value: 0.0"
+attribute: "CHR63600_ATTR_IR_IMAX"
+	"Mode Attribute:CHR63600_ATTR_IR_IMAX"
+	fD readwrite local 00118C5D
+"Type: Channel-Specific
+
+Description: Specifies the maximum current for IR mode to the e-load.
+
+Units: Ampere
+
+Valid Range:
+
+  Model             |  Range
+------------------------------------
+  63610-80-20(IRL)  |  0.0 - 0.2
+  63610-80-20(IRM)  |  0.0 - 2
+  63610-80-20(IRH)  |  0.0 - 20
+  63630-80-60(IRL)  |  0.0 - 0.6
+  63630-80-60(IRM)  |  0.0 - 6
+  63630-80-60(IRH)  |  0.0 - 60
+  63640-80-80(IRL)  |  0.0 - 0.8
+  63640-80-80(IRM)  |  0.0 - 8
+  63640-80-80(IRH)  |  0.0 - 80
+   
+Default Value: 0.0"
+attribute: "CHR63600_ATTR_IR_TON"
+	"Mode Attribute:CHR63600_ATTR_IR_TON"
+	fD readwrite local 00118C5E
+"Type: Channel-Specific
+
+Description: Specifies the on time for IR mode to the e-load.
+
+Units: Second
+
+Valid Range: 0.02-10
+
+Default Value: 10"
+attribute: "CHR63600_ATTR_IR_TOFF"
+	"Mode Attribute:CHR63600_ATTR_IR_TOFF"
+	fD readwrite local 00118C5F
+"Type: Channel-Specific
+
+Description: Specifies the off time for IR mode to the e-load.
+
+Units: Second
+
+Valid Range: 0.00002-10
+
+Default Value: 10"
+attribute: "CHR63600_ATTR_IR_REPEAT"
+	"Mode Attribute:CHR63600_ATTR_IR_REPEAT"
+	iL readwrite local 00118C60
+"Type: Channel-Specific
+
+Description: Specifies the repeat count for IR mode to the e-load.
+
+Valid Range: 1-1000
+
+Default Value: 1"
+attribute: "CHR63600_ATTR_IR_SMP_TIME"
+	"Mode Attribute:CHR63600_ATTR_IR_SMP_TIME"
+	fD readwrite local 00118C61
+"Type: Channel-Specific
+
+Description: Specifies the sampling time for IR mode to the e-load.
+
+Units: Second
+
+Valid Range: 0.000002-0.04
+
+Default Value: 0.04"
+attribute: "CHR63600_ATTR_IR_SMP_POINT"
+	"Mode Attribute:CHR63600_ATTR_IR_SMP_POINT"
+	iL readwrite local 00118C62
+"Type: Channel-Specific
+
+Description: Specifies the sampling points for IR mode to the e-load.
+
+Valid Range: 1-4096
+
+Default Value: 4096"
+attribute: "CHR63600_ATTR_IR_TRG_POINT"
+	"Mode Attribute:CHR63600_ATTR_IR_TRG_POINT"
+	iL readwrite local 00118C63
+"Type: Channel-Specific
+
+Description: Specifies the trigger points for IR mode to the e-load.
+
+Valid Range: 1-4096
+
+Default Value: 2000"
+attribute: "CHR63600_ATTR_DIGI_SMP_TIME"
+	"Mode Attribute:CHR63600_ATTR_DIGI_SMP_TIME"
+	fD readwrite local 00118C64
+"Type: Channel-Specific
+
+Description: Specifies the sampling time for digitizing function to the e-load.
+
+Units: Second
+
+Valid Range: 0.000002-0.04
+
+Default Value: 0.04"
+attribute: "CHR63600_ATTR_DIGI_SMP_POINT"
+	"Mode Attribute:CHR63600_ATTR_DIGI_SMP_POINT"
+	iL readwrite local 00118C65
+"Type: Channel-Specific
+
+Description: Specifies the sampling points for digitizing function to the e-load.
+
+Valid Range: 1-4096
+
+Default Value: 4096"
+attribute: "CHR63600_ATTR_DIGI_TRG_SOURCE"
+	"Mode Attribute:CHR63600_ATTR_DIGI_TRG_SOURCE"
+	iL enum { CHR63600_VAL_DIGI_LOADON=0, CHR63600_VAL_DIGI_LOADOFF=1, CHR63600_VAL_DIGI_TTL=2, CHR63600_VAL_DIGI_SW=3, CHR63600_VAL_DIGI_FORCE=4} readwrite local 00118C67
+"Type: Channel-Specific
+
+Description: Specifies the trigger source for digitizing function to the e-load.
+
+Valid Range:
+0 - trigger source sets to LOADON
+1 - trigger source sets to LOADOFF
+2 - trigger source sets to TTL
+3 - trigger source sets to S/W
+4 - trigger source sets to FORCE
+
+Default Value: 0
+CHR63600_VAL_DIGI_LOADON 0
+trigger source sets to LOADON
+
+CHR63600_VAL_DIGI_LOADOFF 1
+trigger source sets to LOADOFF
+
+CHR63600_VAL_DIGI_TTL 2
+trigger source sets to TTL
+
+CHR63600_VAL_DIGI_SW 3
+trigger source sets to S/W
+
+CHR63600_VAL_DIGI_FORCE 4
+trigger source sets to FORCE"
+attribute: "CHR63600_ATTR_DIGI_TRG_POINT"
+	"Mode Attribute:CHR63600_ATTR_DIGI_TRG_POINT"
+	iL readwrite local 00118C66
+"Type: Channel-Specific
+
+Description: Specifies the trigger points for digitizing function to the e-load.
+
+Valid Range: 1-4096
+
+Default Value: 2000"
+attribute: "CHR63600_ATTR_SPEC_UNIT"
+	"Specification Attributes:CHR63600_ATTR_SPEC_UNIT"
+	bool readwrite local 00118C69
+"Type: Channel-Specific
+
+Description: Specifies the specific entry mode to the e-load.
+
+Valid Range: 
+TRUE  (1) - specific entry mode sets to VALUE
+FALSE (0) - specific entry mode sets to PERCENT
+
+Default Value: FALSE
+VI_TRUE 1
+True
+
+VI_FALSE 0
+False"
+attribute: "CHR63600_ATTR_SPEC_V_C"
+	"Specification Attributes:CHR63600_ATTR_SPEC_V_C"
+	fD readwrite local 00118C68
+"Type: Channel-Specific
+
+Description: Specifies the center-level voltage specification to the e-load.
+
+Units: Volt
+
+Valid Range:
+  Model        |  Range
+-------------------------------
+  63610-80-20  |  0.0 - 80
+  63630-80-60  |  0.0 - 80
+  63640-80-80  |  0.0 - 80
+
+-1 means don't care.
+   
+Default Value: 0.0"
+attribute: "CHR63600_ATTR_SPEC_V_H"
+	"Specification Attributes:CHR63600_ATTR_SPEC_V_H"
+	fD readwrite local 00118C6A
+"Type: Channel-Specific
+
+Description: Specifies the high-level voltage specification to the e-load.
+
+Units: Volt
+
+Valid Range:
+When specific entry mode sets to VALUE:
+  Model        |  Range
+-------------------------------
+  63610-80-20  |  0.0 - 80
+  63630-80-60  |  0.0 - 80
+  63640-80-80  |  0.0 - 80
+
+When specific entry mode sets to PERCENT:
+0 - 100
+
+-1 means don't care.
+   
+Default Value: 0.0"
+attribute: "CHR63600_ATTR_SPEC_V_L"
+	"Specification Attributes:CHR63600_ATTR_SPEC_V_L"
+	fD readwrite local 00118C6B
+"Type: Channel-Specific
+
+Description: Specifies the low-level voltage specification to the e-load.
+
+Units: Volt
+
+Valid Range:
+When specific entry mode sets to VALUE:
+  Model        |  Range
+-------------------------------
+  63610-80-20  |  0.0 - 80
+  63630-80-60  |  0.0 - 80
+  63640-80-80  |  0.0 - 80
+
+When specific entry mode sets to PERCENT:
+0 - 100
+
+-1 means don't care.
+   
+Default Value: 0.0"
+attribute: "CHR63600_ATTR_SPEC_I_C"
+	"Specification Attributes:CHR63600_ATTR_SPEC_I_C"
+	fD readwrite local 00118C6C
+"Type: Channel-Specific
+
+Description: Specifies the center-level current specification to the e-load.
+
+Units: Ampere
+
+Valid Range:
+  Model        |  Range
+-------------------------------
+  63610-80-20  |  0.0 - 20
+  63630-80-60  |  0.0 - 60
+  63640-80-80  |  0.0 - 80
+
+-1 means don't care.
+   
+Default Value: 0.0"
+attribute: "CHR63600_ATTR_SPEC_I_H"
+	"Specification Attributes:CHR63600_ATTR_SPEC_I_H"
+	fD readwrite local 00118C6D
+"Type: Channel-Specific
+
+Description: Specifies the high-level current specification to the e-load.
+
+Units: Ampere
+
+Valid Range:
+When specific entry mode sets to VALUE:
+  Model        |  Range
+-------------------------------
+  63610-80-20  |  0.0 - 20
+  63630-80-60  |  0.0 - 60
+  63640-80-80  |  0.0 - 80
+
+When specific entry mode sets to PERCENT:
+0 - 100
+
+-1 means don't care.
+   
+Default Value: 0.0"
+attribute: "CHR63600_ATTR_SPEC_I_L"
+	"Specification Attributes:CHR63600_ATTR_SPEC_I_L"
+	fD readwrite local 00118C6E
+"Type: Channel-Specific
+
+Description: Specifies the low-level current specification to the e-load.
+
+Units: Ampere
+
+Valid Range:
+When specific entry mode sets to VALUE:
+  Model        |  Range
+-------------------------------
+  63610-80-20  |  0.0 - 20
+  63630-80-60  |  0.0 - 60
+  63640-80-80  |  0.0 - 80
+
+When specific entry mode sets to PERCENT:
+0 - 100
+
+-1 means don't care.
+   
+Default Value: 0.0"
+attribute: "CHR63600_ATTR_SPEC_P_C"
+	"Specification Attributes:CHR63600_ATTR_SPEC_P_C"
+	fD readwrite local 00118C6F
+"Type: Channel-Specific
+
+Description: Specifies the center-level power specification to the e-load.
+
+Units: Watt
+
+Valid Range:
+  Model        |  Range
+-------------------------------
+  63610-80-20  |  0.0 - 100
+  63630-80-60  |  0.0 - 300
+  63640-80-80  |  0.0 - 400
+
+-1 means don't care.
+   
+Default Value: 0.0"
+attribute: "CHR63600_ATTR_SPEC_P_H"
+	"Specification Attributes:CHR63600_ATTR_SPEC_P_H"
+	fD readwrite local 00118C70
+"Type: Channel-Specific
+
+Description: Specifies the high-level power specification to the e-load.
+
+Units: Watt
+
+Valid Range:
+When specific entry mode sets to VALUE:
+  Model        |  Range
+-------------------------------
+  63610-80-20  |  0.0 - 100
+  63630-80-60  |  0.0 - 300
+  63640-80-80  |  0.0 - 400
+
+When specific entry mode sets to PERCENT:
+0 - 100
+
+-1 means don't care.
+   
+Default Value: 0.0"
+attribute: "CHR63600_ATTR_SPEC_P_L"
+	"Specification Attributes:CHR63600_ATTR_SPEC_P_L"
+	fD readwrite local 00118C71
+"Type: Channel-Specific
+
+Description: Specifies the low-level power specification to the e-load.
+
+Units: Watt
+
+Valid Range:
+When specific entry mode sets to VALUE:
+  Model        |  Range
+-------------------------------
+  63610-80-20  |  0.0 - 100
+  63630-80-60  |  0.0 - 300
+  63640-80-80  |  0.0 - 400
+
+When specific entry mode sets to PERCENT:
+0 - 100
+
+-1 means don't care.
+   
+Default Value: 0.0"
+attribute: "CHR63600_ATTR_STATUS_RDT"
+	"Status Attributes:CHR63600_ATTR_STATUS_RDT"
+	string readonly local 00118C33
+"Type: System Interface
+
+Description: Returns the types of e-load. If channel does not exist, it returns 0. If channel exists, it returns the types like 63610-80-20, 63630-80-60, 63630-80-60, 63640-80-80..."
+attribute: "CHR63600_ATTR_STATUS_ESE"
+	"Status Attributes:CHR63600_ATTR_STATUS_ESE"
+	iL readwrite local 00118C32
+"Type: Device Status
+
+Description: Specifies the condition of the Standard Event Status Enable register to determine which event is allowed to set the ESB (Event Summary Bit) for the Status Byte register.
+
+Valid Range: 0-255
+
+Default Value: 0"
+attribute: "CHR63600_ATTR_STATUS_SRE"
+	"Status Attributes:CHR63600_ATTR_STATUS_SRE"
+	iL readwrite local 00118C7B
+"Type: Device Status
+
+Description: Specifies the condition of the Service Request Enable register.
+
+Valid Range: 0-255
+
+Default Value: 0"
+attribute: "CHR63600_ATTR_STATUS_CHANNEL_ENABLE"
+	"Status Attributes:CHR63600_ATTR_STATUS_CHANNEL_ENABLE"
+	iL readwrite local 00118C73
+"Type: Channel-Specific
+
+Description: Mask to select which bit in the Event register is allowed to be summed into the corresponding channel bit for the Channel Summary Event register.
+
+Valid Range: 0-65535
+
+Default Value: 0"
+attribute: "CHR63600_ATTR_STATUS_CHANNEL_PTRansition"
+	"Status Attributes:CHR63600_ATTR_STATUS_CHANNEL_PTRansition"
+	iL readwrite local 00118C74
+"Type: Channel-Specific
+
+Description: Programmable filters that determine 0-to-1 transition in the Condition register will set the corresponding bit of the Event register.
+
+Valid Range: 0-65535
+
+Default Value: 0"
+attribute: "CHR63600_ATTR_STATUS_CHANNEL_NTRansition"
+	"Status Attributes:CHR63600_ATTR_STATUS_CHANNEL_NTRansition"
+	iL readwrite local 00118C75
+"Type: Channel-Specific
+
+Description: Programmable filters that determine 1-to-0 transition in the Condition register will set the corresponding bit of the Event register.
+
+Valid Range: 0-65535
+
+Default Value: 0"
+attribute: "CHR63600_ATTR_STATUS_CSUMMARY_ENABLE"
+	"Status Attributes:CHR63600_ATTR_STATUS_CSUMMARY_ENABLE"
+	iL readwrite local 00118C76
+"Type: Channel-Specific
+
+Description: Mask to select which bit in the Channel Event register is allowed to be summed into the CSUM (Channel Summary) bit for the Status Byte register. Please see the programming manual for detail information.
+
+Valid Range: 0-1023
+
+Default Value: 0"
+attribute: "CHR63600_ATTR_STATUS_QUESTIONABLE_ENABLE"
+	"Status Attributes:CHR63600_ATTR_STATUS_QUESTIONABLE_ENABLE"
+	iL readwrite local 00118C77
+"Type: Channel-Specific
+
+Description: Mask to select which bit on the Event register is allowed to be summed into the QUES bit for the Status Byte register. Please see the programming manual for detail information.
+
+Valid Range: 0-65535
+
+Default Value: 0"
+attribute: "CHR63600_ATTR_STATUS_QUESTIONABLE_PTRansition"
+	"Status Attributes:CHR63600_ATTR_STATUS_QUESTIONABLE_PTRansition"
+	iL readwrite local 00118C78
+"Type: Channel-Specific
+
+Description: Programmable filters determine 0-to-1 transition in the Condition register will set the corresponding bit of the Event register.
+
+Valid Range: 0-65535
+
+Default Value: 0"
+attribute: "CHR63600_ATTR_STATUS_QUESTIONABLE_NTRansition"
+	"Status Attributes:CHR63600_ATTR_STATUS_QUESTIONABLE_NTRansition"
+	iL readwrite local 00118C79
+"Type: Channel-Specific
+
+Description: Programmable filters determine 1-to-0 transition in the Condition register will set the corresponding bit of the Event register.
+
+Valid Range: 0-65535
+
+Default Value: 0"
+attribute: "ID Query Response"
+	"Miscellaneous Attributes:ID Query Response"
+	string readonly local 00118C31
+"Returns the ID Query response string.  The instrument driver gets the value of this property when you pass TRUE for the ID Query parameter to the chr63600_init or chr63600_InitWithOptions function.
+    "
